@@ -30,5 +30,36 @@ public class PlayerController : MonoBehaviour {
 
 	void TakeAction() {
 		print ("Player " + playerNum.ToString() + " is taking an action!");
+
+		RaycastHit hitinfo;
+		if (IsInRange(out hitinfo)) {
+			print("Player is in range!");
+		}
+	}
+
+	bool IsInRange(out RaycastHit hitinfo) {
+		Vector3 halfWidth = transform.right / 2f;
+		float halfHeight = transform.lossyScale.y / 2f;
+		Vector3 center, leftCenter, rightCenter, footPos, footLeft, footRight;
+		
+		// Initialize center positions
+		center = leftCenter = rightCenter = transform.position;
+		leftCenter -= halfWidth;
+		rightCenter += halfWidth;
+		
+		// Initialze bottom positions
+		footPos = transform.position;
+		footPos.y -= halfHeight;
+		footLeft = footRight = footPos;
+		footLeft -= halfWidth;
+		footRight += halfWidth;
+		
+		return (CastResourceRay(center, out hitinfo) || CastResourceRay(footPos, out hitinfo) ||
+		        CastResourceRay(leftCenter, out hitinfo) || CastResourceRay(footLeft, out hitinfo) ||
+		        CastResourceRay(rightCenter, out hitinfo) || CastResourceRay(footRight, out hitinfo));
+	}
+	bool CastResourceRay(Vector3 origin, out RaycastHit info) {
+		int layerMask = 1 << 8; // only collide with Resource layer
+		return Physics.Raycast(origin, transform.forward, out info, 1.5f, layerMask);
 	}
 }
