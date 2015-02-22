@@ -8,7 +8,7 @@ public class Base : MonoBehaviour {
 			return;
 
 		PlayerController player = other.GetComponent<PlayerController>();
-		if (player.homeBase == this) {
+		if (player.homeBase_GO.GetInstanceID() == this.gameObject.GetInstanceID()) {
 			player.inBase = true;
 		}
 	}
@@ -18,7 +18,7 @@ public class Base : MonoBehaviour {
 			return;
 		
 		PlayerController player = other.GetComponent<PlayerController>();
-		if (player.homeBase == this) {
+		if (player.homeBase_GO.GetInstanceID() == this.gameObject.GetInstanceID()) {
 			player.inBase = false;
 		}
 	}
