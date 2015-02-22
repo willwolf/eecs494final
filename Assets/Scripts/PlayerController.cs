@@ -38,15 +38,24 @@ public class PlayerController : MonoBehaviour {
 			if (r == null) {
 				throw new UnassignedReferenceException("Resourse layer object does not have Resource script attached");
 			}
+
 			switch (r.type) {
 			case ResourceType.stone:
-				print ("Player " + playerNum.ToString() + " is mining!");
+				MineStone();
 				break;
 			case ResourceType.wood:
-				print ("Player " + playerNum.ToString() + " is chopping wood!");
+				ChopWood();
 				break;
 			}
 		}
+	}
+	void ChopWood() {
+		print ("Player " + playerNum.ToString() + " is chopping wood!");
+		
+	}
+	void MineStone() {
+		print ("Player " + playerNum.ToString() + " is mining!");
+		
 	}
 
 	bool IsInRange(out RaycastHit hitinfo) {
