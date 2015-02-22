@@ -3,9 +3,12 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour {
 
-	public int playerNum  = 0;
-	public float rotateSpeed = 90f;
-	public float walkSpeed = 8f;
+	public int player_num  = 0;
+	public float rotate_speed = 90f;
+	public float walk_speed = 8f;
+
+	public int current_resources = 0;
+	public int MAX_RESOURCES = 50;
 
 	// Use this for initialization
 	void Start () {
@@ -14,26 +17,26 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (playerNum == 0) {
+		if (player_num == 0) {
 			throw new UnassignedReferenceException("PlayerController::playerNum must be non-zero");
 		}
-		float horizInput = Input.GetAxis("Horizontal_" + playerNum.ToString()),
-			  vertInput = Input.GetAxis("Vertical_" + playerNum.ToString());
+		float horizInput = Input.GetAxis("Horizontal_" + player_num.ToString()),
+			  vertInput = Input.GetAxis("Vertical_" + player_num.ToString());
 
-		transform.Rotate(Vector3.up, rotateSpeed * Time.deltaTime * horizInput);
-		transform.localPosition += (transform.forward * walkSpeed * vertInput * Time.deltaTime);
+		transform.Rotate(Vector3.up, rotate_speed * Time.deltaTime * horizInput);
+		transform.localPosition += (transform.forward * walk_speed * vertInput * Time.deltaTime);
 
-		if (Input.GetButtonDown("Action_" + playerNum.ToString())) {
+		if (Input.GetButtonDown("Action_" + player_num.ToString())) {
 			TakeAction();
 		}
 	}
 
 	void TakeAction() {
-		print ("Player " + playerNum.ToString() + " is taking an action!");
+		print ("Player " + player_num.ToString() + " is taking an action!");
 
 		RaycastHit hitinfo;
 		if (IsInRange(out hitinfo)) {
-			print ("Player " + playerNum.ToString() + " is in range!");
+			print ("Player " + player_num.ToString() + " is in range!");
 			Resource r = hitinfo.transform.GetComponent<Resource>();
 			if (r == null) {
 				throw new UnassignedReferenceException("Resourse layer object does not have Resource script attached");
@@ -50,11 +53,11 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 	void ChopWood() {
-		print ("Player " + playerNum.ToString() + " is chopping wood!");
+		print ("Player " + player_num.ToString() + " is chopping wood!");
 		
 	}
 	void MineStone() {
-		print ("Player " + playerNum.ToString() + " is mining!");
+		print ("Player " + player_num.ToString() + " is mining!");
 		
 	}
 
