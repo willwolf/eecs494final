@@ -64,14 +64,14 @@ public class PlayerController : MonoBehaviour {
 					killPlayer(); 
 				}
 			} else {
-				Debug.Log("In rnage of friendly plaer");
+				Debug.Log("In range of friendly plaer");
 			}
 
 		} else if (IsInRange(out hitinfo, "Resource")) {
 			print ("Player " + player_num.ToString() + " is in range!");
 			Resource r = hitinfo.transform.GetComponent<Resource>();
 			if (r == null) {
-				throw new UnassignedReferenceException("Resourse layer object does not have Resource script attached");
+				throw new UnassignedReferenceException("Resource layer object does not have Resource script attached");
 			}
 
 			switch (r.type) {
