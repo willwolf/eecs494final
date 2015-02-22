@@ -12,7 +12,7 @@ GameObject:
   - 135: {fileID: 13508584}
   - 23: {fileID: 2308584}
   m_Layer: 0
-  m_Name: Sphere
+  m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,7 +30,7 @@ GameObject:
   - 65: {fileID: 6508584}
   - 23: {fileID: 2308586}
   m_Layer: 0
-  m_Name: Player Shape
+  m_Name: Player Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
