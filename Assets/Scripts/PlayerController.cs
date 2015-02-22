@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
-
+	
 	public int player_num  = 0;
 	public float rotate_speed = 90f;
 	public float walk_speed = 8f;
@@ -14,6 +14,10 @@ public class PlayerController : MonoBehaviour {
 	public int stone_gather_val = 5;
 	public int MAX_RESOURCES = 50;
 
+	public GameObject homeBase_GO;
+	public Base homeBase { get; private set; }
+	public bool inBase = false;
+	
 	private Text stone_text;
 	private Text wood_text;
 
@@ -24,6 +28,7 @@ public class PlayerController : MonoBehaviour {
 		}
 		wood_text = GameObject.Find ("Wood_Text_" + player_num.ToString()).GetComponent<Text>();
 		stone_text = GameObject.Find("Stone_Text_ " + player_num.ToString()).GetComponent<Text>();
+		homeBase = homeBase_GO.GetComponent<Base>();
 	}
 	
 	// Update is called once per frame
