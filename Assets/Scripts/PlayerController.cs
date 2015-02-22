@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
 
@@ -10,9 +11,14 @@ public class PlayerController : MonoBehaviour {
 	public int current_resources = 0;
 	public int MAX_RESOURCES = 50;
 
+	private Text resource_text;
+
 	// Use this for initialization
 	void Start () {
-
+		if (player_num == 0) {
+			throw new UnassignedReferenceException("PlayerController::playerNum must be non-zero");
+		}
+		resource_text = GameObject.Find("Resource " + player_num.ToString()).GetComponent<Text>();
 	}
 	
 	// Update is called once per frame
@@ -54,11 +60,22 @@ public class PlayerController : MonoBehaviour {
 	}
 	void ChopWood() {
 		print ("Player " + player_num.ToString() + " is chopping wood!");
-		
+		UpdateCurrentResources(5);
 	}
 	void MineStone() {
 		print ("Player " + player_num.ToString() + " is mining!");
-		
+		UpdateCurrentResources(5);
+	}
+
+	void UpdateCurrentResources(int amount) {
+		current_resources += amount;
+		if (current_resources >= MAX_RESOURCES) {
+			current_resources = MAX_RESOURCES;
+		}
+		if (resource_text == null) {
+			throw new UnassignedReferenceException("resource_text for Player " + player_num.ToString() + " is uninitialized");
+		}
+		resource_text.text = "Carrying " + current_resources + " resources";
 	}
 
 	bool IsInRange(out RaycastHit hitinfo) {
