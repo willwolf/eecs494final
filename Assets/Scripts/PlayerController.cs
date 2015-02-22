@@ -107,7 +107,7 @@ public class PlayerController : MonoBehaviour {
 		        CastResourceRay(rightCenter, out hitinfo) || CastResourceRay(footRight, out hitinfo));
 	}
 	bool CastResourceRay(Vector3 origin, out RaycastHit info) {
-		int layerMask = 1 << 8; // only collide with Resource layer
+		int layerMask = LayerMask.GetMask("Resource"); // only collide with Resource layer
 		return Physics.Raycast(origin, transform.forward, out info, 1.5f, layerMask);
 	}
 }
