@@ -473,7 +473,10 @@ MonoBehaviour:
   player_num: 2
   rotate_speed: 90
   walk_speed: 8
-  current_resources: 0
+  curr_wood_resource: 0
+  wood_gather_val: 5
+  curr_stone_resource: 0
+  stone_gather_val: 5
   MAX_RESOURCES: 50
   homeBase_GO: {fileID: 174982709}
   inBase: 0
@@ -1060,7 +1063,10 @@ MonoBehaviour:
   player_num: 1
   rotate_speed: 90
   walk_speed: 8
-  current_resources: 0
+  curr_wood_resource: 0
+  wood_gather_val: 5
+  curr_stone_resource: 0
+  stone_gather_val: 5
   MAX_RESOURCES: 50
   homeBase_GO: {fileID: 1619672632}
   inBase: 0

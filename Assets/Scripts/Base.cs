@@ -7,8 +7,10 @@ public class Base : MonoBehaviour {
 		if (other.gameObject.layer != LayerMask.NameToLayer("Player"))
 			return;
 
+		Debug.Log("here");
+
 		PlayerController player = other.GetComponent<PlayerController>();
-		if (player.homeBase == this) {
+		if (player.homeBase_GO.GetInstanceID() == this.gameObject.GetInstanceID()) {
 			player.inBase = true;
 		}
 	}
@@ -18,7 +20,7 @@ public class Base : MonoBehaviour {
 			return;
 		
 		PlayerController player = other.GetComponent<PlayerController>();
-		if (player.homeBase == this) {
+		if (player.homeBase_GO.GetInstanceID() == this.gameObject.GetInstanceID()) {
 			player.inBase = false;
 		}
 	}
