@@ -9,11 +9,14 @@ public class PlayerController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		if (playerNum == 0) {
+			throw new UnassignedReferenceException("PlayerController::playerNum must be non-zero");
+		}
 		float horizInput = Input.GetAxis("Horizontal_" + playerNum.ToString()),
 			  vertInput = Input.GetAxis("Vertical_" + playerNum.ToString());
 
