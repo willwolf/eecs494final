@@ -47,11 +47,27 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
+	public void killPlayer() {
+		Debug.Log("player died");
+	}
+
 	void TakeAction() {
 		print ("Player " + player_num.ToString() + " is taking an action!");
 
 		RaycastHit hitinfo;
-		if (IsInRange(out hitinfo)) {
+		if (IsInRange(out hitinfo, "Player")) {
+			PlayerController other = hitinfo.transform.GetComponent<PlayerController>();
+
+			if (other.homeBase_GO.GetInstanceID() != this.gameObject.GetInstanceID()) {
+				Debug.Log("In range of enemy player");
+				if (this.inBase) {
+					killPlayer(); 
+				}
+			} else {
+				Debug.Log("In rnage of friendly plaer");
+			}
+
+		} else if (IsInRange(out hitinfo, "Resource")) {
 			print ("Player " + player_num.ToString() + " is in range!");
 			Resource r = hitinfo.transform.GetComponent<Resource>();
 			if (r == null) {
@@ -85,7 +101,7 @@ public class PlayerController : MonoBehaviour {
 		stone_text.text = "Carrying " + curr_stone_resource + " stone";
 	}
 
-	bool IsInRange(out RaycastHit hitinfo) {
+	bool IsInRange(out RaycastHit hitinfo, string Layer) {
 		Vector3 halfWidth = transform.right / 2f;
 		float halfHeight = transform.lossyScale.y / 2f;
 		Vector3 center, leftCenter, rightCenter, footPos, footLeft, footRight;
@@ -102,12 +118,13 @@ public class PlayerController : MonoBehaviour {
 		footLeft -= halfWidth;
 		footRight += halfWidth;
 		
-		return (CastResourceRay(center, out hitinfo) || CastResourceRay(footPos, out hitinfo) ||
-		        CastResourceRay(leftCenter, out hitinfo) || CastResourceRay(footLeft, out hitinfo) ||
-		        CastResourceRay(rightCenter, out hitinfo) || CastResourceRay(footRight, out hitinfo));
+		return (CastActionRay(center, Layer, out hitinfo) || CastActionRay(footPos, Layer, out hitinfo) ||
+		        CastActionRay(leftCenter, Layer, out hitinfo) || CastActionRay(footLeft, Layer, out hitinfo) ||
+		        CastActionRay(rightCenter, Layer, out hitinfo) || CastActionRay(footRight, Layer, out hitinfo));
 	}
-	bool CastResourceRay(Vector3 origin, out RaycastHit info) {
-		int layerMask = LayerMask.GetMask("Resource"); // only collide with Resource layer
+
+	bool CastActionRay(Vector3 origin, string Layer, out RaycastHit info) {
+		int layerMask = LayerMask.GetMask(Layer); // only collide with Resource layer
 		return Physics.Raycast(origin, transform.forward, out info, 1.5f, layerMask);
 	}
 }
