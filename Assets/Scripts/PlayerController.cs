@@ -34,6 +34,18 @@ public class PlayerController : MonoBehaviour {
 		RaycastHit hitinfo;
 		if (IsInRange(out hitinfo)) {
 			print ("Player " + playerNum.ToString() + " is in range!");
+			Resource r = hitinfo.transform.GetComponent<Resource>();
+			if (r == null) {
+				throw new UnassignedReferenceException("Resourse layer object does not have Resource script attached");
+			}
+			switch (r.type) {
+			case ResourceType.stone:
+				print ("Player " + playerNum.ToString() + " is mining!");
+				break;
+			case ResourceType.wood:
+				print ("Player " + playerNum.ToString() + " is chopping wood!");
+				break;
+			}
 		}
 	}
 
