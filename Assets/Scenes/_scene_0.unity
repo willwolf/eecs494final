@@ -225,6 +225,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 116353828}
+  - 114: {fileID: 116353829}
   m_Layer: 0
   m_Name: Player1
   m_TagString: Untagged
@@ -246,6 +247,20 @@ Transform:
   - {fileID: 1927409170}
   m_Father: {fileID: 0}
   m_RootOrder: 2
+--- !u!114 &116353829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 116353827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f94a2812731e43568d43664a23a6a24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerNum: 1
+  rotateSpeed: 90
+  walkSpeed: 8
 --- !u!1 &262814388
 GameObject:
   m_ObjectHideFlags: 0
@@ -838,6 +853,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1860864736}
+  - 114: {fileID: 1860864737}
   m_Layer: 0
   m_Name: Player2
   m_TagString: Untagged
@@ -859,6 +875,20 @@ Transform:
   - {fileID: 2017655474}
   m_Father: {fileID: 0}
   m_RootOrder: 3
+--- !u!114 &1860864737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1860864735}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f94a2812731e43568d43664a23a6a24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerNum: 2
+  rotateSpeed: 90
+  walkSpeed: 8
 --- !u!1 &1894756581
 GameObject:
   m_ObjectHideFlags: 0
