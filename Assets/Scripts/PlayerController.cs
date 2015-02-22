@@ -8,17 +8,22 @@ public class PlayerController : MonoBehaviour {
 	public float rotate_speed = 90f;
 	public float walk_speed = 8f;
 
-	public int current_resources = 0;
+	public int curr_wood_resource = 0;
+	public int wood_gather_val = 5;
+	public int curr_stone_resource = 0;
+	public int stone_gather_val = 5;
 	public int MAX_RESOURCES = 50;
 
-	private Text resource_text;
+	private Text stone_text;
+	private Text wood_text;
 
 	// Use this for initialization
 	void Start () {
 		if (player_num == 0) {
 			throw new UnassignedReferenceException("PlayerController::playerNum must be non-zero");
 		}
-		resource_text = GameObject.Find("Resource " + player_num.ToString()).GetComponent<Text>();
+		wood_text = GameObject.Find ("Wood_Text_" + player_num.ToString()).GetComponent<Text>();
+		stone_text = GameObject.Find("Stone_Text_ " + player_num.ToString()).GetComponent<Text>();
 	}
 	
 	// Update is called once per frame
@@ -60,22 +65,19 @@ public class PlayerController : MonoBehaviour {
 	}
 	void ChopWood() {
 		print ("Player " + player_num.ToString() + " is chopping wood!");
-		UpdateCurrentResources(5);
+		curr_wood_resource += wood_gather_val;
+		if (wood_text == null) {
+			throw new UnassignedReferenceException("wood_text for player " + player_num.ToString() + " is null");
+		}
+		wood_text.text = "Carrying " + curr_wood_resource + " wood";
 	}
 	void MineStone() {
 		print ("Player " + player_num.ToString() + " is mining!");
-		UpdateCurrentResources(5);
-	}
-
-	void UpdateCurrentResources(int amount) {
-		current_resources += amount;
-		if (current_resources >= MAX_RESOURCES) {
-			current_resources = MAX_RESOURCES;
+		stone_gather_val += stone_gather_val;
+		if (stone_text == null) {
+			throw new UnassignedReferenceException("stone_text for player " + player_num.ToString() + " is null");
 		}
-		if (resource_text == null) {
-			throw new UnassignedReferenceException("resource_text for Player " + player_num.ToString() + " is uninitialized");
-		}
-		resource_text.text = "Carrying " + current_resources + " resources";
+		stone_text.text = "Carrying " + curr_stone_resource + " stone";
 	}
 
 	bool IsInRange(out RaycastHit hitinfo) {
