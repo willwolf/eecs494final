@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour {
 
 		RaycastHit hitinfo;
 		if (IsInRange(out hitinfo)) {
-			print("Player is in range!");
+			print ("Player " + playerNum.ToString() + " is in range!");
 		}
 	}
 
