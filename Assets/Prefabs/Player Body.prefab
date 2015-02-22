@@ -11,7 +11,7 @@ GameObject:
   - 33: {fileID: 3308584}
   - 135: {fileID: 13508584}
   - 23: {fileID: 2308584}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29,7 +29,7 @@ GameObject:
   - 33: {fileID: 3308586}
   - 65: {fileID: 6508584}
   - 23: {fileID: 2308586}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Player Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
