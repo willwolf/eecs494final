@@ -85,7 +85,7 @@ GameObject:
   - 33: {fileID: 23962777}
   - 135: {fileID: 23962776}
   - 23: {fileID: 23962775}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -229,7 +229,7 @@ GameObject:
   - 65: {fileID: 174982712}
   - 23: {fileID: 174982711}
   - 114: {fileID: 174982710}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Player 2 Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -277,7 +277,7 @@ BoxCollider:
   m_PrefabInternal: {fileID: 428712882}
   m_GameObject: {fileID: 174982709}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -315,7 +315,7 @@ GameObject:
   - 23: {fileID: 262814390}
   - 54: {fileID: 262814393}
   - 114: {fileID: 262814394}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Player 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -418,7 +418,7 @@ GameObject:
   - 33: {fileID: 282311727}
   - 65: {fileID: 282311726}
   - 23: {fileID: 282311725}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -606,6 +606,14 @@ Prefab:
     - target: {fileID: 190338, guid: 5f93fdd4e70a94e768133bb21d9dd9b0, type: 2}
       propertyPath: m_Name
       value: Player 2 Base
+      objectReference: {fileID: 0}
+    - target: {fileID: 190338, guid: 5f93fdd4e70a94e768133bb21d9dd9b0, type: 2}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 6590338, guid: 5f93fdd4e70a94e768133bb21d9dd9b0, type: 2}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5f93fdd4e70a94e768133bb21d9dd9b0, type: 2}
@@ -800,6 +808,10 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 07fabfd14fa554bb3a8ffde623661451, type: 2}
+    - target: {fileID: 106442, guid: 37e72a7b37bb1455bbf2223b2eb9a934, type: 2}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 37e72a7b37bb1455bbf2223b2eb9a934, type: 2}
   m_RootGameObject: {fileID: 1368732805}
@@ -904,6 +916,14 @@ Prefab:
       propertyPath: m_Name
       value: Player 1 Base
       objectReference: {fileID: 0}
+    - target: {fileID: 190338, guid: 5f93fdd4e70a94e768133bb21d9dd9b0, type: 2}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 6590338, guid: 5f93fdd4e70a94e768133bb21d9dd9b0, type: 2}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5f93fdd4e70a94e768133bb21d9dd9b0, type: 2}
   m_RootGameObject: {fileID: 1619672632}
@@ -920,7 +940,7 @@ GameObject:
   - 33: {fileID: 1368732808}
   - 135: {fileID: 1368732807}
   - 23: {fileID: 1368732806}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Tree
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -994,7 +1014,7 @@ GameObject:
   - 65: {fileID: 1619672634}
   - 23: {fileID: 1619672633}
   - 114: {fileID: 1619672637}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Player 1 Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1030,7 +1050,7 @@ BoxCollider:
   m_PrefabInternal: {fileID: 1269776080}
   m_GameObject: {fileID: 1619672632}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -1126,6 +1146,10 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: cceca82eed161436ca3044bef0c4efa5, type: 2}
+    - target: {fileID: 154062, guid: 1895f00be1e1141ceacb962eaec4e8bc, type: 2}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1895f00be1e1141ceacb962eaec4e8bc, type: 2}
   m_RootGameObject: {fileID: 282311724}
@@ -1142,7 +1166,7 @@ GameObject:
   - 33: {fileID: 1894756584}
   - 135: {fileID: 1894756583}
   - 23: {fileID: 1894756582}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1216,7 +1240,7 @@ GameObject:
   - 23: {fileID: 1927409171}
   - 54: {fileID: 1927409174}
   - 114: {fileID: 1927409175}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Player 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
