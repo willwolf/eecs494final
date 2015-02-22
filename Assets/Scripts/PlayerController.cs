@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour {
 			throw new UnassignedReferenceException("PlayerController::playerNum must be non-zero");
 		}
 		wood_text = GameObject.Find ("Wood_Text_" + player_num.ToString()).GetComponent<Text>();
-		stone_text = GameObject.Find("Stone_Text_ " + player_num.ToString()).GetComponent<Text>();
+		stone_text = GameObject.Find("Stone_Text_" + player_num.ToString()).GetComponent<Text>();
 		homeBase = homeBase_GO.GetComponent<Base>();
 	}
 	
@@ -78,7 +78,7 @@ public class PlayerController : MonoBehaviour {
 	}
 	void MineStone() {
 		print ("Player " + player_num.ToString() + " is mining!");
-		stone_gather_val += stone_gather_val;
+		curr_stone_resource += stone_gather_val;
 		if (stone_text == null) {
 			throw new UnassignedReferenceException("stone_text for player " + player_num.ToString() + " is null");
 		}
