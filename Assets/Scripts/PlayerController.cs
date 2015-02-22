@@ -22,5 +22,13 @@ public class PlayerController : MonoBehaviour {
 
 		transform.Rotate(Vector3.up, rotateSpeed * Time.deltaTime * horizInput);
 		transform.localPosition += (transform.forward * walkSpeed * vertInput * Time.deltaTime);
+
+		if (Input.GetButtonDown("Action_" + playerNum.ToString())) {
+			TakeAction();
+		}
+	}
+
+	void TakeAction() {
+		print ("Player " + playerNum.ToString() + " is taking an action!");
 	}
 }
