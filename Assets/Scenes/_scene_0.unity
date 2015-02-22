@@ -155,6 +155,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 38783618}
   - 108: {fileID: 38783617}
+  - 81: {fileID: 38783619}
   m_Layer: 0
   m_Name: Directional light
   m_TagString: Untagged
@@ -209,6 +210,13 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
+--- !u!81 &38783619
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 38783616}
+  m_Enabled: 1
 --- !u!1 &116353827
 GameObject:
   m_ObjectHideFlags: 0
@@ -357,7 +365,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: cceca82eed161436ca3044bef0c4efa5, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -409,7 +417,7 @@ GameObject:
   - 20: {fileID: 367926522}
   - 92: {fileID: 367926521}
   - 124: {fileID: 367926520}
-  - 81: {fileID: 367926519}
+  - 45: {fileID: 367926524}
   m_Layer: 0
   m_Name: Cam1
   m_TagString: MainCamera
@@ -417,13 +425,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &367926519
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 367926518}
-  m_Enabled: 1
 --- !u!124 &367926520
 Behaviour:
   m_ObjectHideFlags: 0
@@ -482,6 +483,14 @@ Transform:
   m_Children: []
   m_Father: {fileID: 116353828}
   m_RootOrder: 0
+--- !u!45 &367926524
+Skybox:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 367926518}
+  m_Enabled: 1
+  m_CustomSkybox: {fileID: 2100000, guid: 53412155bc1016547b1a77b2333c0380, type: 2}
 --- !u!1001 &435024744
 Prefab:
   m_ObjectHideFlags: 0
@@ -827,6 +836,10 @@ Prefab:
       propertyPath: m_Name
       value: Ground
       objectReference: {fileID: 0}
+    - target: {fileID: 2354062, guid: 1895f00be1e1141ceacb962eaec4e8bc, type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: cceca82eed161436ca3044bef0c4efa5, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1895f00be1e1141ceacb962eaec4e8bc, type: 2}
   m_RootGameObject: {fileID: 282311724}
@@ -1032,7 +1045,7 @@ GameObject:
   - 20: {fileID: 2017655473}
   - 92: {fileID: 2017655472}
   - 124: {fileID: 2017655471}
-  - 81: {fileID: 2017655470}
+  - 45: {fileID: 2017655475}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1040,13 +1053,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &2017655470
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2017655469}
-  m_Enabled: 1
 --- !u!124 &2017655471
 Behaviour:
   m_ObjectHideFlags: 0
@@ -1105,3 +1111,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1860864736}
   m_RootOrder: 1
+--- !u!45 &2017655475
+Skybox:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2017655469}
+  m_Enabled: 1
+  m_CustomSkybox: {fileID: 2100000, guid: 53412155bc1016547b1a77b2333c0380, type: 2}
