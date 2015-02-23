@@ -18,4 +18,15 @@ public class GameManager : MonoBehaviour {
 	void Update () {
 		
 	}
+
+	public void UpdateResources(int baseId, ResourceType t, int amount) {
+		switch (t) {
+		case ResourceType.stone:
+			teamResources[baseId].stone += amount;
+			break;
+		case ResourceType.wood:
+			teamResources[baseId].wood += amount;
+			break;
+		}
+	}
 }
