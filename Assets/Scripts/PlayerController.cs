@@ -184,12 +184,14 @@ public class PlayerController : MonoBehaviour {
 				print ("Stealing resources!");
 				switch (drop.resourceType) {
 				case ResourceType.stone:
-					CheckMaxStone(drop.StealResources(stone_gather_val));
-					stone_text.text = "Carrying " + curr_stone_resource + " stone";
+					if (!collected_stone) {
+						CollectStone(drop.StealResources(stone_gather_val), " is stealing stone...");
+					}
 					break;
 				case ResourceType.wood:
-					CheckMaxWood(drop.StealResources(wood_gather_val));
-					wood_text.text = "Carrying " + curr_wood_resource + " wood";
+					if (!collected_wood) {
+						CollectWood(drop.StealResources(wood_gather_val), " is stealing wood...");
+					}
 					break;
 				}
 			}
@@ -202,20 +204,23 @@ public class PlayerController : MonoBehaviour {
 
 	void ChopWood() {
 		if(!collected_wood){
-			string chopNotification = "Player " + player_num.ToString() + " is chopping wood!";
-			print (chopNotification);
-			updateMidScreenText(chopNotification);
-			CheckMaxWood(wood_gather_val);
-			if (wood_text == null) {
-				throw new UnassignedReferenceException("wood_text for player " + player_num.ToString() + " is null");
-			}
-			wood_text.text = "Carrying " + curr_wood_resource + " wood";
-			updateMidScreenText("Player " + player_num.ToString() + " chopping...");
-			collected_wood = true;
-			get_wood_at_time = Time.time + WOOD_COOLDOWN_TIME;
-			print ("Get wood at: " + get_wood_at_time);
+			CollectWood(wood_gather_val, " is chopping wood...");
 		}
 		updateWoodText();
+	}
+	void CollectWood(int amount, string message) {
+		string chopNotification = "Player " + player_num.ToString() + " is chopping wood!";
+		print (chopNotification);
+		updateMidScreenText(chopNotification);
+		CheckMaxWood(amount);
+		if (wood_text == null) {
+			throw new UnassignedReferenceException("wood_text for player " + player_num.ToString() + " is null");
+		}
+		wood_text.text = "Carrying " + curr_wood_resource + " wood";
+		updateMidScreenText("Player " + player_num.ToString() + message);
+		collected_wood = true;
+		get_wood_at_time = Time.time + WOOD_COOLDOWN_TIME;
+		print ("Get wood at: " + get_wood_at_time);
 	}
 	void CheckMaxWood(int amount) {
 		if (curr_wood_resource + amount > MAX_RESOURCES) {
@@ -234,22 +239,24 @@ public class PlayerController : MonoBehaviour {
 
 	void MineStone() {
 		if(!collected_stone){
-			string mineNotification = "Player " + player_num.ToString() + " is mining!";
-			print (mineNotification);
-			updateMidScreenText(mineNotification);
-
-			print ("Player " + player_num.ToString() + " is mining!");
-			CheckMaxStone(stone_gather_val);
-			if (stone_text == null) {
-				throw new UnassignedReferenceException("stone_text for player " + player_num.ToString() + " is null");
-			}
-			stone_text.text = "Carrying " + curr_stone_resource + " stone";
-			updateMidScreenText("Player " + player_num.ToString() + " mining...");
-			collected_stone = true;
-			get_stone_at_time = Time.time + STONE_COOLDOWN_TIME;
-			print ("Get wood at: " + get_wood_at_time);
+			CollectStone(stone_gather_val, " is mining stone...");
 		}
 		updateStoneText();
+	}
+	void CollectStone(int amount, string message) {
+		string mineNotification = "Player " + player_num.ToString() + " is mining!";
+		print (mineNotification);
+		updateMidScreenText(mineNotification);
+		print ("Player " + player_num.ToString() + " is mining!");
+		CheckMaxStone(amount);
+		if (stone_text == null) {
+			throw new UnassignedReferenceException("stone_text for player " + player_num.ToString() + " is null");
+		}
+		stone_text.text = "Carrying " + curr_stone_resource + " stone";
+		updateMidScreenText("Player " + player_num.ToString() + message);
+		collected_stone = true;
+		get_stone_at_time = Time.time + STONE_COOLDOWN_TIME;
+		print ("Get wood at: " + get_wood_at_time);
 	}
 	void CheckMaxStone(int amount) {
 		if (curr_stone_resource + amount > MAX_RESOURCES) {
