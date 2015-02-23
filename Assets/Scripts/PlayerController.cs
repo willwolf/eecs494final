@@ -3,6 +3,10 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
+
+	public int RESPAWN_TIME = 20;
+	private bool dead = false;
+	private float respawn_at_time;
 	
 	public int player_num  = 0;
 	public float rotate_speed = 90f;
@@ -36,6 +40,15 @@ public class PlayerController : MonoBehaviour {
 		if (player_num == 0) {
 			throw new UnassignedReferenceException("PlayerController::playerNum must be non-zero");
 		}
+
+		if (dead) {
+			if (Time.time > respawn_at_time) {
+				awakePlayer();
+			} else {
+				return;
+			}
+		}
+
 		float horizInput = Input.GetAxis("Horizontal_" + player_num.ToString()),
 			  vertInput = Input.GetAxis("Vertical_" + player_num.ToString());
 
@@ -47,8 +60,34 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
+	public void awakePlayer() {
+		foreach (Collider collider in GetComponentsInChildren<Collider>()) {
+			collider.enabled = true;
+		}
+		foreach (MeshRenderer renderer in GetComponentsInChildren<MeshRenderer>()) {
+			renderer.enabled = true;
+		}
+		foreach (Rigidbody rb in GetComponentsInChildren<Rigidbody>()) {
+			rb.isKinematic = false;
+		}
+	}
+
 	public void killPlayer() {
-		Debug.Log("player died");
+		foreach (MeshRenderer renderer in GetComponentsInChildren<MeshRenderer>()) {
+			renderer.enabled = false;
+		}
+		foreach (Rigidbody rb in GetComponentsInChildren<Rigidbody>()) {
+			rb.isKinematic = true;
+		}
+		foreach (Collider collider in GetComponentsInChildren<Collider>()) {
+			collider.enabled = false;
+		}
+
+		curr_wood_resource = curr_stone_resource = 0;
+		this.transform.position = homeBase_GO.transform.position;
+
+		dead = true;
+		respawn_at_time = Time.time + RESPAWN_TIME;
 	}
 
 	void TakeAction() {
@@ -61,7 +100,7 @@ public class PlayerController : MonoBehaviour {
 			if (other.homeBase_GO.GetInstanceID() != this.gameObject.GetInstanceID()) {
 				Debug.Log("In range of enemy player");
 				if (this.inBase) {
-					killPlayer(); 
+					other.killPlayer(); 
 				}
 			} else {
 				Debug.Log("In range of friendly plaer");
