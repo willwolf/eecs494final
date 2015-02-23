@@ -93,6 +93,10 @@ public class PlayerController : MonoBehaviour {
 			print ("Player " + player_num.ToString() + " may collect stone again!");
 		}
 
+		if (curr_wood_resource + curr_stone_resource >= MAX_RESOURCES) {
+			updateMidScreenText("Backpack Full");
+		}
+
 		float horizInput = Input.GetAxis("Horizontal_" + player_num.ToString()),
 			  vertInput = Input.GetAxis("Vertical_" + player_num.ToString());
 
