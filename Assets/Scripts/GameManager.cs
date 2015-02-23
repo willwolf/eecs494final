@@ -5,9 +5,12 @@ using System.Collections.Generic;
 public class GameManager : MonoBehaviour {
 
 	public Dictionary<int, ResourceCount> teamResources;
+	public int winningWood = 500;
+	public int winningStone = 500;
 
 	// Use this for initialization
 	void Start () {
+		teamResources = new Dictionary<int, ResourceCount>();
 		GameObject[] bases = GameObject.FindGameObjectsWithTag("Base");
 		foreach(GameObject b in bases){
 			teamResources.Add(b.GetInstanceID(), new ResourceCount());
@@ -16,7 +19,11 @@ public class GameManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		foreach(KeyValuePair<int, ResourceCount> team in teamResources){
+			if(team.Value.wood >= winningWood && team.Value.stone >= winningStone){
+				Application.LoadLevel(1);
+			}
+		}
 	}
 
 	public void UpdateResources(int baseId, ResourceType t, int amount) {

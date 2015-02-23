@@ -61,7 +61,7 @@ public class PlayerController : MonoBehaviour {
 				mid_screen_text.text = "";
 				awakePlayer();
 			} else {
-				mid_screen_text.text = "Respawn in " + Mathf.Floor(Time.time - respawn_at_time).ToString("0") + " seconds";
+				mid_screen_text.text = "Respawn in " + Mathf.Floor(respawn_at_time - Time.time).ToString("0") + " seconds";
 				return;
 			}
 		}
@@ -147,6 +147,25 @@ public class PlayerController : MonoBehaviour {
 			case ResourceType.wood:
 				ChopWood();
 				break;
+			}
+		} else if (IsInRange(out hitinfo, "DropPoint")) {
+			DropPoint drop = hitinfo.transform.GetComponent<DropPoint>();
+			if (drop == null) {
+				throw new UnassignedReferenceException("DropPoint layer object does not have a DropPoint script attached");
+			}
+
+			if (drop.playerBaseGO.GetInstanceID() == homeBase_GO.GetInstanceID()) {
+				print ("Depsoting resources!");
+				switch (drop.resourceType) {
+				case ResourceType.stone:
+					drop.DepositResources(curr_stone_resource);
+					break;
+				case ResourceType.wood:
+					drop.DepositResources(curr_wood_resource);
+					break;
+				}
+			} else {
+				print ("Stealing resources!");
 			}
 		}
 	}
