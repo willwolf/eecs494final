@@ -125,7 +125,12 @@ public class PlayerController : MonoBehaviour {
 	}
 	void ChopWood() {
 		print ("Player " + player_num.ToString() + " is chopping wood!");
+		if (curr_wood_resource + wood_gather_val > MAX_RESOURCES) {
+			print ("Player " + player_num.ToString () + " has max amount of wood!");
+			curr_wood_resource = MAX_RESOURCES;
+		} else {
 		curr_wood_resource += wood_gather_val;
+		}
 		if (wood_text == null) {
 			throw new UnassignedReferenceException("wood_text for player " + player_num.ToString() + " is null");
 		}
@@ -133,7 +138,12 @@ public class PlayerController : MonoBehaviour {
 	}
 	void MineStone() {
 		print ("Player " + player_num.ToString() + " is mining!");
-		curr_stone_resource += stone_gather_val;
+		if (curr_stone_resource + stone_gather_val > MAX_RESOURCES) {
+			print ("Player " + player_num.ToString() + " has max amount of stone!");
+			curr_stone_resource = MAX_RESOURCES;
+		} else {
+			curr_stone_resource += stone_gather_val;
+		}
 		if (stone_text == null) {
 			throw new UnassignedReferenceException("stone_text for player " + player_num.ToString() + " is null");
 		}
