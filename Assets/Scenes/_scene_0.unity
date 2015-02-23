@@ -862,7 +862,7 @@ Canvas:
   m_GameObject: {fileID: 56050735}
   m_Enabled: 1
   serializedVersion: 2
-  m_RenderMode: 1
+  m_RenderMode: 0
   m_Camera: {fileID: 2017655473}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -2444,6 +2444,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f94a2812731e43568d43664a23a6a24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RESPAWN_TIME: 20
   player_num: 2
   rotate_speed: 90
   walk_speed: 8
@@ -5787,7 +5788,7 @@ Canvas:
   m_GameObject: {fileID: 843186046}
   m_Enabled: 1
   serializedVersion: 2
-  m_RenderMode: 1
+  m_RenderMode: 0
   m_Camera: {fileID: 367926522}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -12400,6 +12401,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f94a2812731e43568d43664a23a6a24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RESPAWN_TIME: 20
   player_num: 1
   rotate_speed: 90
   walk_speed: 8
