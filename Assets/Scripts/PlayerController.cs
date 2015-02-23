@@ -224,7 +224,7 @@ public class PlayerController : MonoBehaviour {
 			updateMidScreenText(maxWood);
 			curr_wood_resource = MAX_RESOURCES;
 		} else {
-			curr_wood_resource += wood_gather_val;
+			curr_wood_resource += amount;
 		}
 	}
 	
@@ -258,7 +258,7 @@ public class PlayerController : MonoBehaviour {
 			updateMidScreenText(maxStone);
 			curr_stone_resource = MAX_RESOURCES;
 		} else {
-			curr_stone_resource += stone_gather_val;
+			curr_stone_resource += amount;
 		}
 	}
 	
