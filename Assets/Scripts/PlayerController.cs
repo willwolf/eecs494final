@@ -121,6 +121,26 @@ public class PlayerController : MonoBehaviour {
 				ChopWood();
 				break;
 			}
+		} else if (IsInRange(out hitinfo, "DropPoint")) {
+			DropPoint drop = hitinfo.transform.GetComponent<DropPoint>();
+			if (drop == null) {
+				throw new UnassignedReferenceException("DropPoint layer object does not have a DropPoint script attached");
+			}
+
+			if (drop.playerBaseGO.GetInstanceID() == homeBase_GO.GetInstanceID()) {
+				switch (drop.resourceType) {
+				case ResourceType.stone:
+					print ("Dropping stone resources!");
+					drop.DepositResources(curr_stone_resource);
+					break;
+				case ResourceType.wood:
+					print ("Dropping wood resources!");
+					drop.DepositResources(curr_wood_resource);
+					break;
+				}
+			} else {
+				print("Stealing resources!");
+			}
 		}
 	}
 	void ChopWood() {
