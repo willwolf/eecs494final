@@ -13,18 +13,22 @@ public class PlayerController : MonoBehaviour {
 	public float walk_speed = 8f;
 
 	public int curr_wood_resource = 0;
-	public int wood_gather_val = 5;
+	public int wood_gather_val = 1;
 	public int curr_stone_resource = 0;
-	public int stone_gather_val = 5;
+	public int stone_gather_val = 1;
 	public int MAX_RESOURCES = 50;
 
-	public int WOOD_COOLDOWN_TIME = 20;
+	public int WOOD_COOLDOWN_TIME = 1;
 	private bool collected_wood = false;
 	private float get_wood_at_time;
 
-	public int STONE_COOLDOWN_TIME = 20;
+	public int STONE_COOLDOWN_TIME = 1;
 	private bool collected_stone = false;
 	private float get_stone_at_time;
+
+	public int MIDTEXT_COOLDOWN_TIME = 5;
+	private bool showing = false;
+	private float zero_at_time;
 
 	public GameObject homeBase_GO;
 	public Base homeBase { get; private set; }
@@ -66,6 +70,14 @@ public class PlayerController : MonoBehaviour {
 			}
 		}
 
+		if (showing) {
+			if (Time.time > zero_at_time) {
+				mid_screen_text.text = "";
+				
+				showing = false;
+			} 
+		}
+
 		if (collected_wood && (Time.time > get_wood_at_time)) {
 			collected_wood = false;
 			print ("Player " + player_num.ToString() + " may collect wood again!");
@@ -82,7 +94,7 @@ public class PlayerController : MonoBehaviour {
 		transform.Rotate(Vector3.up, rotate_speed * Time.deltaTime * horizInput);
 		transform.localPosition += (transform.forward * walk_speed * vertInput * Time.deltaTime);
 
-		if (Input.GetButtonDown("Action_" + player_num.ToString())) {
+		if (Input.GetButton("Action_" + player_num.ToString())) {
 			TakeAction();
 		}
 	}
@@ -195,13 +207,10 @@ public class PlayerController : MonoBehaviour {
 				throw new UnassignedReferenceException("wood_text for player " + player_num.ToString() + " is null");
 			}
 			wood_text.text = "Carrying " + curr_wood_resource + " wood";
-			updateMidScreenText("Player " + player_num.ToString() + " received " + wood_gather_val+ " wood");
+			updateMidScreenText("Player " + player_num.ToString() + " chopping...");
 			collected_wood = true;
 			get_wood_at_time = Time.time + WOOD_COOLDOWN_TIME;
 			print ("Get wood at: " + get_wood_at_time);
-		} else{
-			updateMidScreenText("Player " + player_num.ToString() + " must wait " + 
-			                    (get_wood_at_time - Time.time) + " seconds to collect wood again.");
 		}
 		updateWoodText();
 	}
@@ -229,13 +238,10 @@ public class PlayerController : MonoBehaviour {
 				throw new UnassignedReferenceException("stone_text for player " + player_num.ToString() + " is null");
 			}
 			stone_text.text = "Carrying " + curr_stone_resource + " stone";
-			updateMidScreenText("Player " + player_num.ToString() + " received " + stone_gather_val+ " stone");
+			updateMidScreenText("Player " + player_num.ToString() + " mining...");
 			collected_stone = true;
 			get_stone_at_time = Time.time + STONE_COOLDOWN_TIME;
 			print ("Get wood at: " + get_wood_at_time);
-		} else{
-			updateMidScreenText ("Player " + player_num.ToString() + " must wait " + 
-			       (get_stone_at_time - Time.time) + " seconds to collect stone again.");
 		}
 		updateStoneText();
 	}
@@ -268,6 +274,10 @@ bool IsInRange(out RaycastHit hitinfo, string Layer) {
 	}
 
 	private void updateMidScreenText(string newText){
+		showing = true;
+		zero_at_time = Time.time + MIDTEXT_COOLDOWN_TIME;
+	
 		mid_screen_text.text = newText;
+
 	}
 }
