@@ -2427,7 +2427,7 @@ Transform:
   m_PrefabParentObject: {fileID: 408586, guid: 4622970ae76ee4778a6f178ffe1fac5b, type: 2}
   m_PrefabInternal: {fileID: 435024744}
   m_GameObject: {fileID: 262814388}
-  m_LocalRotation: {x: 0, y: -.707106829, z: 0, w: .707106709}
+  m_LocalRotation: {x: 0, y: -.707106888, z: 0, w: .707106769}
   m_LocalPosition: {x: 10, y: 1.5, z: 0}
   m_LocalScale: {x: .5, y: 2, z: .5}
   m_Children:
@@ -2508,12 +2508,13 @@ MonoBehaviour:
   rotate_speed: 90
   walk_speed: 8
   curr_wood_resource: 0
-  wood_gather_val: 5
+  wood_gather_val: 1
   curr_stone_resource: 0
-  stone_gather_val: 5
+  stone_gather_val: 1
   MAX_RESOURCES: 50
-  WOOD_COOLDOWN_TIME: 20
-  STONE_COOLDOWN_TIME: 20
+  WOOD_COOLDOWN_TIME: 1
+  STONE_COOLDOWN_TIME: 1
+  MIDTEXT_COOLDOWN_TIME: 1
   homeBase_GO: {fileID: 1619672632}
   inBase: 0
 --- !u!1001 &274888818
@@ -12574,7 +12575,7 @@ Transform:
   m_PrefabParentObject: {fileID: 408586, guid: 4622970ae76ee4778a6f178ffe1fac5b, type: 2}
   m_PrefabInternal: {fileID: 734557373}
   m_GameObject: {fileID: 1927409169}
-  m_LocalRotation: {x: 0, y: .707106829, z: 0, w: .707106709}
+  m_LocalRotation: {x: 0, y: .707106888, z: 0, w: .707106769}
   m_LocalPosition: {x: -33, y: 1.5, z: 0}
   m_LocalScale: {x: .5, y: 2, z: .5}
   m_Children:
@@ -12655,12 +12656,13 @@ MonoBehaviour:
   rotate_speed: 90
   walk_speed: 8
   curr_wood_resource: 0
-  wood_gather_val: 5
+  wood_gather_val: 1
   curr_stone_resource: 0
-  stone_gather_val: 5
+  stone_gather_val: 1
   MAX_RESOURCES: 50
-  WOOD_COOLDOWN_TIME: 20
-  STONE_COOLDOWN_TIME: 20
+  WOOD_COOLDOWN_TIME: 1
+  STONE_COOLDOWN_TIME: 1
+  MIDTEXT_COOLDOWN_TIME: 1
   homeBase_GO: {fileID: 174982709}
   inBase: 0
 --- !u!1 &1963194571
