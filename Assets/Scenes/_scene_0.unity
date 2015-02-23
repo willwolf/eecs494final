@@ -2506,7 +2506,7 @@ MonoBehaviour:
   RESPAWN_TIME: 20
   player_num: 2
   rotate_speed: 90
-  walk_speed: 8
+  walk_speed: 20
   curr_wood_resource: 0
   wood_gather_val: 1
   curr_stone_resource: 0
@@ -12260,8 +12260,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 447c27080d2354984b68f17304436118, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  winningWood: 500
-  winningStone: 500
+  winningWood: 50
+  winningStone: 50
 --- !u!4 &1897715652
 Transform:
   m_ObjectHideFlags: 0
@@ -12654,7 +12654,7 @@ MonoBehaviour:
   RESPAWN_TIME: 20
   player_num: 1
   rotate_speed: 90
-  walk_speed: 8
+  walk_speed: 20
   curr_wood_resource: 0
   wood_gather_val: 1
   curr_stone_resource: 0

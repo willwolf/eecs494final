@@ -40,6 +40,7 @@ public class PlayerController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		Time.timeScale = 1;
 		if (player_num == 0) {
 			throw new UnassignedReferenceException("PlayerController::playerNum must be non-zero");
 		}
@@ -58,6 +59,10 @@ public class PlayerController : MonoBehaviour {
 	void Update () {
 		if (player_num == 0) {
 			throw new UnassignedReferenceException("PlayerController::playerNum must be non-zero");
+		}
+		if (hasWon (GameManager.winningTeam)) {
+			updateMidScreenText("You won!\nPress 'R' to Replay");
+			Time.timeScale = 0;
 		}
 
 		if (dead) {
@@ -246,7 +251,7 @@ public class PlayerController : MonoBehaviour {
 		updateStoneText();
 	}
 
-bool IsInRange(out RaycastHit hitinfo, string Layer) {
+	bool IsInRange(out RaycastHit hitinfo, string Layer) {
 		Vector3 halfWidth = transform.right / 2f;
 		float halfHeight = transform.lossyScale.y / 2f;
 		Vector3 center, leftCenter, rightCenter, footPos, footLeft, footRight;
@@ -279,5 +284,9 @@ bool IsInRange(out RaycastHit hitinfo, string Layer) {
 	
 		mid_screen_text.text = newText;
 
+	}
+
+	public bool hasWon(int baseID){
+		return homeBase_GO.GetInstanceID() == baseID;
 	}
 }
