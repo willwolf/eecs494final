@@ -916,8 +916,8 @@ MonoBehaviour:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
-    m_FontStyle: 0
+    m_FontSize: 18
+    m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 10
     m_MaxSize: 40
@@ -2512,7 +2512,7 @@ MonoBehaviour:
   wood_gather_val: 1
   curr_stone_resource: 0
   stone_gather_val: 1
-  MAX_RESOURCES: 50
+  MAX_RESOURCES: 10
   WOOD_COOLDOWN_TIME: 1
   STONE_COOLDOWN_TIME: 1
   MIDTEXT_COOLDOWN_TIME: 1
@@ -9546,8 +9546,8 @@ MonoBehaviour:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
-    m_FontStyle: 0
+    m_FontSize: 18
+    m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 10
     m_MaxSize: 40
@@ -12727,7 +12727,7 @@ MonoBehaviour:
   wood_gather_val: 1
   curr_stone_resource: 0
   stone_gather_val: 1
-  MAX_RESOURCES: 50
+  MAX_RESOURCES: 10
   WOOD_COOLDOWN_TIME: 1
   STONE_COOLDOWN_TIME: 1
   MIDTEXT_COOLDOWN_TIME: 1
