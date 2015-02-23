@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		teamResources = new Dictionary<int, ResourceCount>();
 		GameObject[] bases = GameObject.FindGameObjectsWithTag("Base");
 		foreach(GameObject b in bases){
 			teamResources.Add(b.GetInstanceID(), new ResourceCount());
