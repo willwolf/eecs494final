@@ -170,6 +170,7 @@ public class PlayerController : MonoBehaviour {
 				throw new UnassignedReferenceException("wood_text for player " + player_num.ToString() + " is null");
 			}
 			wood_text.text = "Carrying " + curr_wood_resource + " wood";
+			updateMidScreenText("Player " + player_num.ToString() + " received wood");
 			collected_wood = true;
 			get_wood_at_time = Time.time + WOOD_COOLDOWN_TIME;
 			print ("Get wood at: " + get_wood_at_time);
@@ -235,6 +236,6 @@ bool IsInRange(out RaycastHit hitinfo, string Layer) {
 	}
 
 	private void updateMidScreenText(string newText){
-		stone_text.text = newText;
+		mid_screen_text.text = newText;
 	}
 }
