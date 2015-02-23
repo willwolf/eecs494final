@@ -164,8 +164,8 @@ public class PlayerController : MonoBehaviour {
 					break;
 				case ResourceType.wood:
 					drop.DepositResources(curr_wood_resource);
-					updateWoodText();
 					curr_wood_resource = 0;
+					updateWoodText();
 					break;
 				}
 			} else {
