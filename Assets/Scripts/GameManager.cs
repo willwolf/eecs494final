@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 
-	public void UpdateResources(int baseId, ResourceType t, int amount) {
+	public void AddResources(int baseId, ResourceType t, int amount) {
 		switch (t) {
 		case ResourceType.stone:
 			teamResources[baseId].stone += amount;
@@ -35,5 +35,29 @@ public class GameManager : MonoBehaviour {
 			teamResources[baseId].wood += amount;
 			break;
 		}
+	}
+
+	public int RemoveResources(int baseId, ResourceType t, int amount) {
+		switch (t) {
+		case ResourceType.stone:
+			if (teamResources[baseId].stone >= amount) {
+				teamResources[baseId].stone -= amount;
+				return amount;
+			} else {
+				int temp = teamResources[baseId].stone;
+				teamResources[baseId].stone = 0;
+				return temp;
+			}
+		case ResourceType.wood:
+			if (teamResources[baseId].wood >= amount) {
+				teamResources[baseId].wood -= amount;
+				return amount;
+			} else {
+				int temp = teamResources[baseId].wood;
+				teamResources[baseId].wood = 0;
+				return temp;
+			}
+		}
+		return 0;
 	}
 }

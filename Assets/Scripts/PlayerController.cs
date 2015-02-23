@@ -182,6 +182,16 @@ public class PlayerController : MonoBehaviour {
 				}
 			} else {
 				print ("Stealing resources!");
+				switch (drop.resourceType) {
+				case ResourceType.stone:
+					CheckMaxStone(drop.StealResources(stone_gather_val));
+					stone_text.text = "Carrying " + curr_stone_resource + " stone";
+					break;
+				case ResourceType.wood:
+					CheckMaxWood(drop.StealResources(wood_gather_val));
+					wood_text.text = "Carrying " + curr_wood_resource + " wood";
+					break;
+				}
 			}
 		}
 	}
@@ -195,14 +205,7 @@ public class PlayerController : MonoBehaviour {
 			string chopNotification = "Player " + player_num.ToString() + " is chopping wood!";
 			print (chopNotification);
 			updateMidScreenText(chopNotification);
-			if (curr_wood_resource + wood_gather_val > MAX_RESOURCES) {
-				string maxWood = "Player " + player_num.ToString () + " has max amount of wood!";
-				print (maxWood);
-				updateMidScreenText(maxWood);
-				curr_wood_resource = MAX_RESOURCES;
-			} else {
-				curr_wood_resource += wood_gather_val;
-			}
+			CheckMaxWood(wood_gather_val);
 			if (wood_text == null) {
 				throw new UnassignedReferenceException("wood_text for player " + player_num.ToString() + " is null");
 			}
@@ -214,7 +217,17 @@ public class PlayerController : MonoBehaviour {
 		}
 		updateWoodText();
 	}
-
+	void CheckMaxWood(int amount) {
+		if (curr_wood_resource + amount > MAX_RESOURCES) {
+			string maxWood = "Player " + player_num.ToString () + " has max amount of wood!";
+			print (maxWood);
+			updateMidScreenText(maxWood);
+			curr_wood_resource = MAX_RESOURCES;
+		} else {
+			curr_wood_resource += amount;
+		}
+	}
+	
 	private void updateStoneText() {
 		stone_text.text = "Carrying " + curr_stone_resource + " stone";
 	}
@@ -226,14 +239,7 @@ public class PlayerController : MonoBehaviour {
 			updateMidScreenText(mineNotification);
 
 			print ("Player " + player_num.ToString() + " is mining!");
-			if (curr_stone_resource + stone_gather_val > MAX_RESOURCES) {
-				string maxStone = "Player " + player_num.ToString () + " has max amount of stone!";
-				print (maxStone);
-				updateMidScreenText(maxStone);
-				curr_stone_resource = MAX_RESOURCES;
-			} else {
-				curr_stone_resource += stone_gather_val;
-			}
+			CheckMaxStone(stone_gather_val);
 			if (stone_text == null) {
 				throw new UnassignedReferenceException("stone_text for player " + player_num.ToString() + " is null");
 			}
@@ -245,8 +251,18 @@ public class PlayerController : MonoBehaviour {
 		}
 		updateStoneText();
 	}
-
-bool IsInRange(out RaycastHit hitinfo, string Layer) {
+	void CheckMaxStone(int amount) {
+		if (curr_stone_resource + amount > MAX_RESOURCES) {
+			string maxStone = "Player " + player_num.ToString () + " has max amount of stone!";
+			print (maxStone);
+			updateMidScreenText(maxStone);
+			curr_stone_resource = MAX_RESOURCES;
+		} else {
+			curr_stone_resource += amount;
+		}
+	}
+	
+	bool IsInRange(out RaycastHit hitinfo, string Layer) {
 		Vector3 halfWidth = transform.right / 2f;
 		float halfHeight = transform.lossyScale.y / 2f;
 		Vector3 center, leftCenter, rightCenter, footPos, footLeft, footRight;
