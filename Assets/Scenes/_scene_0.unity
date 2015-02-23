@@ -912,7 +912,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 14
@@ -925,7 +925,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: New Text
+  m_Text: New Text 2
 --- !u!222 &61551583
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -947,7 +947,7 @@ RectTransform:
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
   m_AnchoredPosition: {x: 132.100006, y: 38.7999992}
-  m_SizeDelta: {x: 100, y: 46.0999985}
+  m_SizeDelta: {x: 120, y: 70}
   m_Pivot: {x: .5, y: .5}
 --- !u!1001 &69473583
 Prefab:
@@ -2427,7 +2427,7 @@ Transform:
   m_PrefabParentObject: {fileID: 408586, guid: 4622970ae76ee4778a6f178ffe1fac5b, type: 2}
   m_PrefabInternal: {fileID: 435024744}
   m_GameObject: {fileID: 262814388}
-  m_LocalRotation: {x: 0, y: -.707106829, z: 0, w: .707106709}
+  m_LocalRotation: {x: 0, y: -.707106888, z: 0, w: .707106769}
   m_LocalPosition: {x: 10, y: 1.5, z: 0}
   m_LocalScale: {x: .5, y: 2, z: .5}
   m_Children:
@@ -9518,7 +9518,7 @@ RectTransform:
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
   m_AnchoredPosition: {x: -141, y: 41}
-  m_SizeDelta: {x: 100, y: 36}
+  m_SizeDelta: {x: 120, y: 70}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &1473616736
 MonoBehaviour:
@@ -9532,7 +9532,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 14
@@ -9545,7 +9545,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: New Text
+  m_Text: New Text 1
 --- !u!222 &1473616737
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -12566,7 +12566,7 @@ Transform:
   m_PrefabParentObject: {fileID: 408586, guid: 4622970ae76ee4778a6f178ffe1fac5b, type: 2}
   m_PrefabInternal: {fileID: 734557373}
   m_GameObject: {fileID: 1927409169}
-  m_LocalRotation: {x: 0, y: .707106829, z: 0, w: .707106709}
+  m_LocalRotation: {x: 0, y: .707106888, z: 0, w: .707106769}
   m_LocalPosition: {x: -33, y: 1.5, z: 0}
   m_LocalScale: {x: .5, y: 2, z: .5}
   m_Children:
