@@ -4,7 +4,14 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
-	//baseID + resourceCount
+
+	
+	private Dictionary<string, string> teamNames = new Dictionary<string, string>() {
+		{ "Player 1 Base", "Team 1" },
+		{ "Player 2 Base", "Team 2" }
+	};
+
+	public Dictionary<int, string> baseNames;
 	public Dictionary<int, ResourceCount> teamResources;
 	public int winningWood = 500;
 	public int winningStone = 500;
@@ -15,10 +22,13 @@ public class GameManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		teamResources = new Dictionary<int, ResourceCount>();
-		GameObject[] bases = GameObject.FindGameObjectsWithTag("Base");
-		foreach(GameObject b in bases){
 
-			teamResources.Add(b.GetInstanceID(), new ResourceCount());
+		baseNames = new Dictionary<int, string>();
+
+		foreach (KeyValuePair<string, string> pair in teamNames) {
+			GameObject baseObj = GameObject.Find(pair.Key);
+			baseNames.Add(baseObj.GetInstanceID(), pair.Value);
+			teamResources.Add(baseObj.GetInstanceID(), new ResourceCount());
 		}
 		print ("winning wood: " + winningWood + " stone: " + winningStone);
 	
@@ -40,7 +50,7 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 
-	public void UpdateResources(int baseId, ResourceType t, int amount) {
+	public void AddResources(int baseId, ResourceType t, int amount) {
 		switch (t) {
 		case ResourceType.stone:
 			teamResources[baseId].stone += amount;
@@ -52,4 +62,27 @@ public class GameManager : MonoBehaviour {
 	}
 
 
+	public int RemoveResources(int baseId, ResourceType t, int amount) {
+		switch (t) {
+		case ResourceType.stone:
+			if (teamResources[baseId].stone >= amount) {
+				teamResources[baseId].stone -= amount;
+				return amount;
+			} else {
+				int temp = teamResources[baseId].stone;
+				teamResources[baseId].stone = 0;
+				return temp;
+			}
+		case ResourceType.wood:
+			if (teamResources[baseId].wood >= amount) {
+				teamResources[baseId].wood -= amount;
+				return amount;
+			} else {
+				int temp = teamResources[baseId].wood;
+				teamResources[baseId].wood = 0;
+				return temp;
+			}
+		}
+		return 0;
+	}
 }

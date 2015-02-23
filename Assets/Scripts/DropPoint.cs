@@ -30,10 +30,10 @@ public class DropPoint : MonoBehaviour {
 	}
 
 	public void DepositResources(int amount) {
-		gm.UpdateResources(playerBaseGO.GetInstanceID(), resourceType, amount);
+		gm.AddResources(playerBaseGO.GetInstanceID(), resourceType, amount);
 	}
 
-	public int StealResources() {
-		return 0;
+	public int StealResources(int amount) {
+		return gm.RemoveResources(playerBaseGO.GetInstanceID(), resourceType, amount);
 	}
 }
