@@ -2507,7 +2507,7 @@ MonoBehaviour:
   RESPAWN_TIME: 20
   player_num: 2
   rotate_speed: 90
-  walk_speed: 20
+  walk_speed: 15
   curr_wood_resource: 0
   wood_gather_val: 1
   curr_stone_resource: 0
@@ -12722,7 +12722,7 @@ MonoBehaviour:
   RESPAWN_TIME: 20
   player_num: 1
   rotate_speed: 90
-  walk_speed: 20
+  walk_speed: 15
   curr_wood_resource: 0
   wood_gather_val: 1
   curr_stone_resource: 0
