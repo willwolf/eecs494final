@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -9,10 +10,13 @@ public class GameManager : MonoBehaviour {
 		{ "Player 2 Base", "Team 2" }
 	};
 
+	private Dictionary<int, Text> teamTexts =  new Dictionary<int, Text>();
+
 	public Dictionary<int, string> baseNames;
 	public Dictionary<int, ResourceCount> teamResources;
 	public int winningWood = 500;
 	public int winningStone = 500;
+	
 
 	// Use this for initialization
 	void Start () {
@@ -23,7 +27,15 @@ public class GameManager : MonoBehaviour {
 			GameObject baseObj = GameObject.Find(pair.Key);
 			baseNames.Add(baseObj.GetInstanceID(), pair.Value);
 			teamResources.Add(baseObj.GetInstanceID(), new ResourceCount());
+			teamTexts.Add(baseObj.GetInstanceID(), GameObject.Find(pair.Value + "_vals").GetComponent<Text>());
 		}
+	}
+
+	void updateTeamText(int baseId) {
+		Text text = teamTexts[baseId];
+		ResourceCount counts = teamResources[baseId];
+
+		text.text = baseNames[baseId] + " Wood: " + counts.wood + " Stone: " + counts.stone;
 	}
 	
 	// Update is called once per frame
@@ -44,29 +56,34 @@ public class GameManager : MonoBehaviour {
 			teamResources[baseId].wood += amount;
 			break;
 		}
+		updateTeamText(baseId);
 	}
 
 	public int RemoveResources(int baseId, ResourceType t, int amount) {
-		switch (t) {
-		case ResourceType.stone:
-			if (teamResources[baseId].stone >= amount) {
-				teamResources[baseId].stone -= amount;
-				return amount;
-			} else {
-				int temp = teamResources[baseId].stone;
-				teamResources[baseId].stone = 0;
-				return temp;
+		try {
+			switch (t) {
+			case ResourceType.stone:
+				if (teamResources[baseId].stone >= amount) {
+					teamResources[baseId].stone -= amount;
+					return amount;
+				} else {
+					int temp = teamResources[baseId].stone;
+					teamResources[baseId].stone = 0;
+					return temp;
+				}
+			case ResourceType.wood:
+				if (teamResources[baseId].wood >= amount) {
+					teamResources[baseId].wood -= amount;
+					return amount;
+				} else {
+					int temp = teamResources[baseId].wood;
+					teamResources[baseId].wood = 0;
+					return temp;
+				}
 			}
-		case ResourceType.wood:
-			if (teamResources[baseId].wood >= amount) {
-				teamResources[baseId].wood -= amount;
-				return amount;
-			} else {
-				int temp = teamResources[baseId].wood;
-				teamResources[baseId].wood = 0;
-				return temp;
-			}
+			return 0;
+		} finally {
+			updateTeamText(baseId);
 		}
-		return 0;
 	}
 }
