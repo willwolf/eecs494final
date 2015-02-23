@@ -18,6 +18,14 @@ public class PlayerController : MonoBehaviour {
 	public int stone_gather_val = 5;
 	public int MAX_RESOURCES = 50;
 
+	public int WOOD_COOLDOWN_TIME = 20;
+	private bool collected_wood = false;
+	private float get_wood_at_time;
+
+	public int STONE_COOLDOWN_TIME = 20;
+	private bool collected_stone = false;
+	private float get_stone_at_time;
+
 	public GameObject homeBase_GO;
 	public Base homeBase { get; private set; }
 	public bool inBase = false;
@@ -47,6 +55,16 @@ public class PlayerController : MonoBehaviour {
 			} else {
 				return;
 			}
+		}
+
+		if (collected_wood && (Time.time > get_wood_at_time)) {
+			collected_wood = false;
+			print ("Player " + player_num.ToString() + " may collect wood again!");
+		}
+
+		if (collected_stone && (Time.time > get_stone_at_time)) {
+			collected_stone = false;
+			print ("Player " + player_num.ToString() + " may collect stone again!");
 		}
 
 		float horizInput = Input.GetAxis("Horizontal_" + player_num.ToString()),
@@ -124,33 +142,49 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 	void ChopWood() {
-		print ("Player " + player_num.ToString() + " is chopping wood!");
-		if (curr_wood_resource + wood_gather_val > MAX_RESOURCES) {
-			print ("Player " + player_num.ToString () + " has max amount of wood!");
-			curr_wood_resource = MAX_RESOURCES;
-		} else {
-		curr_wood_resource += wood_gather_val;
+		if(!collected_wood){
+			print ("Player " + player_num.ToString() + " is chopping wood!");
+			if (curr_wood_resource + wood_gather_val > MAX_RESOURCES) {
+				print ("Player " + player_num.ToString () + " has max amount of wood!");
+				curr_wood_resource = MAX_RESOURCES;
+			} else {
+				curr_wood_resource += wood_gather_val;
+			}
+			if (wood_text == null) {
+				throw new UnassignedReferenceException("wood_text for player " + player_num.ToString() + " is null");
+			}
+			wood_text.text = "Carrying " + curr_wood_resource + " wood";
+			collected_wood = true;
+			get_wood_at_time = Time.time + WOOD_COOLDOWN_TIME;
+			print ("Get wood at: " + get_wood_at_time);
+		} else{
+			print ("Player " + player_num.ToString() + " must wait " + 
+			       (get_wood_at_time - Time.time) + " seconds to collect wood again.");
 		}
-		if (wood_text == null) {
-			throw new UnassignedReferenceException("wood_text for player " + player_num.ToString() + " is null");
-		}
-		wood_text.text = "Carrying " + curr_wood_resource + " wood";
 	}
 	void MineStone() {
-		print ("Player " + player_num.ToString() + " is mining!");
-		if (curr_stone_resource + stone_gather_val > MAX_RESOURCES) {
-			print ("Player " + player_num.ToString() + " has max amount of stone!");
-			curr_stone_resource = MAX_RESOURCES;
-		} else {
-			curr_stone_resource += stone_gather_val;
+		if(!collected_stone){
+			print ("Player " + player_num.ToString() + " is mining!");
+			if (curr_stone_resource + stone_gather_val > MAX_RESOURCES) {
+				print ("Player " + player_num.ToString() + " has max amount of stone!");
+				curr_stone_resource = MAX_RESOURCES;
+			} else {
+				curr_stone_resource += stone_gather_val;
+			}
+			if (stone_text == null) {
+				throw new UnassignedReferenceException("stone_text for player " + player_num.ToString() + " is null");
+			}
+			stone_text.text = "Carrying " + curr_stone_resource + " stone";
+			collected_stone = true;
+			get_stone_at_time = Time.time + STONE_COOLDOWN_TIME;
+			print ("Get wood at: " + get_wood_at_time);
+		} else{
+			print ("Player " + player_num.ToString() + " must wait " + 
+			       (get_stone_at_time - Time.time) + " seconds to collect stone again.");
 		}
-		if (stone_text == null) {
-			throw new UnassignedReferenceException("stone_text for player " + player_num.ToString() + " is null");
-		}
-		stone_text.text = "Carrying " + curr_stone_resource + " stone";
 	}
 
-	bool IsInRange(out RaycastHit hitinfo, string Layer) {
+bool IsInRange(out RaycastHit hitinfo, string Layer) {
 		Vector3 halfWidth = transform.right / 2f;
 		float halfHeight = transform.lossyScale.y / 2f;
 		Vector3 center, leftCenter, rightCenter, footPos, footLeft, footRight;
