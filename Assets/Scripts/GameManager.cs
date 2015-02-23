@@ -2,8 +2,10 @@
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
+
 	
 	private Dictionary<string, string> teamNames = new Dictionary<string, string>() {
 		{ "Player 1 Base", "Team 1" },
@@ -18,9 +20,13 @@ public class GameManager : MonoBehaviour {
 	public int winningStone = 500;
 	
 
+	public static int winningTeam = -1;
+
+
 	// Use this for initialization
 	void Start () {
 		teamResources = new Dictionary<int, ResourceCount>();
+
 		baseNames = new Dictionary<int, string>();
 
 		foreach (KeyValuePair<string, string> pair in teamNames) {
@@ -29,6 +35,8 @@ public class GameManager : MonoBehaviour {
 			teamResources.Add(baseObj.GetInstanceID(), new ResourceCount());
 			teamTexts.Add(baseObj.GetInstanceID(), GameObject.Find(pair.Value + "_vals").GetComponent<Text>());
 		}
+		print ("winning wood: " + winningWood + " stone: " + winningStone);
+	
 	}
 
 	void updateTeamText(int baseId) {
@@ -42,8 +50,15 @@ public class GameManager : MonoBehaviour {
 	void Update () {
 		foreach(KeyValuePair<int, ResourceCount> team in teamResources){
 			if(team.Value.wood >= winningWood && team.Value.stone >= winningStone){
-				Application.LoadLevel(1);
+				print (team.Key + " team resources: " + team.Value.wood + " winning: " + winningWood);
+				winningTeam = team.Key;
 			}
+		}
+		if (Time.timeScale == 0 && winningTeam != -1) {
+			if(Input.GetKeyDown(KeyCode.R)){
+				Application.LoadLevel(Application.loadedLevel);
+
+			}		
 		}
 	}
 
@@ -58,6 +73,7 @@ public class GameManager : MonoBehaviour {
 		}
 		updateTeamText(baseId);
 	}
+
 
 	public int RemoveResources(int baseId, ResourceType t, int amount) {
 		try {

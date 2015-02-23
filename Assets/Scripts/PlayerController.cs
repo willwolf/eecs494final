@@ -40,6 +40,7 @@ public class PlayerController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		Time.timeScale = 1;
 		if (player_num == 0) {
 			throw new UnassignedReferenceException("PlayerController::playerNum must be non-zero");
 		}
@@ -58,6 +59,10 @@ public class PlayerController : MonoBehaviour {
 	void Update () {
 		if (player_num == 0) {
 			throw new UnassignedReferenceException("PlayerController::playerNum must be non-zero");
+		}
+		if (hasWon (GameManager.winningTeam)) {
+			updateMidScreenText("You won!\nPress 'R' to Replay");
+			Time.timeScale = 0;
 		}
 
 		if (dead) {
@@ -302,5 +307,9 @@ public class PlayerController : MonoBehaviour {
 	
 		mid_screen_text.text = newText;
 
+	}
+
+	public bool hasWon(int baseID){
+		return homeBase_GO.GetInstanceID() == baseID;
 	}
 }
