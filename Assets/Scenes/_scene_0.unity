@@ -945,10 +945,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 56050739}
   m_RootOrder: 2
-  m_AnchorMin: {x: .5, y: .5}
-  m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 132.100006, y: 38.7999992}
-  m_SizeDelta: {x: 120, y: 70}
+  m_AnchorMin: {x: .637197316, y: .5}
+  m_AnchorMax: {x: .87500006, y: .757731915}
+  m_AnchoredPosition: {x: -.399993896, y: 1.29999924}
+  m_SizeDelta: {x: -3, y: -5}
   m_Pivot: {x: .5, y: .5}
 --- !u!1001 &69473583
 Prefab:
@@ -9526,10 +9526,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 843186050}
   m_RootOrder: 2
-  m_AnchorMin: {x: .5, y: .5}
-  m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: -141, y: 41}
-  m_SizeDelta: {x: 120, y: 70}
+  m_AnchorMin: {x: .109197289, y: .5}
+  m_AnchorMax: {x: .349197298, y: .764673531}
+  m_AnchoredPosition: {x: -1, y: 2.5}
+  m_SizeDelta: {x: -4, y: -7}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &1473616736
 MonoBehaviour:
@@ -10781,10 +10781,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 56050739}
   m_RootOrder: 3
-  m_AnchorMin: {x: .5, y: 0}
-  m_AnchorMax: {x: .5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 20}
-  m_SizeDelta: {x: 500, y: 50}
+  m_AnchorMin: {x: .536723495, y: 0}
+  m_AnchorMax: {x: .982671201, y: .154745713}
+  m_AnchoredPosition: {x: -.5, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &1704845057
 MonoBehaviour:
@@ -10806,7 +10806,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 10
     m_MaxSize: 40
-    m_Alignment: 5
+    m_Alignment: 4
     m_RichText: 0
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
@@ -12762,10 +12762,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 843186050}
   m_RootOrder: 3
-  m_AnchorMin: {x: .5, y: 0}
-  m_AnchorMax: {x: .5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 20}
-  m_SizeDelta: {x: 500, y: 50}
+  m_AnchorMin: {x: .0271315295, y: 0}
+  m_AnchorMax: {x: .451644123, y: .154745728}
+  m_AnchoredPosition: {x: -1, y: -.5}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &1957280263
 MonoBehaviour:
@@ -12787,7 +12787,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 10
     m_MaxSize: 40
-    m_Alignment: 3
+    m_Alignment: 4
     m_RichText: 0
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
