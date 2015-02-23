@@ -3,6 +3,10 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
+
+	public int RESPAWN_TIME = 20;
+	private bool dead = false;
+	private float respawn_at_time;
 	
 	public int player_num  = 0;
 	public float rotate_speed = 90f;
@@ -36,6 +40,15 @@ public class PlayerController : MonoBehaviour {
 		if (player_num == 0) {
 			throw new UnassignedReferenceException("PlayerController::playerNum must be non-zero");
 		}
+
+		if (dead) {
+			if (Time.time > respawn_at_time) {
+				awakePlayer();
+			} else {
+				return;
+			}
+		}
+
 		float horizInput = Input.GetAxis("Horizontal_" + player_num.ToString()),
 			  vertInput = Input.GetAxis("Vertical_" + player_num.ToString());
 
@@ -47,8 +60,34 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
+	public void awakePlayer() {
+		foreach (Collider collider in GetComponentsInChildren<Collider>()) {
+			collider.enabled = true;
+		}
+		foreach (MeshRenderer renderer in GetComponentsInChildren<MeshRenderer>()) {
+			renderer.enabled = true;
+		}
+		foreach (Rigidbody rb in GetComponentsInChildren<Rigidbody>()) {
+			rb.isKinematic = false;
+		}
+	}
+
 	public void killPlayer() {
-		Debug.Log("player died");
+		foreach (MeshRenderer renderer in GetComponentsInChildren<MeshRenderer>()) {
+			renderer.enabled = false;
+		}
+		foreach (Rigidbody rb in GetComponentsInChildren<Rigidbody>()) {
+			rb.isKinematic = true;
+		}
+		foreach (Collider collider in GetComponentsInChildren<Collider>()) {
+			collider.enabled = false;
+		}
+
+		curr_wood_resource = curr_stone_resource = 0;
+		this.transform.position = homeBase_GO.transform.position;
+
+		dead = true;
+		respawn_at_time = Time.time + RESPAWN_TIME;
 	}
 
 	void TakeAction() {
@@ -61,17 +100,17 @@ public class PlayerController : MonoBehaviour {
 			if (other.homeBase_GO.GetInstanceID() != this.gameObject.GetInstanceID()) {
 				Debug.Log("In range of enemy player");
 				if (this.inBase) {
-					killPlayer(); 
+					other.killPlayer(); 
 				}
 			} else {
-				Debug.Log("In rnage of friendly plaer");
+				Debug.Log("In range of friendly plaer");
 			}
 
 		} else if (IsInRange(out hitinfo, "Resource")) {
 			print ("Player " + player_num.ToString() + " is in range!");
 			Resource r = hitinfo.transform.GetComponent<Resource>();
 			if (r == null) {
-				throw new UnassignedReferenceException("Resourse layer object does not have Resource script attached");
+				throw new UnassignedReferenceException("Resource layer object does not have Resource script attached");
 			}
 
 			switch (r.type) {
@@ -86,7 +125,12 @@ public class PlayerController : MonoBehaviour {
 	}
 	void ChopWood() {
 		print ("Player " + player_num.ToString() + " is chopping wood!");
+		if (curr_wood_resource + wood_gather_val > MAX_RESOURCES) {
+			print ("Player " + player_num.ToString () + " has max amount of wood!");
+			curr_wood_resource = MAX_RESOURCES;
+		} else {
 		curr_wood_resource += wood_gather_val;
+		}
 		if (wood_text == null) {
 			throw new UnassignedReferenceException("wood_text for player " + player_num.ToString() + " is null");
 		}
@@ -94,7 +138,12 @@ public class PlayerController : MonoBehaviour {
 	}
 	void MineStone() {
 		print ("Player " + player_num.ToString() + " is mining!");
-		curr_stone_resource += stone_gather_val;
+		if (curr_stone_resource + stone_gather_val > MAX_RESOURCES) {
+			print ("Player " + player_num.ToString() + " has max amount of stone!");
+			curr_stone_resource = MAX_RESOURCES;
+		} else {
+			curr_stone_resource += stone_gather_val;
+		}
 		if (stone_text == null) {
 			throw new UnassignedReferenceException("stone_text for player " + player_num.ToString() + " is null");
 		}
