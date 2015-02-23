@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour {
 	
 	private Text stone_text;
 	private Text wood_text;
+	private Text mid_screen_text;
 
 	// Use this for initialization
 	void Start () {
@@ -40,7 +41,9 @@ public class PlayerController : MonoBehaviour {
 		}
 		wood_text = GameObject.Find ("Wood_Text_" + player_num.ToString()).GetComponent<Text>();
 		stone_text = GameObject.Find("Stone_Text_" + player_num.ToString()).GetComponent<Text>();
+		mid_screen_text = GameObject.Find("mid_screen_text_" + player_num.ToString()).GetComponent<Text>();
 
+		mid_screen_text.text = "";
 		updateStoneText();
 		updateWoodText();
 
@@ -55,8 +58,10 @@ public class PlayerController : MonoBehaviour {
 
 		if (dead) {
 			if (Time.time > respawn_at_time) {
+				mid_screen_text.text = "";
 				awakePlayer();
 			} else {
+				mid_screen_text.text = "Respawn in " + Mathf.Floor(Time.time - respawn_at_time).ToString("0") + " seconds";
 				return;
 			}
 		}
