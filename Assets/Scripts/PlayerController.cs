@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour {
 	
 	private Text stone_text;
 	private Text wood_text;
+	private Text mid_screen_text;
 
 	// Use this for initialization
 	void Start () {
@@ -40,7 +41,9 @@ public class PlayerController : MonoBehaviour {
 		}
 		wood_text = GameObject.Find ("Wood_Text_" + player_num.ToString()).GetComponent<Text>();
 		stone_text = GameObject.Find("Stone_Text_" + player_num.ToString()).GetComponent<Text>();
+		mid_screen_text = GameObject.Find("mid_screen_text_" + player_num.ToString()).GetComponent<Text>();
 
+		mid_screen_text.text = "";
 		updateStoneText();
 		updateWoodText();
 
@@ -55,8 +58,10 @@ public class PlayerController : MonoBehaviour {
 
 		if (dead) {
 			if (Time.time > respawn_at_time) {
+				mid_screen_text.text = "";
 				awakePlayer();
 			} else {
+				mid_screen_text.text = "Respawn in " + Mathf.Floor(Time.time - respawn_at_time).ToString("0") + " seconds";
 				return;
 			}
 		}
@@ -152,9 +157,11 @@ public class PlayerController : MonoBehaviour {
 
 	void ChopWood() {
 		if(!collected_wood){
-			print ("Player " + player_num.ToString() + " is chopping wood!");
+			string chopNotification = "Player " + player_num.ToString() + " is chopping wood!";
+			updateMidScreenText(chopNotification);
 			if (curr_wood_resource + wood_gather_val > MAX_RESOURCES) {
-				print ("Player " + player_num.ToString () + " has max amount of wood!");
+				string maxWood = "Player " + player_num.ToString () + " has max amount of wood!";
+				updateMidScreenText(maxWood);
 				curr_wood_resource = MAX_RESOURCES;
 			} else {
 				curr_wood_resource += wood_gather_val;
@@ -167,8 +174,8 @@ public class PlayerController : MonoBehaviour {
 			get_wood_at_time = Time.time + WOOD_COOLDOWN_TIME;
 			print ("Get wood at: " + get_wood_at_time);
 		} else{
-			print ("Player " + player_num.ToString() + " must wait " + 
-			       (get_wood_at_time - Time.time) + " seconds to collect wood again.");
+			updateMidScreenText("Player " + player_num.ToString() + " must wait " + 
+			                    (get_wood_at_time - Time.time) + " seconds to collect wood again.");
 		}
 		updateWoodText();
 	}
@@ -225,5 +232,9 @@ bool IsInRange(out RaycastHit hitinfo, string Layer) {
 	bool CastActionRay(Vector3 origin, string Layer, out RaycastHit info) {
 		int layerMask = LayerMask.GetMask(Layer); // only collide with Resource layer
 		return Physics.Raycast(origin, transform.forward, out info, 1.5f, layerMask);
+	}
+
+	private void updateMidScreenText(string newText){
+		stone_text.text = newText;
 	}
 }

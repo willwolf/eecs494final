@@ -2,7 +2,8 @@
 using System.Collections;
 
 public class DropPoint : MonoBehaviour {
-	
+
+	public GameManager gm = null;
 	public GameObject playerBaseGO = null;
 	public ResourceType resourceType = ResourceType.none;
 	public int currentResourceCount = 0;
@@ -15,6 +16,7 @@ public class DropPoint : MonoBehaviour {
 		if (resourceType == ResourceType.none) {
 			throw new UnassignedReferenceException("DropPoint::resourceType is uninitialized");
 		}
+		gm = GameObject.Find("GameManager").GetComponent<GameManager>();
 	}
 	
 	// Update is called once per frame
@@ -28,7 +30,7 @@ public class DropPoint : MonoBehaviour {
 	}
 
 	public void DepositResources(int amount) {
-		currentResourceCount += amount;
+		gm.UpdateResources(playerBaseGO.GetInstanceID(), resourceType, amount);
 	}
 
 	public int StealResources() {
