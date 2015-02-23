@@ -181,9 +181,11 @@ public class PlayerController : MonoBehaviour {
 	void ChopWood() {
 		if(!collected_wood){
 			string chopNotification = "Player " + player_num.ToString() + " is chopping wood!";
+			print (chopNotification);
 			updateMidScreenText(chopNotification);
 			if (curr_wood_resource + wood_gather_val > MAX_RESOURCES) {
 				string maxWood = "Player " + player_num.ToString () + " has max amount of wood!";
+				print (maxWood);
 				updateMidScreenText(maxWood);
 				curr_wood_resource = MAX_RESOURCES;
 			} else {
@@ -193,6 +195,7 @@ public class PlayerController : MonoBehaviour {
 				throw new UnassignedReferenceException("wood_text for player " + player_num.ToString() + " is null");
 			}
 			wood_text.text = "Carrying " + curr_wood_resource + " wood";
+			updateMidScreenText("Player " + player_num.ToString() + " received " + wood_gather_val+ " wood");
 			collected_wood = true;
 			get_wood_at_time = Time.time + WOOD_COOLDOWN_TIME;
 			print ("Get wood at: " + get_wood_at_time);
@@ -209,9 +212,15 @@ public class PlayerController : MonoBehaviour {
 
 	void MineStone() {
 		if(!collected_stone){
+			string mineNotification = "Player " + player_num.ToString() + " is mining!";
+			print (mineNotification);
+			updateMidScreenText(mineNotification);
+
 			print ("Player " + player_num.ToString() + " is mining!");
 			if (curr_stone_resource + stone_gather_val > MAX_RESOURCES) {
-				print ("Player " + player_num.ToString() + " has max amount of stone!");
+				string maxStone = "Player " + player_num.ToString () + " has max amount of stone!";
+				print (maxStone);
+				updateMidScreenText(maxStone);
 				curr_stone_resource = MAX_RESOURCES;
 			} else {
 				curr_stone_resource += stone_gather_val;
@@ -220,11 +229,12 @@ public class PlayerController : MonoBehaviour {
 				throw new UnassignedReferenceException("stone_text for player " + player_num.ToString() + " is null");
 			}
 			stone_text.text = "Carrying " + curr_stone_resource + " stone";
+			updateMidScreenText("Player " + player_num.ToString() + " received " + stone_gather_val+ " stone");
 			collected_stone = true;
 			get_stone_at_time = Time.time + STONE_COOLDOWN_TIME;
 			print ("Get wood at: " + get_wood_at_time);
 		} else{
-			print ("Player " + player_num.ToString() + " must wait " + 
+			updateMidScreenText ("Player " + player_num.ToString() + " must wait " + 
 			       (get_stone_at_time - Time.time) + " seconds to collect stone again.");
 		}
 		updateStoneText();
@@ -258,6 +268,6 @@ bool IsInRange(out RaycastHit hitinfo, string Layer) {
 	}
 
 	private void updateMidScreenText(string newText){
-		stone_text.text = newText;
+		mid_screen_text.text = newText;
 	}
 }
