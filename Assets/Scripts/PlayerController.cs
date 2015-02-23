@@ -40,6 +40,10 @@ public class PlayerController : MonoBehaviour {
 		}
 		wood_text = GameObject.Find ("Wood_Text_" + player_num.ToString()).GetComponent<Text>();
 		stone_text = GameObject.Find("Stone_Text_" + player_num.ToString()).GetComponent<Text>();
+
+		updateStoneText();
+		updateWoodText();
+
 		homeBase = homeBase_GO.GetComponent<Base>();
 	}
 	
@@ -141,6 +145,11 @@ public class PlayerController : MonoBehaviour {
 			}
 		}
 	}
+
+	private void updateWoodText() {
+		wood_text.text = "Carrying " + curr_wood_resource + " wood";
+	}
+
 	void ChopWood() {
 		if(!collected_wood){
 			print ("Player " + player_num.ToString() + " is chopping wood!");
@@ -161,7 +170,13 @@ public class PlayerController : MonoBehaviour {
 			print ("Player " + player_num.ToString() + " must wait " + 
 			       (get_wood_at_time - Time.time) + " seconds to collect wood again.");
 		}
+		updateWoodText();
 	}
+
+	private void updateStoneText() {
+		stone_text.text = "Carrying " + curr_stone_resource + " stone";
+	}
+
 	void MineStone() {
 		if(!collected_stone){
 			print ("Player " + player_num.ToString() + " is mining!");
@@ -182,6 +197,7 @@ public class PlayerController : MonoBehaviour {
 			print ("Player " + player_num.ToString() + " must wait " + 
 			       (get_stone_at_time - Time.time) + " seconds to collect stone again.");
 		}
+		updateStoneText();
 	}
 
 bool IsInRange(out RaycastHit hitinfo, string Layer) {
