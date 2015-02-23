@@ -32,6 +32,10 @@ public class PlayerController : MonoBehaviour {
 		}
 		wood_text = GameObject.Find ("Wood_Text_" + player_num.ToString()).GetComponent<Text>();
 		stone_text = GameObject.Find("Stone_Text_" + player_num.ToString()).GetComponent<Text>();
+
+		updateStoneText();
+		updateWoodText();
+
 		homeBase = homeBase_GO.GetComponent<Base>();
 	}
 	
@@ -121,28 +125,13 @@ public class PlayerController : MonoBehaviour {
 				ChopWood();
 				break;
 			}
-		} else if (IsInRange(out hitinfo, "DropPoint")) {
-			DropPoint drop = hitinfo.transform.GetComponent<DropPoint>();
-			if (drop == null) {
-				throw new UnassignedReferenceException("DropPoint layer object does not have a DropPoint script attached");
-			}
-
-			if (drop.playerBaseGO.GetInstanceID() == homeBase_GO.GetInstanceID()) {
-				switch (drop.resourceType) {
-				case ResourceType.stone:
-					print ("Dropping stone resources!");
-					drop.DepositResources(curr_stone_resource);
-					break;
-				case ResourceType.wood:
-					print ("Dropping wood resources!");
-					drop.DepositResources(curr_wood_resource);
-					break;
-				}
-			} else {
-				print("Stealing resources!");
-			}
 		}
 	}
+
+	private void updateWoodText() {
+		wood_text.text = "Carrying " + curr_wood_resource + " wood";
+	}
+
 	void ChopWood() {
 		print ("Player " + player_num.ToString() + " is chopping wood!");
 		if (curr_wood_resource + wood_gather_val > MAX_RESOURCES) {
@@ -154,8 +143,13 @@ public class PlayerController : MonoBehaviour {
 		if (wood_text == null) {
 			throw new UnassignedReferenceException("wood_text for player " + player_num.ToString() + " is null");
 		}
-		wood_text.text = "Carrying " + curr_wood_resource + " wood";
+		updateWoodText();
 	}
+
+	private void updateStoneText() {
+		stone_text.text = "Carrying " + curr_stone_resource + " stone";
+	}
+
 	void MineStone() {
 		print ("Player " + player_num.ToString() + " is mining!");
 		if (curr_stone_resource + stone_gather_val > MAX_RESOURCES) {
@@ -167,7 +161,7 @@ public class PlayerController : MonoBehaviour {
 		if (stone_text == null) {
 			throw new UnassignedReferenceException("stone_text for player " + player_num.ToString() + " is null");
 		}
-		stone_text.text = "Carrying " + curr_stone_resource + " stone";
+		updateStoneText();
 	}
 
 	bool IsInRange(out RaycastHit hitinfo, string Layer) {
