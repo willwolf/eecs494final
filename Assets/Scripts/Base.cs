@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class Base : MonoBehaviour {
-
+	
 	void OnTriggerEnter(Collider other) {
 		if (other.gameObject.layer != LayerMask.NameToLayer("Player"))
 			return;
