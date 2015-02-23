@@ -2428,7 +2428,7 @@ Transform:
   m_PrefabParentObject: {fileID: 408586, guid: 4622970ae76ee4778a6f178ffe1fac5b, type: 2}
   m_PrefabInternal: {fileID: 435024744}
   m_GameObject: {fileID: 262814388}
-  m_LocalRotation: {x: 0, y: -.707106888, z: 0, w: .707106769}
+  m_LocalRotation: {x: 0, y: -.707106829, z: 0, w: .707106709}
   m_LocalPosition: {x: 10, y: 1.5, z: 0}
   m_LocalScale: {x: .5, y: 2, z: .5}
   m_Children:
@@ -10763,7 +10763,7 @@ GameObject:
   - 222: {fileID: 1704845058}
   - 114: {fileID: 1704845057}
   m_Layer: 5
-  m_Name: Team_Text_2
+  m_Name: Team 2_vals
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12643,7 +12643,7 @@ Transform:
   m_PrefabParentObject: {fileID: 408586, guid: 4622970ae76ee4778a6f178ffe1fac5b, type: 2}
   m_PrefabInternal: {fileID: 734557373}
   m_GameObject: {fileID: 1927409169}
-  m_LocalRotation: {x: 0, y: .707106888, z: 0, w: .707106769}
+  m_LocalRotation: {x: 0, y: .707106829, z: 0, w: .707106709}
   m_LocalPosition: {x: -33, y: 1.5, z: 0}
   m_LocalScale: {x: .5, y: 2, z: .5}
   m_Children:
@@ -12744,7 +12744,7 @@ GameObject:
   - 222: {fileID: 1957280264}
   - 114: {fileID: 1957280263}
   m_Layer: 5
-  m_Name: Team_Text_1
+  m_Name: Team 1_vals
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
