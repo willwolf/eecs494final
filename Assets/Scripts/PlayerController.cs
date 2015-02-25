@@ -41,6 +41,9 @@ public class PlayerController : MonoBehaviour {
 	private Text wood_text;
 	private Text mid_screen_text;
 
+	public AudioSource mining_stone;
+	public AudioSource chopping_wood;
+
 	// Use this for initialization
 	void Start () {
 		Time.timeScale = 1;
@@ -88,12 +91,12 @@ public class PlayerController : MonoBehaviour {
 
 		if (collected_wood && (Time.time > get_wood_at_time)) {
 			collected_wood = false;
-			print ("Player " + player_num.ToString() + " may collect wood again!");
+//			print ("Player " + player_num.ToString() + " may collect wood again!");
 		}
 
 		if (collected_stone && (Time.time > get_stone_at_time)) {
 			collected_stone = false;
-			print ("Player " + player_num.ToString() + " may collect stone again!");
+//			print ("Player " + player_num.ToString() + " may collect stone again!");
 		}
 
 		if (curr_wood_resource + curr_stone_resource >= MAX_RESOURCES) {
@@ -146,7 +149,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void TakeAction() {
-		print ("Player " + player_num.ToString() + " is taking an action!");
+//		print ("Player " + player_num.ToString() + " is taking an action!");
 
 		RaycastHit hitinfo;
 		if (IsInRange(out hitinfo, "Player")) {
@@ -162,7 +165,7 @@ public class PlayerController : MonoBehaviour {
 			}
 
 		} else if (IsInRange(out hitinfo, "Resource")) {
-			print ("Player " + player_num.ToString() + " is in range!");
+//			print ("Player " + player_num.ToString() + " is in range!");
 			Resource r = hitinfo.transform.GetComponent<Resource>();
 			if (r == null) {
 				throw new UnassignedReferenceException("Resource layer object does not have Resource script attached");
@@ -183,7 +186,7 @@ public class PlayerController : MonoBehaviour {
 			}
 
 			if (drop.playerBaseGO.GetInstanceID() == homeBase_GO.GetInstanceID()) {
-				print ("Depsoting resources!");
+//				print ("Depsoting resources!");
 				switch (drop.resourceType) {
 				case ResourceType.stone:
 					drop.DepositResources(curr_stone_resource);
@@ -199,7 +202,7 @@ public class PlayerController : MonoBehaviour {
 					break;
 				}
 			} else {
-				print ("Stealing resources!");
+//				print ("Stealing resources!");
 				switch (drop.resourceType) {
 				case ResourceType.stone:
 					if (!collected_stone && !backpackFull) {
@@ -223,13 +226,14 @@ public class PlayerController : MonoBehaviour {
 	void ChopWood() {
 		if(!collected_wood && !backpackFull){
 			CollectWood(wood_gather_val, " is chopping wood...");
+			if(chopping_wood) chopping_wood.Play();
 		}
 		updateWoodText();
 	}
 
 	void CollectWood(int amount, string message) {
 		string chopNotification = "Player " + player_num.ToString() + " is chopping wood!";
-		print (chopNotification);
+//		print (chopNotification);
 		updateMidScreenText(chopNotification);
 		CheckMaxWood(amount);
 		if (wood_text == null) {
@@ -239,13 +243,13 @@ public class PlayerController : MonoBehaviour {
 		updateMidScreenText("Player " + player_num.ToString() + message);
 		collected_wood = true;
 		get_wood_at_time = Time.time + WOOD_COOLDOWN_TIME;
-		print ("Get wood at: " + get_wood_at_time);
+//		print ("Get wood at: " + get_wood_at_time);
 	}
 
 	void CheckMaxWood(int amount) {
 		if (curr_wood_resource + curr_stone_resource + amount > MAX_RESOURCES) {
 			string maxWood = "Player " + player_num.ToString () + " has max amount of wood!";
-			print (maxWood);
+//			print (maxWood);
 			updateMidScreenText(maxWood);
 			curr_wood_resource = MAX_RESOURCES - curr_stone_resource;
 			backpackFull = true;
@@ -261,15 +265,16 @@ public class PlayerController : MonoBehaviour {
 	void MineStone() {
 		if(!collected_stone && !backpackFull){
 			CollectStone(stone_gather_val, " is mining stone...");
+			if(mining_stone) mining_stone.Play();
 		}
 		updateStoneText();
 	}
 
 	void CollectStone(int amount, string message) {
 		string mineNotification = "Player " + player_num.ToString() + " is mining!";
-		print (mineNotification);
+//		print (mineNotification);
 		updateMidScreenText(mineNotification);
-		print ("Player " + player_num.ToString() + " is mining!");
+//		print ("Player " + player_num.ToString() + " is mining!");
 		CheckMaxStone(amount);
 		if (stone_text == null) {
 			throw new UnassignedReferenceException("stone_text for player " + player_num.ToString() + " is null");
@@ -278,13 +283,13 @@ public class PlayerController : MonoBehaviour {
 		updateMidScreenText("Player " + player_num.ToString() + message);
 		collected_stone = true;
 		get_stone_at_time = Time.time + STONE_COOLDOWN_TIME;
-		print ("Get wood at: " + get_wood_at_time);
+//		print ("Get wood at: " + get_wood_at_time);
 	}
 
 	void CheckMaxStone(int amount) {
 		if (curr_stone_resource + curr_wood_resource + amount > MAX_RESOURCES) {
 			string maxStone = "Player " + player_num.ToString () + " has max amount of stone!";
-			print (maxStone);
+//			print (maxStone);
 			updateMidScreenText(maxStone);
 			curr_stone_resource = MAX_RESOURCES - curr_wood_resource;
 			backpackFull = true;
