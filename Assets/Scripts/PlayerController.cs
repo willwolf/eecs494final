@@ -11,12 +11,14 @@ public class PlayerController : MonoBehaviour {
 	public int player_num  = 0;
 	public float rotate_speed = 90f;
 	public float walk_speed = 8f;
+	public float enemy_base_speed_multiplier = 0.5f;
 
 	public int curr_wood_resource = 0;
 	public int wood_gather_val = 1;
 	public int curr_stone_resource = 0;
 	public int stone_gather_val = 1;
 	public int MAX_RESOURCES = 50;
+	public bool backpackFull = false;
 
 	public int WOOD_COOLDOWN_TIME = 1;
 	private bool collected_wood = false;
@@ -33,6 +35,7 @@ public class PlayerController : MonoBehaviour {
 	public GameObject homeBase_GO;
 	public Base homeBase { get; private set; }
 	public bool inBase = false;
+	public bool inEnemyBase = false;
 	
 	private Text stone_text;
 	private Text wood_text;
@@ -99,6 +102,10 @@ public class PlayerController : MonoBehaviour {
 
 		float horizInput = Input.GetAxis("Horizontal_" + player_num.ToString()),
 			  vertInput = Input.GetAxis("Vertical_" + player_num.ToString());
+		if(inEnemyBase){
+			horizInput *= enemy_base_speed_multiplier;
+			vertInput *= enemy_base_speed_multiplier;
+		}
 
 		transform.Rotate(Vector3.up, rotate_speed * Time.deltaTime * horizInput);
 		transform.localPosition += (transform.forward * walk_speed * vertInput * Time.deltaTime);
@@ -182,23 +189,25 @@ public class PlayerController : MonoBehaviour {
 					drop.DepositResources(curr_stone_resource);
 					curr_stone_resource = 0;
 					updateStoneText();
+					backpackFull = false;
 					break;
 				case ResourceType.wood:
 					drop.DepositResources(curr_wood_resource);
 					curr_wood_resource = 0;
 					updateWoodText();
+					backpackFull = false;
 					break;
 				}
 			} else {
 				print ("Stealing resources!");
 				switch (drop.resourceType) {
 				case ResourceType.stone:
-					if (!collected_stone) {
+					if (!collected_stone && !backpackFull) {
 						CollectStone(drop.StealResources(stone_gather_val), " is stealing stone...");
 					}
 					break;
 				case ResourceType.wood:
-					if (!collected_wood) {
+					if (!collected_wood && !backpackFull) {
 						CollectWood(drop.StealResources(wood_gather_val), " is stealing wood...");
 					}
 					break;
@@ -212,11 +221,12 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void ChopWood() {
-		if(!collected_wood){
+		if(!collected_wood && !backpackFull){
 			CollectWood(wood_gather_val, " is chopping wood...");
 		}
 		updateWoodText();
 	}
+
 	void CollectWood(int amount, string message) {
 		string chopNotification = "Player " + player_num.ToString() + " is chopping wood!";
 		print (chopNotification);
@@ -231,12 +241,14 @@ public class PlayerController : MonoBehaviour {
 		get_wood_at_time = Time.time + WOOD_COOLDOWN_TIME;
 		print ("Get wood at: " + get_wood_at_time);
 	}
+
 	void CheckMaxWood(int amount) {
-		if (curr_wood_resource + amount > MAX_RESOURCES) {
+		if (curr_wood_resource + curr_stone_resource + amount > MAX_RESOURCES) {
 			string maxWood = "Player " + player_num.ToString () + " has max amount of wood!";
 			print (maxWood);
 			updateMidScreenText(maxWood);
-			curr_wood_resource = MAX_RESOURCES;
+			curr_wood_resource = MAX_RESOURCES - curr_stone_resource;
+			backpackFull = true;
 		} else {
 			curr_wood_resource += amount;
 		}
@@ -247,11 +259,12 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void MineStone() {
-		if(!collected_stone){
+		if(!collected_stone && !backpackFull){
 			CollectStone(stone_gather_val, " is mining stone...");
 		}
 		updateStoneText();
 	}
+
 	void CollectStone(int amount, string message) {
 		string mineNotification = "Player " + player_num.ToString() + " is mining!";
 		print (mineNotification);
@@ -267,12 +280,14 @@ public class PlayerController : MonoBehaviour {
 		get_stone_at_time = Time.time + STONE_COOLDOWN_TIME;
 		print ("Get wood at: " + get_wood_at_time);
 	}
+
 	void CheckMaxStone(int amount) {
-		if (curr_stone_resource + amount > MAX_RESOURCES) {
+		if (curr_stone_resource + curr_wood_resource + amount > MAX_RESOURCES) {
 			string maxStone = "Player " + player_num.ToString () + " has max amount of stone!";
 			print (maxStone);
 			updateMidScreenText(maxStone);
-			curr_stone_resource = MAX_RESOURCES;
+			curr_stone_resource = MAX_RESOURCES - curr_wood_resource;
+			backpackFull = true;
 		} else {
 			curr_stone_resource += amount;
 		}

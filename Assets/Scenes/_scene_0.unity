@@ -2508,16 +2508,19 @@ MonoBehaviour:
   player_num: 2
   rotate_speed: 90
   walk_speed: 15
+  enemy_base_speed_multiplier: .5
   curr_wood_resource: 0
   wood_gather_val: 1
   curr_stone_resource: 0
   stone_gather_val: 1
   MAX_RESOURCES: 15
+  backpackFull: 0
   WOOD_COOLDOWN_TIME: 1
   STONE_COOLDOWN_TIME: 1
   MIDTEXT_COOLDOWN_TIME: 1
   homeBase_GO: {fileID: 1619672632}
   inBase: 0
+  inEnemyBase: 0
 --- !u!1001 &274888818
 Prefab:
   m_ObjectHideFlags: 0
@@ -12786,16 +12789,19 @@ MonoBehaviour:
   player_num: 1
   rotate_speed: 90
   walk_speed: 15
+  enemy_base_speed_multiplier: .5
   curr_wood_resource: 0
   wood_gather_val: 1
   curr_stone_resource: 0
   stone_gather_val: 1
   MAX_RESOURCES: 15
+  backpackFull: 0
   WOOD_COOLDOWN_TIME: 1
   STONE_COOLDOWN_TIME: 1
   MIDTEXT_COOLDOWN_TIME: 1
   homeBase_GO: {fileID: 174982709}
   inBase: 0
+  inEnemyBase: 0
 --- !u!1 &1957280261
 GameObject:
   m_ObjectHideFlags: 0

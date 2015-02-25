@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ResourceCount : MonoBehaviour {
+public class ResourceCount {
 
 	public int wood = 0;
 	public int stone = 0;
