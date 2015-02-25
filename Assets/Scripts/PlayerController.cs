@@ -145,6 +145,7 @@ public class PlayerController : MonoBehaviour {
 		this.transform.position = homeBase_GO.transform.position;
 
 		dead = true;
+		inEnemyBase = false;
 		respawn_at_time = Time.time + RESPAWN_TIME;
 	}
 
