@@ -3794,8 +3794,8 @@ Transform:
   m_PrefabParentObject: {fileID: 416914, guid: 4622970ae76ee4778a6f178ffe1fac5b, type: 2}
   m_PrefabInternal: {fileID: 1368225220}
   m_GameObject: {fileID: 367926518}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: .5, z: -20}
+  m_LocalRotation: {x: .173648193, y: 0, z: 0, w: .984807789}
+  m_LocalPosition: {x: 0, y: 4, z: -20}
   m_LocalScale: {x: 2, y: .5, z: 2}
   m_Children: []
   m_Father: {fileID: 1927409170}
@@ -9024,6 +9024,18 @@ Prefab:
       propertyPath: STONE_COOLDOWN_TIME
       value: .5
       objectReference: {fileID: 0}
+    - target: {fileID: 416914, guid: 4622970ae76ee4778a6f178ffe1fac5b, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 416914, guid: 4622970ae76ee4778a6f178ffe1fac5b, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: .173648193
+      objectReference: {fileID: 0}
+    - target: {fileID: 416914, guid: 4622970ae76ee4778a6f178ffe1fac5b, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: .984807789
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4622970ae76ee4778a6f178ffe1fac5b, type: 2}
   m_RootGameObject: {fileID: 1927409169}
@@ -13574,8 +13586,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2017655469}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: .49999994, z: -20}
+  m_LocalRotation: {x: .173648193, y: 0, z: 0, w: .984807789}
+  m_LocalPosition: {x: 0, y: 4, z: -20}
   m_LocalScale: {x: 2, y: .5, z: 2}
   m_Children: []
   m_Father: {fileID: 262814389}
