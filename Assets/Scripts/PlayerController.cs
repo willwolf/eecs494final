@@ -20,11 +20,11 @@ public class PlayerController : MonoBehaviour {
 	public int MAX_RESOURCES = 50;
 	public bool backpackFull = false;
 
-	public int WOOD_COOLDOWN_TIME = 1;
+	public float WOOD_COOLDOWN_TIME = 0.5f;
 	private bool collected_wood = false;
 	private float get_wood_at_time;
 
-	public int STONE_COOLDOWN_TIME = 1;
+	public float STONE_COOLDOWN_TIME = 0.5f;
 	private bool collected_stone = false;
 	private float get_stone_at_time;
 
@@ -43,6 +43,7 @@ public class PlayerController : MonoBehaviour {
 
 	public AudioSource mining_stone;
 	public AudioSource chopping_wood;
+	public AudioSource dropping_resources;
 
 	// Use this for initialization
 	void Start () {
@@ -190,12 +191,14 @@ public class PlayerController : MonoBehaviour {
 //				print ("Depsoting resources!");
 				switch (drop.resourceType) {
 				case ResourceType.stone:
+					if(curr_stone_resource > 0)dropping_resources.Play();
 					drop.DepositResources(curr_stone_resource);
 					curr_stone_resource = 0;
 					updateStoneText();
 					backpackFull = false;
 					break;
 				case ResourceType.wood:
+					if(curr_wood_resource > 0)dropping_resources.Play();
 					drop.DepositResources(curr_wood_resource);
 					curr_wood_resource = 0;
 					updateWoodText();
