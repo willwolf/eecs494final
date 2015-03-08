@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour {
 	public int wood_gather_val = 1;
 	public int curr_stone_resource = 0;
 	public int stone_gather_val = 1;
-	public int MAX_RESOURCES = 50;
+	public int MAX_RESOURCES = 30;
 	public bool backpackFull = false;
 
 	public float WOOD_COOLDOWN_TIME = 0.5f;

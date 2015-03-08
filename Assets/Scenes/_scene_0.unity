@@ -2648,7 +2648,7 @@ MonoBehaviour:
   wood_gather_val: 1
   curr_stone_resource: 0
   stone_gather_val: 1
-  MAX_RESOURCES: 15
+  MAX_RESOURCES: 30
   backpackFull: 0
   WOOD_COOLDOWN_TIME: .5
   STONE_COOLDOWN_TIME: .5
@@ -13154,7 +13154,7 @@ MonoBehaviour:
   wood_gather_val: 1
   curr_stone_resource: 0
   stone_gather_val: 1
-  MAX_RESOURCES: 15
+  MAX_RESOURCES: 30
   backpackFull: 0
   WOOD_COOLDOWN_TIME: .5
   STONE_COOLDOWN_TIME: .5

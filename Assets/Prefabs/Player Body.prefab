@@ -417,7 +417,7 @@ MonoBehaviour:
   wood_gather_val: 1
   curr_stone_resource: 0
   stone_gather_val: 1
-  MAX_RESOURCES: 15
+  MAX_RESOURCES: 30
   backpackFull: 0
   WOOD_COOLDOWN_TIME: 1
   STONE_COOLDOWN_TIME: 1
@@ -427,6 +427,7 @@ MonoBehaviour:
   inEnemyBase: 0
   mining_stone: {fileID: 0}
   chopping_wood: {fileID: 0}
+  dropping_resources: {fileID: 0}
 --- !u!124 &12416910
 Behaviour:
   m_ObjectHideFlags: 1
