@@ -202,12 +202,6 @@ public class PlayerController : MonoBehaviour {
 				break;
 			case ResourceType.wood:
 				ChopWood(hitinfo.transform.gameObject);
-				if(r.amountLeft == 0){
-					Destroy(hitinfo.transform.gameObject);
-				}
-				else{
-					--r.amountLeft;
-				}
 				break;
 			
 			}
