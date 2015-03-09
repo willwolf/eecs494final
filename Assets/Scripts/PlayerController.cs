@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using InControl;
 
 public class PlayerController : MonoBehaviour {
 
@@ -9,6 +10,7 @@ public class PlayerController : MonoBehaviour {
 	private float respawn_at_time;
 	
 	public int player_num  = 0;
+	private InputDevice device = null;
 	public float rotate_speed = 90f;
 	public float walk_speed = 8f;
 	public float enemy_base_speed_multiplier = 0.5f;
@@ -60,6 +62,13 @@ public class PlayerController : MonoBehaviour {
 		updateWoodText();
 
 		homeBase = homeBase_GO.GetComponent<Base>();
+
+		var devices = InputManager.Devices;
+		foreach (InputDevice d in devices) {
+			if (d.Meta.Contains(player_num.ToString())) {
+				device = d;
+			}
+		}
 	}
 	
 	// Update is called once per frame
@@ -104,19 +113,30 @@ public class PlayerController : MonoBehaviour {
 			updateMidScreenText("Backpack Full");
 		}
 
-		float horizInput = Input.GetAxis("Horizontal_" + player_num.ToString()),
-			  vertInput = Input.GetAxis("Vertical_" + player_num.ToString());
-		if(inEnemyBase){
-			horizInput *= enemy_base_speed_multiplier;
-			vertInput *= enemy_base_speed_multiplier;
-		}
-
-		transform.Rotate(Vector3.up, rotate_speed * Time.deltaTime * horizInput);
-		transform.localPosition += (transform.forward * walk_speed * vertInput * Time.deltaTime);
+		Move();
 
 		if (Input.GetButton("Action_" + player_num.ToString())) {
 			TakeAction();
 		}
+	}
+
+	void Move() {
+		float horizInput = 0,
+			  vertInput = 0;
+		if (device != null) {
+			horizInput = device.LeftStickX;
+			vertInput = device.LeftStickY;
+		} else {
+			horizInput = Input.GetAxis("Horizontal_" + player_num.ToString());
+			vertInput = Input.GetAxis("Vertical_" + player_num.ToString());
+		}
+		if(inEnemyBase){
+			horizInput *= enemy_base_speed_multiplier;
+			vertInput *= enemy_base_speed_multiplier;
+		}
+		
+		transform.Rotate(Vector3.up, rotate_speed * Time.deltaTime * horizInput);
+		transform.localPosition += (transform.forward * walk_speed * vertInput * Time.deltaTime);
 	}
 
 	public void awakePlayer() {
