@@ -68,6 +68,9 @@ public class PlayerController : MonoBehaviour {
 		homeBase = homeBase_GO.GetComponent<Base>();
 
 		var devices = InputManager.Devices;
+		if (devices == null) {
+			return;
+		}
 		foreach (InputDevice d in devices) {
 			if (d.Meta.Contains(player_num.ToString())) {
 				device = d;
