@@ -15,9 +15,11 @@ public class PlayerController : MonoBehaviour {
 
 	public int curr_wood_resource = 0;
 	public int wood_gather_val = 1;
+	public static int MAX_WOOD_PER_TREE = 10;
 	public int curr_stone_resource = 0;
 	public int stone_gather_val = 1;
 	public int MAX_RESOURCES = 30;
+	public static int MAX_STONE_PER_ROCK = 10;
 	public bool backpackFull = false;
 
 	public float WOOD_COOLDOWN_TIME = 0.5f;
@@ -175,12 +177,20 @@ public class PlayerController : MonoBehaviour {
 
 			switch (r.type) {
 			case ResourceType.stone:
-				MineStone();
+				MineStone(hitinfo.transform.gameObject);
 				break;
 			case ResourceType.wood:
-				ChopWood();
+				ChopWood(hitinfo.transform.gameObject);
+				if(r.amountLeft == 0){
+					Destroy(hitinfo.transform.gameObject);
+				}
+				else{
+					--r.amountLeft;
+				}
 				break;
+			
 			}
+
 		} else if (IsInRange(out hitinfo, "DropPoint")) {
 			DropPoint drop = hitinfo.transform.GetComponent<DropPoint>();
 			if (drop == null) {
@@ -227,10 +237,11 @@ public class PlayerController : MonoBehaviour {
 		wood_text.text = "Carrying " + curr_wood_resource + " wood";
 	}
 
-	void ChopWood() {
+	void ChopWood(GameObject wood) {
 		if(!collected_wood && !backpackFull){
 			CollectWood(wood_gather_val, " is chopping wood...");
 			if(chopping_wood) chopping_wood.Play();
+			decreaseResource(wood);
 		}
 		updateWoodText();
 	}
@@ -266,11 +277,22 @@ public class PlayerController : MonoBehaviour {
 		stone_text.text = "Carrying " + curr_stone_resource + " stone";
 	}
 
-	void MineStone() {
+	void decreaseResource(GameObject resource){
+		print ("Amount of " + resource.ToString () + " left: " + 
+						resource.GetComponent<Resource> ().amountLeft);
+		resource.GetComponent<Resource>().amountLeft--; //dec first to not get off by 1 error
+		if(resource.GetComponent<Resource>().amountLeft == 0){
+			Destroy(resource);
+		}
+	}
+
+	void MineStone(GameObject stone) {
 		if(!collected_stone && !backpackFull){
 			CollectStone(stone_gather_val, " is mining stone...");
 			if(mining_stone) mining_stone.Play();
+			decreaseResource (stone);
 		}
+
 		updateStoneText();
 	}
 
