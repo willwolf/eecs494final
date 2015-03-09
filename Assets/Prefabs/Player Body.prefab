@@ -1,5 +1,24 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &120228
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 420228}
+  - 20: {fileID: 2020228}
+  - 124: {fileID: 12420228}
+  - 92: {fileID: 9220228}
+  - 45: {fileID: 4520228}
+  m_Layer: 0
+  m_Name: Cam1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &156042
 GameObject:
   m_ObjectHideFlags: 0
@@ -9,7 +28,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 456042}
   m_Layer: 0
-  m_Name: Sword
+  m_Name: Sword1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -155,6 +174,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!4 &420228
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 120228}
+  m_LocalRotation: {x: .173647955, y: 0, z: 0, w: .984807789}
+  m_LocalPosition: {x: -.5, y: 2.5, z: -16}
+  m_LocalScale: {x: 2, y: 1.55821168, z: 4.20895672}
+  m_Children: []
+  m_Father: {fileID: 456056}
+  m_RootOrder: 5
 --- !u!4 &456042
 Transform:
   m_ObjectHideFlags: 1
@@ -257,6 +288,7 @@ Transform:
   - {fileID: 456052}
   - {fileID: 456054}
   - {fileID: 456042}
+  - {fileID: 420228}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &456058
@@ -271,6 +303,38 @@ Transform:
   m_Children: []
   m_Father: {fileID: 456056}
   m_RootOrder: 1
+--- !u!20 &2020228
+Camera:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 120228}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 1
+  m_BackGroundColor: {r: .192156866, g: .301960796, b: .474509805, a: .0196078438}
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: .5
+    height: 1
+  near clip plane: .300000012
+  far clip plane: 1000
+  field of view: 60
+  orthographic: 0
+  orthographic size: 5
+  m_Depth: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
+  m_HDR: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: .0219999999
 --- !u!23 &2356042
 Renderer:
   m_ObjectHideFlags: 1
@@ -406,6 +470,14 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 156056}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!45 &4520228
+Skybox:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 120228}
+  m_Enabled: 1
+  m_CustomSkybox: {fileID: 2100000, guid: 53412155bc1016547b1a77b2333c0380, type: 2}
 --- !u!54 &5456042
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -643,6 +715,13 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+--- !u!92 &9220228
+Behaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 120228}
+  m_Enabled: 1
 --- !u!114 &11456042
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -671,9 +750,18 @@ MonoBehaviour:
   homeBase_GO: {fileID: 0}
   inBase: 0
   inEnemyBase: 0
+  hasSword: 0
   mining_stone: {fileID: 8256042}
   chopping_wood: {fileID: 8256046}
   dropping_resources: {fileID: 8256044}
+  sword: {fileID: 156042}
+--- !u!124 &12420228
+Behaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 120228}
+  m_Enabled: 1
 --- !u!135 &13556042
 SphereCollider:
   m_ObjectHideFlags: 1
