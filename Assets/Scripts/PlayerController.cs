@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using InControl;
 
 public class PlayerController : MonoBehaviour {
 
@@ -9,6 +10,7 @@ public class PlayerController : MonoBehaviour {
 	private float respawn_at_time;
 	
 	public int player_num  = 0;
+	private InputDevice device = null;
 	public float rotate_speed = 90f;
 	public float walk_speed = 8f;
 	public float enemy_base_speed_multiplier = 0.5f;
@@ -62,6 +64,13 @@ public class PlayerController : MonoBehaviour {
 		updateWoodText();
 
 		homeBase = homeBase_GO.GetComponent<Base>();
+
+		var devices = InputManager.Devices;
+		foreach (InputDevice d in devices) {
+			if (d.Meta.Contains(player_num.ToString())) {
+				device = d;
+			}
+		}
 	}
 	
 	// Update is called once per frame
@@ -94,31 +103,46 @@ public class PlayerController : MonoBehaviour {
 
 		if (collected_wood && (Time.time > get_wood_at_time)) {
 			collected_wood = false;
-//			print ("Player " + player_num.ToString() + " may collect wood again!");
 		}
 
 		if (collected_stone && (Time.time > get_stone_at_time)) {
 			collected_stone = false;
-//			print ("Player " + player_num.ToString() + " may collect stone again!");
 		}
 
 		if (curr_wood_resource + curr_stone_resource >= MAX_RESOURCES) {
 			updateMidScreenText("Backpack Full");
 		}
 
-		float horizInput = Input.GetAxis("Horizontal_" + player_num.ToString()),
-			  vertInput = Input.GetAxis("Vertical_" + player_num.ToString());
-		if(inEnemyBase){
-			horizInput *= enemy_base_speed_multiplier;
-			vertInput *= enemy_base_speed_multiplier;
-		}
+		Move();
 
-		transform.Rotate(Vector3.up, rotate_speed * Time.deltaTime * horizInput);
-		transform.localPosition += (transform.forward * walk_speed * vertInput * Time.deltaTime);
-
-		if (Input.GetButton("Action_" + player_num.ToString())) {
+		if (Input.GetButton("Action_" + player_num.ToString()) || 
+		    (device != null && device.Action1.IsPressed)) {
 			TakeAction();
 		}
+	}
+
+	void Move() {
+		float rotate_input = 0,
+			  forward_input = 0,
+			  sidestep_input = 0;
+		if (device != null) {
+			// Default to using controller inputs, if they are present otherwise use keyboard commands
+			rotate_input = device.RightStickX ? device.RightStickX : Input.GetAxis("Horizontal_" + player_num.ToString());
+			sidestep_input = device.LeftStickX;
+			forward_input = device.LeftStickY ? device.LeftStickY : Input.GetAxis("Vertical_" + player_num.ToString());
+		} else {
+			rotate_input = Input.GetAxis("Horizontal_" + player_num.ToString());
+			forward_input = Input.GetAxis("Vertical_" + player_num.ToString());
+		}
+		if(inEnemyBase){
+			rotate_input *= enemy_base_speed_multiplier;
+			forward_input *= enemy_base_speed_multiplier;
+			sidestep_input *= enemy_base_speed_multiplier;
+		}
+		
+		transform.Rotate(Vector3.up, rotate_speed * Time.deltaTime * rotate_input);
+		transform.localPosition += ((transform.forward * walk_speed * forward_input * Time.deltaTime) +
+		                            (transform.right * walk_speed * sidestep_input * Time.deltaTime));
 	}
 
 	public void awakePlayer() {
@@ -153,8 +177,6 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void TakeAction() {
-//		print ("Player " + player_num.ToString() + " is taking an action!");
-
 		RaycastHit hitinfo;
 		if (IsInRange(out hitinfo, "Player")) {
 			PlayerController other = hitinfo.transform.GetComponent<PlayerController>();
@@ -169,7 +191,6 @@ public class PlayerController : MonoBehaviour {
 			}
 
 		} else if (IsInRange(out hitinfo, "Resource")) {
-//			print ("Player " + player_num.ToString() + " is in range!");
 			Resource r = hitinfo.transform.GetComponent<Resource>();
 			if (r == null) {
 				throw new UnassignedReferenceException("Resource layer object does not have Resource script attached");
@@ -198,7 +219,6 @@ public class PlayerController : MonoBehaviour {
 			}
 
 			if (drop.playerBaseGO.GetInstanceID() == homeBase_GO.GetInstanceID()) {
-//				print ("Depsoting resources!");
 				switch (drop.resourceType) {
 				case ResourceType.stone:
 					if(curr_stone_resource > 0)dropping_resources.Play();
@@ -216,7 +236,6 @@ public class PlayerController : MonoBehaviour {
 					break;
 				}
 			} else {
-//				print ("Stealing resources!");
 				switch (drop.resourceType) {
 				case ResourceType.stone:
 					if (!collected_stone && !backpackFull) {
@@ -248,7 +267,6 @@ public class PlayerController : MonoBehaviour {
 
 	void CollectWood(int amount, string message) {
 		string chopNotification = "Player " + player_num.ToString() + " is chopping wood!";
-//		print (chopNotification);
 		updateMidScreenText(chopNotification);
 		CheckMaxWood(amount);
 		if (wood_text == null) {
@@ -258,13 +276,11 @@ public class PlayerController : MonoBehaviour {
 		updateMidScreenText("Player " + player_num.ToString() + message);
 		collected_wood = true;
 		get_wood_at_time = Time.time + WOOD_COOLDOWN_TIME;
-//		print ("Get wood at: " + get_wood_at_time);
 	}
 
 	void CheckMaxWood(int amount) {
 		if (curr_wood_resource + curr_stone_resource + amount > MAX_RESOURCES) {
 			string maxWood = "Player " + player_num.ToString () + " has max amount of wood!";
-//			print (maxWood);
 			updateMidScreenText(maxWood);
 			curr_wood_resource = MAX_RESOURCES - curr_stone_resource;
 			backpackFull = true;
@@ -298,9 +314,7 @@ public class PlayerController : MonoBehaviour {
 
 	void CollectStone(int amount, string message) {
 		string mineNotification = "Player " + player_num.ToString() + " is mining!";
-//		print (mineNotification);
 		updateMidScreenText(mineNotification);
-//		print ("Player " + player_num.ToString() + " is mining!");
 		CheckMaxStone(amount);
 		if (stone_text == null) {
 			throw new UnassignedReferenceException("stone_text for player " + player_num.ToString() + " is null");
@@ -309,13 +323,11 @@ public class PlayerController : MonoBehaviour {
 		updateMidScreenText("Player " + player_num.ToString() + message);
 		collected_stone = true;
 		get_stone_at_time = Time.time + STONE_COOLDOWN_TIME;
-//		print ("Get wood at: " + get_wood_at_time);
 	}
 
 	void CheckMaxStone(int amount) {
 		if (curr_stone_resource + curr_wood_resource + amount > MAX_RESOURCES) {
 			string maxStone = "Player " + player_num.ToString () + " has max amount of stone!";
-//			print (maxStone);
 			updateMidScreenText(maxStone);
 			curr_stone_resource = MAX_RESOURCES - curr_wood_resource;
 			backpackFull = true;
@@ -347,7 +359,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	bool CastActionRay(Vector3 origin, string Layer, out RaycastHit info) {
-		int layerMask = LayerMask.GetMask(Layer); // only collide with Resource layer
+		int layerMask = LayerMask.GetMask(Layer); // only collide with Layer specified
 		return Physics.Raycast(origin, transform.forward, out info, 1.5f, layerMask);
 	}
 
