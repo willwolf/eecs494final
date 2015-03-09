@@ -8490,7 +8490,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RESPAWN_TIME: 20
   player_num: 2
-  rotate_speed: 90
+  rotate_speed: 180
   walk_speed: 15
   enemy_base_speed_multiplier: .5
   curr_wood_resource: 0
@@ -12439,7 +12439,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 456056, guid: 59a29ccec391e473185f743761988bce, type: 2}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: .999156475
       objectReference: {fileID: 0}
     - target: {fileID: 456056, guid: 59a29ccec391e473185f743761988bce, type: 2}
       propertyPath: m_LocalRotation.z
@@ -12447,7 +12447,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 456056, guid: 59a29ccec391e473185f743761988bce, type: 2}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: -.0410655253
       objectReference: {fileID: 0}
     - target: {fileID: 456056, guid: 59a29ccec391e473185f743761988bce, type: 2}
       propertyPath: m_RootOrder
@@ -20969,7 +20969,7 @@ Transform:
   m_PrefabParentObject: {fileID: 456056, guid: 59a29ccec391e473185f743761988bce, type: 2}
   m_PrefabInternal: {fileID: 1208199124}
   m_GameObject: {fileID: 1927409169}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: .999156475, z: 0, w: -.0410655253}
   m_LocalPosition: {x: -2.81999993, y: 2, z: 81.8300018}
   m_LocalScale: {x: .5, y: 2, z: .5}
   m_Children:
@@ -21053,7 +21053,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RESPAWN_TIME: 20
   player_num: 1
-  rotate_speed: 90
+  rotate_speed: 180
   walk_speed: 15
   enemy_base_speed_multiplier: .5
   curr_wood_resource: 0
