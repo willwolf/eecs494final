@@ -115,29 +115,34 @@ public class PlayerController : MonoBehaviour {
 
 		Move();
 
-		if (Input.GetButton("Action_" + player_num.ToString())) {
+		if (Input.GetButton("Action_" + player_num.ToString()) || 
+		    (device != null && device.Action1.IsPressed)) {
 			TakeAction();
 		}
 	}
 
 	void Move() {
-		float horizInput = 0,
-			  vertInput = 0;
+		float rotate_input = 0,
+			  forward_input = 0,
+			  sidestep_input = 0;
 		if (device != null) {
 			// Default to using controller inputs, if they are present otherwise use keyboard commands
-			horizInput = device.LeftStickX ? device.LeftStickX : Input.GetAxis("Horizontal_" + player_num.ToString());
-			vertInput = device.LeftStickY ? device.LeftStickY : Input.GetAxis("Vertical_" + player_num.ToString());
+			rotate_input = device.RightStickX ? device.RightStickX : Input.GetAxis("Horizontal_" + player_num.ToString());
+			sidestep_input = device.LeftStickX;
+			forward_input = device.LeftStickY ? device.LeftStickY : Input.GetAxis("Vertical_" + player_num.ToString());
 		} else {
-			horizInput = Input.GetAxis("Horizontal_" + player_num.ToString());
-			vertInput = Input.GetAxis("Vertical_" + player_num.ToString());
+			rotate_input = Input.GetAxis("Horizontal_" + player_num.ToString());
+			forward_input = Input.GetAxis("Vertical_" + player_num.ToString());
 		}
 		if(inEnemyBase){
-			horizInput *= enemy_base_speed_multiplier;
-			vertInput *= enemy_base_speed_multiplier;
+			rotate_input *= enemy_base_speed_multiplier;
+			forward_input *= enemy_base_speed_multiplier;
+			sidestep_input *= enemy_base_speed_multiplier;
 		}
 		
-		transform.Rotate(Vector3.up, rotate_speed * Time.deltaTime * horizInput);
-		transform.localPosition += (transform.forward * walk_speed * vertInput * Time.deltaTime);
+		transform.Rotate(Vector3.up, rotate_speed * Time.deltaTime * rotate_input);
+		transform.localPosition += ((transform.forward * walk_speed * forward_input * Time.deltaTime) +
+		                            (transform.right * walk_speed * sidestep_input * Time.deltaTime));
 	}
 
 	public void awakePlayer() {
