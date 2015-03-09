@@ -1,9 +1,14 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class Base : MonoBehaviour {
 
+	GameManager gm;
 
+	void Start() {
+		gm = GameObject.Find("GameManager").GetComponent<GameManager>();
+	}
 
 	void OnTriggerEnter(Collider other) {
 		if (other.gameObject.layer != LayerMask.NameToLayer("Player"))
@@ -14,6 +19,7 @@ public class Base : MonoBehaviour {
 			player.inBase = true;
 		} else {
 			player.inEnemyBase = true;
+			gm.playerInBase(true, this.gameObject.GetInstanceID());
 		}
 	}
 
@@ -26,6 +32,7 @@ public class Base : MonoBehaviour {
 			player.inBase = false;
 		} else {
 			player.inEnemyBase = false;
+			gm.playerInBase(false, this.gameObject.GetInstanceID());
 		}
 	}
 }

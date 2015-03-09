@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour {
 	};
 
 	private Dictionary<int, Text> teamTexts =  new Dictionary<int, Text>();
+	private Dictionary<int, Text> enemyInBaseTexts = new Dictionary<int, Text>();
 
 	public Dictionary<int, string> baseNames;
 	public Dictionary<int, ResourceCount> teamResources;
@@ -34,8 +35,13 @@ public class GameManager : MonoBehaviour {
 			baseNames.Add(baseObj.GetInstanceID(), pair.Value);
 			teamResources.Add(baseObj.GetInstanceID(), new ResourceCount());
 			teamTexts.Add(baseObj.GetInstanceID(), GameObject.Find(pair.Value + "_vals").GetComponent<Text>());
+			enemyInBaseTexts.Add(baseObj.GetInstanceID(), GameObject.Find(pair.Value + "_BaseWarning").GetComponent<Text>());
 		}
 		print ("winning wood: " + winningWood + " stone: " + winningStone);
+
+		foreach (KeyValuePair<int, Text> pair in enemyInBaseTexts) {
+			pair.Value.enabled = false;
+		}
 	
 	}
 
@@ -60,6 +66,10 @@ public class GameManager : MonoBehaviour {
 
 			}		
 		}
+	}
+
+	public void playerInBase(bool inBase, int baseId) {
+		enemyInBaseTexts[baseId].enabled = inBase;
 	}
 
 	public void AddResources(int baseId, ResourceType t, int amount) {
