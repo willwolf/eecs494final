@@ -124,8 +124,9 @@ public class PlayerController : MonoBehaviour {
 		float horizInput = 0,
 			  vertInput = 0;
 		if (device != null) {
-			horizInput = device.LeftStickX;
-			vertInput = device.LeftStickY;
+			// Default to using controller inputs, if they are present otherwise use keyboard commands
+			horizInput = device.LeftStickX ? device.LeftStickX : Input.GetAxis("Horizontal_" + player_num.ToString());
+			vertInput = device.LeftStickY ? device.LeftStickY : Input.GetAxis("Vertical_" + player_num.ToString());
 		} else {
 			horizInput = Input.GetAxis("Horizontal_" + player_num.ToString());
 			vertInput = Input.GetAxis("Vertical_" + player_num.ToString());
