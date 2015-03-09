@@ -121,6 +121,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  amountLeft: 0
 --- !u!23 &8039428
 Renderer:
   m_ObjectHideFlags: 0
@@ -218,6 +219,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  amountLeft: 0
 --- !u!23 &9772407
 Renderer:
   m_ObjectHideFlags: 0
@@ -397,6 +399,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  amountLeft: 0
 --- !u!23 &30804704
 Renderer:
   m_ObjectHideFlags: 0
@@ -494,6 +497,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  amountLeft: 0
 --- !u!23 &36004884
 Renderer:
   m_ObjectHideFlags: 0
@@ -591,6 +595,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  amountLeft: 0
 --- !u!23 &38450592
 Renderer:
   m_ObjectHideFlags: 0
@@ -751,6 +756,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  amountLeft: 0
 --- !u!23 &51366544
 Renderer:
   m_ObjectHideFlags: 0
@@ -887,6 +893,7 @@ RectTransform:
   - {fileID: 1399662594}
   - {fileID: 61551584}
   - {fileID: 1704845056}
+  - {fileID: 728759454}
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_AnchorMin: {x: 0, y: 0}
@@ -1236,6 +1243,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  amountLeft: 0
 --- !u!23 &74917909
 Renderer:
   m_ObjectHideFlags: 0
@@ -1596,6 +1604,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  amountLeft: 0
 --- !u!23 &116318736
 Renderer:
   m_ObjectHideFlags: 0
@@ -1691,6 +1700,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
+  amountLeft: 0
 --- !u!64 &119709719
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1922,6 +1932,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  amountLeft: 0
 --- !u!23 &137902266
 Renderer:
   m_ObjectHideFlags: 0
@@ -2017,6 +2028,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
+  amountLeft: 0
 --- !u!64 &139640885
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2107,6 +2119,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  amountLeft: 0
 --- !u!23 &140039332
 Renderer:
   m_ObjectHideFlags: 0
@@ -2289,6 +2302,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  amountLeft: 0
 --- !u!23 &147669217
 Renderer:
   m_ObjectHideFlags: 0
@@ -2384,6 +2398,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
+  amountLeft: 0
 --- !u!64 &153624566
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2474,6 +2489,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  amountLeft: 0
 --- !u!23 &158586885
 Renderer:
   m_ObjectHideFlags: 0
@@ -2743,6 +2759,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  amountLeft: 0
 --- !u!23 &190112333
 Renderer:
   m_ObjectHideFlags: 0
@@ -2882,6 +2899,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
+  amountLeft: 0
 --- !u!64 &202921697
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -3016,6 +3034,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  amountLeft: 0
 --- !u!23 &214079285
 Renderer:
   m_ObjectHideFlags: 0
@@ -3167,6 +3186,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
+  amountLeft: 0
 --- !u!64 &221624369
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -3787,6 +3807,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  amountLeft: 0
 --- !u!23 &281390046
 Renderer:
   m_ObjectHideFlags: 0
@@ -3882,6 +3903,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
+  amountLeft: 0
 --- !u!64 &285797983
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -4349,6 +4371,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  amountLeft: 0
 --- !u!23 &305489639
 Renderer:
   m_ObjectHideFlags: 0
@@ -4444,6 +4467,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
+  amountLeft: 0
 --- !u!64 &309518507
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -4816,6 +4840,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  amountLeft: 0
 --- !u!23 &340845602
 Renderer:
   m_ObjectHideFlags: 0
@@ -4952,6 +4977,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
+  amountLeft: 0
 --- !u!64 &348686780
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -5042,6 +5068,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  amountLeft: 0
 --- !u!23 &353230311
 Renderer:
   m_ObjectHideFlags: 0
@@ -5139,6 +5166,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  amountLeft: 0
 --- !u!23 &360521927
 Renderer:
   m_ObjectHideFlags: 0
@@ -5292,6 +5320,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  amountLeft: 0
 --- !u!23 &380425529
 Renderer:
   m_ObjectHideFlags: 0
@@ -5389,6 +5418,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  amountLeft: 0
 --- !u!23 &397758001
 Renderer:
   m_ObjectHideFlags: 0
@@ -5674,6 +5704,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  amountLeft: 0
 --- !u!23 &449185891
 Renderer:
   m_ObjectHideFlags: 0
@@ -5927,6 +5958,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  amountLeft: 0
 --- !u!23 &471150282
 Renderer:
   m_ObjectHideFlags: 0
@@ -6080,6 +6112,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  amountLeft: 0
 --- !u!23 &488650389
 Renderer:
   m_ObjectHideFlags: 0
@@ -6177,6 +6210,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  amountLeft: 0
 --- !u!23 &489319660
 Renderer:
   m_ObjectHideFlags: 0
@@ -6378,6 +6412,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  amountLeft: 0
 --- !u!23 &514254224
 Renderer:
   m_ObjectHideFlags: 0
@@ -6514,6 +6549,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
+  amountLeft: 0
 --- !u!64 &521757458
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -6714,6 +6750,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
+  amountLeft: 0
 --- !u!64 &556811373
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -6802,6 +6839,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
+  amountLeft: 0
 --- !u!64 &558335527
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -7022,6 +7060,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
+  amountLeft: 0
 --- !u!64 &583795724
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -7110,6 +7149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
+  amountLeft: 0
 --- !u!64 &592581405
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -7226,6 +7266,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
+  amountLeft: 0
 --- !u!64 &606746503
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -7409,6 +7450,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
+  amountLeft: 0
 --- !u!64 &614738738
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -7594,6 +7636,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
+  amountLeft: 0
 --- !u!64 &639680729
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -7682,6 +7725,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
+  amountLeft: 0
 --- !u!64 &641403154
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -7770,6 +7814,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
+  amountLeft: 0
 --- !u!64 &647701751
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -8120,6 +8165,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  amountLeft: 0
 --- !u!23 &664643039
 Renderer:
   m_ObjectHideFlags: 0
@@ -8566,6 +8612,72 @@ MeshFilter:
   m_PrefabInternal: {fileID: 231695740}
   m_GameObject: {fileID: 725918230}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &728759451
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 224: {fileID: 728759454}
+  - 222: {fileID: 728759453}
+  - 114: {fileID: 728759452}
+  m_Layer: 5
+  m_Name: Team 2_BaseWarning
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &728759452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 728759451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 12
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 1
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: Enemy in Base!
+--- !u!222 &728759453
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 728759451}
+--- !u!224 &728759454
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 728759451}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 56050739}
+  m_RootOrder: 4
+  m_AnchorMin: {x: .688657224, y: .584375083}
+  m_AnchorMax: {x: .908657253, y: .712500095}
+  m_AnchoredPosition: {x: -7.5, y: -4.96300125}
+  m_SizeDelta: {x: 78, y: -4.69599915}
+  m_Pivot: {x: .5, y: .5}
 --- !u!1 &733334505
 GameObject:
   m_ObjectHideFlags: 0
@@ -8652,6 +8764,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
+  amountLeft: 0
 --- !u!64 &742214396
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -8783,6 +8896,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  amountLeft: 0
 --- !u!23 &758967173
 Renderer:
   m_ObjectHideFlags: 0
@@ -8922,6 +9036,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
+  amountLeft: 0
 --- !u!64 &770225394
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -9223,6 +9338,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
+  amountLeft: 0
 --- !u!64 &790087570
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -9546,6 +9662,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  amountLeft: 0
 --- !u!23 &833564077
 Renderer:
   m_ObjectHideFlags: 0
@@ -9682,6 +9799,7 @@ RectTransform:
   - {fileID: 1337057391}
   - {fileID: 1473616735}
   - {fileID: 1957280262}
+  - {fileID: 1688144500}
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_AnchorMin: {x: 0, y: 0}
@@ -9808,6 +9926,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  amountLeft: 0
 --- !u!23 &863239322
 Renderer:
   m_ObjectHideFlags: 0
@@ -9905,6 +10024,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  amountLeft: 0
 --- !u!23 &878360593
 Renderer:
   m_ObjectHideFlags: 0
@@ -10000,6 +10120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
+  amountLeft: 0
 --- !u!64 &885968265
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -10090,6 +10211,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  amountLeft: 0
 --- !u!23 &886382983
 Renderer:
   m_ObjectHideFlags: 0
@@ -10282,6 +10404,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
+  amountLeft: 0
 --- !u!64 &924951578
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -10447,6 +10570,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  amountLeft: 0
 --- !u!23 &940796429
 Renderer:
   m_ObjectHideFlags: 0
@@ -10629,6 +10753,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  amountLeft: 0
 --- !u!23 &976778441
 Renderer:
   m_ObjectHideFlags: 0
@@ -10906,6 +11031,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
+  amountLeft: 0
 --- !u!64 &1027669553
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -11052,6 +11178,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  amountLeft: 0
 --- !u!23 &1059445918
 Renderer:
   m_ObjectHideFlags: 0
@@ -11149,6 +11276,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  amountLeft: 0
 --- !u!23 &1083701765
 Renderer:
   m_ObjectHideFlags: 0
@@ -11356,6 +11484,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
+  amountLeft: 0
 --- !u!64 &1094857749
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -11502,6 +11631,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  amountLeft: 0
 --- !u!23 &1107501651
 Renderer:
   m_ObjectHideFlags: 0
@@ -11597,6 +11727,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
+  amountLeft: 0
 --- !u!64 &1108230170
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -11687,6 +11818,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  amountLeft: 0
 --- !u!23 &1113011340
 Renderer:
   m_ObjectHideFlags: 0
@@ -11784,6 +11916,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  amountLeft: 0
 --- !u!23 &1113856957
 Renderer:
   m_ObjectHideFlags: 0
@@ -11866,6 +11999,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
+  amountLeft: 0
 --- !u!64 &1118793974
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -11969,6 +12103,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  amountLeft: 0
 --- !u!23 &1133808549
 Renderer:
   m_ObjectHideFlags: 0
@@ -12274,6 +12409,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
+  amountLeft: 0
 --- !u!64 &1204293493
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -12702,6 +12838,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  amountLeft: 0
 --- !u!23 &1222499028
 Renderer:
   m_ObjectHideFlags: 0
@@ -13030,6 +13167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  amountLeft: 0
 --- !u!23 &1257040898
 Renderer:
   m_ObjectHideFlags: 0
@@ -13466,6 +13604,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
+  amountLeft: 0
 --- !u!64 &1307871176
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -13556,6 +13695,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  amountLeft: 0
 --- !u!23 &1310165379
 Renderer:
   m_ObjectHideFlags: 0
@@ -13781,6 +13921,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  amountLeft: 0
 --- !u!23 &1329202214
 Renderer:
   m_ObjectHideFlags: 0
@@ -14100,6 +14241,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  amountLeft: 0
 --- !u!23 &1352827263
 Renderer:
   m_ObjectHideFlags: 0
@@ -14195,6 +14337,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
+  amountLeft: 0
 --- !u!64 &1363296525
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -14424,6 +14567,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
+  amountLeft: 0
 --- !u!64 &1372217800
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -14568,6 +14712,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
+  amountLeft: 0
 --- !u!64 &1394826383
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -14780,6 +14925,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  amountLeft: 0
 --- !u!23 &1401420127
 Renderer:
   m_ObjectHideFlags: 0
@@ -14976,6 +15122,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
+  amountLeft: 0
 --- !u!64 &1420632824
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -15066,6 +15213,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  amountLeft: 0
 --- !u!23 &1426679394
 Renderer:
   m_ObjectHideFlags: 0
@@ -15161,6 +15309,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
+  amountLeft: 0
 --- !u!64 &1429789924
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -15251,6 +15400,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  amountLeft: 0
 --- !u!23 &1436637511
 Renderer:
   m_ObjectHideFlags: 0
@@ -15784,6 +15934,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
+  amountLeft: 0
 --- !u!64 &1517573470
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -15874,6 +16025,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  amountLeft: 0
 --- !u!23 &1531126090
 Renderer:
   m_ObjectHideFlags: 0
@@ -15971,6 +16123,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  amountLeft: 0
 --- !u!23 &1538589862
 Renderer:
   m_ObjectHideFlags: 0
@@ -16112,6 +16265,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  amountLeft: 0
 --- !u!23 &1544670008
 Renderer:
   m_ObjectHideFlags: 0
@@ -16250,6 +16404,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  amountLeft: 0
 --- !u!23 &1552307682
 Renderer:
   m_ObjectHideFlags: 0
@@ -16444,6 +16599,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  amountLeft: 0
 --- !u!23 &1568120255
 Renderer:
   m_ObjectHideFlags: 0
@@ -16595,6 +16751,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
+  amountLeft: 0
 --- !u!64 &1577240476
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -16683,6 +16840,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
+  amountLeft: 0
 --- !u!64 &1581083880
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -16827,6 +16985,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
+  amountLeft: 0
 --- !u!64 &1595966057
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -17233,6 +17392,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  amountLeft: 0
 --- !u!23 &1666184613
 Renderer:
   m_ObjectHideFlags: 0
@@ -17328,6 +17488,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
+  amountLeft: 0
 --- !u!64 &1671215116
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -17549,6 +17710,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  amountLeft: 0
 --- !u!23 &1682070498
 Renderer:
   m_ObjectHideFlags: 0
@@ -17599,6 +17761,72 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1963194572}
   m_RootOrder: 47
+--- !u!1 &1688144499
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 224: {fileID: 1688144500}
+  - 222: {fileID: 1688144502}
+  - 114: {fileID: 1688144501}
+  m_Layer: 5
+  m_Name: Team 1_BaseWarning
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1688144500
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1688144499}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 843186050}
+  m_RootOrder: 4
+  m_AnchorMin: {x: .12334282, y: .609375}
+  m_AnchorMax: {x: .349197298, y: .714750051}
+  m_AnchoredPosition: {x: -12, y: -7.15200043}
+  m_SizeDelta: {x: 75, y: 2.30400085}
+  m_Pivot: {x: .5, y: .5}
+--- !u!114 &1688144501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1688144499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 12
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 1
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: Enemy in Base!
+--- !u!222 &1688144502
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1688144499}
 --- !u!1001 &1693478963
 Prefab:
   m_ObjectHideFlags: 0
@@ -17883,6 +18111,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
+  amountLeft: 0
 --- !u!64 &1707132143
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -18101,6 +18330,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  amountLeft: 0
 --- !u!23 &1716314749
 Renderer:
   m_ObjectHideFlags: 0
@@ -18237,6 +18467,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
+  amountLeft: 0
 --- !u!64 &1718912533
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -18327,6 +18558,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  amountLeft: 0
 --- !u!23 &1742007866
 Renderer:
   m_ObjectHideFlags: 0
@@ -18468,6 +18700,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  amountLeft: 0
 --- !u!23 &1760075807
 Renderer:
   m_ObjectHideFlags: 0
@@ -18565,6 +18798,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  amountLeft: 0
 --- !u!23 &1765481456
 Renderer:
   m_ObjectHideFlags: 0
@@ -18790,6 +19024,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
+  amountLeft: 0
 --- !u!64 &1795196036
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -18880,6 +19115,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  amountLeft: 0
 --- !u!23 &1796466950
 Renderer:
   m_ObjectHideFlags: 0
@@ -19031,6 +19267,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
+  amountLeft: 0
 --- !u!64 &1802355451
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -19177,6 +19414,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  amountLeft: 0
 --- !u!23 &1814840260
 Renderer:
   m_ObjectHideFlags: 0
@@ -19318,6 +19556,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  amountLeft: 0
 --- !u!23 &1823224903
 Renderer:
   m_ObjectHideFlags: 0
@@ -19610,6 +19849,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
+  amountLeft: 0
 --- !u!64 &1849363837
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -19772,6 +20012,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  amountLeft: 0
 --- !u!23 &1852567956
 Renderer:
   m_ObjectHideFlags: 0
@@ -19869,6 +20110,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  amountLeft: 0
 --- !u!23 &1858727314
 Renderer:
   m_ObjectHideFlags: 0
@@ -20022,6 +20264,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  amountLeft: 0
 --- !u!23 &1863818536
 Renderer:
   m_ObjectHideFlags: 0
@@ -20117,6 +20360,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
+  amountLeft: 0
 --- !u!64 &1877061983
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -20251,6 +20495,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  amountLeft: 0
 --- !u!23 &1885365038
 Renderer:
   m_ObjectHideFlags: 0
@@ -20510,6 +20755,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  amountLeft: 0
 --- !u!23 &1898363765
 Renderer:
   m_ObjectHideFlags: 0
@@ -21366,6 +21612,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
+  amountLeft: 0
 --- !u!64 &2007147631
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -21512,6 +21759,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  amountLeft: 0
 --- !u!23 &2034382147
 Renderer:
   m_ObjectHideFlags: 0
@@ -21735,6 +21983,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
+  amountLeft: 0
 --- !u!64 &2049634883
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -21937,6 +22186,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  amountLeft: 0
 --- !u!23 &2072520081
 Renderer:
   m_ObjectHideFlags: 0
@@ -22432,6 +22682,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
+  amountLeft: 0
 --- !u!64 &2132380158
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -22619,6 +22870,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  amountLeft: 0
 --- !u!23 &2147178314
 Renderer:
   m_ObjectHideFlags: 0
