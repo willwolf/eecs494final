@@ -40,6 +40,7 @@ public class PlayerController : MonoBehaviour {
 	public Base homeBase { get; private set; }
 	public bool inBase = false;
 	public bool inEnemyBase = false;
+	public bool hasSword = false;
 	
 	private Text stone_text;
 	private Text wood_text;
@@ -48,6 +49,7 @@ public class PlayerController : MonoBehaviour {
 	public AudioSource mining_stone;
 	public AudioSource chopping_wood;
 	public AudioSource dropping_resources;
+	public GameObject sword;
 
 	// Use this for initialization
 	void Start () {
@@ -75,6 +77,17 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if(!hasSword){
+			foreach(Renderer child in sword.GetComponentsInChildren<Renderer>()){
+				child.enabled = false;
+			}
+
+		} else {
+			foreach(Renderer child in sword.GetComponentsInChildren<Renderer>()){
+				child.enabled = true;
+			}
+		}
+
 		if (player_num == 0) {
 			throw new UnassignedReferenceException("PlayerController::playerNum must be non-zero");
 		}
