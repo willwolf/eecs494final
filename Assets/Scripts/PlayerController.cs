@@ -68,6 +68,9 @@ public class PlayerController : MonoBehaviour {
 		homeBase = homeBase_GO.GetComponent<Base>();
 
 		var devices = InputManager.Devices;
+		if (devices == null) {
+			return;
+		}
 		foreach (InputDevice d in devices) {
 			if (d.Meta.Contains(player_num.ToString())) {
 				device = d;
@@ -170,7 +173,7 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
-	public void killPlayer() {
+	public void killPlayer(GameObject enemy_base_GO) {
 		foreach (MeshRenderer renderer in GetComponentsInChildren<MeshRenderer>()) {
 			renderer.enabled = false;
 		}
@@ -180,6 +183,12 @@ public class PlayerController : MonoBehaviour {
 		foreach (Collider collider in GetComponentsInChildren<Collider>()) {
 			collider.enabled = false;
 		}
+
+		// Drop all resources in enemy's base upon death
+		GameManager gm = GameObject.Find("GameManager").GetComponent<GameManager>();
+		gm.AddResources(enemy_base_GO.GetInstanceID(), ResourceType.stone, curr_stone_resource);
+		gm.AddResources(enemy_base_GO.GetInstanceID(), ResourceType.wood, curr_wood_resource);
+
 
 		curr_wood_resource = curr_stone_resource = 0;
 		this.transform.position = homeBase_GO.transform.position;
@@ -197,7 +206,7 @@ public class PlayerController : MonoBehaviour {
 			if (other.homeBase_GO.GetInstanceID() != this.gameObject.GetInstanceID()) {
 				Debug.Log("In range of enemy player");
 				if (this.inBase) {
-					other.killPlayer(); 
+					other.killPlayer(homeBase_GO); 
 				}
 			} else {
 				Debug.Log("In range of friendly plaer");
