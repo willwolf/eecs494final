@@ -210,15 +210,14 @@ public class PlayerController : MonoBehaviour {
 	void TakeAction() {
 		RaycastHit hitinfo;
 		if (IsInRange(out hitinfo, "Player")) {
-			PlayerController other = hitinfo.transform.GetComponent<PlayerController>();
-
-			if (other.homeBase_GO.GetInstanceID() != this.gameObject.GetInstanceID()) {
-				Debug.Log("In range of enemy player");
-				if (this.inBase) {
-					other.killPlayer(homeBase_GO); 
+			if(hasSword && !inEnemyBase){
+				PlayerController other = hitinfo.transform.GetComponent<PlayerController>();
+				if (other.homeBase_GO.GetInstanceID() != this.gameObject.GetInstanceID()) {
+					Debug.Log("In range of enemy player");
+					other.killPlayer(homeBase_GO);
+				} else {
+					Debug.Log("In range of friendly player");
 				}
-			} else {
-				Debug.Log("In range of friendly plaer");
 			}
 
 		} else if (IsInRange(out hitinfo, "Resource")) {
