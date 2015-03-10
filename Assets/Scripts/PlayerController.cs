@@ -40,6 +40,8 @@ public class PlayerController : MonoBehaviour {
 	public Base homeBase { get; private set; }
 	public bool inBase = false;
 	public bool inEnemyBase = false;
+	public int EnemyBaseId;
+
 	public bool hasSword = false;
 	
 	private Text stone_text;
@@ -50,6 +52,8 @@ public class PlayerController : MonoBehaviour {
 	public AudioSource chopping_wood;
 	public AudioSource dropping_resources;
 	public GameObject sword;
+
+	public GameManager gm;
 
 	// Use this for initialization
 	void Start () {
@@ -76,6 +80,8 @@ public class PlayerController : MonoBehaviour {
 				device = d;
 			}
 		}
+
+		gm = GameObject.Find("GameManager").GetComponent<GameManager>();
 	}
 	
 	// Update is called once per frame
@@ -194,6 +200,9 @@ public class PlayerController : MonoBehaviour {
 		this.transform.position = homeBase_GO.transform.position;
 
 		dead = true;
+		if (inEnemyBase) {
+			gm.playerInBase(false, EnemyBaseId);
+		}
 		inEnemyBase = false;
 		respawn_at_time = Time.time + RESPAWN_TIME;
 	}

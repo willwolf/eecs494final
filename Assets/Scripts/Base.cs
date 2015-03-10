@@ -38,6 +38,7 @@ public class Base : MonoBehaviour {
 			player.inBase = true;
 		} else {
 			player.inEnemyBase = true;
+			player.EnemyBaseId = this.gameObject.GetInstanceID();
 			gm.playerInBase(true, this.gameObject.GetInstanceID());
 		}
 	}
