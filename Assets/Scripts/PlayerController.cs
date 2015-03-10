@@ -218,6 +218,10 @@ public class PlayerController : MonoBehaviour {
 				} else {
 					Debug.Log("In range of friendly player");
 				}
+			} else if(!hasSword) {
+				Debug.Log("Can't kill player without the sword!");
+			} else {
+				Debug.Log("Can't kill player in base!");
 			}
 
 		} else if (IsInRange(out hitinfo, "Resource")) {
