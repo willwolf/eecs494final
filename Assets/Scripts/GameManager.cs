@@ -112,4 +112,8 @@ public class GameManager : MonoBehaviour {
 			updateTeamText(baseId);
 		}
 	}
+
+	public ResourceCount GetTeamResourceInfo(int team_id) {
+		return teamResources[team_id];
+	}
 }
