@@ -17,6 +17,8 @@ public class ShopMenu : MonoBehaviour {
 		manager = GameObject.Find ("GameManager").GetComponent<GameManager>();
 		ShopItemList temp = new ShopItemList();
 		items = temp.items;
+		print ("number of shop icons: " + items.Count); 
+		populateList ();
 	}
 	
 	// Update is called once per frame

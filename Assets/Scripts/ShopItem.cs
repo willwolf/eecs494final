@@ -22,8 +22,13 @@ public class ShopItemList {
 	public List<ShopItem> items = new List<ShopItem>();
 	
 	public ShopItemList() {
-//		addItem ("hiofd", "jiofds", "inodfs", "jiofds");
-//		addItem ("hiofd", "jiofds", "inodfs", "jiofds");
+		addItem (Resources.LoadAssetAtPath<Sprite>("Assets/Sprites/Sword.png"), 
+		         "Sword", 3, 3);
+		addItem (Resources.LoadAssetAtPath<Sprite>("Assets/Sprites/Wall.png"), 
+		         "Wall", 0, 10);
+		addItem (Resources.LoadAssetAtPath<Sprite>("Assets/Sprites/Turret.png"), 
+		         "Turret", 10, 0);
+		//		addItem ("hiofd", "jiofds", "inodfs", "jiofds");
 //		addItem ("hiofd", "jiofds", "inodfs", "jiofds");
 	}
 	

@@ -78,6 +78,10 @@ public class PlayerController : MonoBehaviour {
 		updateWoodText();
 
 		homeBase = homeBase_GO.GetComponent<Base>();
+		shop = canvas.transform.FindChild ("Shop_Menu").gameObject;
+		shopOpen = true;
+		//shop.SetActive(false);
+
 
 		var devices = InputManager.Devices;
 		if (devices == null) {
@@ -91,8 +95,7 @@ public class PlayerController : MonoBehaviour {
 
 		gm = GameObject.Find("GameManager").GetComponent<GameManager>();
 	
-//		shop = GameObject.Find ("Shop_" + player_num.ToString ());
-//		shop.SetActive(false);
+
 	}
 	
 	// Update is called once per frame
@@ -124,6 +127,7 @@ public class PlayerController : MonoBehaviour {
 			} 
 		}
 
+		//update timers
 		if (collected_wood && (Time.time > get_wood_at_time)) {
 			collected_wood = false;
 		}
@@ -317,14 +321,14 @@ public class PlayerController : MonoBehaviour {
 			}
 		}
 		else if(inBase){
-//			if(!shopOpen){
-//				shopOpen = true;
-//				shop.SetActive (true);
-//			}
-//			else{
-//				shopOpen = false;
-//				shop.SetActive(false);
-//			}
+			if(!shopOpen){
+				shopOpen = true;
+				shop.SetActive (true);
+			}
+			else{
+				shopOpen = false;
+				shop.SetActive(false);
+			}
 		}
 
 	}
