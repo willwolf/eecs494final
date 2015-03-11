@@ -178,7 +178,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void LateUpdate(){
-		if(!hasSword){
+		if(!hasSword || dead){
 			foreach (Collider collider in sword.GetComponentsInChildren<Collider>()) {
 				collider.enabled = false;
 			}
