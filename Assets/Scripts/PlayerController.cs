@@ -55,6 +55,9 @@ public class PlayerController : MonoBehaviour {
 
 	public GameManager gm;
 
+	public GameObject shop;
+	public bool shopOpen;
+
 	// Use this for initialization
 	void Start () {
 		Time.timeScale = 1;
@@ -82,6 +85,9 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		gm = GameObject.Find("GameManager").GetComponent<GameManager>();
+	
+		shop = GameObject.Find ("Shop_" + player_num.ToString ());
+		shop.SetActive(false);
 	}
 	
 	// Update is called once per frame
@@ -249,7 +255,9 @@ public class PlayerController : MonoBehaviour {
 			
 			}
 
-		} else if (IsInRange(out hitinfo, "DropPoint")) {
+		} 
+
+		else if (IsInRange(out hitinfo, "DropPoint")) {
 			DropPoint drop = hitinfo.transform.GetComponent<DropPoint>();
 			if (drop == null) {
 				throw new UnassignedReferenceException("DropPoint layer object does not have a DropPoint script attached");
@@ -287,6 +295,17 @@ public class PlayerController : MonoBehaviour {
 				}
 			}
 		}
+		else if(inBase){
+			if(!shopOpen){
+				shopOpen = true;
+				shop.SetActive (true);
+			}
+			else{
+				shopOpen = false;
+				shop.SetActive(false);
+			}
+		}
+
 	}
 
 	private void updateWoodText() {
