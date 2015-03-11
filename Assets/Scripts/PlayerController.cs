@@ -132,7 +132,9 @@ public class PlayerController : MonoBehaviour {
 			updateMidScreenText("Backpack Full");
 		}
 
-		Move();
+		if (!shopOpen) {
+			Move();
+		}
 
 		if (device != null) {
 			if (device.Action1.WasPressed) {
