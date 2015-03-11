@@ -175,6 +175,13 @@ public class PlayerController : MonoBehaviour {
 		} else if (Input.GetButton("Action_" + player_num.ToString())) {
 			TakeAction();
 		}
+		if (device != null) {
+			if (device.DPadUp.WasPressed && inBase) {
+				ToggleStore();
+			}
+		} else if (Input.GetButtonDown("Store_Open_" + player_num.ToString()) && inBase) {
+			ToggleStore();
+		}
 	}
 
 	void LateUpdate(){
@@ -261,8 +268,9 @@ public class PlayerController : MonoBehaviour {
 		gm.AddResources(enemy_base_GO.GetInstanceID(), ResourceType.stone, curr_stone_resource);
 		gm.AddResources(enemy_base_GO.GetInstanceID(), ResourceType.wood, curr_wood_resource);
 
-
 		curr_wood_resource = curr_stone_resource = 0;
+		updateStoneText();
+		updateWoodText();
 		this.transform.position = homeBase_GO.transform.position;
 
 		dead = true;
@@ -347,15 +355,16 @@ public class PlayerController : MonoBehaviour {
 					break;
 				}
 			}
-		} else if(inBase){
-			if (device != null) {
-				if (device.Action1.WasPressed) {
-					ToggleStore();
-				}
-			} else if (Input.GetButtonDown("Action_" + player_num.ToString())) {
-				ToggleStore();
-			}
-		}
+		} 
+//		else if(inBase){
+//			if (device != null) {
+//				if (device.Action1.WasPressed) {
+//					ToggleStore();
+//				}
+//			} else if (Input.GetButtonDown("Action_" + player_num.ToString())) {
+//				ToggleStore();
+//			}
+//		}
 	}
 
 	void ToggleStore() {
