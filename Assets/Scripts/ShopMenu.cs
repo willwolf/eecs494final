@@ -23,10 +23,10 @@ public class ShopMenu : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+
 	}
 	
-	bool MakePurchase(int team_id, int item_id) {
+	public bool MakePurchase(int team_id, int item_id) {
 		ResourceCount team_count = manager.GetTeamResourceInfo(team_id);
 		ShopItem item = shoplist.items[item_id].GetComponent<ShopItem>();
 		if (CanPurchase(item, team_count)) {
