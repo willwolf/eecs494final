@@ -137,7 +137,7 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		if (device != null) {
-			if (device.Action1.WasPressed) {
+			if (device.Action1.IsPressed) {
 				TakeAction();
 			}
 		} else if (Input.GetButton("Action_" + player_num.ToString())) {
@@ -314,17 +314,26 @@ public class PlayerController : MonoBehaviour {
 				}
 			}
 		}
-		else if(inBase && Input.GetButtonDown("Action_" + player_num.ToString())){
-			if(!shopOpen){
-				shopOpen = true;
-				shop.SetActive (true);
-			}
-			else{
-				shopOpen = false;
-				shop.SetActive(false);
+		else if(inBase){
+			if (device != null) {
+				if (device.Action1.WasPressed) {
+					ToggleStore();
+				}
+			} else if (Input.GetButtonDown("Action_" + player_num.ToString())) {
+				ToggleStore();
 			}
 		}
+	}
 
+	void ToggleStore() {
+		if(!shopOpen){
+			shopOpen = true;
+			shop.SetActive (true);
+		}
+		else{
+			shopOpen = false;
+			shop.SetActive(false);
+		}
 	}
 
 	private void updateWoodText() {
