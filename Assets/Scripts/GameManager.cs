@@ -2,7 +2,17 @@
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.UI;
+
+public class MultiValueDictionary<Key, Value> : Dictionary<Key, List<Value>> {
+	public void Add(Key key, Value value) {
+		List<Value> values;
+		if (!this.TryGetValue(key, out values)) {
+			values = new List<Value>();
+			this.Add(key, values);
+		}
+		values.Add(value);
+	}
+}
 
 public class GameManager : MonoBehaviour {
 
@@ -12,44 +22,94 @@ public class GameManager : MonoBehaviour {
 		{ "Player 2 Base", "Team 2" }
 	};
 
-	private Dictionary<int, Text> teamTexts =  new Dictionary<int, Text>();
-	private Dictionary<int, Text> enemyInBaseTexts = new Dictionary<int, Text>();
+	private MultiValueDictionary<int, Text> teamTexts =  new MultiValueDictionary<int, Text>();
+	private MultiValueDictionary<int, Text> enemyInBaseTexts = new MultiValueDictionary<int, Text>();
 
 	public Dictionary<int, string> baseNames;
 	public Dictionary<int, ResourceCount> teamResources;
 	public int winningWood = 500;
 	public int winningStone = 500;
+
+
+	public GameObject playerBase;
+	public GameObject playerCanvasBase;
+
+	public List<Material> mats;
 	
 
 	public static int winningTeam = -1;
 
+	void addPlayer(GameObject base1, Rect viewport, int playerNum, int teamNum) {
+
+		GameObject player = Instantiate(playerBase, base1.transform.position, new Quaternion()) as GameObject;
+		Canvas canvas = (Instantiate(playerCanvasBase, new Vector3(), new Quaternion()) as GameObject).GetComponent<Canvas>();
+		Camera cam = player.GetComponentInChildren<Camera>();
+		cam.rect = viewport;
+		Debug.Log(cam.rect);
+		canvas.worldCamera = player.GetComponentInChildren<Camera>();
+
+		PlayerController controller = player.GetComponent<PlayerController>();
+		controller.player_num = playerNum;
+		controller.homeBase_GO = base1;
+		controller.canvas = canvas;
+
+		teamTexts.Add(base1.GetInstanceID(), canvas.transform.FindChild("Team_Vals").GetComponent<Text>());
+
+		Text enemyWarning = canvas.transform.FindChild("Enemy_Warning").GetComponent<Text>();
+		enemyWarning.enabled = false;
+		enemyInBaseTexts.Add(base1.GetInstanceID(), enemyWarning);
+
+		player.renderer.material = mats[teamNum];
+	}
+
+	Rect getViewport(int numPlayers, int playerNum) {
+		switch (numPlayers) {
+		case 2:
+			switch (playerNum) {
+			case 1:
+				return new Rect(0f, 0f, .5f, 1f);
+			case 2:
+				return new Rect(.5f, 0f, .5f, 1f);
+			}
+			break;
+		}
+		return new Rect(-1f, -1f, -1f, -1f);
+	}
 
 	// Use this for initialization
 	void Start () {
+
 		teamResources = new Dictionary<int, ResourceCount>();
 
 		baseNames = new Dictionary<int, string>();
-
+		
+		int playerNum = 1;
 		foreach (KeyValuePair<string, string> pair in teamNames) {
 			GameObject baseObj = GameObject.Find(pair.Key);
 			baseNames.Add(baseObj.GetInstanceID(), pair.Value);
 			teamResources.Add(baseObj.GetInstanceID(), new ResourceCount());
-			teamTexts.Add(baseObj.GetInstanceID(), GameObject.Find(pair.Value + "_vals").GetComponent<Text>());
-			enemyInBaseTexts.Add(baseObj.GetInstanceID(), GameObject.Find(pair.Value + "_BaseWarning").GetComponent<Text>());
+
+			//teamTexts.Add(baseObj.GetInstanceID(), GameObject.Find(pair.Value + "_vals").GetComponent<Text>());
+			//enemyInBaseTexts.Add(baseObj.GetInstanceID(), GameObject.Find(pair.Value + "_BaseWarning").GetComponent<Text>());
+
+			addPlayer(baseObj, getViewport(2, playerNum), playerNum, playerNum % 2);
+
+			playerNum++;
+		}
+
+		foreach (KeyValuePair<int, string> pair in baseNames) {
+			updateTeamText(pair.Key);
 		}
 		print ("winning wood: " + winningWood + " stone: " + winningStone);
 
-		foreach (KeyValuePair<int, Text> pair in enemyInBaseTexts) {
-			pair.Value.enabled = false;
-		}
-	
 	}
 
 	void updateTeamText(int baseId) {
-		Text text = teamTexts[baseId];
-		ResourceCount counts = teamResources[baseId];
+		foreach (Text text in teamTexts[baseId]) {
+			ResourceCount counts = teamResources[baseId];
 
-		text.text = baseNames[baseId] + " Wood: " + counts.wood + " Stone: " + counts.stone;
+			text.text = baseNames[baseId] + " Wood: " + counts.wood + " Stone: " + counts.stone;
+		}
 	}
 	
 	// Update is called once per frame
@@ -69,7 +129,9 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void playerInBase(bool inBase, int baseId) {
-		enemyInBaseTexts[baseId].enabled = inBase;
+		foreach (Text text in enemyInBaseTexts[baseId]) {
+			text.enabled = inBase;
+		}
 	}
 
 	public void AddResources(int baseId, ResourceType t, int amount) {
