@@ -5,6 +5,7 @@ using System.Collections;
 public class Base : MonoBehaviour {
 
 	GameManager gm;
+	private bool hasWalls = false;
 
 	void Start() {
 		gm = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -20,6 +21,10 @@ public class Base : MonoBehaviour {
 
 	}
 
+	public void HasWalls(){
+		return hasWalls;
+	}
+
 	public void TurnOnWalls(){
 		foreach(Transform child in GetComponentsInChildren<Transform>()){
 			if(child.tag == "Wall"){
@@ -27,6 +32,7 @@ public class Base : MonoBehaviour {
 				child.collider.enabled = true;
 			}
 		}
+		hasWalls = true;
 	}
 	
 	void OnTriggerEnter(Collider other) {
