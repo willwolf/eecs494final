@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour {
 	private float vulnerable_at_time;
 	
 	public int player_num  = 0;
-	private InputDevice device = null;
+	public InputDevice device = null;
 	public float rotate_speed = 90f;
 	public float walk_speed = 8f;
 	public float enemy_base_speed_multiplier = 0.5f;
@@ -81,21 +81,13 @@ public class PlayerController : MonoBehaviour {
 		shop = canvas.transform.FindChild ("Shop_Menu").gameObject;
 		shopOpen = true;
 		//shop.SetActive(false);
+		gm = GameObject.Find("GameManager").GetComponent<GameManager>();
 
 
 		var devices = InputManager.Devices;
 		if (devices == null) {
 			return;
 		}
-		foreach (InputDevice d in devices) {
-			if (d.Meta.Contains(player_num.ToString())) {
-				device = d;
-			}
-		}
-
-		gm = GameObject.Find("GameManager").GetComponent<GameManager>();
-	
-
 	}
 	
 	// Update is called once per frame

@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
+using InControl;
 
 public class MultiValueDictionary<Key, Value> : Dictionary<Key, List<Value>> {
 	public void Add(Key key, Value value) {
@@ -45,6 +46,11 @@ public class GameManager : MonoBehaviour {
 		pos.x += playerNum % 2;
 
 		GameObject player = Instantiate(playerBase, pos, new Quaternion()) as GameObject;
+		var devices = InputManager.Devices;
+		if (playerNum - 1 < devices.Count) {
+			player.GetComponent<PlayerController>().device = devices[playerNum - 1];
+		}
+
 		Canvas canvas = (Instantiate(playerCanvasBase, new Vector3(), new Quaternion()) as GameObject).GetComponent<Canvas>();
 		Camera cam = player.GetComponentInChildren<Camera>();
 		cam.rect = viewport;
