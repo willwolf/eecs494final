@@ -55,6 +55,8 @@ public class PlayerController : MonoBehaviour {
 	public AudioSource mining_stone;
 	public AudioSource chopping_wood;
 	public AudioSource dropping_resources;
+	public AudioSource stealing_resources;
+
 	public GameObject sword;
 
 	public GameManager gm;
@@ -137,7 +139,7 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		if (device != null) {
-			if (device.Action1.WasPressed) {
+			if (device.Action1.IsPressed) {
 				TakeAction();
 			}
 		} else if (Input.GetButton("Action_" + player_num.ToString())) {
@@ -304,27 +306,38 @@ public class PlayerController : MonoBehaviour {
 				case ResourceType.stone:
 					if (!collected_stone && !backpackFull) {
 						CollectStone(drop.StealResources(stone_gather_val), " is stealing stone...");
+						stealing_resources.Play ();
 					}
 					break;
 				case ResourceType.wood:
 					if (!collected_wood && !backpackFull) {
 						CollectWood(drop.StealResources(wood_gather_val), " is stealing wood...");
+						stealing_resources.Play ();
 					}
 					break;
 				}
 			}
 		}
-		else if(inBase && Input.GetButtonDown("Action_" + player_num.ToString())){
-			if(!shopOpen){
-				shopOpen = true;
-				shop.SetActive (true);
-			}
-			else{
-				shopOpen = false;
-				shop.SetActive(false);
+		else if(inBase){
+			if (device != null) {
+				if (device.Action1.WasPressed) {
+					ToggleStore();
+				}
+			} else if (Input.GetButtonDown("Action_" + player_num.ToString())) {
+				ToggleStore();
 			}
 		}
+	}
 
+	void ToggleStore() {
+		if(!shopOpen){
+			shopOpen = true;
+			shop.SetActive (true);
+		}
+		else{
+			shopOpen = false;
+			shop.SetActive(false);
+		}
 	}
 
 	private void updateWoodText() {
