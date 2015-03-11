@@ -89,6 +89,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &149478
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 449478}
+  - 82: {fileID: 8249478}
+  m_Layer: 0
+  m_Name: WoodSound
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &156050
 GameObject:
   m_ObjectHideFlags: 0
@@ -169,7 +185,7 @@ GameObject:
   - 4: {fileID: 456058}
   - 82: {fileID: 8256046}
   m_Layer: 0
-  m_Name: WoodSound
+  m_Name: StealSound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -186,7 +202,7 @@ Transform:
   m_LocalScale: {x: 2, y: 1.55821168, z: 4.20895672}
   m_Children: []
   m_Father: {fileID: 456056}
-  m_RootOrder: 5
+  m_RootOrder: 6
 --- !u!4 &421850
 Transform:
   m_ObjectHideFlags: 1
@@ -217,7 +233,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 121854}
-  m_LocalRotation: {x: .707106829, y: .707106709, z: -1.15202326e-07, w: -1.15202312e-07}
+  m_LocalRotation: {x: .707106888, y: .707106769, z: -1.15202333e-07, w: -1.15202319e-07}
   m_LocalPosition: {x: -.640000343, y: .154999971, z: .619995117}
   m_LocalScale: {x: .25, y: 1, z: 1.60000002}
   m_Children:
@@ -225,7 +241,7 @@ Transform:
   - {fileID: 421856}
   - {fileID: 421850}
   m_Father: {fileID: 456056}
-  m_RootOrder: 4
+  m_RootOrder: 5
 --- !u!4 &421856
 Transform:
   m_ObjectHideFlags: 1
@@ -237,6 +253,18 @@ Transform:
   m_LocalScale: {x: 1, y: .25, z: .25}
   m_Children: []
   m_Father: {fileID: 421854}
+  m_RootOrder: 1
+--- !u!4 &449478
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 149478}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 456056}
   m_RootOrder: 1
 --- !u!4 &456050
 Transform:
@@ -273,7 +301,7 @@ Transform:
   m_LocalScale: {x: 1.25, y: .300000012, z: 1.25}
   m_Children: []
   m_Father: {fileID: 456056}
-  m_RootOrder: 3
+  m_RootOrder: 4
 --- !u!4 &456056
 Transform:
   m_ObjectHideFlags: 1
@@ -285,8 +313,9 @@ Transform:
   m_LocalScale: {x: .5, y: 2, z: .5}
   m_Children:
   - {fileID: 456050}
-  - {fileID: 456058}
+  - {fileID: 449478}
   - {fileID: 456052}
+  - {fileID: 456058}
   - {fileID: 456054}
   - {fileID: 421854}
   - {fileID: 420228}
@@ -303,7 +332,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 456056}
-  m_RootOrder: 1
+  m_RootOrder: 3
 --- !u!20 &2020228
 Camera:
   m_ObjectHideFlags: 1
@@ -542,6 +571,64 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!82 &8249478
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 149478}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_audioClip: {fileID: 8300000, guid: 31ec7e6df762a477ea6ba26e74fcae96, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: .699999988
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 4950.49512
+  MaxDistance: 5000
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
 --- !u!82 &8256042
 AudioSource:
   m_ObjectHideFlags: 1
@@ -666,7 +753,7 @@ AudioSource:
   m_GameObject: {fileID: 156058}
   m_Enabled: 1
   serializedVersion: 3
-  m_audioClip: {fileID: 8300000, guid: 31ec7e6df762a477ea6ba26e74fcae96, type: 3}
+  m_audioClip: {fileID: 8300000, guid: b35f6da5959bbc543895fb09b8c0221b, type: 3}
   m_PlayOnAwake: 0
   m_Volume: .699999988
   m_Pitch: 1
@@ -772,8 +859,9 @@ MonoBehaviour:
   EnemyBaseId: 0
   hasSword: 0
   mining_stone: {fileID: 8256042}
-  chopping_wood: {fileID: 8256046}
+  chopping_wood: {fileID: 8249478}
   dropping_resources: {fileID: 8256044}
+  stealing_resources: {fileID: 0}
   sword: {fileID: 121854}
   gm: {fileID: 0}
   canvas: {fileID: 0}

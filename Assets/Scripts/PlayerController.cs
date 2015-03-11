@@ -55,6 +55,8 @@ public class PlayerController : MonoBehaviour {
 	public AudioSource mining_stone;
 	public AudioSource chopping_wood;
 	public AudioSource dropping_resources;
+	public AudioSource stealing_resources;
+
 	public GameObject sword;
 
 	public GameManager gm;
@@ -304,11 +306,13 @@ public class PlayerController : MonoBehaviour {
 				case ResourceType.stone:
 					if (!collected_stone && !backpackFull) {
 						CollectStone(drop.StealResources(stone_gather_val), " is stealing stone...");
+						stealing_resources.Play ();
 					}
 					break;
 				case ResourceType.wood:
 					if (!collected_wood && !backpackFull) {
 						CollectWood(drop.StealResources(wood_gather_val), " is stealing wood...");
+						stealing_resources.Play ();
 					}
 					break;
 				}
