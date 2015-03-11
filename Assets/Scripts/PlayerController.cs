@@ -86,16 +86,6 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(!hasSword){
-			foreach(Renderer child in sword.GetComponentsInChildren<Renderer>()){
-				child.enabled = false;
-			}
-
-		} else {
-			foreach(Renderer child in sword.GetComponentsInChildren<Renderer>()){
-				child.enabled = true;
-			}
-		}
 
 		if (player_num == 0) {
 			throw new UnassignedReferenceException("PlayerController::playerNum must be non-zero");
@@ -140,6 +130,25 @@ public class PlayerController : MonoBehaviour {
 		if (Input.GetButton("Action_" + player_num.ToString()) || 
 		    (device != null && device.Action1.IsPressed)) {
 			TakeAction();
+		}
+	}
+
+	void LateUpdate(){
+		if(!hasSword){
+			foreach (Collider collider in sword.GetComponentsInChildren<Collider>()) {
+				collider.enabled = false;
+			}
+			foreach (MeshRenderer renderer in sword.GetComponentsInChildren<MeshRenderer>()) {
+				renderer.enabled = false;
+			}
+			
+		} else {
+			foreach (Collider collider in sword.GetComponentsInChildren<Collider>()) {
+				collider.enabled = true;
+			}
+			foreach (MeshRenderer renderer in sword.GetComponentsInChildren<MeshRenderer>()) {
+				renderer.enabled = true;
+			}
 		}
 	}
 
