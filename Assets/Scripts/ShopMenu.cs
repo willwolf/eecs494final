@@ -7,17 +7,17 @@ using System.Collections.Generic;
 
 public class ShopMenu : MonoBehaviour {
 
-	public List<ShopItem> items;
+	public ShopItemList shoplist = null;
 	GameManager manager = null;
 	public GameObject menuButtonPrefab;
 	public Transform contentPanel;
 
 	// Use this for initialization
 	void Awake () {
-		manager = GameObject.Find ("GameManager").GetComponent<GameManager>();
-		ShopItemList temp = new ShopItemList();
-		items = temp.items;
-		print ("number of shop icons: " + items.Count); 
+		GameObject gm = GameObject.Find("GameManager");
+		manager = gm.GetComponent<GameManager>();
+		shoplist = gm.GetComponent<ShopItemList>();
+		print ("number of shop icons: " + shoplist.items.Count); 
 		populateList ();
 	}
 	
@@ -28,7 +28,7 @@ public class ShopMenu : MonoBehaviour {
 	
 	bool MakePurchase(int team_id, int item_id) {
 		ResourceCount team_count = manager.GetTeamResourceInfo(team_id);
-		ShopItem item = items[item_id];
+		ShopItem item = shoplist.items[item_id].GetComponent<ShopItem>();
 		if (CanPurchase(item, team_count)) {
 			manager.RemoveResources(team_id, ResourceType.stone, item.stone_cost);
 			manager.RemoveResources(team_id, ResourceType.wood, item.wood_cost);
@@ -42,7 +42,8 @@ public class ShopMenu : MonoBehaviour {
 	}
 
 	public void populateList(){
-		foreach (ShopItem i in items) {
+		foreach (GameObject go in shoplist.items) {
+			ShopItem i = go.GetComponent<ShopItem>();
 			GameObject newButton = Instantiate (menuButtonPrefab) as GameObject;
 			MenuButton button = newButton.GetComponent <MenuButton> ();
 			button.nameLabel.text = i.item_name;
