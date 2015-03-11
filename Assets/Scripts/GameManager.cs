@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour {
 
 	private MultiValueDictionary<int, Text> teamTexts =  new MultiValueDictionary<int, Text>();
 	private MultiValueDictionary<int, Text> enemyInBaseTexts = new MultiValueDictionary<int, Text>();
+	private Dictionary<int, Material> teamMats = new Dictionary<int, Material>();
 
 	public Dictionary<int, string> baseNames;
 	public Dictionary<int, ResourceCount> teamResources;
@@ -39,9 +40,11 @@ public class GameManager : MonoBehaviour {
 
 	public static int winningTeam = -1;
 
-	void addPlayer(GameObject base1, Rect viewport, int playerNum, int teamNum) {
+	void addPlayer(GameObject base1, Rect viewport, int playerNum) {
+		Vector3 pos = base1.transform.position;
+		pos.x += playerNum % 2;
 
-		GameObject player = Instantiate(playerBase, base1.transform.position, new Quaternion()) as GameObject;
+		GameObject player = Instantiate(playerBase, pos, new Quaternion()) as GameObject;
 		Canvas canvas = (Instantiate(playerCanvasBase, new Vector3(), new Quaternion()) as GameObject).GetComponent<Canvas>();
 		Camera cam = player.GetComponentInChildren<Camera>();
 		cam.rect = viewport;
@@ -59,7 +62,7 @@ public class GameManager : MonoBehaviour {
 		enemyWarning.enabled = false;
 		enemyInBaseTexts.Add(base1.GetInstanceID(), enemyWarning);
 
-		player.renderer.material = mats[teamNum];
+		player.renderer.material = teamMats[base1.GetInstanceID()];
 	}
 
 	Rect getViewport(int numPlayers, int playerNum) {
@@ -72,6 +75,18 @@ public class GameManager : MonoBehaviour {
 				return new Rect(.5f, 0f, .5f, 1f);
 			}
 			break;
+		case 4:
+			switch (playerNum) {
+			case 1:
+				return new Rect(0f, .5f, .5f, .5f);
+			case 2:
+				return new Rect(.5f, .5f, .5f, .5f);
+			case 3:
+				return new Rect(0f, 0f, .5f, .5f);
+			case 4:
+				return new Rect(.5f, 0f, .5f, .5f);
+			}
+			break;
 		}
 		return new Rect(-1f, -1f, -1f, -1f);
 	}
@@ -82,18 +97,19 @@ public class GameManager : MonoBehaviour {
 		teamResources = new Dictionary<int, ResourceCount>();
 
 		baseNames = new Dictionary<int, string>();
-		
+
+		int teamNum = 0;
 		int playerNum = 1;
 		foreach (KeyValuePair<string, string> pair in teamNames) {
 			GameObject baseObj = GameObject.Find(pair.Key);
 			baseNames.Add(baseObj.GetInstanceID(), pair.Value);
 			teamResources.Add(baseObj.GetInstanceID(), new ResourceCount());
+			teamMats.Add(baseObj.GetInstanceID(), mats[teamNum++]);
 
-			//teamTexts.Add(baseObj.GetInstanceID(), GameObject.Find(pair.Value + "_vals").GetComponent<Text>());
-			//enemyInBaseTexts.Add(baseObj.GetInstanceID(), GameObject.Find(pair.Value + "_BaseWarning").GetComponent<Text>());
 
-			addPlayer(baseObj, getViewport(2, playerNum), playerNum, playerNum % 2);
-
+			addPlayer(baseObj, getViewport(4, playerNum), playerNum);
+			playerNum++;
+			addPlayer(baseObj, getViewport(4, playerNum), playerNum);
 			playerNum++;
 		}
 

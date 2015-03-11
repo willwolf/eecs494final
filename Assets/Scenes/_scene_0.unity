@@ -19498,8 +19498,8 @@ MonoBehaviour:
   playerBase: {fileID: 156056, guid: 59a29ccec391e473185f743761988bce, type: 2}
   playerCanvasBase: {fileID: 150072, guid: f862f544e71f443449d6a276abff306a, type: 2}
   mats:
-  - {fileID: 2100000, guid: 408dd4dcf43fc46fdb2d3449a9100be2, type: 2}
   - {fileID: 2100000, guid: 395ec361745414b4ca4ebfd754bf1be1, type: 2}
+  - {fileID: 2100000, guid: 408dd4dcf43fc46fdb2d3449a9100be2, type: 2}
 --- !u!4 &1897715652
 Transform:
   m_ObjectHideFlags: 0
