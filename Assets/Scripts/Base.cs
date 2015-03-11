@@ -21,7 +21,7 @@ public class Base : MonoBehaviour {
 
 	}
 
-	public void HasWalls(){
+	public bool HasWalls(){
 		return hasWalls;
 	}
 
