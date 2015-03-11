@@ -228,6 +228,8 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	public void awakePlayer() {
+		dead = false;
+		hasSword = false;
 		foreach (Collider collider in GetComponentsInChildren<Collider>()) {
 			collider.enabled = true;
 		}
