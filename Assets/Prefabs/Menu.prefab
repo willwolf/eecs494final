@@ -82,6 +82,7 @@ GameObject:
   - 224: {fileID: 22465658}
   - 222: {fileID: 22265658}
   - 114: {fileID: 11465666}
+  - 114: {fileID: 11427100}
   m_Layer: 5
   m_Name: Menu
   m_TagString: Untagged
@@ -89,6 +90,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &11427100
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 165658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 705f8e9b45dc444fdba2c45a1d92ac4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  items: []
+  menuButtonPrefab: {fileID: 146602, guid: d143da1671b334ec99467739b313cf47, type: 2}
+  contentPanel: {fileID: 22465654}
 --- !u!114 &11465650
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -101,7 +116,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: .1953125, g: .1953125, b: .1953125, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 14
@@ -127,7 +142,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: .154411793, g: .146464124, b: .146464124, a: 1}
   m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
@@ -384,9 +399,9 @@ RectTransform:
   - {fileID: 22465656}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_AnchorMin: {x: .5, y: .5}
-  m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: -104.099998, y: 0}
+  m_AnchorMin: {x: 0, y: .5}
+  m_AnchorMax: {x: 0, y: .5}
+  m_AnchoredPosition: {x: 80, y: 0}
   m_SizeDelta: {x: 130, y: 182}
   m_Pivot: {x: .5, y: .5}
 --- !u!1001 &100100000
