@@ -138,10 +138,17 @@ public class PlayerController : MonoBehaviour {
 			Move();
 		} else {
 			if (device != null) {
-				if (device.Action3.WasPressed) {
+				if (device.Action3.WasPressed) { // X button pressed
 					ShopMenu sm = shop.GetComponent<ShopMenu>();
-					if (sm.MakePurchase(homeBase_GO.GetInstanceID(), 0)) {
+					if (!hasSword && sm.MakePurchase(homeBase_GO.GetInstanceID(), 0)) {
 						print ("Bought sword");
+						hasSword = true;
+					}
+				} else if (device.Action4.WasPressed) { // Y button pressed
+					ShopMenu sm = shop.GetComponent<ShopMenu>();
+					if (homeBase.HasWalls() && sm.MakePurchase(homeBase_GO.GetInstanceID(), 1)) {
+						print ("Wall purchased");
+						homeBase.TurnOnWalls();
 					}
 				}
 			} else {
