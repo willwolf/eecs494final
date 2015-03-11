@@ -136,6 +136,17 @@ public class PlayerController : MonoBehaviour {
 
 		if (!shopOpen) {
 			Move();
+		} else {
+			if (device != null) {
+				if (device.Action3.WasPressed) {
+					ShopMenu sm = shop.GetComponent<ShopMenu>();
+					if (sm.MakePurchase(homeBase_GO.GetInstanceID(), 0)) {
+						print ("Bought sword");
+					}
+				}
+			} else {
+
+			}
 		}
 
 		if (device != null) {
@@ -245,7 +256,7 @@ public class PlayerController : MonoBehaviour {
 
 	void TakeAction() {
 		RaycastHit hitinfo;
-		if (IsInRange(out hitinfo, "Player")) {
+		if (IsInRange(out hitinfo, "Player") && !shopOpen) {
 			if(hasSword && !inEnemyBase){
 				PlayerController other = hitinfo.transform.GetComponent<PlayerController>();
 				if (other.homeBase_GO.GetInstanceID() != this.gameObject.GetInstanceID()) {
@@ -260,7 +271,7 @@ public class PlayerController : MonoBehaviour {
 				Debug.Log("Can't kill player in base!");
 			}
 
-		} else if (IsInRange(out hitinfo, "Resource")) {
+		} else if (IsInRange(out hitinfo, "Resource") && !shopOpen) {
 			Resource r = hitinfo.transform.GetComponent<Resource>();
 			if (r == null) {
 				throw new UnassignedReferenceException("Resource layer object does not have Resource script attached");
@@ -278,7 +289,7 @@ public class PlayerController : MonoBehaviour {
 
 		} 
 
-		else if (IsInRange(out hitinfo, "DropPoint")) {
+		else if (IsInRange(out hitinfo, "DropPoint") && !shopOpen) {
 			DropPoint drop = hitinfo.transform.GetComponent<DropPoint>();
 			if (drop == null) {
 				throw new UnassignedReferenceException("DropPoint layer object does not have a DropPoint script attached");
@@ -317,8 +328,7 @@ public class PlayerController : MonoBehaviour {
 					break;
 				}
 			}
-		}
-		else if(inBase){
+		} else if(inBase){
 			if (device != null) {
 				if (device.Action1.WasPressed) {
 					ToggleStore();
