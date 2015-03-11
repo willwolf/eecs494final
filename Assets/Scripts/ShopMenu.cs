@@ -13,7 +13,7 @@ public class ShopMenu : MonoBehaviour {
 	public Transform contentPanel;
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 		manager = GameObject.Find ("GameManager").GetComponent<GameManager>();
 		ShopItemList temp = new ShopItemList();
 		items = temp.items;
@@ -45,7 +45,7 @@ public class ShopMenu : MonoBehaviour {
 		foreach (ShopItem i in items) {
 			GameObject newButton = Instantiate (menuButtonPrefab) as GameObject;
 			MenuButton button = newButton.GetComponent <MenuButton> ();
-			button.nameLabel.text = i.name;
+			button.nameLabel.text = i.item_name;
 			button.icon.sprite = i.icon;
 			button.woodLabel.text = "Wood: " + i.wood_cost.ToString();
 			button.stoneLabel.text = "Stone: " + i.stone_cost.ToString();

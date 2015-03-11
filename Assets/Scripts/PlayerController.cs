@@ -79,8 +79,8 @@ public class PlayerController : MonoBehaviour {
 
 		homeBase = homeBase_GO.GetComponent<Base>();
 		shop = canvas.transform.FindChild ("Shop_Menu").gameObject;
-		shopOpen = true;
-		//shop.SetActive(false);
+		shopOpen = false;//true;
+		shop.SetActive(false);
 		gm = GameObject.Find("GameManager").GetComponent<GameManager>();
 
 
@@ -135,7 +135,7 @@ public class PlayerController : MonoBehaviour {
 		Move();
 
 		if (device != null) {
-			if (device.Action1.IsPressed) {
+			if (device.Action1.WasPressed) {
 				TakeAction();
 			}
 		} else if (Input.GetButton("Action_" + player_num.ToString())) {
@@ -312,7 +312,7 @@ public class PlayerController : MonoBehaviour {
 				}
 			}
 		}
-		else if(inBase){
+		else if(inBase && Input.GetButtonDown("Action_" + player_num.ToString())){
 			if(!shopOpen){
 				shopOpen = true;
 				shop.SetActive (true);
