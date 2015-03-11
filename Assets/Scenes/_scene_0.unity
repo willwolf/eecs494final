@@ -14804,6 +14804,10 @@ Prefab:
       propertyPath: m_Name
       value: Player 2 Base
       objectReference: {fileID: 0}
+    - target: {fileID: 2390338, guid: 5f93fdd4e70a94e768133bb21d9dd9b0, type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e74fb53e4b15f40af972ea6fee8c3721, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5f93fdd4e70a94e768133bb21d9dd9b0, type: 2}
   m_RootGameObject: {fileID: 1619672632}
@@ -21145,7 +21149,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: fc9095356999849a9a42dbc98ea16bea, type: 2}
+  - {fileID: 2100000, guid: e74fb53e4b15f40af972ea6fee8c3721, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -24946,6 +24950,7 @@ GameObject:
   - 4: {fileID: 1897715652}
   - 114: {fileID: 1897715651}
   - 81: {fileID: 1897715650}
+  - 114: {fileID: 1897715653}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -24990,6 +24995,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
+--- !u!114 &1897715653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1897715649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be5dca4f0e71b4a5fbab422b3c216c19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  items:
+  - {fileID: 174104, guid: bf34bd68baf534608a8086cd447c45e5, type: 2}
+  - {fileID: 153712, guid: 9cd6c1051cd3d4614845bcb01b3c724b, type: 2}
 --- !u!1 &1898363762
 GameObject:
   m_ObjectHideFlags: 0
