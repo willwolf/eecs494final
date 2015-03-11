@@ -8,6 +8,10 @@ public class PlayerController : MonoBehaviour {
 	public int RESPAWN_TIME = 20;
 	private bool dead = false;
 	private float respawn_at_time;
+	public int health = 10;
+	public int damage_amount = 2;
+	public int INVULNERABLE_TIME = 2;
+	private float vulnerable_at_time;
 	
 	public int player_num  = 0;
 	private InputDevice device = null;
@@ -188,6 +192,19 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
+	public void takeDamage(int damage, GameObject enemy_base_GO){
+		if(Time.time > vulnerable_at_time){
+			health -= damage;
+			//update health bar
+			vulnerable_at_time = Time.time + INVULNERABLE_TIME;
+			Debug.Log("Player " + player_num + " health is " + health);
+		}
+
+		if(health <= 0){
+			killPlayer(enemy_base_GO);
+		}
+	}
+
 	public void killPlayer(GameObject enemy_base_GO) {
 		foreach (MeshRenderer renderer in GetComponentsInChildren<MeshRenderer>()) {
 			renderer.enabled = false;
@@ -223,7 +240,7 @@ public class PlayerController : MonoBehaviour {
 				PlayerController other = hitinfo.transform.GetComponent<PlayerController>();
 				if (other.homeBase_GO.GetInstanceID() != this.gameObject.GetInstanceID()) {
 					Debug.Log("In range of enemy player");
-					other.killPlayer(homeBase_GO);
+					other.takeDamage(damage_amount, homeBase_GO);
 				} else {
 					Debug.Log("In range of friendly player");
 				}
