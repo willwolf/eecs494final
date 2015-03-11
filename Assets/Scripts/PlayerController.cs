@@ -146,13 +146,25 @@ public class PlayerController : MonoBehaviour {
 					}
 				} else if (device.Action4.WasPressed) { // Y button pressed
 					ShopMenu sm = shop.GetComponent<ShopMenu>();
-					if (homeBase.HasWalls() && sm.MakePurchase(homeBase_GO.GetInstanceID(), 1)) {
+					if (!homeBase.HasWalls() && sm.MakePurchase(homeBase_GO.GetInstanceID(), 1)) {
 						print ("Wall purchased");
 						homeBase.TurnOnWalls();
 					}
 				}
 			} else {
-
+				if (Input.GetButtonDown("Purchase_First_" + player_num.ToString())) {
+					ShopMenu sm = shop.GetComponent<ShopMenu>();
+					if (!hasSword && sm.MakePurchase(homeBase_GO.GetInstanceID(), 0)) {
+						print ("Bought sword");
+						hasSword = true;
+					}
+				} else if (Input.GetButtonDown("Purchase_Second_" + player_num.ToString())) {
+					ShopMenu sm = shop.GetComponent<ShopMenu>();
+					if (!homeBase.HasWalls() && sm.MakePurchase(homeBase_GO.GetInstanceID(), 1)) {
+						print ("Wall purchased");
+						homeBase.TurnOnWalls();
+					}
+				}
 			}
 		}
 
@@ -399,8 +411,8 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void decreaseResource(GameObject resource){
-		print ("Amount of " + resource.ToString () + " left: " + 
-						resource.GetComponent<Resource> ().amountLeft);
+//		print ("Amount of " + resource.ToString () + " left: " + 
+//						resource.GetComponent<Resource> ().amountLeft);
 		resource.GetComponent<Resource>().amountLeft--; //dec first to not get off by 1 error
 		if(resource.GetComponent<Resource>().amountLeft == 0){
 			Destroy(resource);

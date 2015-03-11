@@ -5,7 +5,7 @@ using System.Collections;
 public class Base : MonoBehaviour {
 
 	GameManager gm;
-	private bool hasWalls = false;
+	public bool hasWalls = false;
 
 	void Start() {
 		gm = GameObject.Find("GameManager").GetComponent<GameManager>();
