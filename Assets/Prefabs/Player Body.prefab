@@ -13,7 +13,7 @@ GameObject:
   - 92: {fileID: 9220228}
   - 45: {fileID: 4520228}
   m_Layer: 0
-  m_Name: Cam1
+  m_Name: Cam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,7 +28,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 456042}
   m_Layer: 0
-  m_Name: Sword1
+  m_Name: Sword
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -750,11 +750,13 @@ MonoBehaviour:
   homeBase_GO: {fileID: 0}
   inBase: 0
   inEnemyBase: 0
+  EnemyBaseId: 0
   hasSword: 0
   mining_stone: {fileID: 8256042}
   chopping_wood: {fileID: 8256046}
   dropping_resources: {fileID: 8256044}
   sword: {fileID: 156042}
+  gm: {fileID: 0}
 --- !u!124 &12420228
 Behaviour:
   m_ObjectHideFlags: 1

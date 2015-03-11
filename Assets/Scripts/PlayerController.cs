@@ -54,6 +54,7 @@ public class PlayerController : MonoBehaviour {
 	public GameObject sword;
 
 	public GameManager gm;
+	public Canvas canvas;
 
 	// Use this for initialization
 	void Start () {
@@ -61,9 +62,9 @@ public class PlayerController : MonoBehaviour {
 		if (player_num == 0) {
 			throw new UnassignedReferenceException("PlayerController::playerNum must be non-zero");
 		}
-		wood_text = GameObject.Find ("Wood_Text_" + player_num.ToString()).GetComponent<Text>();
-		stone_text = GameObject.Find("Stone_Text_" + player_num.ToString()).GetComponent<Text>();
-		mid_screen_text = GameObject.Find("mid_screen_text_" + player_num.ToString()).GetComponent<Text>();
+		wood_text = canvas.transform.FindChild("Wood_Text").GetComponent<Text>();
+		stone_text = canvas.transform.FindChild("Stone_Text").GetComponent<Text>();
+		mid_screen_text = canvas.transform.FindChild("mid_screen_text").GetComponent<Text>();
 
 		mid_screen_text.text = "";
 		updateStoneText();
