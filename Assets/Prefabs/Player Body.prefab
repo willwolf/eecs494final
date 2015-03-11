@@ -774,7 +774,7 @@ MonoBehaviour:
   mining_stone: {fileID: 8256042}
   chopping_wood: {fileID: 8256046}
   dropping_resources: {fileID: 8256044}
-  sword: {fileID: 0}
+  sword: {fileID: 121854}
   gm: {fileID: 0}
   canvas: {fileID: 0}
   shop: {fileID: 0}
