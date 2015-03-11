@@ -58,6 +58,8 @@ public class GameManager : MonoBehaviour {
 		Text enemyWarning = canvas.transform.FindChild("Enemy_Warning").GetComponent<Text>();
 		enemyWarning.enabled = false;
 		enemyInBaseTexts.Add(base1.GetInstanceID(), enemyWarning);
+
+		player.renderer.material = mats[teamNum];
 	}
 
 	Rect getViewport(int numPlayers, int playerNum) {
