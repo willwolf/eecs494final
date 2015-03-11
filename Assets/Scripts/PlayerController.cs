@@ -138,8 +138,11 @@ public class PlayerController : MonoBehaviour {
 
 		Move();
 
-		if (Input.GetButton("Action_" + player_num.ToString()) || 
-		    (device != null && device.Action1.IsPressed)) {
+		if (device != null) {
+			if (device.Action1.IsPressed) {
+				TakeAction();
+			}
+		} else if (Input.GetButton("Action_" + player_num.ToString())) {
 			TakeAction();
 		}
 	}
@@ -169,9 +172,9 @@ public class PlayerController : MonoBehaviour {
 			  sidestep_input = 0;
 		if (device != null) {
 			// Default to using controller inputs, if they are present otherwise use keyboard commands
-			rotate_input = device.RightStickX ? device.RightStickX : Input.GetAxis("Horizontal_" + player_num.ToString());
+			rotate_input = device.RightStickX;
 			sidestep_input = device.LeftStickX;
-			forward_input = device.LeftStickY ? device.LeftStickY : Input.GetAxis("Vertical_" + player_num.ToString());
+			forward_input = device.LeftStickY;
 		} else {
 			rotate_input = Input.GetAxis("Horizontal_" + player_num.ToString());
 			forward_input = Input.GetAxis("Vertical_" + player_num.ToString());
