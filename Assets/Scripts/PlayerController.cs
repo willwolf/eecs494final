@@ -58,6 +58,12 @@ public class PlayerController : MonoBehaviour {
 	public AudioSource stealing_resources;
 
 	public GameObject sword;
+	public Transform swordTransform;
+	public Transform hiltTransform;
+	public bool upswing = false;
+	public bool downswing = false;
+	public Vector3 swingStart;
+	public Vector3 swingEnd;
 
 	public GameManager gm;
 	public Canvas canvas;
@@ -85,6 +91,15 @@ public class PlayerController : MonoBehaviour {
 		shop.SetActive(false);
 		gm = GameObject.Find("GameManager").GetComponent<GameManager>();
 
+		//For testing purposes only
+		if (hasSword) {
+			swordTransform = transform.FindChild("Sword");		
+
+			//sword.layer = "Weapon" + player_num;
+//			hiltTransform = Transform.FindChild("Hilt");
+		}
+		swingStart = this.transform.position + this.transform.forward;
+		swingEnd = this.transform.position + this.transform.right;
 
 		var devices = InputManager.Devices;
 		if (devices == null) {
@@ -132,6 +147,15 @@ public class PlayerController : MonoBehaviour {
 
 		if (curr_wood_resource + curr_stone_resource >= MAX_RESOURCES) {
 			updateMidScreenText("Backpack Full");
+		}
+
+		/*
+		if(hasSword && swing){
+			swing = sword.GetComponent<SwordScript>().swing();
+		}*/
+		if (hasSword) {
+
+		
 		}
 
 		if (!shopOpen) {
@@ -195,10 +219,11 @@ public class PlayerController : MonoBehaviour {
 			
 		} else {
 			foreach (Collider collider in sword.GetComponentsInChildren<Collider>()) {
+				swordTransform = transform.FindChild("Sword");
 				collider.enabled = true;
 			}
 			foreach (MeshRenderer renderer in sword.GetComponentsInChildren<MeshRenderer>()) {
-				renderer.enabled = true;
+				renderer.enabled = true; 
 			}
 		}
 	}
@@ -287,10 +312,18 @@ public class PlayerController : MonoBehaviour {
 		RaycastHit hitinfo;
 		if (IsInRange(out hitinfo, "Player") && !shopOpen) {
 			if(hasSword && !inEnemyBase){
+				/*if(!swing){
+					swing = true;
+					sword.GetComponent<SwordScript>().setUpswing(true);
+				}*/
+				sword.GetComponent<SwordScript>().swing();
+
+
 				PlayerController other = hitinfo.transform.GetComponent<PlayerController>();
 				if (other.homeBase_GO.GetInstanceID() != this.gameObject.GetInstanceID()) {
 					Debug.Log("In range of enemy player");
-					other.takeDamage(damage_amount, homeBase_GO);
+
+			//		other.takeDamage(damage_amount, homeBase_GO);
 				} else {
 					Debug.Log("In range of friendly player");
 				}
