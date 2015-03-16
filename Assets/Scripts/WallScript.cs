@@ -17,8 +17,5 @@ public class WallScript : ShopItem {
 	public bool CanPurchase() {
 		return true;
 	}
-	override
-	public ShopItemType ItemType() {
-		return ShopItemType.wall;
-	}
+
 }

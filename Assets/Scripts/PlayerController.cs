@@ -279,15 +279,10 @@ public class PlayerController : MonoBehaviour {
 	}
 	void HandlePurchase(ShopItem item) {
 		if (item) {
-			switch (item.ItemType()) {
-			case ShopItemType.sword:
-				print ("It's a sword!");
+			if (item is SwordScript) {
 				hasSword = true;
-				break;
-			case ShopItemType.wall:
-				print ("It's a wall!");
+			} else if (item is WallScript) {
 				homeBase.TurnOnWalls();
-				break;
 			}
 		}
 	}

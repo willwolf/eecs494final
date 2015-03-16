@@ -17,8 +17,5 @@ public class SwordScript : ShopItem {
 	public bool CanPurchase() {
 		return true;
 	}
-	override
-	public ShopItemType ItemType() {
-		return ShopItemType.sword;
-	}
+
 }
