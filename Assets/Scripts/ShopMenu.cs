@@ -35,8 +35,11 @@ public class ShopMenu : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		// Treat the current button like it has a mouse hovering over it
+		var pointer = new PointerEventData(EventSystem.current);
+		ExecuteEvents.Execute(menuButtons[current_item], pointer, ExecuteEvents.pointerEnterHandler);
 		if (lerpV) {
-			contentPanel.localPosition = Vector3.Lerp(contentPanel.localPosition, target_point, 10 * Time.deltaTime);
+			contentPanel.localPosition = Vector3.Lerp(contentPanel.localPosition, target_point, 75 * scroll.elasticity * Time.deltaTime);
 			if (scroll.verticalNormalizedPosition < 0) {
 				// Cant scroll any further, so stop
 				scroll.verticalNormalizedPosition = 0;
@@ -49,19 +52,24 @@ public class ShopMenu : MonoBehaviour {
 	}
 
 	public void ScrollDown() {
-		current_item++;
-		Scroll();
+		Scroll(1);
 	}
 	public void ScrollUp() {
-		current_item--;
-		Scroll();
+		Scroll(-1);
 	}
-	void Scroll() {
-		if (current_item >= menuButtons.Count) {
-			current_item = menuButtons.Count - 1;
-		} else if (current_item <= 0) {
+	void Scroll(int shift) { 
+		// Remove the pointer event on the previous item
+		var pointer = new PointerEventData(EventSystem.current);
+		ExecuteEvents.Execute(menuButtons[current_item], pointer, ExecuteEvents.pointerExitHandler);
+
+		// Shift to next item on list
+		current_item += shift;
+		if (current_item < 0) {
 			current_item = 0;
+		} else if (current_item >= menuButtons.Count) {
+			current_item = menuButtons.Count - 1;
 		}
+
 		// Place content panel at the top of the current item
 		target_point = new Vector3(contentPanel.localPosition.x, content_y_offset + current_item * button_size, contentPanel.localPosition.z);
 		lerpV = true;
