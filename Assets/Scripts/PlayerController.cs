@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour {
 	public int player_num  = 0;
 	public InputDevice device = null;
 	public float controller_sensitivity = 0.5f;
-	public float jump_height = 20f;
+	public float jump_height = 5f;
 	public float rotate_speed = 90f;
 	public float walk_speed = 8f;
 	public float enemy_base_speed_multiplier = 0.5f;
@@ -51,7 +51,7 @@ public class PlayerController : MonoBehaviour {
 	public bool inEnemyBase = false;
 	public int EnemyBaseId;
 
-	public bool hasSword = false;
+	public bool hasWeapon = false;
 
 
 	public bool hasStealth = false;
@@ -70,6 +70,7 @@ public class PlayerController : MonoBehaviour {
 	public AudioSource stealing_resources;
 
 	public GameObject sword;
+	public WeaponItem currentWeapon = null;
 
 	public GameManager gm;
 	public Canvas canvas;
@@ -194,7 +195,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void LateUpdate(){
-		if(!hasSword || dead){
+		if(!hasWeapon){
 			foreach (Collider collider in sword.GetComponentsInChildren<Collider>()) {
 				collider.enabled = false;
 			}
@@ -279,17 +280,27 @@ public class PlayerController : MonoBehaviour {
 	}
 	void HandlePurchase(ShopItem item) {
 		if (item) {
-			if (item is SwordScript) {
-				hasSword = true;
-			} else if (item is WallScript) {
-				homeBase.TurnOnWalls();
+			if (item is WeaponItem) {
+				HandleWeapon((WeaponItem)item);
+			} else if (item is BaseUpgradeItem) {
+				HandleBaseUpgrade((BaseUpgradeItem)item);
 			}
+		}
+	}
+	void HandleWeapon(WeaponItem weapon) {
+		if (weapon is SwordScript) {
+			hasWeapon = true;
+			currentWeapon = weapon;
+		}
+	}
+	void HandleBaseUpgrade(BaseUpgradeItem upgrade) {
+		if (upgrade is WallScript) {
+			homeBase.TurnOnWalls();
 		}
 	}
 
 	public void awakePlayer() {
 		dead = false;
-		hasSword = false;
 		health = startingHealth;
 		health_slider.value = health;
 		foreach (Collider collider in GetComponentsInChildren<Collider>()) {
@@ -339,6 +350,7 @@ public class PlayerController : MonoBehaviour {
 		this.transform.position = homeBase_GO.transform.position;
 
 		stealthActive = false;
+		hasWeapon = false;
 		hasStealth = false;
 
 		dead = true;
@@ -352,7 +364,7 @@ public class PlayerController : MonoBehaviour {
 	void TakeAction() {
 		RaycastHit hitinfo;
 		if (IsInRange(out hitinfo, "Player") && !shopOpen) {
-			if(hasSword && !inEnemyBase){
+			if(hasWeapon && !inEnemyBase){
 				PlayerController other = hitinfo.transform.GetComponent<PlayerController>();
 				if (other.homeBase_GO.GetInstanceID() != this.gameObject.GetInstanceID()) {
 					Debug.Log("In range of enemy player");
@@ -360,7 +372,7 @@ public class PlayerController : MonoBehaviour {
 				} else {
 					Debug.Log("In range of friendly player");
 				}
-			} else if(!hasSword) {
+			} else if(!hasWeapon) {
 				Debug.Log("Can't kill player without the sword!");
 			} else {
 				Debug.Log("Can't kill player in base!");
