@@ -12,6 +12,8 @@ public class ShopMenu : MonoBehaviour {
 	public Vector3 target_point = Vector3.zero;
 	public float content_y_offset = 0f;
 	public float button_size = 0f;
+	public const float scroll_interval = 0.15f;
+	public float allow_scroll_at = 0;
 
 	public ShopItemList shoplist = null;
 	GameManager manager = null;
@@ -58,6 +60,10 @@ public class ShopMenu : MonoBehaviour {
 		Scroll(-1);
 	}
 	void Scroll(int shift) { 
+		if (Time.time < allow_scroll_at) {
+			return;
+		}
+		allow_scroll_at = Time.time + scroll_interval;
 		// Remove the pointer event on the previous item
 		var pointer = new PointerEventData(EventSystem.current);
 		ExecuteEvents.Execute(menuButtons[current_item], pointer, ExecuteEvents.pointerExitHandler);
