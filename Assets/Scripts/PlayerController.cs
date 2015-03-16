@@ -51,6 +51,7 @@ public class PlayerController : MonoBehaviour {
 	private Text stone_text;
 	private Text wood_text;
 	private Text mid_screen_text;
+	private Slider health_slider;
 
 	public AudioSource mining_stone;
 	public AudioSource chopping_wood;
@@ -74,6 +75,7 @@ public class PlayerController : MonoBehaviour {
 		wood_text = canvas.transform.FindChild("Wood_Text").GetComponent<Text>();
 		stone_text = canvas.transform.FindChild("Stone_Text").GetComponent<Text>();
 		mid_screen_text = canvas.transform.FindChild("mid_screen_text").GetComponent<Text>();
+		health_slider = canvas.transform.FindChild("Slider").GetComponent<Slider>();
 
 		mid_screen_text.text = "";
 		updateStoneText();
@@ -245,6 +247,7 @@ public class PlayerController : MonoBehaviour {
 		if(Time.time > vulnerable_at_time){
 			health -= damage;
 			//update health bar
+			health_slider.value = health;
 			vulnerable_at_time = Time.time + INVULNERABLE_TIME;
 			Debug.Log("Player " + player_num + " health is " + health);
 		}
