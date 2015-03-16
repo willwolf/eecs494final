@@ -127,6 +127,8 @@ public class PlayerController : MonoBehaviour {
 				health_slider.value = health;
 				regen_at_time = Time.time + HEALTH_REGEN_TIME;
 			}
+		} else {
+			regen_at_time = Time.time + HEALTH_REGEN_TIME;
 		}
 
 		if (showing) {
