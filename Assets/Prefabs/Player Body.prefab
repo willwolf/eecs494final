@@ -837,7 +837,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RESPAWN_TIME: 20
-  health: 2
+  health: 10
   damage_amount: 2
   INVULNERABLE_TIME: 2
   player_num: 1
