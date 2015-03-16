@@ -3254,7 +3254,7 @@ InputManager:
     axis: 2
     joyNum: 0
   - serializedVersion: 3
-    m_Name: Horizontal_3
+    m_Name: Horizontal_1
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: a
@@ -3270,7 +3270,7 @@ InputManager:
     axis: 0
     joyNum: 0
   - serializedVersion: 3
-    m_Name: Vertical_3
+    m_Name: Vertical_1
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: s
@@ -3286,7 +3286,7 @@ InputManager:
     axis: 0
     joyNum: 0
   - serializedVersion: 3
-    m_Name: Horizontal_4
+    m_Name: Horizontal_0
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: left
@@ -3302,7 +3302,7 @@ InputManager:
     axis: 0
     joyNum: 0
   - serializedVersion: 3
-    m_Name: Vertical_4
+    m_Name: Vertical_0
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: down
@@ -3318,7 +3318,7 @@ InputManager:
     axis: 0
     joyNum: 0
   - serializedVersion: 3
-    m_Name: Action_3
+    m_Name: Action_1
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
@@ -3334,7 +3334,7 @@ InputManager:
     axis: 0
     joyNum: 0
   - serializedVersion: 3
-    m_Name: Action_4
+    m_Name: Action_0
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
@@ -3350,7 +3350,7 @@ InputManager:
     axis: 0
     joyNum: 0
   - serializedVersion: 3
-    m_Name: Store_Open_3
+    m_Name: Store_Open_1
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
@@ -3366,7 +3366,7 @@ InputManager:
     axis: 0
     joyNum: 0
   - serializedVersion: 3
-    m_Name: Store_Open_4
+    m_Name: Store_Open_0
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
@@ -3382,7 +3382,7 @@ InputManager:
     axis: 0
     joyNum: 0
   - serializedVersion: 3
-    m_Name: Purchase_First_3
+    m_Name: Purchase_First_1
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
@@ -3398,7 +3398,7 @@ InputManager:
     axis: 0
     joyNum: 0
   - serializedVersion: 3
-    m_Name: Purchase_Second_3
+    m_Name: Purchase_Second_1
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 2
@@ -3414,7 +3414,7 @@ InputManager:
     axis: 0
     joyNum: 0
   - serializedVersion: 3
-    m_Name: Purchase_First_4
+    m_Name: Purchase_First_0
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
@@ -3430,7 +3430,7 @@ InputManager:
     axis: 0
     joyNum: 0
   - serializedVersion: 3
-    m_Name: Purchase_Second_4
+    m_Name: Purchase_Second_0
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 

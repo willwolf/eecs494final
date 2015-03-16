@@ -112,11 +112,13 @@ public class GameManager : MonoBehaviour {
 			teamResources.Add(baseObj.GetInstanceID(), new ResourceCount());
 			teamMats.Add(baseObj.GetInstanceID(), mats[teamNum++]);
 
-
-			addPlayer(baseObj, getViewport(4, playerNum), playerNum);
+			int numPlayers = InputManager.Devices.Count >= 2 ? 4 : 2;
+			addPlayer(baseObj, getViewport(numPlayers, playerNum), playerNum);
 			playerNum++;
-			addPlayer(baseObj, getViewport(4, playerNum), playerNum);
-			playerNum++;
+			if (numPlayers == 4) {
+				addPlayer(baseObj, getViewport(4, playerNum), playerNum);
+				playerNum++;
+			}
 		}
 
 		foreach (KeyValuePair<int, string> pair in baseNames) {
