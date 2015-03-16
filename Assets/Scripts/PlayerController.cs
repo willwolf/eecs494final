@@ -152,13 +152,13 @@ public class PlayerController : MonoBehaviour {
 					}
 				}
 			} else {
-				if (Input.GetButtonDown("Purchase_First_" + player_num.ToString())) {
+				if (Input.GetButtonDown("Purchase_First_" + Mathf.Ceil(player_num % 2.0f).ToString())) {
 					ShopMenu sm = shop.GetComponent<ShopMenu>();
 					if (!hasSword && sm.MakePurchase(homeBase_GO.GetInstanceID(), 0)) {
 						print ("Bought sword");
 						hasSword = true;
 					}
-				} else if (Input.GetButtonDown("Purchase_Second_" + player_num.ToString())) {
+				} else if (Input.GetButtonDown("Purchase_Second_" + Mathf.Ceil(player_num % 2.0f).ToString())) {
 					ShopMenu sm = shop.GetComponent<ShopMenu>();
 					if (!homeBase.HasWalls() && sm.MakePurchase(homeBase_GO.GetInstanceID(), 1)) {
 						print ("Wall purchased");
@@ -172,14 +172,14 @@ public class PlayerController : MonoBehaviour {
 			if (device.Action1.IsPressed) {
 				TakeAction();
 			}
-		} else if (Input.GetButton("Action_" + player_num.ToString())) {
+		} else if (Input.GetButton("Action_" + Mathf.Ceil(player_num % 2.0f).ToString())) {
 			TakeAction();
 		}
 		if (device != null) {
 			if (device.DPadUp.WasPressed && inBase) {
 				ToggleStore();
 			}
-		} else if (Input.GetButtonDown("Store_Open_" + player_num.ToString()) && inBase) {
+		} else if (Input.GetButtonDown("Store_Open_" + Mathf.Ceil(player_num % 2.0f).ToString()) && inBase) {
 			ToggleStore();
 		}
 	}
@@ -213,8 +213,8 @@ public class PlayerController : MonoBehaviour {
 			sidestep_input = device.LeftStickX;
 			forward_input = device.LeftStickY;
 		} else {
-			rotate_input = Input.GetAxis("Horizontal_" + player_num.ToString());
-			forward_input = Input.GetAxis("Vertical_" + player_num.ToString());
+			rotate_input = Input.GetAxis("Horizontal_" + Mathf.Ceil(player_num % 2.0f).ToString());
+			forward_input = Input.GetAxis("Vertical_" + Mathf.Ceil(player_num % 2.0f).ToString());
 		}
 		if(inEnemyBase){
 			rotate_input *= enemy_base_speed_multiplier;
@@ -363,7 +363,7 @@ public class PlayerController : MonoBehaviour {
 //				if (device.Action1.WasPressed) {
 //					ToggleStore();
 //				}
-//			} else if (Input.GetButtonDown("Action_" + player_num.ToString())) {
+//			} else if (Input.GetButtonDown("Action_" + Mathf.Ceil(player_num % 2.0f).ToString())) {
 //				ToggleStore();
 //			}
 //		}
@@ -394,14 +394,14 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void CollectWood(int amount, string message) {
-		string chopNotification = "Player " + player_num.ToString() + " is chopping wood!";
+		string chopNotification = "Player " + Mathf.Ceil(player_num % 2.0f).ToString() + " is chopping wood!";
 		updateMidScreenText(chopNotification);
 		CheckMaxWood(amount);
 		if (wood_text == null) {
-			throw new UnassignedReferenceException("wood_text for player " + player_num.ToString() + " is null");
+			throw new UnassignedReferenceException("wood_text for player " + Mathf.Ceil(player_num % 2.0f).ToString() + " is null");
 		}
 		wood_text.text = "Carrying " + curr_wood_resource + " wood";
-		updateMidScreenText("Player " + player_num.ToString() + message);
+		updateMidScreenText("Player " + Mathf.Ceil(player_num % 2.0f).ToString() + message);
 		collected_wood = true;
 		get_wood_at_time = Time.time + WOOD_COOLDOWN_TIME;
 	}
@@ -441,14 +441,14 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void CollectStone(int amount, string message) {
-		string mineNotification = "Player " + player_num.ToString() + " is mining!";
+		string mineNotification = "Player " + Mathf.Ceil(player_num % 2.0f).ToString() + " is mining!";
 		updateMidScreenText(mineNotification);
 		CheckMaxStone(amount);
 		if (stone_text == null) {
-			throw new UnassignedReferenceException("stone_text for player " + player_num.ToString() + " is null");
+			throw new UnassignedReferenceException("stone_text for player " + Mathf.Ceil(player_num % 2.0f).ToString() + " is null");
 		}
 		stone_text.text = "Carrying " + curr_stone_resource + " stone";
-		updateMidScreenText("Player " + player_num.ToString() + message);
+		updateMidScreenText("Player " + Mathf.Ceil(player_num % 2.0f).ToString() + message);
 		collected_stone = true;
 		get_stone_at_time = Time.time + STONE_COOLDOWN_TIME;
 	}
