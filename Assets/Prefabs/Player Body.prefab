@@ -840,6 +840,7 @@ MonoBehaviour:
   startingHealth: 10
   damage_amount: 2
   INVULNERABLE_TIME: 1
+  HEALTH_REGEN_TIME: 1
   player_num: 1
   rotate_speed: 180
   walk_speed: 15

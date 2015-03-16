@@ -11,8 +11,10 @@ public class PlayerController : MonoBehaviour {
 	public int startingHealth = 10;
 	private int health;
 	public int damage_amount = 2;
-	public int INVULNERABLE_TIME = 2;
+	public float INVULNERABLE_TIME = 2;
 	private float vulnerable_at_time;
+	public float HEALTH_REGEN_TIME = 5;
+	private float regen_at_time;
 	
 	public int player_num  = 0;
 	public InputDevice device = null;
@@ -114,6 +116,15 @@ public class PlayerController : MonoBehaviour {
 			} else {
 				mid_screen_text.text = "Respawn in " + Mathf.Floor(respawn_at_time - Time.time).ToString("0") + " seconds";
 				return;
+			}
+		} else if(inBase) {
+			if(Time.time > regen_at_time){
+				health += 1;
+				if(health > startingHealth) {
+					health = startingHealth;
+				}
+				health_slider.value = health;
+				regen_at_time = Time.time + HEALTH_REGEN_TIME;
 			}
 		}
 
