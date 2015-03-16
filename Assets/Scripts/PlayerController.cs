@@ -70,6 +70,7 @@ public class PlayerController : MonoBehaviour {
 	public AudioSource stealing_resources;
 
 	public GameObject sword;
+	public WeaponItem currentWeapon = null;
 
 	public GameManager gm;
 	public Canvas canvas;
@@ -279,11 +280,22 @@ public class PlayerController : MonoBehaviour {
 	}
 	void HandlePurchase(ShopItem item) {
 		if (item) {
-			if (item is SwordScript) {
-				hasSword = true;
-			} else if (item is WallScript) {
-				homeBase.TurnOnWalls();
+			if (item is WeaponItem) {
+				HandleWeapon((WeaponItem)item);
+			} else if (item is BaseUpgradeItem) {
+				HandleBaseUpgrade((BaseUpgradeItem)item);
 			}
+		}
+	}
+	void HandleWeapon(WeaponItem weapon) {
+		if (weapon is SwordScript) {
+			hasSword = true;
+			currentWeapon = weapon;
+		}
+	}
+	void HandleBaseUpgrade(BaseUpgradeItem upgrade) {
+		if (upgrade is WallScript) {
+			homeBase.TurnOnWalls();
 		}
 	}
 

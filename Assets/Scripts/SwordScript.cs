@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SwordScript : ShopItem {
+public class SwordScript : WeaponItem {
 
 	// Use this for initialization
 	void Start () {
