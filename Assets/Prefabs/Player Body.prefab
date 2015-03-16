@@ -1352,14 +1352,18 @@ MonoBehaviour:
   inBase: 0
   inEnemyBase: 0
   EnemyBaseId: 0
-  hasSword: 0
   hasStealth: 0
   stealthActive: 0
   mining_stone: {fileID: 8256042}
   chopping_wood: {fileID: 8249478}
   dropping_resources: {fileID: 8256044}
   stealing_resources: {fileID: 8256046}
-  sword: {fileID: 121854}
+  hasWeapon: 0
+  currentWeaponIndex: 0
+  weapons:
+  - {fileID: 121854}
+  - {fileID: 182970}
+  currentWeapon: {fileID: 0}
   gm: {fileID: 0}
   canvas: {fileID: 0}
   shop: {fileID: 0}

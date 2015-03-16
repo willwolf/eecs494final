@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.UI;
 using InControl;
 
@@ -51,9 +52,6 @@ public class PlayerController : MonoBehaviour {
 	public bool inEnemyBase = false;
 	public int EnemyBaseId;
 
-	public bool hasWeapon = false;
-
-
 	public bool hasStealth = false;
 	public bool stealthActive = false;
 	private double stealthAmount = 1;
@@ -69,7 +67,10 @@ public class PlayerController : MonoBehaviour {
 	public AudioSource dropping_resources;
 	public AudioSource stealing_resources;
 
-	public GameObject sword;
+//	public GameObject sword;
+	public bool hasWeapon = false;
+	public int currentWeaponIndex = 0;
+	public List<GameObject> weapons = new List<GameObject>();
 	public WeaponItem currentWeapon = null;
 
 	public GameManager gm;
@@ -97,10 +98,17 @@ public class PlayerController : MonoBehaviour {
 		homeBase = homeBase_GO.GetComponent<Base>();
 		shop = canvas.transform.FindChild ("Shop_Menu").gameObject;
 		shopMenu = shop.GetComponent<ShopMenu>();
+
 		shopOpen = false;
 		shop.SetActive(false);
+
 		health = startingHealth;
 		gm = GameObject.Find("GameManager").GetComponent<GameManager>();
+
+		foreach (GameObject weapon in weapons) {
+			weapon.SetActive(false);
+		}
+
 		if (device != null) {
 			device.RightStickX.LowerDeadZone = controller_sensitivity;
 			device.RightStickY.LowerDeadZone = controller_sensitivity;
@@ -195,22 +203,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void LateUpdate(){
-		if(!hasWeapon){
-			foreach (Collider collider in sword.GetComponentsInChildren<Collider>()) {
-				collider.enabled = false;
-			}
-			foreach (MeshRenderer renderer in sword.GetComponentsInChildren<MeshRenderer>()) {
-				renderer.enabled = false;
-			}
-			
-		} else {
-			foreach (Collider collider in sword.GetComponentsInChildren<Collider>()) {
-				collider.enabled = true;
-			}
-			foreach (MeshRenderer renderer in sword.GetComponentsInChildren<MeshRenderer>()) {
-				renderer.enabled = true;
-			}
-		}
+
 	}
 
 	void Move() {
@@ -291,6 +284,8 @@ public class PlayerController : MonoBehaviour {
 		if (weapon is SwordScript) {
 			hasWeapon = true;
 			currentWeapon = weapon;
+			currentWeaponIndex = 0;
+			weapons[currentWeaponIndex].SetActive(true);
 		}
 	}
 	void HandleBaseUpgrade(BaseUpgradeItem upgrade) {
@@ -351,6 +346,7 @@ public class PlayerController : MonoBehaviour {
 
 		stealthActive = false;
 		hasWeapon = false;
+		weapons[currentWeaponIndex].SetActive(false);
 		hasStealth = false;
 
 		dead = true;
