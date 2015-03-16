@@ -51,6 +51,12 @@ public class PlayerController : MonoBehaviour {
 	public int EnemyBaseId;
 
 	public bool hasSword = false;
+
+
+	public bool hasStealth = false;
+	public bool stealthActive = false;
+	private double stealthAmount = 1;
+
 	
 	private Text stone_text;
 	private Text wood_text;
@@ -186,6 +192,16 @@ public class PlayerController : MonoBehaviour {
 			}
 		}
 
+		foreach (Renderer renderer in this.GetComponentsInChildren<Renderer>()) {
+			Color col = renderer.material.color;
+			if (stealthActive) {
+				col.a = .1f;
+			} else {
+				col.a = 1f;
+			}
+			renderer.material.color = col;
+		}
+
 		if (device != null) {
 			if (device.Action1.IsPressed) {
 				TakeAction();
@@ -308,6 +324,9 @@ public class PlayerController : MonoBehaviour {
 		updateStoneText();
 		updateWoodText();
 		this.transform.position = homeBase_GO.transform.position;
+
+		stealthActive = false;
+		hasStealth = false;
 
 		dead = true;
 		if (inEnemyBase) {

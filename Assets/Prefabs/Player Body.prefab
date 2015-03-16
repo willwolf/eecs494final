@@ -842,6 +842,7 @@ MonoBehaviour:
   INVULNERABLE_TIME: 1
   HEALTH_REGEN_TIME: 1
   player_num: 1
+  jump_height: 20
   rotate_speed: 180
   walk_speed: 15
   enemy_base_speed_multiplier: .5
@@ -859,6 +860,8 @@ MonoBehaviour:
   inEnemyBase: 0
   EnemyBaseId: 0
   hasSword: 0
+  hasStealth: 0
+  stealthActive: 0
   mining_stone: {fileID: 8256042}
   chopping_wood: {fileID: 8249478}
   dropping_resources: {fileID: 8256044}
