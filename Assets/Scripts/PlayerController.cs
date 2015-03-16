@@ -229,18 +229,25 @@ public class PlayerController : MonoBehaviour {
 			rotate_input = Input.GetAxis("Horizontal_" + Mathf.Ceil(player_num % 2.0f).ToString());
 			forward_input = Input.GetAxis("Vertical_" + Mathf.Ceil(player_num % 2.0f).ToString());
 		}
-		if(inEnemyBase){
-			rotate_input *= enemy_base_speed_multiplier;
-			forward_input *= enemy_base_speed_multiplier;
-			sidestep_input *= enemy_base_speed_multiplier;
-		}
 		
 		transform.Rotate(Vector3.up, rotate_speed * Time.deltaTime * rotate_input);
-		transform.localPosition += ((transform.forward * walk_speed * forward_input * Time.deltaTime) +
-		                            (transform.right * walk_speed * sidestep_input * Time.deltaTime));
+		transform.localPosition += (CalculateMoveSpeed(transform.forward, forward_input) +
+		                            CalculateMoveSpeed(transform.right, sidestep_input));
 		Vector3 newVel = transform.rigidbody.velocity;
 		newVel.y += jump_input * jump_height;
 		transform.rigidbody.velocity = newVel;
+	}
+	Vector3 CalculateMoveSpeed(Vector3 direction, float input_data) {
+		Vector3 moveSpeed = direction * walk_speed * input_data * Time.deltaTime;
+		if (!inEnemyBase) {
+			float encumbered = 1;
+			// max encumberance == 1 - enemy_base_speed_multiplier
+			encumbered -= Mathf.Min(((1.0f * curr_wood_resource + curr_stone_resource) / MAX_RESOURCES), 
+			                        enemy_base_speed_multiplier);
+			return moveSpeed * encumbered;
+		} else {
+			return moveSpeed * enemy_base_speed_multiplier;
+		}
 	}
 
 	public void awakePlayer() {
