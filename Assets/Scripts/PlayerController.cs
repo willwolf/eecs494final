@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour {
 	
 	public int player_num  = 0;
 	public InputDevice device = null;
+	public float controller_sensitivity = 0.5f;
 	public float jump_height = 20f;
 	public float rotate_speed = 90f;
 	public float walk_speed = 8f;
@@ -85,15 +86,15 @@ public class PlayerController : MonoBehaviour {
 
 		homeBase = homeBase_GO.GetComponent<Base>();
 		shop = canvas.transform.FindChild ("Shop_Menu").gameObject;
-		shopOpen = false;//true;
+		shopOpen = false;
 		shop.SetActive(false);
 		health = startingHealth;
 		gm = GameObject.Find("GameManager").GetComponent<GameManager>();
-
-
-		var devices = InputManager.Devices;
-		if (devices == null) {
-			return;
+		if (device != null) {
+			device.RightStickX.LowerDeadZone = controller_sensitivity;
+			device.RightStickY.LowerDeadZone = controller_sensitivity;
+			device.LeftStickX.LowerDeadZone = controller_sensitivity;
+			device.LeftStickY.LowerDeadZone = controller_sensitivity;
 		}
 	}
 	
@@ -218,12 +219,9 @@ public class PlayerController : MonoBehaviour {
 			rotate_input = device.RightStickX;
 			sidestep_input = device.LeftStickX;
 			forward_input = device.LeftStickY;
-//			Vector3 player_bottom = transform.position;
-//			player_bottom.y -= transform.localScale.y / 2f;
-			RaycastHit hitinfo;
-//			Debug.DrawRay(player_bottom, Vector3.down, Color.red);
-			if (device.Action4.WasPressed) { 
-				if (Physics.Raycast(transform.position, Vector3.down, out hitinfo, transform.collider.bounds.extents.y + 0.1f)) {
+			if (device.Action4.WasPressed) {
+				// Check for being on the ground when the button is pressed
+				if (Physics.Raycast(transform.position, Vector3.down, transform.collider.bounds.extents.y + 0.1f)) {
 					jump_input = 1;
 				}
 			}
