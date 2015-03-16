@@ -260,16 +260,9 @@ public class PlayerController : MonoBehaviour {
 			} else if (device.LeftStickY > 0) {
 				shopMenu.ScrollUp();
 			}
-			if (device.Action3.WasPressed) { // X button pressed
-				if (!hasSword && shopMenu.MakePurchase(homeBase_GO.GetInstanceID(), 0)) {
-					print ("Bought sword");
-					hasSword = true;
-				}
-			} else if (device.Action4.WasPressed) { // Y button pressed
-				if (!homeBase.HasWalls() && shopMenu.MakePurchase(homeBase_GO.GetInstanceID(), 1)) {
-					print ("Wall purchased");
-					homeBase.TurnOnWalls();
-				}
+			if (device.Action1.WasPressed) {
+				ShopItem item = shopMenu.MakePurchase(homeBase_GO.GetInstanceID());
+				HandlePurchase(item);
 			}
 		} else {
 			float vertInput = Input.GetAxis("Vertical_" + (player_num % 2.0f).ToString());
@@ -278,16 +271,23 @@ public class PlayerController : MonoBehaviour {
 			}else if (vertInput > 0) {
 				shopMenu.ScrollUp();
 			}
-			if (Input.GetButtonDown("Purchase_First_" + Mathf.Ceil(player_num % 2.0f).ToString())) {
-				if (!hasSword && shopMenu.MakePurchase(homeBase_GO.GetInstanceID(), 0)) {
-					print ("Bought sword");
-					hasSword = true;
-				}
-			} else if (Input.GetButtonDown("Purchase_Second_" + Mathf.Ceil(player_num % 2.0f).ToString())) {
-				if (!homeBase.HasWalls() && shopMenu.MakePurchase(homeBase_GO.GetInstanceID(), 1)) {
-					print ("Wall purchased");
-					homeBase.TurnOnWalls();
-				}
+			if (Input.GetButtonDown("Action_" + (player_num % 2).ToString())) {
+				ShopItem item = shopMenu.MakePurchase(homeBase_GO.GetInstanceID());
+				HandlePurchase(item);
+			}
+		}
+	}
+	void HandlePurchase(ShopItem item) {
+		if (item) {
+			switch (item.ItemType()) {
+			case ShopItemType.sword:
+				print ("It's a sword!");
+				hasSword = true;
+				break;
+			case ShopItemType.wall:
+				print ("It's a wall!");
+				homeBase.TurnOnWalls();
+				break;
 			}
 		}
 	}
@@ -429,15 +429,6 @@ public class PlayerController : MonoBehaviour {
 				}
 			}
 		} 
-//		else if(inBase){
-//			if (device != null) {
-//				if (device.Action1.WasPressed) {
-//					ToggleStore();
-//				}
-//			} else if (Input.GetButtonDown("Action_" + Mathf.Ceil(player_num % 2.0f).ToString())) {
-//				ToggleStore();
-//			}
-//		}
 	}
 
 	void ToggleStore() {

@@ -81,15 +81,15 @@ public class ShopMenu : MonoBehaviour {
 		lerpV = true;
 	}
 
-	public bool MakePurchase(int team_id, int item_id) {
+	public ShopItem MakePurchase(int team_id) {
 		ResourceCount team_count = manager.GetTeamResourceInfo(team_id);
-		ShopItem item = shoplist.items[item_id].GetComponent<ShopItem>();
+		ShopItem item = shoplist.items[current_item].GetComponent<ShopItem>();
 		if (CanPurchase(item, team_count)) {
 			manager.RemoveResources(team_id, ResourceType.stone, item.stone_cost);
 			manager.RemoveResources(team_id, ResourceType.wood, item.wood_cost);
-			return true;
+			return item;
 		} 
-		return false;
+		return null;
 	}
 	
 	bool CanPurchase(ShopItem item, ResourceCount resource_count) {

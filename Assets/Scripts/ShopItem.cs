@@ -2,6 +2,11 @@
 using System.Collections;
 using System.Collections.Generic;
 
+public enum ShopItemType {
+	sword,
+	wall
+}
+
 public abstract class ShopItem : MonoBehaviour {
 	
 	public Sprite icon;
@@ -21,4 +26,5 @@ public abstract class ShopItem : MonoBehaviour {
 	}
 
  	public abstract bool CanPurchase();
+	public abstract ShopItemType ItemType();
 }
