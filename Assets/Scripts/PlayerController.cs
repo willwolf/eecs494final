@@ -281,12 +281,17 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 	void HandleWeapon(WeaponItem weapon) {
+		weapons[currentWeaponIndex].SetActive(false);
 		if (weapon is SwordScript) {
 			hasWeapon = true;
 			currentWeapon = weapon;
 			currentWeaponIndex = 0;
-			weapons[currentWeaponIndex].SetActive(true);
+		} else if (weapon is BowScript) {
+			hasWeapon = true;
+			currentWeapon = weapon;
+			currentWeaponIndex = 1;
 		}
+		weapons[currentWeaponIndex].SetActive(true);	
 	}
 	void HandleBaseUpgrade(BaseUpgradeItem upgrade) {
 		if (upgrade is WallScript) {
@@ -346,6 +351,7 @@ public class PlayerController : MonoBehaviour {
 
 		stealthActive = false;
 		hasWeapon = false;
+		currentWeapon = null;
 		weapons[currentWeaponIndex].SetActive(false);
 		hasStealth = false;
 
