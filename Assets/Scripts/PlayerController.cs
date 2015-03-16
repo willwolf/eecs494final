@@ -8,7 +8,8 @@ public class PlayerController : MonoBehaviour {
 	public int RESPAWN_TIME = 20;
 	private bool dead = false;
 	private float respawn_at_time;
-	public int health = 10;
+	public int startingHealth = 10;
+	private int health;
 	public int damage_amount = 2;
 	public int INVULNERABLE_TIME = 2;
 	private float vulnerable_at_time;
@@ -52,6 +53,7 @@ public class PlayerController : MonoBehaviour {
 	private Text stone_text;
 	private Text wood_text;
 	private Text mid_screen_text;
+	private Slider health_slider;
 
 	public AudioSource mining_stone;
 	public AudioSource chopping_wood;
@@ -75,6 +77,7 @@ public class PlayerController : MonoBehaviour {
 		wood_text = canvas.transform.FindChild("Wood_Text").GetComponent<Text>();
 		stone_text = canvas.transform.FindChild("Stone_Text").GetComponent<Text>();
 		mid_screen_text = canvas.transform.FindChild("mid_screen_text").GetComponent<Text>();
+		health_slider = canvas.transform.FindChild("Slider").GetComponent<Slider>();
 
 		mid_screen_text.text = "";
 		updateStoneText();
@@ -84,6 +87,7 @@ public class PlayerController : MonoBehaviour {
 		shop = canvas.transform.FindChild ("Shop_Menu").gameObject;
 		shopOpen = false;//true;
 		shop.SetActive(false);
+		health = startingHealth;
 		gm = GameObject.Find("GameManager").GetComponent<GameManager>();
 
 
@@ -244,6 +248,8 @@ public class PlayerController : MonoBehaviour {
 	public void awakePlayer() {
 		dead = false;
 		hasSword = false;
+		health = startingHealth;
+		health_slider.value = health;
 		foreach (Collider collider in GetComponentsInChildren<Collider>()) {
 			collider.enabled = true;
 		}
@@ -259,6 +265,7 @@ public class PlayerController : MonoBehaviour {
 		if(Time.time > vulnerable_at_time){
 			health -= damage;
 			//update health bar
+			health_slider.value = health;
 			vulnerable_at_time = Time.time + INVULNERABLE_TIME;
 			Debug.Log("Player " + player_num + " health is " + health);
 		}
