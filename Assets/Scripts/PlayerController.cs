@@ -8,7 +8,8 @@ public class PlayerController : MonoBehaviour {
 	public int RESPAWN_TIME = 20;
 	private bool dead = false;
 	private float respawn_at_time;
-	public int health = 10;
+	public int startingHealth = 10;
+	private int health;
 	public int damage_amount = 2;
 	public int INVULNERABLE_TIME = 2;
 	private float vulnerable_at_time;
@@ -85,6 +86,7 @@ public class PlayerController : MonoBehaviour {
 		shop = canvas.transform.FindChild ("Shop_Menu").gameObject;
 		shopOpen = false;//true;
 		shop.SetActive(false);
+		health = startingHealth;
 		gm = GameObject.Find("GameManager").GetComponent<GameManager>();
 
 
@@ -232,6 +234,8 @@ public class PlayerController : MonoBehaviour {
 	public void awakePlayer() {
 		dead = false;
 		hasSword = false;
+		health = startingHealth;
+		health_slider.value = health;
 		foreach (Collider collider in GetComponentsInChildren<Collider>()) {
 			collider.enabled = true;
 		}
