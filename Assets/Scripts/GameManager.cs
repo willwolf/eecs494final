@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour {
 
 	void addPlayer(GameObject base1, Rect viewport, int playerNum) {
 		Vector3 pos = base1.transform.position;
-		pos.x += playerNum % 2;
+		pos.x += playerNum % 3;
 
 		GameObject player = Instantiate(playerBase, pos, new Quaternion()) as GameObject;
 		var devices = InputManager.Devices;
@@ -106,17 +106,22 @@ public class GameManager : MonoBehaviour {
 
 		int teamNum = 0;
 		int playerNum = 1;
+		int numPlayers = InputManager.Devices.Count >= 2 ? 4 : 2;
 		foreach (KeyValuePair<string, string> pair in teamNames) {
 			GameObject baseObj = GameObject.Find(pair.Key);
 			baseNames.Add(baseObj.GetInstanceID(), pair.Value);
 			teamResources.Add(baseObj.GetInstanceID(), new ResourceCount());
 			teamMats.Add(baseObj.GetInstanceID(), mats[teamNum++]);
 
-			int numPlayers = InputManager.Devices.Count >= 2 ? 4 : 2;
 			addPlayer(baseObj, getViewport(numPlayers, playerNum), playerNum);
 			playerNum++;
-			if (numPlayers == 4) {
-				addPlayer(baseObj, getViewport(4, playerNum), playerNum);
+		}
+		if (numPlayers == 4) {
+			// Add the remaining two players in the event of there are 4 players
+			foreach (KeyValuePair<string, string> pair in teamNames) {
+				GameObject baseObj = GameObject.Find(pair.Key);
+				
+				addPlayer(baseObj, getViewport(numPlayers, playerNum), playerNum);
 				playerNum++;
 			}
 		}
