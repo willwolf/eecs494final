@@ -276,6 +276,11 @@ public class PlayerController : MonoBehaviour {
 				}
 			}
 		} else {
+			if (Input.GetKeyDown(KeyCode.S)) {
+				shop.GetComponent<ShopMenu>().ScrollDown();
+			}else if (Input.GetKeyDown(KeyCode.W)) {
+				shop.GetComponent<ShopMenu>().ScrollUp();
+			}
 			if (Input.GetButtonDown("Purchase_First_" + Mathf.Ceil(player_num % 2.0f).ToString())) {
 				ShopMenu sm = shop.GetComponent<ShopMenu>();
 				if (!hasSword && sm.MakePurchase(homeBase_GO.GetInstanceID(), 0)) {

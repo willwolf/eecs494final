@@ -412,9 +412,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 705f8e9b45dc444fdba2c45a1d92ac4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lerpV: 0
+  current_item: 0
+  target_scroll: 0
+  button_size: 0
   shoplist: {fileID: 0}
+  scroll: {fileID: 0}
   menuButtonPrefab: {fileID: 146602, guid: d143da1671b334ec99467739b313cf47, type: 2}
   contentPanel: {fileID: 22436894}
+  scrollView: {fileID: 22436892}
+  contentRect: {fileID: 0}
 --- !u!114 &11436880
 MonoBehaviour:
   m_ObjectHideFlags: 1

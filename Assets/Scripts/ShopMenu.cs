@@ -7,25 +7,66 @@ using System.Collections.Generic;
 
 public class ShopMenu : MonoBehaviour {
 
+	public bool lerpV = false;
+	public int current_item = 0;
+	public Vector3 target_point = Vector3.zero;
+	public float content_y_offset = 0f;
+	public float button_size = 0f;
+
 	public ShopItemList shoplist = null;
 	GameManager manager = null;
+	public ScrollRect scroll;
 	public GameObject menuButtonPrefab;
 	public Transform contentPanel;
+	public Transform scrollView;
+	public List<GameObject> menuButtons = new List<GameObject>();
 
 	// Use this for initialization
 	void Awake () {
 		GameObject gm = GameObject.Find("GameManager");
 		manager = gm.GetComponent<GameManager>();
 		shoplist = gm.GetComponent<ShopItemList>();
+		scroll = scrollView.GetComponent<ScrollRect>();
 		print ("number of shop icons: " + shoplist.items.Count); 
+		button_size = menuButtonPrefab.GetComponent<LayoutElement>().minHeight;
+		content_y_offset = contentPanel.localPosition.y;
 		populateList ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-
+		if (lerpV) {
+			contentPanel.localPosition = Vector3.Lerp(contentPanel.localPosition, target_point, 10 * Time.deltaTime);
+			if (scroll.verticalNormalizedPosition < 0) {
+				// Cant scroll any further, so stop
+				scroll.verticalNormalizedPosition = 0;
+				lerpV = false;
+			} else if ((int)contentPanel.localPosition.y == (int)target_point.y) {
+				// Reached the end point
+				lerpV = false;
+			}
+		}
 	}
-	
+
+	public void ScrollDown() {
+		current_item++;
+		Scroll();
+	}
+	public void ScrollUp() {
+		current_item--;
+		Scroll();
+	}
+	void Scroll() {
+		if (current_item >= menuButtons.Count) {
+			current_item = menuButtons.Count - 1;
+		} else if (current_item <= 0) {
+			current_item = 0;
+		}
+		// Place content panel at the top of the current item
+		target_point = new Vector3(contentPanel.localPosition.x, content_y_offset + current_item * button_size, contentPanel.localPosition.z);
+		lerpV = true;
+	}
+
 	public bool MakePurchase(int team_id, int item_id) {
 		ResourceCount team_count = manager.GetTeamResourceInfo(team_id);
 		ShopItem item = shoplist.items[item_id].GetComponent<ShopItem>();
@@ -51,6 +92,7 @@ public class ShopMenu : MonoBehaviour {
 			button.woodLabel.text = "Wood: " + i.wood_cost.ToString();
 			button.stoneLabel.text = "Stone: " + i.stone_cost.ToString();
 			newButton.transform.SetParent (contentPanel);
+			menuButtons.Add (newButton);
 		}
 	}
 
