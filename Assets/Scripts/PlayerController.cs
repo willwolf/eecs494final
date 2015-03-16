@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour {
 	
 	public int player_num  = 0;
 	public InputDevice device = null;
+	public float jump_height = 20f;
 	public float rotate_speed = 90f;
 	public float walk_speed = 8f;
 	public float enemy_base_speed_multiplier = 0.5f;
@@ -221,12 +222,22 @@ public class PlayerController : MonoBehaviour {
 	void Move() {
 		float rotate_input = 0,
 			  forward_input = 0,
-			  sidestep_input = 0;
+			  sidestep_input = 0,
+			  jump_input = 0;
 		if (device != null) {
 			// Default to using controller inputs, if they are present otherwise use keyboard commands
 			rotate_input = device.RightStickX;
 			sidestep_input = device.LeftStickX;
 			forward_input = device.LeftStickY;
+//			Vector3 player_bottom = transform.position;
+//			player_bottom.y -= transform.localScale.y / 2f;
+			RaycastHit hitinfo;
+//			Debug.DrawRay(player_bottom, Vector3.down, Color.red);
+			if (device.Action4.WasPressed) { 
+				if (Physics.Raycast(transform.position, Vector3.down, out hitinfo, transform.collider.bounds.extents.y + 0.1f)) {
+					jump_input = 1;
+				}
+			}
 		} else {
 			rotate_input = Input.GetAxis("Horizontal_" + Mathf.Ceil(player_num % 2.0f).ToString());
 			forward_input = Input.GetAxis("Vertical_" + Mathf.Ceil(player_num % 2.0f).ToString());
@@ -240,6 +251,9 @@ public class PlayerController : MonoBehaviour {
 		transform.Rotate(Vector3.up, rotate_speed * Time.deltaTime * rotate_input);
 		transform.localPosition += ((transform.forward * walk_speed * forward_input * Time.deltaTime) +
 		                            (transform.right * walk_speed * sidestep_input * Time.deltaTime));
+		Vector3 newVel = transform.rigidbody.velocity;
+		newVel.y += jump_input * jump_height;
+		transform.rigidbody.velocity = newVel;
 	}
 
 	public void awakePlayer() {
