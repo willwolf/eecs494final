@@ -255,7 +255,13 @@ public class PlayerController : MonoBehaviour {
 				shopMenu.ScrollUp();
 			}
 			if (device.Action1.WasPressed) {
-				ShopItem item = shopMenu.MakePurchase(homeBase_GO.GetInstanceID());
+				ShopItem item = shopMenu.GetCurrentItem();
+				if ((item is SwordScript && currentWeapon is SwordScript) || 
+				    (item is BowScript && currentWeapon is BowScript) || 
+				    (item is WallScript && homeBase.HasWalls())) {
+					return;
+				}
+				item = shopMenu.MakePurchase(homeBase_GO.GetInstanceID());
 				HandlePurchase(item);
 			}
 		} else {
@@ -266,7 +272,13 @@ public class PlayerController : MonoBehaviour {
 				shopMenu.ScrollUp();
 			}
 			if (Input.GetButtonDown("Action_" + (player_num % 2).ToString())) {
-				ShopItem item = shopMenu.MakePurchase(homeBase_GO.GetInstanceID());
+				ShopItem item = shopMenu.GetCurrentItem();
+				if ((item is SwordScript && currentWeapon is SwordScript) || 
+				    (item is BowScript && currentWeapon is BowScript) || 
+				    (item is WallScript && homeBase.HasWalls())) {
+					return;
+				}
+				item = shopMenu.MakePurchase(homeBase_GO.GetInstanceID());
 				HandlePurchase(item);
 			}
 		}

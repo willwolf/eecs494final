@@ -81,6 +81,10 @@ public class ShopMenu : MonoBehaviour {
 		lerpV = true;
 	}
 
+	public ShopItem GetCurrentItem() {
+		return shoplist.items[current_item].GetComponent<ShopItem>();
+	}
+
 	public ShopItem MakePurchase(int team_id) {
 		ResourceCount team_count = manager.GetTeamResourceInfo(team_id);
 		ShopItem item = shoplist.items[current_item].GetComponent<ShopItem>();
