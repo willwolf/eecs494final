@@ -162,35 +162,7 @@ public class PlayerController : MonoBehaviour {
 		if (!shopOpen) {
 			Move();
 		} else {
-			if (device != null) {
-				if (device.Action3.WasPressed) { // X button pressed
-					ShopMenu sm = shop.GetComponent<ShopMenu>();
-					if (!hasSword && sm.MakePurchase(homeBase_GO.GetInstanceID(), 0)) {
-						print ("Bought sword");
-						hasSword = true;
-					}
-				} else if (device.Action4.WasPressed) { // Y button pressed
-					ShopMenu sm = shop.GetComponent<ShopMenu>();
-					if (!homeBase.HasWalls() && sm.MakePurchase(homeBase_GO.GetInstanceID(), 1)) {
-						print ("Wall purchased");
-						homeBase.TurnOnWalls();
-					}
-				}
-			} else {
-				if (Input.GetButtonDown("Purchase_First_" + Mathf.Ceil(player_num % 2.0f).ToString())) {
-					ShopMenu sm = shop.GetComponent<ShopMenu>();
-					if (!hasSword && sm.MakePurchase(homeBase_GO.GetInstanceID(), 0)) {
-						print ("Bought sword");
-						hasSword = true;
-					}
-				} else if (Input.GetButtonDown("Purchase_Second_" + Mathf.Ceil(player_num % 2.0f).ToString())) {
-					ShopMenu sm = shop.GetComponent<ShopMenu>();
-					if (!homeBase.HasWalls() && sm.MakePurchase(homeBase_GO.GetInstanceID(), 1)) {
-						print ("Wall purchased");
-						homeBase.TurnOnWalls();
-					}
-				}
-			}
+			CheckShopInputs();
 		}
 
 		foreach (Renderer renderer in this.GetComponentsInChildren<Renderer>()) {
@@ -276,6 +248,47 @@ public class PlayerController : MonoBehaviour {
 			return moveSpeed * encumbered;
 		} else {
 			return moveSpeed * enemy_base_speed_multiplier;
+		}
+	}
+
+	void CheckShopInputs() {
+		if (device != null) {
+			if (device.LeftStickY) {
+				ScrollRect scrollRect = shop.transform.FindChild("Scroll View").GetComponent<ScrollRect>();
+				scrollRect.verticalNormalizedPosition += 0.1f * device.LeftStickY;
+				if (scrollRect.verticalNormalizedPosition < 0) {
+					scrollRect.verticalNormalizedPosition = 0;
+				} else if (scrollRect.verticalNormalizedPosition > 1) {
+					scrollRect.verticalNormalizedPosition = 1;
+				}
+			}
+			if (device.Action3.WasPressed) { // X button pressed
+				ShopMenu sm = shop.GetComponent<ShopMenu>();
+				if (!hasSword && sm.MakePurchase(homeBase_GO.GetInstanceID(), 0)) {
+					print ("Bought sword");
+					hasSword = true;
+				}
+			} else if (device.Action4.WasPressed) { // Y button pressed
+				ShopMenu sm = shop.GetComponent<ShopMenu>();
+				if (!homeBase.HasWalls() && sm.MakePurchase(homeBase_GO.GetInstanceID(), 1)) {
+					print ("Wall purchased");
+					homeBase.TurnOnWalls();
+				}
+			}
+		} else {
+			if (Input.GetButtonDown("Purchase_First_" + Mathf.Ceil(player_num % 2.0f).ToString())) {
+				ShopMenu sm = shop.GetComponent<ShopMenu>();
+				if (!hasSword && sm.MakePurchase(homeBase_GO.GetInstanceID(), 0)) {
+					print ("Bought sword");
+					hasSword = true;
+				}
+			} else if (Input.GetButtonDown("Purchase_Second_" + Mathf.Ceil(player_num % 2.0f).ToString())) {
+				ShopMenu sm = shop.GetComponent<ShopMenu>();
+				if (!homeBase.HasWalls() && sm.MakePurchase(homeBase_GO.GetInstanceID(), 1)) {
+					print ("Wall purchased");
+					homeBase.TurnOnWalls();
+				}
+			}
 		}
 	}
 
