@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class WallScript : BaseUpgradeItem {
+public class BowScript : WeaponItem {
 
 	// Use this for initialization
 	void Start () {
@@ -17,5 +17,4 @@ public class WallScript : BaseUpgradeItem {
 	public bool CanPurchase() {
 		return true;
 	}
-
 }

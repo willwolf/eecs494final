@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.UI;
 using InControl;
 
@@ -8,13 +9,18 @@ public class PlayerController : MonoBehaviour {
 	public int RESPAWN_TIME = 20;
 	private bool dead = false;
 	private float respawn_at_time;
-	public int health = 10;
+	public int startingHealth = 10;
+	private int health;
 	public int damage_amount = 2;
-	public int INVULNERABLE_TIME = 2;
+	public float INVULNERABLE_TIME = 2;
 	private float vulnerable_at_time;
+	public float HEALTH_REGEN_TIME = 5;
+	private float regen_at_time;
 	
 	public int player_num  = 0;
 	public InputDevice device = null;
+	public float controller_sensitivity = 0.5f;
+	public float jump_height = 5f;
 	public float rotate_speed = 90f;
 	public float walk_speed = 8f;
 	public float enemy_base_speed_multiplier = 0.5f;
@@ -46,29 +52,32 @@ public class PlayerController : MonoBehaviour {
 	public bool inEnemyBase = false;
 	public int EnemyBaseId;
 
-	public bool hasSword = false;
+	public bool hasStealth = false;
+	public bool stealthActive = false;
+	private double stealthAmount = 1;
+
 	
 	private Text stone_text;
 	private Text wood_text;
 	private Text mid_screen_text;
+	private Slider health_slider;
 
 	public AudioSource mining_stone;
 	public AudioSource chopping_wood;
 	public AudioSource dropping_resources;
 	public AudioSource stealing_resources;
 
-	public GameObject sword;
-	public Transform swordTransform;
-	public Transform hiltTransform;
-	public bool upswing = false;
-	public bool downswing = false;
-	public Vector3 swingStart;
-	public Vector3 swingEnd;
+//	public GameObject sword;
+	public bool hasWeapon = false;
+	public int currentWeaponIndex = 0;
+	public List<GameObject> weapons = new List<GameObject>();
+	public WeaponItem currentWeapon = null;
 
 	public GameManager gm;
 	public Canvas canvas;
 
 	public GameObject shop;
+	public ShopMenu shopMenu;
 	public bool shopOpen;
 
 	// Use this for initialization
@@ -80,6 +89,7 @@ public class PlayerController : MonoBehaviour {
 		wood_text = canvas.transform.FindChild("Wood_Text").GetComponent<Text>();
 		stone_text = canvas.transform.FindChild("Stone_Text").GetComponent<Text>();
 		mid_screen_text = canvas.transform.FindChild("mid_screen_text").GetComponent<Text>();
+		health_slider = canvas.transform.FindChild("Slider").GetComponent<Slider>();
 
 		mid_screen_text.text = "";
 		updateStoneText();
@@ -87,23 +97,23 @@ public class PlayerController : MonoBehaviour {
 
 		homeBase = homeBase_GO.GetComponent<Base>();
 		shop = canvas.transform.FindChild ("Shop_Menu").gameObject;
-		shopOpen = false;//true;
+		shopMenu = shop.GetComponent<ShopMenu>();
+
+		shopOpen = false;
 		shop.SetActive(false);
+
+		health = startingHealth;
 		gm = GameObject.Find("GameManager").GetComponent<GameManager>();
 
-		//For testing purposes only
-		if (hasSword) {
-			swordTransform = transform.FindChild("Sword");		
-
-			//sword.layer = "Weapon" + player_num;
-//			hiltTransform = Transform.FindChild("Hilt");
+		foreach (GameObject weapon in weapons) {
+			weapon.SetActive(false);
 		}
-		swingStart = this.transform.position + this.transform.forward;
-		swingEnd = this.transform.position + this.transform.right;
 
-		var devices = InputManager.Devices;
-		if (devices == null) {
-			return;
+		if (device != null) {
+			device.RightStickX.LowerDeadZone = controller_sensitivity;
+			device.RightStickY.LowerDeadZone = controller_sensitivity;
+			device.LeftStickX.LowerDeadZone = controller_sensitivity;
+			device.LeftStickY.LowerDeadZone = controller_sensitivity;
 		}
 	}
 	
@@ -126,6 +136,17 @@ public class PlayerController : MonoBehaviour {
 				mid_screen_text.text = "Respawn in " + Mathf.Floor(respawn_at_time - Time.time).ToString("0") + " seconds";
 				return;
 			}
+		} else if(inBase) {
+			if(Time.time > regen_at_time){
+				health += 1;
+				if(health > startingHealth) {
+					health = startingHealth;
+				}
+				health_slider.value = health;
+				regen_at_time = Time.time + HEALTH_REGEN_TIME;
+			}
+		} else {
+			regen_at_time = Time.time + HEALTH_REGEN_TIME;
 		}
 
 		if (showing) {
@@ -149,47 +170,20 @@ public class PlayerController : MonoBehaviour {
 			updateMidScreenText("Backpack Full");
 		}
 
-		/*
-		if(hasSword && swing){
-			swing = sword.GetComponent<SwordScript>().swing();
-		}*/
-		if (hasSword) {
-
-		
-		}
-
 		if (!shopOpen) {
 			Move();
 		} else {
-			if (device != null) {
-				if (device.Action3.WasPressed) { // X button pressed
-					ShopMenu sm = shop.GetComponent<ShopMenu>();
-					if (!hasSword && sm.MakePurchase(homeBase_GO.GetInstanceID(), 0)) {
-						print ("Bought sword");
-						hasSword = true;
-					}
-				} else if (device.Action4.WasPressed) { // Y button pressed
-					ShopMenu sm = shop.GetComponent<ShopMenu>();
-					if (!homeBase.HasWalls() && sm.MakePurchase(homeBase_GO.GetInstanceID(), 1)) {
-						print ("Wall purchased");
-						homeBase.TurnOnWalls();
-					}
-				}
+			CheckShopInputs();
+		}
+
+		foreach (Renderer renderer in this.GetComponentsInChildren<Renderer>()) {
+			Color col = renderer.material.color;
+			if (stealthActive) {
+				col.a = .1f;
 			} else {
-				if (Input.GetButtonDown("Purchase_First_" + Mathf.Ceil(player_num % 2.0f).ToString())) {
-					ShopMenu sm = shop.GetComponent<ShopMenu>();
-					if (!hasSword && sm.MakePurchase(homeBase_GO.GetInstanceID(), 0)) {
-						print ("Bought sword");
-						hasSword = true;
-					}
-				} else if (Input.GetButtonDown("Purchase_Second_" + Mathf.Ceil(player_num % 2.0f).ToString())) {
-					ShopMenu sm = shop.GetComponent<ShopMenu>();
-					if (!homeBase.HasWalls() && sm.MakePurchase(homeBase_GO.GetInstanceID(), 1)) {
-						print ("Wall purchased");
-						homeBase.TurnOnWalls();
-					}
-				}
+				col.a = 1f;
 			}
+			renderer.material.color = col;
 		}
 
 		if (device != null) {
@@ -209,52 +203,118 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void LateUpdate(){
-		if(!hasSword || dead){
-			foreach (Collider collider in sword.GetComponentsInChildren<Collider>()) {
-				collider.enabled = false;
-			}
-			foreach (MeshRenderer renderer in sword.GetComponentsInChildren<MeshRenderer>()) {
-				renderer.enabled = false;
-			}
-			
-		} else {
-			foreach (Collider collider in sword.GetComponentsInChildren<Collider>()) {
-				swordTransform = transform.FindChild("Sword");
-				collider.enabled = true;
-			}
-			foreach (MeshRenderer renderer in sword.GetComponentsInChildren<MeshRenderer>()) {
-				renderer.enabled = true; 
-			}
-		}
+
 	}
 
 	void Move() {
 		float rotate_input = 0,
 			  forward_input = 0,
-			  sidestep_input = 0;
+			  sidestep_input = 0,
+			  jump_input = 0;
 		if (device != null) {
 			// Default to using controller inputs, if they are present otherwise use keyboard commands
 			rotate_input = device.RightStickX;
 			sidestep_input = device.LeftStickX;
 			forward_input = device.LeftStickY;
+			if (device.Action4.WasPressed) {
+				// Check for being on the ground when the button is pressed
+				if (Physics.Raycast(transform.position, Vector3.down, transform.collider.bounds.extents.y + 0.1f)) {
+					jump_input = 1;
+				}
+			}
 		} else {
 			rotate_input = Input.GetAxis("Horizontal_" + Mathf.Ceil(player_num % 2.0f).ToString());
 			forward_input = Input.GetAxis("Vertical_" + Mathf.Ceil(player_num % 2.0f).ToString());
 		}
-		if(inEnemyBase){
-			rotate_input *= enemy_base_speed_multiplier;
-			forward_input *= enemy_base_speed_multiplier;
-			sidestep_input *= enemy_base_speed_multiplier;
-		}
 		
 		transform.Rotate(Vector3.up, rotate_speed * Time.deltaTime * rotate_input);
-		transform.localPosition += ((transform.forward * walk_speed * forward_input * Time.deltaTime) +
-		                            (transform.right * walk_speed * sidestep_input * Time.deltaTime));
+		transform.localPosition += (CalculateMoveSpeed(transform.forward, forward_input) +
+		                            CalculateMoveSpeed(transform.right, sidestep_input));
+		Vector3 newVel = transform.rigidbody.velocity;
+		newVel.y += jump_input * jump_height;
+		transform.rigidbody.velocity = newVel;
+	}
+	Vector3 CalculateMoveSpeed(Vector3 direction, float input_data) {
+		Vector3 moveSpeed = direction * walk_speed * input_data * Time.deltaTime;
+		if (!inEnemyBase) {
+			float encumbered = 1;
+			// max encumberance == 1 - enemy_base_speed_multiplier
+			encumbered -= Mathf.Min(((1.0f * curr_wood_resource + curr_stone_resource) / MAX_RESOURCES), 
+			                        enemy_base_speed_multiplier);
+			return moveSpeed * encumbered;
+		} else {
+			return moveSpeed * enemy_base_speed_multiplier;
+		}
+	}
+
+	void CheckShopInputs() {
+		if (device != null) {
+			if (device.LeftStickY < 0) {
+				shopMenu.ScrollDown();
+			} else if (device.LeftStickY > 0) {
+				shopMenu.ScrollUp();
+			}
+			if (device.Action1.WasPressed) {
+				ShopItem item = shopMenu.GetCurrentItem();
+				if ((item is SwordScript && currentWeapon is SwordScript) || 
+				    (item is BowScript && currentWeapon is BowScript) || 
+				    (item is WallScript && homeBase.HasWalls())) {
+					return;
+				}
+				item = shopMenu.MakePurchase(homeBase_GO.GetInstanceID());
+				HandlePurchase(item);
+			}
+		} else {
+			float vertInput = Input.GetAxis("Vertical_" + (player_num % 2.0f).ToString());
+			if (vertInput < 0) {
+				shopMenu.ScrollDown();
+			}else if (vertInput > 0) {
+				shopMenu.ScrollUp();
+			}
+			if (Input.GetButtonDown("Action_" + (player_num % 2).ToString())) {
+				ShopItem item = shopMenu.GetCurrentItem();
+				if ((item is SwordScript && currentWeapon is SwordScript) || 
+				    (item is BowScript && currentWeapon is BowScript) || 
+				    (item is WallScript && homeBase.HasWalls())) {
+					return;
+				}
+				item = shopMenu.MakePurchase(homeBase_GO.GetInstanceID());
+				HandlePurchase(item);
+			}
+		}
+	}
+	void HandlePurchase(ShopItem item) {
+		if (item) {
+			if (item is WeaponItem) {
+				HandleWeapon((WeaponItem)item);
+			} else if (item is BaseUpgradeItem) {
+				HandleBaseUpgrade((BaseUpgradeItem)item);
+			}
+		}
+	}
+	void HandleWeapon(WeaponItem weapon) {
+		weapons[currentWeaponIndex].SetActive(false);
+		if (weapon is SwordScript) {
+			hasWeapon = true;
+			currentWeapon = weapon;
+			currentWeaponIndex = 0;
+		} else if (weapon is BowScript) {
+			hasWeapon = true;
+			currentWeapon = weapon;
+			currentWeaponIndex = 1;
+		}
+		weapons[currentWeaponIndex].SetActive(true);	
+	}
+	void HandleBaseUpgrade(BaseUpgradeItem upgrade) {
+		if (upgrade is WallScript) {
+			homeBase.TurnOnWalls();
+		}
 	}
 
 	public void awakePlayer() {
 		dead = false;
-		hasSword = false;
+		health = startingHealth;
+		health_slider.value = health;
 		foreach (Collider collider in GetComponentsInChildren<Collider>()) {
 			collider.enabled = true;
 		}
@@ -270,6 +330,7 @@ public class PlayerController : MonoBehaviour {
 		if(Time.time > vulnerable_at_time){
 			health -= damage;
 			//update health bar
+			health_slider.value = health;
 			vulnerable_at_time = Time.time + INVULNERABLE_TIME;
 			Debug.Log("Player " + player_num + " health is " + health);
 		}
@@ -300,6 +361,12 @@ public class PlayerController : MonoBehaviour {
 		updateWoodText();
 		this.transform.position = homeBase_GO.transform.position;
 
+		stealthActive = false;
+		hasWeapon = false;
+		currentWeapon = null;
+		weapons[currentWeaponIndex].SetActive(false);
+		hasStealth = false;
+
 		dead = true;
 		if (inEnemyBase) {
 			gm.playerInBase(false, EnemyBaseId);
@@ -311,14 +378,8 @@ public class PlayerController : MonoBehaviour {
 	void TakeAction() {
 		RaycastHit hitinfo;
 		if (IsInRange(out hitinfo, "Player") && !shopOpen) {
-			if(hasSword && !inEnemyBase){
-				/*if(!swing){
-					swing = true;
-					sword.GetComponent<SwordScript>().setUpswing(true);
-				}*/
-				sword.GetComponent<SwordScript>().swing();
-
-
+			// TODO: Call SwordScript::Swing
+			if(hasWeapon && !inEnemyBase){
 				PlayerController other = hitinfo.transform.GetComponent<PlayerController>();
 				if (other.homeBase_GO.GetInstanceID() != this.gameObject.GetInstanceID()) {
 					Debug.Log("In range of enemy player");
@@ -327,7 +388,7 @@ public class PlayerController : MonoBehaviour {
 				} else {
 					Debug.Log("In range of friendly player");
 				}
-			} else if(!hasSword) {
+			} else if(!hasWeapon) {
 				Debug.Log("Can't kill player without the sword!");
 			} else {
 				Debug.Log("Can't kill player in base!");
@@ -391,15 +452,6 @@ public class PlayerController : MonoBehaviour {
 				}
 			}
 		} 
-//		else if(inBase){
-//			if (device != null) {
-//				if (device.Action1.WasPressed) {
-//					ToggleStore();
-//				}
-//			} else if (Input.GetButtonDown("Action_" + Mathf.Ceil(player_num % 2.0f).ToString())) {
-//				ToggleStore();
-//			}
-//		}
 	}
 
 	void ToggleStore() {

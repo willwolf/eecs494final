@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class WallScript : BaseUpgradeItem {
+public abstract class BaseUpgradeItem : ShopItem {
 
 	// Use this for initialization
 	void Start () {
@@ -12,10 +12,4 @@ public class WallScript : BaseUpgradeItem {
 	void Update () {
 	
 	}
-
-	override
-	public bool CanPurchase() {
-		return true;
-	}
-
 }
