@@ -383,8 +383,10 @@ public class PlayerController : MonoBehaviour {
 				PlayerController other = hitinfo.transform.GetComponent<PlayerController>();
 				if (other.homeBase_GO.GetInstanceID() != this.gameObject.GetInstanceID()) {
 					Debug.Log("In range of enemy player");
-
-			//		other.takeDamage(damage_amount, homeBase_GO);
+					if (currentWeapon is SwordScript) {
+						weapons[currentWeaponIndex].GetComponent<SwordScript>().Swing();
+					}
+					other.takeDamage(damage_amount, homeBase_GO);
 				} else {
 					Debug.Log("In range of friendly player");
 				}
