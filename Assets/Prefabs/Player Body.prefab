@@ -367,6 +367,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &175506
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 475506}
+  - 114: {fileID: 11475506}
+  m_Layer: 0
+  m_Name: Stealth
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!4 &410902
 Transform:
   m_ObjectHideFlags: 1
@@ -613,6 +629,7 @@ Transform:
   - {fileID: 421854}
   - {fileID: 420228}
   - {fileID: 410918}
+  - {fileID: 475506}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &456058
@@ -639,6 +656,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 456056}
   m_RootOrder: 3
+--- !u!4 &475506
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 175506}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 49.6611481, y: 1.24833155, z: -9.03915501}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 456056}
+  m_RootOrder: 9
 --- !u!20 &2020228
 Camera:
   m_ObjectHideFlags: 1
@@ -1436,6 +1465,7 @@ MonoBehaviour:
   damage_amount: 2
   INVULNERABLE_TIME: 1
   HEALTH_REGEN_TIME: 1
+  FIRE_RATE_TIME: .5
   player_num: 1
   controller_sensitivity: .5
   jump_height: 5
@@ -1475,6 +1505,17 @@ MonoBehaviour:
   shopMenu: {fileID: 0}
   shopOpen: 0
   arrow: {fileID: 193964, guid: bbb61d06d237441deb88b644408f120c, type: 2}
+--- !u!114 &11475506
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 175506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0590a2d52f6e34daab97c35d98cc86ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!124 &12420228
 Behaviour:
   m_ObjectHideFlags: 1

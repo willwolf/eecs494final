@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviour {
 	private float vulnerable_at_time;
 	public float HEALTH_REGEN_TIME = 5;
 	private float regen_at_time;
+	public float FIRE_RATE_TIME = 0.5f;
+	private float next_fire_at_time;
 	
 	public int player_num  = 0;
 	public InputDevice device = null;
@@ -427,7 +429,11 @@ public class PlayerController : MonoBehaviour {
 				}
 			}
 		}  else if (currentWeapon is BowScript){
-			Arrow newArrow = Instantiate(arrow, transform.position + transform.forward, Quaternion.AngleAxis(90, transform.right)) as Arrow;
+			if(Time.time > next_fire_at_time){
+				Arrow newArrow = Instantiate(arrow, transform.position + transform.forward, Quaternion.AngleAxis(90, transform.right)) as Arrow;
+				next_fire_at_time = Time.time + FIRE_RATE_TIME;
+			}
+
 		}
 	}
 

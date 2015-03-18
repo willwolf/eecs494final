@@ -21,7 +21,7 @@ public class Arrow : MonoBehaviour {
 		transform.localPosition += transform.up * Time.deltaTime * 20;
 	}
 
-	void OnCollisionEnter(Collision other){
+	void OnTriggerEnter(Collider other){
 		if(other.gameObject.layer == LayerMask.NameToLayer("Player")){
 			PlayerController player = other.transform.GetComponent<PlayerController>();
 			//friendly fire allowed
