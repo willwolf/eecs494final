@@ -84,6 +84,7 @@ public class PlayerController : MonoBehaviour {
 	public GameObject shop;
 	public ShopMenu shopMenu;
 	public bool shopOpen;
+	public GameObject arrow;
 
 	// Use this for initialization
 	void Start () {
@@ -322,7 +323,16 @@ public class PlayerController : MonoBehaviour {
 			currentWeapon = weapon;
 			currentWeaponIndex = 1;
 		}
-		weapons[currentWeaponIndex].SetActive(true);	
+		weapons[currentWeaponIndex].SetActive(true);
+		//set to visible
+		foreach (MeshRenderer renderer in weapons[currentWeaponIndex].GetComponentsInChildren<MeshRenderer>()) {
+			renderer.enabled = true;
+		}
+		foreach (Collider collider in weapons[currentWeaponIndex].GetComponentsInChildren<Collider>()) {
+			collider.enabled = true;
+		}
+
+
 	}
 
 	void HandleBaseUpgrade(BaseUpgradeItem upgrade) {
@@ -406,7 +416,9 @@ public class PlayerController : MonoBehaviour {
 					other.takeDamage(damage_amount, homeBase_GO);
 				}
 			}
-		} 
+		}  else if (currentWeapon is BowScript){
+			Arrow newArrow = Instantiate(arrow, transform.position + transform.forward, Quaternion.AngleAxis(90, transform.right)) as Arrow;
+		}
 	}
 
 	void TakeAction() {

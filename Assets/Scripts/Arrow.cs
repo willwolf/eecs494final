@@ -18,7 +18,7 @@ public class Arrow : MonoBehaviour {
 		if(Time.time > kill_at_time){
 			Destroy(this.gameObject);
 		}
-		transform.localPosition += transform.up * Time.deltaTime * 5;
+		transform.localPosition += transform.up * Time.deltaTime * 20;
 	}
 
 	void OnCollisionEnter(Collision other){
