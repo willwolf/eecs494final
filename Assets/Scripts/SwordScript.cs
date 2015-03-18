@@ -20,18 +20,18 @@ public class SwordScript : WeaponItem {
 	void Update () {
 		if (upswing){
 			transform.localPosition = Vector3.Slerp(transform.localPosition, swingEnd, 25 * Time.deltaTime);
-			print ("swingup");
+			//print ("swingup");
 			if (transform.localPosition == swingEnd) {
-				print ("start downswing");
+			//	print ("start downswing");
 				upswing = false;
 				downswing = true;
 			}
 		}	
 		if (downswing){
-			print ("swingdown");
+			//print ("swingdown");
 			transform.localPosition = Vector3.Slerp(transform.localPosition, swingStart, 25 * Time.deltaTime);
 			if (transform.localPosition == swingStart) {	
-				print ("back to start");
+		//		print ("back to start");
 				downswing = false;
 			}
 		}

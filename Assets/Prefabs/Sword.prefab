@@ -11,7 +11,7 @@ GameObject:
   - 33: {fileID: 3301452}
   - 65: {fileID: 6501452}
   - 23: {fileID: 2301452}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Hilt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29,7 +29,7 @@ GameObject:
   - 33: {fileID: 3374100}
   - 65: {fileID: 6574100}
   - 23: {fileID: 2374100}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Blade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47,7 +47,7 @@ GameObject:
   - 33: {fileID: 3374102}
   - 65: {fileID: 6574102}
   - 23: {fileID: 2374102}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Hilt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -63,7 +63,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 474104}
   - 114: {fileID: 11401452}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Sword
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -112,7 +112,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 174104}
-  m_LocalRotation: {x: .707106829, y: .707106709, z: -1.15202326e-07, w: -1.15202312e-07}
+  m_LocalRotation: {x: .707106888, y: .707106769, z: -1.15202333e-07, w: -1.15202319e-07}
   m_LocalPosition: {x: -.640000343, y: .154999971, z: .619995117}
   m_LocalScale: {x: .25, y: 1, z: 1.60000002}
   m_Children:
