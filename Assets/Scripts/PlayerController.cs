@@ -189,7 +189,7 @@ public class PlayerController : MonoBehaviour {
 			} if(device.RightTrigger.IsPressed && !shopOpen){
 				Attack();
 			}
-		} else if (Input.GetButton("Action_" + Mathf.Ceil(player_num % 2.0f).ToString())) {
+		} else if (Input.GetButton("Action_" + (player_num % 2).ToString())) {
 			if(!shopOpen){
 				Attack();
 			}
@@ -199,7 +199,7 @@ public class PlayerController : MonoBehaviour {
 			if (device.DPadUp.WasPressed && inBase) {
 				ToggleStore();
 			}
-		} else if (Input.GetButtonDown("Store_Open_" + Mathf.Ceil(player_num % 2.0f).ToString()) && inBase) {
+		} else if (Input.GetButtonDown("Store_Open_" + (player_num % 2).ToString()) && inBase) {
 			ToggleStore();
 		}
 	}
@@ -234,8 +234,8 @@ public class PlayerController : MonoBehaviour {
 				}
 			}
 		} else {
-			rotate_input = Input.GetAxis("Horizontal_" + Mathf.Ceil(player_num % 2.0f).ToString());
-			forward_input = Input.GetAxis("Vertical_" + Mathf.Ceil(player_num % 2.0f).ToString());
+			rotate_input = Input.GetAxis("Horizontal_" + (player_num % 2).ToString());
+			forward_input = Input.GetAxis("Vertical_" + (player_num % 2).ToString());
 		}
 		
 		transform.Rotate(Vector3.up, rotate_speed * Time.deltaTime * rotate_input);
@@ -277,7 +277,7 @@ public class PlayerController : MonoBehaviour {
 				HandlePurchase(item);
 			}
 		} else {
-			float vertInput = Input.GetAxis("Vertical_" + (player_num % 2.0f).ToString());
+			float vertInput = Input.GetAxis("Vertical_" + (player_num % 2).ToString());
 			if (vertInput < 0) {
 				shopMenu.ScrollDown();
 			}else if (vertInput > 0) {
@@ -522,13 +522,13 @@ public class PlayerController : MonoBehaviour {
 	}
 	
 	void CollectStone(string message){
-		updateMidScreenText("Player " + Mathf.Ceil(player_num % 2.0f).ToString() + message);
+		updateMidScreenText("Player " + player_num.ToString() + message);
 		curr_stone_resource++;
 		updateStoneText();
 	}
 
 	void CollectWood(string message){
-		updateMidScreenText("Player " + Mathf.Ceil(player_num % 2.0f).ToString() + message);
+		updateMidScreenText("Player " + player_num.ToString() + message);
 		curr_wood_resource++;
 		updateWoodText();
 	}
