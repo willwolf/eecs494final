@@ -15,7 +15,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &445334
 Transform:
   m_ObjectHideFlags: 1
@@ -41,8 +41,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 0}
   item_name: Stealth
-  stone_cost: 5
-  wood_cost: 5
+  stone_cost: 10
+  wood_cost: 10
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
