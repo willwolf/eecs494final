@@ -1472,16 +1472,15 @@ MonoBehaviour:
   rotate_speed: 180
   walk_speed: 15
   enemy_base_speed_multiplier: .5
-  encumberPercent: .649999976
+  encumberPercent: .5
   curr_wood_resource: 0
   wood_gather_val: 1
   curr_stone_resource: 0
   stone_gather_val: 1
   MAX_RESOURCES: 12
   backpackFull: 0
-  WOOD_COOLDOWN_TIME: .5
-  STONE_COOLDOWN_TIME: .5
-  STEAL_COOLDOWN_TIME: .5
+  COLLECTION_COOLDOWN_TIME: .5
+  STEAL_COOLDOWN_TIME: .25
   MIDTEXT_COOLDOWN_TIME: 1
   homeBase_GO: {fileID: 0}
   inBase: 0
