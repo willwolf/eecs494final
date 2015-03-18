@@ -70,6 +70,7 @@ public class PlayerController : MonoBehaviour {
 	public AudioSource chopping_wood;
 	public AudioSource dropping_resources;
 	public AudioSource stealing_resources;
+	public AudioSource swinging_sword;
 
 //	public GameObject sword;
 	public bool hasWeapon = false;
@@ -397,6 +398,7 @@ public class PlayerController : MonoBehaviour {
 	void Attack(){
 		if(currentWeapon is SwordScript){
 			weapons[currentWeaponIndex].GetComponent<SwordScript>().Swing();
+			swinging_sword.Play();
 			RaycastHit hitinfo;
 			if (IsInRange(out hitinfo, "Player") && !inEnemyBase){
 				PlayerController other = hitinfo.transform.GetComponent<PlayerController>();
