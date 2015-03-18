@@ -417,7 +417,7 @@ public class PlayerController : MonoBehaviour {
 				}
 			}
 		}  else if (currentWeapon is BowScript){
-			Arrow newArrow = Instantiate(arrow, transform.position + transform.forward, new Quaternion()) as Arrow;
+			Arrow newArrow = Instantiate(arrow, transform.position + transform.forward, Quaternion.AngleAxis(90, transform.right)) as Arrow;
 		}
 	}
 

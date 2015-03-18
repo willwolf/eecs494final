@@ -1474,6 +1474,7 @@ MonoBehaviour:
   shop: {fileID: 0}
   shopMenu: {fileID: 0}
   shopOpen: 0
+  arrow: {fileID: 193964, guid: bbb61d06d237441deb88b644408f120c, type: 2}
 --- !u!124 &12420228
 Behaviour:
   m_ObjectHideFlags: 1
