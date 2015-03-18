@@ -1498,6 +1498,7 @@ MonoBehaviour:
   weapons:
   - {fileID: 121854}
   - {fileID: 110918}
+  - {fileID: 145334, guid: 6ee2ee0a489434952bcdedba92a5170c, type: 2}
   currentWeapon: {fileID: 0}
   gm: {fileID: 0}
   canvas: {fileID: 0}
@@ -1516,6 +1517,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0590a2d52f6e34daab97c35d98cc86ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  icon: {fileID: 0}
+  item_name: 
+  stone_cost: 0
+  wood_cost: 0
 --- !u!124 &12420228
 Behaviour:
   m_ObjectHideFlags: 1
