@@ -291,7 +291,7 @@ GameObject:
   - 4: {fileID: 456052}
   - 82: {fileID: 8256044}
   m_Layer: 0
-  m_Name: DropSound
+  m_Name: SwordSound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -346,6 +346,22 @@ GameObject:
   - 82: {fileID: 8256046}
   m_Layer: 0
   m_Name: StealSound
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &161448
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 461448}
+  - 82: {fileID: 8261448}
+  m_Layer: 0
+  m_Name: DropSound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -420,7 +436,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 110912}
-  m_LocalRotation: {x: -.382683456, y: 0, z: 0, w: .923879504}
+  m_LocalRotation: {x: -.382683486, y: 0, z: 0, w: .923879564}
   m_LocalPosition: {x: 0, y: 1.25399995, z: -.106999993}
   m_LocalScale: {x: .0989999995, y: .180000007, z: .0989999995}
   m_Children: []
@@ -432,7 +448,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 110914}
-  m_LocalRotation: {x: .382683456, y: 0, z: 0, w: .923879504}
+  m_LocalRotation: {x: .382683486, y: 0, z: 0, w: .923879564}
   m_LocalPosition: {x: 0, y: -.546000004, z: -.106999993}
   m_LocalScale: {x: .0989999995, y: .180000007, z: .0989999995}
   m_Children: []
@@ -466,7 +482,7 @@ Transform:
   - {fileID: 410910}
   - {fileID: 410908}
   m_Father: {fileID: 456056}
-  m_RootOrder: 7
+  m_RootOrder: 8
 --- !u!4 &420228
 Transform:
   m_ObjectHideFlags: 1
@@ -478,7 +494,7 @@ Transform:
   m_LocalScale: {x: 2, y: 1.55821168, z: 4.20895672}
   m_Children: []
   m_Father: {fileID: 456056}
-  m_RootOrder: 6
+  m_RootOrder: 7
 --- !u!4 &421850
 Transform:
   m_ObjectHideFlags: 1
@@ -517,7 +533,7 @@ Transform:
   - {fileID: 421856}
   - {fileID: 421850}
   m_Father: {fileID: 456056}
-  m_RootOrder: 5
+  m_RootOrder: 6
 --- !u!4 &421856
 Transform:
   m_ObjectHideFlags: 1
@@ -541,7 +557,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 456056}
-  m_RootOrder: 1
+  m_RootOrder: 2
 --- !u!4 &456050
 Transform:
   m_ObjectHideFlags: 1
@@ -560,12 +576,12 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 156052}
-  m_LocalRotation: {x: 0, y: 2.59342528e-07, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: .99999994}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 456056}
-  m_RootOrder: 2
+  m_RootOrder: 1
 --- !u!4 &456054
 Transform:
   m_ObjectHideFlags: 1
@@ -577,7 +593,7 @@ Transform:
   m_LocalScale: {x: 1.25, y: .300000012, z: 1.25}
   m_Children: []
   m_Father: {fileID: 456056}
-  m_RootOrder: 4
+  m_RootOrder: 5
 --- !u!4 &456056
 Transform:
   m_ObjectHideFlags: 1
@@ -589,8 +605,9 @@ Transform:
   m_LocalScale: {x: .5, y: 2, z: .5}
   m_Children:
   - {fileID: 456050}
-  - {fileID: 449478}
   - {fileID: 456052}
+  - {fileID: 449478}
+  - {fileID: 461448}
   - {fileID: 456058}
   - {fileID: 456054}
   - {fileID: 421854}
@@ -607,6 +624,18 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 456056}
+  m_RootOrder: 4
+--- !u!4 &461448
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161448}
+  m_LocalRotation: {x: 0, y: 2.59342528e-07, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: .99999994}
   m_Children: []
   m_Father: {fileID: 456056}
   m_RootOrder: 3
@@ -1188,7 +1217,7 @@ AudioSource:
   m_GameObject: {fileID: 156052}
   m_Enabled: 1
   serializedVersion: 3
-  m_audioClip: {fileID: 8300000, guid: 4ced76b6e3e410b4b8bfaff9a60fcf1c, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 23741429b530edd4ab05abe082588a52, type: 3}
   m_PlayOnAwake: 0
   m_Volume: .699999988
   m_Pitch: 1
@@ -1247,6 +1276,64 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 3
   m_audioClip: {fileID: 8300000, guid: b35f6da5959bbc543895fb09b8c0221b, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: .699999988
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 4950.49512
+  MaxDistance: 5000
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+--- !u!82 &8261448
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161448}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_audioClip: {fileID: 8300000, guid: 4ced76b6e3e410b4b8bfaff9a60fcf1c, type: 3}
   m_PlayOnAwake: 0
   m_Volume: .699999988
   m_Pitch: 1
@@ -1363,6 +1450,7 @@ MonoBehaviour:
   backpackFull: 0
   WOOD_COOLDOWN_TIME: .5
   STONE_COOLDOWN_TIME: .5
+  STEAL_COOLDOWN_TIME: .5
   MIDTEXT_COOLDOWN_TIME: 1
   homeBase_GO: {fileID: 0}
   inBase: 0
@@ -1372,8 +1460,9 @@ MonoBehaviour:
   stealthActive: 0
   mining_stone: {fileID: 8256042}
   chopping_wood: {fileID: 8249478}
-  dropping_resources: {fileID: 8256044}
+  dropping_resources: {fileID: 8261448}
   stealing_resources: {fileID: 8256046}
+  swinging_sword: {fileID: 8256044}
   hasWeapon: 0
   currentWeaponIndex: 0
   weapons:
