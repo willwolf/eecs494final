@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class StealthScript : MonoBehaviour {
+public class StealthScript : WeaponItem {
 
 	// Use this for initialization
 	void Start () {
@@ -11,5 +11,10 @@ public class StealthScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	
+	}
+
+	override
+	public bool CanPurchase() {
+		return true;
 	}
 }

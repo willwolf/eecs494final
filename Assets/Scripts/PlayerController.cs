@@ -192,7 +192,7 @@ public class PlayerController : MonoBehaviour {
 
 		foreach (Renderer renderer in this.GetComponentsInChildren<Renderer>()) {
 			Color col = renderer.material.color;
-			if (stealthActive) {
+			if (hasWeapon && currentWeapon is StealthScript) {
 				col.a = .1f;
 			} else {
 				col.a = 1f;
@@ -304,6 +304,7 @@ public class PlayerController : MonoBehaviour {
 				ShopItem item = shopMenu.GetCurrentItem();
 				if ((item is SwordScript && currentWeapon is SwordScript) || 
 				    (item is BowScript && currentWeapon is BowScript) || 
+				    (item is StealthScript && currentWeapon is StealthScript) || 
 				    (item is WallScript && homeBase.HasWalls())) {
 					return;
 				}
@@ -333,6 +334,10 @@ public class PlayerController : MonoBehaviour {
 			hasWeapon = true;
 			currentWeapon = weapon;
 			currentWeaponIndex = 1;
+		} else if (weapon is StealthScript) {
+			hasWeapon = true;
+			currentWeapon = weapon;
+			currentWeaponIndex = 2;
 		}
 		weapons[currentWeaponIndex].SetActive(true);
 		//set to visible
