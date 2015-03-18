@@ -8914,7 +8914,6 @@ MonoBehaviour:
   gm: {fileID: 0}
   playerBaseGO: {fileID: 174982709}
   resourceType: 1
-  currentResourceCount: 0
 --- !u!1 &662083612
 GameObject:
   m_ObjectHideFlags: 0
@@ -10472,7 +10471,6 @@ MonoBehaviour:
   gm: {fileID: 0}
   playerBaseGO: {fileID: 174982709}
   resourceType: 2
-  currentResourceCount: 0
 --- !u!1 &833564074
 GameObject:
   m_ObjectHideFlags: 0
@@ -20682,7 +20680,6 @@ MonoBehaviour:
   gm: {fileID: 0}
   playerBaseGO: {fileID: 1619672632}
   resourceType: 2
-  currentResourceCount: 0
 --- !u!23 &1790634950
 Renderer:
   m_ObjectHideFlags: 0
@@ -22725,7 +22722,6 @@ MonoBehaviour:
   gm: {fileID: 0}
   playerBaseGO: {fileID: 1619672632}
   resourceType: 1
-  currentResourceCount: 0
 --- !u!23 &1915872453
 Renderer:
   m_ObjectHideFlags: 0

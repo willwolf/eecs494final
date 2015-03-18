@@ -6,7 +6,6 @@ public class DropPoint : MonoBehaviour {
 	public GameManager gm = null;
 	public GameObject playerBaseGO = null;
 	public ResourceType resourceType = ResourceType.none;
-	public int currentResourceCount = 0;
 
 	// Use this for initialization
 	void Start () {

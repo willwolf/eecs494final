@@ -36,17 +36,12 @@ public class PlayerController : MonoBehaviour {
 	public static int MAX_STONE_PER_ROCK = 10;
 	public bool backpackFull = false;
 
-	public float WOOD_COOLDOWN_TIME = 1.0f;
-	private bool collected_wood = false;
-	private float get_wood_at_time;
-
-	public float STONE_COOLDOWN_TIME = 1.0f;
-	private bool collected_stone = false;
-	private float get_stone_at_time;
-
-	public float STEAL_COOLDOWN_TIME = .5f;
-	private bool stole_resorces = false;
+	public float COLLECTION_COOLDOWN_TIME = 0.5f;
+	private float collect_at_time;
+	private bool stole_resorces;
+	public float STEAL_COOLDOWN_TIME = 0.25f;
 	private float steal_at_time;
+
 
 	public int MIDTEXT_COOLDOWN_TIME = 5;
 	private bool showing = false;
@@ -163,19 +158,6 @@ public class PlayerController : MonoBehaviour {
 				
 				showing = false;
 			} 
-		}
-
-		//update timers
-		if (collected_wood && (Time.time > get_wood_at_time)) {
-			collected_wood = false;
-		}
-
-		if (collected_stone && (Time.time > get_stone_at_time)) {
-			collected_stone = false;
-		}
-
-		if (stole_resorces && (Time.time > steal_at_time)) {
-			stole_resorces = false;
 		}
 
 		if (curr_wood_resource + curr_stone_resource >= MAX_RESOURCES) {
@@ -450,16 +432,7 @@ public class PlayerController : MonoBehaviour {
 				throw new UnassignedReferenceException("Resource layer object does not have Resource script attached");
 			}
 
-			switch (r.type) {
-			case ResourceType.stone:
-				MineStone(hitinfo.transform.gameObject);
-				break;
-			case ResourceType.wood:
-				ChopWood(hitinfo.transform.gameObject);
-				break;
-			
-			}
-
+			CollectResource(hitinfo.transform.gameObject, r.type);
 		} 
 
 		else if (IsInRange(out hitinfo, "DropPoint") && !shopOpen) {
@@ -469,41 +442,9 @@ public class PlayerController : MonoBehaviour {
 			}
 
 			if (drop.playerBaseGO.GetInstanceID() == homeBase_GO.GetInstanceID()) {
-				switch (drop.resourceType) {
-				case ResourceType.stone:
-					if(curr_stone_resource > 0)dropping_resources.Play();
-					drop.DepositResources(curr_stone_resource);
-					curr_stone_resource = 0;
-					updateStoneText();
-					backpackFull = false;
-					break;
-				case ResourceType.wood:
-					if(curr_wood_resource > 0)dropping_resources.Play();
-					drop.DepositResources(curr_wood_resource);
-					curr_wood_resource = 0;
-					updateWoodText();
-					backpackFull = false;
-					break;
-				}
+				DropResource(drop);
 			} else {
-				switch (drop.resourceType) {
-				case ResourceType.stone:
-					if (!stole_resorces && !backpackFull) {
-						CollectStone(drop.StealResources(stone_gather_val), " is stealing stone...");
-						stole_resorces = true;
-						steal_at_time = Time.time + STEAL_COOLDOWN_TIME;
-						stealing_resources.Play ();
-					}
-					break;
-				case ResourceType.wood:
-					if (!stole_resorces && !backpackFull) {
-						CollectWood(drop.StealResources(wood_gather_val), " is stealing wood...");
-						stole_resorces = true;
-						steal_at_time = Time.time + STEAL_COOLDOWN_TIME;
-						stealing_resources.Play ();
-					}
-					break;
-				}
+				StealResource(drop);
 			}
 		} 
 	}
@@ -519,89 +460,95 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
+	void CollectResource(GameObject resource, ResourceType type){
+		if(Time.time > collect_at_time && !backpackFull){
+			if(type == ResourceType.stone){
+				CollectStone(" is mining!");
+				mining_stone.Play();
+			} if(type == ResourceType.wood){
+				CollectWood(" is chopping wood!");
+				chopping_wood.Play();
+			}
+			decreaseResource(resource);
+			collect_at_time = Time.time + COLLECTION_COOLDOWN_TIME;
+			backpackFull = (curr_stone_resource + curr_wood_resource >= MAX_RESOURCES);
+		}
+	}
+
+	void StealResource(DropPoint drop){
+		if(Time.time > steal_at_time && !backpackFull){
+			if(drop.resourceType == ResourceType.wood){
+				if(gm.teamResources[drop.playerBaseGO.GetInstanceID()].wood == 0){
+					updateMidScreenText("No resources to steal");
+					return;
+				}
+				drop.StealResources(wood_gather_val);
+				CollectWood(" is stealing wood!");
+			} if(drop.resourceType == ResourceType.stone){
+				if(gm.teamResources[drop.playerBaseGO.GetInstanceID()].stone == 0){
+					updateMidScreenText("No resources to steal");
+					return;
+				}
+				drop.StealResources(stone_gather_val);
+				CollectStone(" is stealing stone!");
+			}
+			stealing_resources.Play();
+			steal_at_time = Time.time + STEAL_COOLDOWN_TIME;
+			backpackFull = (curr_stone_resource + curr_wood_resource >= MAX_RESOURCES);
+		}
+	}
+
+	void DropResource(DropPoint drop){
+		switch (drop.resourceType) {
+		case ResourceType.stone:
+			if(curr_stone_resource > 0) {
+				drop.DepositResources(curr_stone_resource);
+				curr_stone_resource = 0;
+				updateStoneText();
+				backpackFull = false;
+			}
+			break;
+		case ResourceType.wood:
+			if(curr_wood_resource > 0) {
+				drop.DepositResources(curr_wood_resource);
+				curr_wood_resource = 0;
+				updateWoodText();
+				backpackFull = false;
+			}
+			break;
+		}
+		dropping_resources.Play();
+	}
+	
+	void CollectStone(string message){
+		updateMidScreenText("Player " + Mathf.Ceil(player_num % 2.0f).ToString() + message);
+		curr_stone_resource++;
+		updateStoneText();
+	}
+
+	void CollectWood(string message){
+		updateMidScreenText("Player " + Mathf.Ceil(player_num % 2.0f).ToString() + message);
+		curr_wood_resource++;
+		updateWoodText();
+	}
+
 	private void updateWoodText() {
 		wood_text.text = "Carrying " + curr_wood_resource + " wood";
 	}
 
-	void ChopWood(GameObject wood) {
-		if(!collected_wood && !backpackFull){
-			CollectWood(wood_gather_val, " is chopping wood...");
-			if(chopping_wood) chopping_wood.Play();
-			decreaseResource(wood);
-		}
-		updateWoodText();
-	}
-
-	void CollectWood(int amount, string message) {
-		string chopNotification = "Player " + Mathf.Ceil(player_num % 2.0f).ToString() + " is chopping wood!";
-		updateMidScreenText(chopNotification);
-		CheckMaxWood(amount);
-		if (wood_text == null) {
-			throw new UnassignedReferenceException("wood_text for player " + Mathf.Ceil(player_num % 2.0f).ToString() + " is null");
-		}
-		wood_text.text = "Carrying " + curr_wood_resource + " wood";
-		updateMidScreenText("Player " + Mathf.Ceil(player_num % 2.0f).ToString() + message);
-		collected_wood = true;
-		get_wood_at_time = Time.time + WOOD_COOLDOWN_TIME;
-	}
-
-	void CheckMaxWood(int amount) {
-		if (curr_wood_resource + curr_stone_resource + amount > MAX_RESOURCES) {
-			string maxWood = "Player " + player_num.ToString () + " has max amount of wood!";
-			updateMidScreenText(maxWood);
-			curr_wood_resource = MAX_RESOURCES - curr_stone_resource;
-			backpackFull = true;
-		} else {
-			curr_wood_resource += amount;
-		}
-	}
-	
 	private void updateStoneText() {
 		stone_text.text = "Carrying " + curr_stone_resource + " stone";
 	}
 
 	void decreaseResource(GameObject resource){
-//		print ("Amount of " + resource.ToString () + " left: " + 
-//						resource.GetComponent<Resource> ().amountLeft);
+		//		print ("Amount of " + resource.ToString () + " left: " + 
+		//						resource.GetComponent<Resource> ().amountLeft);
 		resource.GetComponent<Resource>().amountLeft--; //dec first to not get off by 1 error
 		if(resource.GetComponent<Resource>().amountLeft == 0){
 			Destroy(resource);
 		}
 	}
 
-	void MineStone(GameObject stone) {
-		if(!collected_stone && !backpackFull){
-			CollectStone(stone_gather_val, " is mining stone...");
-			if(mining_stone) mining_stone.Play();
-			decreaseResource (stone);
-		}
-
-		updateStoneText();
-	}
-
-	void CollectStone(int amount, string message) {
-		string mineNotification = "Player " + Mathf.Ceil(player_num % 2.0f).ToString() + " is mining!";
-		updateMidScreenText(mineNotification);
-		CheckMaxStone(amount);
-		if (stone_text == null) {
-			throw new UnassignedReferenceException("stone_text for player " + Mathf.Ceil(player_num % 2.0f).ToString() + " is null");
-		}
-		stone_text.text = "Carrying " + curr_stone_resource + " stone";
-		updateMidScreenText("Player " + Mathf.Ceil(player_num % 2.0f).ToString() + message);
-		collected_stone = true;
-		get_stone_at_time = Time.time + STONE_COOLDOWN_TIME;
-	}
-
-	void CheckMaxStone(int amount) {
-		if (curr_stone_resource + curr_wood_resource + amount > MAX_RESOURCES) {
-			string maxStone = "Player " + player_num.ToString () + " has max amount of stone!";
-			updateMidScreenText(maxStone);
-			curr_stone_resource = MAX_RESOURCES - curr_wood_resource;
-			backpackFull = true;
-		} else {
-			curr_stone_resource += amount;
-		}
-	}
 	
 	bool IsInRange(out RaycastHit hitinfo, string Layer) {
 		Vector3 halfWidth = transform.right / 2f;
