@@ -39,7 +39,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0590a2d52f6e34daab97c35d98cc86ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 5aaa1367034b204499ffe9242bc01b72, type: 3}
   item_name: Stealth
   stone_cost: 10
   wood_cost: 10
