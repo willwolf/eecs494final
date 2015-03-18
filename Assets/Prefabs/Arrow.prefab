@@ -12,6 +12,7 @@ GameObject:
   - 136: {fileID: 13693964}
   - 23: {fileID: 2393964}
   - 114: {fileID: 11406238}
+  - 54: {fileID: 5477608}
   m_Layer: 13
   m_Name: Arrow
   m_TagString: Untagged
@@ -58,6 +59,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 193964}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!54 &5477608
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 193964}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: .0500000007
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!114 &11406238
 MonoBehaviour:
   m_ObjectHideFlags: 1
