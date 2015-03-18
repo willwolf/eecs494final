@@ -189,8 +189,13 @@ public class PlayerController : MonoBehaviour {
 		if (device != null) {
 			if (device.Action1.IsPressed) {
 				TakeAction();
+			} if(device.RightTrigger.IsPressed && !shopOpen){
+				Attack();
 			}
 		} else if (Input.GetButton("Action_" + Mathf.Ceil(player_num % 2.0f).ToString())) {
+			if(!shopOpen){
+				Attack();
+			}
 			TakeAction();
 		}
 		if (device != null) {
@@ -234,6 +239,7 @@ public class PlayerController : MonoBehaviour {
 		newVel.y += jump_input * jump_height;
 		transform.rigidbody.velocity = newVel;
 	}
+
 	Vector3 CalculateMoveSpeed(Vector3 direction, float input_data) {
 		Vector3 moveSpeed = direction * walk_speed * input_data * Time.deltaTime;
 		if (!inEnemyBase) {
@@ -283,6 +289,7 @@ public class PlayerController : MonoBehaviour {
 			}
 		}
 	}
+
 	void HandlePurchase(ShopItem item) {
 		if (item) {
 			if (item is WeaponItem) {
@@ -292,6 +299,7 @@ public class PlayerController : MonoBehaviour {
 			}
 		}
 	}
+
 	void HandleWeapon(WeaponItem weapon) {
 		weapons[currentWeaponIndex].SetActive(false);
 		if (weapon is SwordScript) {
@@ -305,6 +313,7 @@ public class PlayerController : MonoBehaviour {
 		}
 		weapons[currentWeaponIndex].SetActive(true);	
 	}
+
 	void HandleBaseUpgrade(BaseUpgradeItem upgrade) {
 		if (upgrade is WallScript) {
 			homeBase.TurnOnWalls();
@@ -375,10 +384,11 @@ public class PlayerController : MonoBehaviour {
 		respawn_at_time = Time.time + RESPAWN_TIME;
 	}
 
-	void TakeAction() {
-		RaycastHit hitinfo;
-		if (IsInRange(out hitinfo, "Player") && !shopOpen) {
-			if(hasWeapon && !inEnemyBase){
+	void Attack(){
+
+		if(currentWeapon is SwordScript){
+			RaycastHit hitinfo;
+			if (IsInRange(out hitinfo, "Player") && !inEnemyBase){
 				PlayerController other = hitinfo.transform.GetComponent<PlayerController>();
 				if (other.homeBase_GO.GetInstanceID() != this.gameObject.GetInstanceID()) {
 					Debug.Log("In range of enemy player");
@@ -386,13 +396,13 @@ public class PlayerController : MonoBehaviour {
 				} else {
 					Debug.Log("In range of friendly player");
 				}
-			} else if(!hasWeapon) {
-				Debug.Log("Can't kill player without the sword!");
-			} else {
-				Debug.Log("Can't kill player in base!");
 			}
+		} 
+	}
 
-		} else if (IsInRange(out hitinfo, "Resource") && !shopOpen) {
+	void TakeAction() {
+		RaycastHit hitinfo;
+		if (IsInRange(out hitinfo, "Resource") && !shopOpen) {
 			Resource r = hitinfo.transform.GetComponent<Resource>();
 			if (r == null) {
 				throw new UnassignedReferenceException("Resource layer object does not have Resource script attached");
