@@ -71,6 +71,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LIFE_TIME: 3
   damage_amount: 2
+  speed_multiplier: 25
   homeBase_GO: {fileID: 0}
 --- !u!136 &13693964
 CapsuleCollider:
@@ -79,7 +80,7 @@ CapsuleCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 193964}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: .5
   m_Height: 2

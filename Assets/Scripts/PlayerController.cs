@@ -228,8 +228,7 @@ public class PlayerController : MonoBehaviour {
 	void OnTriggerEnter(Collider coll) {
 		//currently friendly fire is enabled
 		if (coll.gameObject.layer == LayerMask.NameToLayer ("Weapon")) {
-			takeDamage(damage_amount, homeBase_GO);
-			print ("It's a sword!");		
+			takeDamage(damage_amount, homeBase_GO);		
 		}
 		
 	}
@@ -430,7 +429,8 @@ public class PlayerController : MonoBehaviour {
 			}
 		}  else if (currentWeapon is BowScript){
 			if(Time.time > next_fire_at_time){
-				Arrow newArrow = Instantiate(arrow, transform.position + transform.forward, Quaternion.AngleAxis(90, transform.right)) as Arrow;
+				GameObject newArrow = Instantiate(arrow, transform.position + transform.forward, Quaternion.AngleAxis(90, transform.right)) as GameObject;
+				newArrow.GetComponent<Arrow>().homeBase_GO = homeBase_GO;
 				next_fire_at_time = Time.time + FIRE_RATE_TIME;
 			}
 
