@@ -22,7 +22,7 @@ public class Arrow : MonoBehaviour {
 		transform.localPosition += transform.up * Time.deltaTime * speed_multiplier;
 	}
 
-	void OnTriggerEnter(Collider other){
+	void OnCollisionEnter(Collision other){
 		if(other.gameObject.layer == LayerMask.NameToLayer("Player")){
 			Debug.Log("Hit!");
 			PlayerController player = other.transform.GetComponent<PlayerController>();

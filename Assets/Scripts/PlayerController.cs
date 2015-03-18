@@ -228,7 +228,7 @@ public class PlayerController : MonoBehaviour {
 	void OnTriggerEnter(Collider coll) {
 		//currently friendly fire is enabled
 		if (coll.gameObject.layer == LayerMask.NameToLayer ("Weapon")) {
-			takeDamage(damage_amount, homeBase_GO);		
+			//takeDamage(damage_amount, homeBase_GO);		
 		}
 		
 	}

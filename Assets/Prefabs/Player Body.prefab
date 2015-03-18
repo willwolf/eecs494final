@@ -1463,7 +1463,7 @@ MonoBehaviour:
   RESPAWN_TIME: 20
   startingHealth: 10
   damage_amount: 2
-  INVULNERABLE_TIME: 1
+  INVULNERABLE_TIME: 0
   HEALTH_REGEN_TIME: 1
   FIRE_RATE_TIME: .5
   player_num: 1

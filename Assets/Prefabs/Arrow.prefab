@@ -80,9 +80,9 @@ CapsuleCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 193964}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: .5
+  m_Radius: 5
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
