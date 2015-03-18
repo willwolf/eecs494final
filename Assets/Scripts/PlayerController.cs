@@ -225,6 +225,16 @@ public class PlayerController : MonoBehaviour {
 
 	}
 
+	void OnTriggerEnter(Collider coll) {
+		//currently friendly fire is enabled
+		if (coll.gameObject.layer == LayerMask.NameToLayer ("Weapon")) {
+			takeDamage(damage_amount, homeBase_GO);
+			print ("It's a sword!");		
+		}
+		
+	}
+
+
 	void Move() {
 		float rotate_input = 0,
 			  forward_input = 0,

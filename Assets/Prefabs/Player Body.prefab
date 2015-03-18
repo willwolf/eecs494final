@@ -190,7 +190,7 @@ GameObject:
   - 33: {fileID: 3321850}
   - 65: {fileID: 6521850}
   - 23: {fileID: 2321850}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Hilt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -208,7 +208,7 @@ GameObject:
   - 33: {fileID: 3321852}
   - 65: {fileID: 6521852}
   - 23: {fileID: 2321852}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Blade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -224,7 +224,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 421854}
   - 114: {fileID: 11421850}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Sword
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -242,7 +242,7 @@ GameObject:
   - 33: {fileID: 3321854}
   - 65: {fileID: 6521854}
   - 23: {fileID: 2321854}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Hilt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1064,7 +1064,7 @@ BoxCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 121852}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
