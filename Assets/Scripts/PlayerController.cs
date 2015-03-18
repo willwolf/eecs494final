@@ -34,13 +34,17 @@ public class PlayerController : MonoBehaviour {
 	public static int MAX_STONE_PER_ROCK = 10;
 	public bool backpackFull = false;
 
-	public float WOOD_COOLDOWN_TIME = 0.5f;
+	public float WOOD_COOLDOWN_TIME = 1.0f;
 	private bool collected_wood = false;
 	private float get_wood_at_time;
 
-	public float STONE_COOLDOWN_TIME = 0.5f;
+	public float STONE_COOLDOWN_TIME = 1.0f;
 	private bool collected_stone = false;
 	private float get_stone_at_time;
+
+	public float STEAL_COOLDOWN_TIME = .5f;
+	private bool stole_resorces = false;
+	private float steal_at_time;
 
 	public int MIDTEXT_COOLDOWN_TIME = 5;
 	private bool showing = false;
@@ -166,9 +170,15 @@ public class PlayerController : MonoBehaviour {
 			collected_stone = false;
 		}
 
+		if (stole_resorces && (Time.time > steal_at_time)) {
+			stole_resorces = false;
+		}
+
 		if (curr_wood_resource + curr_stone_resource >= MAX_RESOURCES) {
 			updateMidScreenText("Backpack Full");
 		}
+
+
 
 		if (!shopOpen) {
 			Move();
@@ -443,14 +453,18 @@ public class PlayerController : MonoBehaviour {
 			} else {
 				switch (drop.resourceType) {
 				case ResourceType.stone:
-					if (!collected_stone && !backpackFull) {
+					if (!stole_resorces && !backpackFull) {
 						CollectStone(drop.StealResources(stone_gather_val), " is stealing stone...");
+						stole_resorces = true;
+						steal_at_time = Time.time + STEAL_COOLDOWN_TIME;
 						stealing_resources.Play ();
 					}
 					break;
 				case ResourceType.wood:
-					if (!collected_wood && !backpackFull) {
+					if (!stole_resorces && !backpackFull) {
 						CollectWood(drop.StealResources(wood_gather_val), " is stealing wood...");
+						stole_resorces = true;
+						steal_at_time = Time.time + STEAL_COOLDOWN_TIME;
 						stealing_resources.Play ();
 					}
 					break;
