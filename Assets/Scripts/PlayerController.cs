@@ -83,6 +83,8 @@ public class PlayerController : MonoBehaviour {
 	public ShopMenu shopMenu;
 	public bool shopOpen;
 	public GameObject arrow;
+	public GameObject aim;
+	private GameObject aimLine;
 
 	public Material normMat;
 	public Color hitColor;
@@ -131,7 +133,7 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+
 		if (player_num == 0) {
 			throw new UnassignedReferenceException("PlayerController::playerNum must be non-zero");
 		}
@@ -141,7 +143,7 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		if (dead) {
-			if (Time.time > respawn_at_time) {
+			if (Time.time > respawn_at_time || Input.GetKeyDown(KeyCode.T)) {
 				mid_screen_text.text = "";
 				awakePlayer();
 			} else {
@@ -196,6 +198,10 @@ public class PlayerController : MonoBehaviour {
 				TakeAction();
 			} if(device.RightTrigger.IsPressed && !shopOpen){
 				Attack();
+			} if(device.LeftTrigger.IsPressed && !shopOpen){
+				Aim();
+			} else if(aimLine){
+				Destroy(aimLine);
 			}
 		} else if (Input.GetButton("Action_" + Mathf.Ceil(player_num % 2.0f).ToString())) {
 			if(!shopOpen){
@@ -373,14 +379,21 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	public  IEnumerator colorFlash(){
-
-		print ("HitColor: " + renderer.material.color.ToString());		
-		this.renderer.material = null;
-		this.renderer.material.color = hitColor;
-		yield return new WaitForSeconds(0.1f);
+		int index = 0;
+		while(Time.time < vulnerable_at_time){
+			this.renderer.material = null;
+			if(index % 2 == 0){
+				this.renderer.material.color = normColor;
+				this.renderer.material = normMat;
+			}
+			else{
+				this.renderer.material.color = hitColor;
+			}
+			++index;
+			yield return new WaitForSeconds(.1f);  
+		}
+		this.renderer.material.color = normColor;
 		this.renderer.material = normMat;
-		this.renderer.material.color = normColor;   
-		print ("NormColor: " + renderer.material.color.ToString());
 	}
 
 	public void takeDamage(int damage, GameObject enemy_base_GO){
@@ -391,14 +404,6 @@ public class PlayerController : MonoBehaviour {
 			vulnerable_at_time = Time.time + INVULNERABLE_TIME;
 			Debug.Log("Player " + player_num + " health is " + health);
 			StartCoroutine(colorFlash());
-			/*
-			print ("HitColor: " + renderer.material.color.ToString());		
-			this.renderer.material = null;
-			this.renderer.material.color = hitColor;
-			yield return new WaitForSeconds(0.1f);
-			this.renderer.material = normMat;
-			this.renderer.material.color = normColor;   
-			print ("NormColor: " + renderer.material.color.ToString());*/
 		}
 
 		if(health <= 0){
@@ -418,8 +423,9 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		// Drop all resources in enemy's base upon death
-//		gm.AddResources(enemy_base_GO.GetInstanceID(), ResourceType.stone, curr_stone_resource);
-//		gm.AddResources(enemy_base_GO.GetInstanceID(), ResourceType.wood, curr_wood_resource);
+		GameManager gm = GameObject.Find("GameManager").GetComponent<GameManager>();
+		gm.AddResources(enemy_base_GO.GetInstanceID(), ResourceType.stone, curr_stone_resource);
+		gm.AddResources(enemy_base_GO.GetInstanceID(), ResourceType.wood, curr_wood_resource);
 
 		curr_wood_resource = curr_stone_resource = 0;
 		updateStoneText();
@@ -445,7 +451,7 @@ public class PlayerController : MonoBehaviour {
 			weapons[currentWeaponIndex].GetComponent<SwordScript>().Swing();
 			swinging_sword.Play();
 			RaycastHit hitinfo;
-			if (IsInRange(out hitinfo, "Player")){
+			if (IsInRange(out hitinfo, "Player") && !inEnemyBase){
 				PlayerController other = hitinfo.transform.GetComponent<PlayerController>();
 				if (other.homeBase_GO.GetInstanceID() != this.gameObject.GetInstanceID()) {
 					other.takeDamage(damage_amount, homeBase_GO);
@@ -486,6 +492,20 @@ public class PlayerController : MonoBehaviour {
 		} 
 	}
 
+	void Aim(){
+		if(!aimLine){
+			aimLine = Instantiate(aim, transform.position + transform.forward * 5, Quaternion.AngleAxis(90, transform.right)) as GameObject;
+		}
+		if(currentWeapon is SwordScript){
+			aimLine.GetComponent<LineRenderer>().SetPosition(0, transform.position);
+			aimLine.GetComponent<LineRenderer>().SetPosition(1, transform.position + transform.forward * 1.6f);
+		} else if (currentWeapon is BowScript){
+			aimLine.GetComponent<LineRenderer>().SetPosition(0, transform.position);
+			aimLine.GetComponent<LineRenderer>().SetPosition(1, transform.position + transform.forward * 60);
+		}
+
+	}
+	
 	void ToggleStore() {
 		if(!shopOpen){
 			shopOpen = true;
