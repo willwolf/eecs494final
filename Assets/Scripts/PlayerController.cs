@@ -408,7 +408,7 @@ public class PlayerController : MonoBehaviour {
 			weapons[currentWeaponIndex].GetComponent<SwordScript>().Swing();
 			swinging_sword.Play();
 			RaycastHit hitinfo;
-			if (IsInRange(out hitinfo, "Player") && !inEnemyBase){
+			if (IsInRange(out hitinfo, "Player")){
 				PlayerController other = hitinfo.transform.GetComponent<PlayerController>();
 				if (other.homeBase_GO.GetInstanceID() != this.gameObject.GetInstanceID()) {
 					other.takeDamage(damage_amount, homeBase_GO);
