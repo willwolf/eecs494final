@@ -337,6 +337,12 @@ public class PlayerController : MonoBehaviour {
 	void HandleBaseUpgrade(BaseUpgradeItem upgrade) {
 		if (upgrade is WallScript) {
 			homeBase.TurnOnWalls();
+		} else if (upgrade is CatapultArmScript) {
+			gm.AddCatapultPart(homeBase_GO.GetInstanceID(), CatapultPart.arm);
+		} else if (upgrade is CatapultLegScript) {
+			gm.AddCatapultPart(homeBase_GO.GetInstanceID(), CatapultPart.legs);
+		} else if (upgrade is CatapultStoneScript) {
+			gm.AddCatapultPart(homeBase_GO.GetInstanceID(), CatapultPart.stone);
 		}
 	}
 
