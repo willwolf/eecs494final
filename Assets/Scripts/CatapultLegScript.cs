@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CatapultScript : BaseUpgradeItem {
+public class CatapultLegScript : BaseUpgradeItem {
 
 	// Use this for initialization
 	void Start () {
