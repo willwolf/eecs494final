@@ -6,6 +6,15 @@ public class Base : MonoBehaviour {
 
 	GameManager gm;
 	public bool hasWalls = false;
+	public bool hasCatapultArm {
+		get; private set;
+	}
+	public bool hasCatapultLegs {
+		get; private set;
+	}
+	public bool hasCatapultStone {
+		get; private set;
+	}
 	public GameObject catapult_GO;
 	public Catapult catapult;
 
@@ -17,6 +26,7 @@ public class Base : MonoBehaviour {
 				child.collider.enabled = false;
 			}
 		}
+		hasCatapultArm = hasCatapultLegs = hasCatapultStone = false;
 		catapult = catapult_GO.GetComponent<Catapult>();
 		DisableCatapult();
 	}
@@ -53,12 +63,15 @@ public class Base : MonoBehaviour {
 
 	public void TurnOnCatapultArm() {
 		catapult.EnableArm();
+		hasCatapultArm = true;
 	}
 	public void TurnOnCatapultLegs() {
 		catapult.EnableLegs();
+		hasCatapultLegs = true;
 	}
 	public void TurnOnCatapultStone() {
 		catapult.EnableStone();
+		hasCatapultStone = true;
 	}
 	
 	void OnTriggerEnter(Collider other) {

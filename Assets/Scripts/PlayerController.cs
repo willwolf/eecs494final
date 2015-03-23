@@ -282,9 +282,7 @@ public class PlayerController : MonoBehaviour {
 			}
 			if (device.Action1.WasPressed) {
 				ShopItem item = shopMenu.GetCurrentItem();
-				if ((item is SwordScript && currentWeapon is SwordScript) || 
-				    (item is BowScript && currentWeapon is BowScript) || 
-				    (item is WallScript && homeBase.HasWalls())) {
+				if (CantMakePurchaseOn(item)) {
 					return;
 				}
 				item = shopMenu.MakePurchase(homeBase_GO.GetInstanceID());
@@ -299,10 +297,7 @@ public class PlayerController : MonoBehaviour {
 			}
 			if (Input.GetButtonDown("Action_" + (player_num % 2).ToString())) {
 				ShopItem item = shopMenu.GetCurrentItem();
-				if ((item is SwordScript && currentWeapon is SwordScript) || 
-				    (item is BowScript && currentWeapon is BowScript) || 
-				    (item is StealthScript && currentWeapon is StealthScript) || 
-				    (item is WallScript && homeBase.HasWalls())) {
+				if (CantMakePurchaseOn(item)) {
 					return;
 				}
 				item = shopMenu.MakePurchase(homeBase_GO.GetInstanceID());
@@ -311,6 +306,16 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
+	bool CantMakePurchaseOn(ShopItem item) {
+		return (item is SwordScript && currentWeapon is SwordScript) || 
+				(item is BowScript && currentWeapon is BowScript) || 
+				(item is StealthScript && currentWeapon is StealthScript) || 
+				(item is WallScript && homeBase.HasWalls()) ||
+				(item is CatapultArmScript && homeBase.hasCatapultArm) ||
+				(item is CatapultLegScript && homeBase.hasCatapultLegs) ||
+				(item is CatapultStoneScript && homeBase.hasCatapultStone);
+	}
+	
 	void HandlePurchase(ShopItem item) {
 		if (item) {
 			if (item is WeaponItem) {
