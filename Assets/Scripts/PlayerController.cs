@@ -123,7 +123,7 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
+	
 		if (player_num == 0) {
 			throw new UnassignedReferenceException("PlayerController::playerNum must be non-zero");
 		}
@@ -381,9 +381,8 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		// Drop all resources in enemy's base upon death
-		GameManager gm = GameObject.Find("GameManager").GetComponent<GameManager>();
-		gm.AddResources(enemy_base_GO.GetInstanceID(), ResourceType.stone, curr_stone_resource);
-		gm.AddResources(enemy_base_GO.GetInstanceID(), ResourceType.wood, curr_wood_resource);
+//		gm.AddResources(enemy_base_GO.GetInstanceID(), ResourceType.stone, curr_stone_resource);
+//		gm.AddResources(enemy_base_GO.GetInstanceID(), ResourceType.wood, curr_wood_resource);
 
 		curr_wood_resource = curr_stone_resource = 0;
 		updateStoneText();

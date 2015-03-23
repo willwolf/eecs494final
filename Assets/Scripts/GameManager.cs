@@ -15,6 +15,12 @@ public class MultiValueDictionary<Key, Value> : Dictionary<Key, List<Value>> {
 	}
 }
 
+public class CatapultTracker {
+	public bool has_arm = false;
+	public bool has_projectile = false;
+	public bool has_legs = false;
+}
+
 public class GameManager : MonoBehaviour {
 
 	
@@ -29,6 +35,7 @@ public class GameManager : MonoBehaviour {
 
 	public Dictionary<int, string> baseNames;
 	public Dictionary<int, ResourceCount> teamResources;
+	public Dictionary<int, CatapultTracker> teamCatapultStatus = new Dictionary<int, CatapultTracker>(); 
 	public int winningWood = 500;
 	public int winningStone = 500;
 
@@ -112,6 +119,7 @@ public class GameManager : MonoBehaviour {
 			baseNames.Add(baseObj.GetInstanceID(), pair.Value);
 			teamResources.Add(baseObj.GetInstanceID(), new ResourceCount());
 			teamMats.Add(baseObj.GetInstanceID(), mats[teamNum++]);
+			teamCatapultStatus.Add(baseObj.GetInstanceID(), new CatapultTracker());
 
 			addPlayer(baseObj, getViewport(numPlayers, playerNum), playerNum);
 			playerNum++;
@@ -149,6 +157,12 @@ public class GameManager : MonoBehaviour {
 				winningTeam = team.Key;
 			}
 		}
+//		foreach(KeyValuePair<int, CatapultTracker> team in teamCatapultStatus) {
+//			if (team.Value.has_arm && team.Value.has_legs && team.Value.has_projectile) {
+//				winningTeam = team.Key;
+//				break;
+//			}
+//		}
 		if (Time.timeScale == 0 && winningTeam != -1) {
 			if(Input.GetKeyDown(KeyCode.R)){
 				Application.LoadLevel(Application.loadedLevel);
