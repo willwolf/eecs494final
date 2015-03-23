@@ -131,7 +131,7 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
+	
 		if (player_num == 0) {
 			throw new UnassignedReferenceException("PlayerController::playerNum must be non-zero");
 		}
@@ -409,9 +409,8 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		// Drop all resources in enemy's base upon death
-		GameManager gm = GameObject.Find("GameManager").GetComponent<GameManager>();
-		gm.AddResources(enemy_base_GO.GetInstanceID(), ResourceType.stone, curr_stone_resource);
-		gm.AddResources(enemy_base_GO.GetInstanceID(), ResourceType.wood, curr_wood_resource);
+//		gm.AddResources(enemy_base_GO.GetInstanceID(), ResourceType.stone, curr_stone_resource);
+//		gm.AddResources(enemy_base_GO.GetInstanceID(), ResourceType.wood, curr_wood_resource);
 
 		curr_wood_resource = curr_stone_resource = 0;
 		updateStoneText();
@@ -437,7 +436,7 @@ public class PlayerController : MonoBehaviour {
 			weapons[currentWeaponIndex].GetComponent<SwordScript>().Swing();
 			swinging_sword.Play();
 			RaycastHit hitinfo;
-			if (IsInRange(out hitinfo, "Player") && !inEnemyBase){
+			if (IsInRange(out hitinfo, "Player")){
 				PlayerController other = hitinfo.transform.GetComponent<PlayerController>();
 				if (other.homeBase_GO.GetInstanceID() != this.gameObject.GetInstanceID()) {
 					other.takeDamage(damage_amount, homeBase_GO);
