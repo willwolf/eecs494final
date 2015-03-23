@@ -6,6 +6,8 @@ public class Base : MonoBehaviour {
 
 	GameManager gm;
 	public bool hasWalls = false;
+	public GameObject catapult_GO;
+	public Catapult catapult;
 
 	void Start() {
 		gm = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -15,8 +17,22 @@ public class Base : MonoBehaviour {
 				child.collider.enabled = false;
 			}
 		}
+		catapult = catapult_GO.GetComponent<Catapult>();
+		DisableCatapult();
 	}
-	
+
+	void DisableCatapult() {
+		foreach (Collider collider in catapult_GO.GetComponentsInChildren<Collider>()) {
+			collider.enabled = false;
+		}
+		foreach (MeshRenderer renderer in catapult_GO.GetComponentsInChildren<MeshRenderer>()) {
+			renderer.enabled = false;
+		}
+		foreach (Rigidbody rb in catapult_GO.GetComponentsInChildren<Rigidbody>()) {
+			rb.isKinematic = false;
+		}
+	}
+
 	void Update(){
 
 	}
@@ -33,6 +49,16 @@ public class Base : MonoBehaviour {
 			}
 		}
 		hasWalls = true;
+	}
+
+	public void TurnOnCatapultArm() {
+		catapult.EnableArm();
+	}
+	public void TurnOnCatapultLegs() {
+		catapult.EnableLegs();
+	}
+	public void TurnOnCatapultStone() {
+		catapult.EnableStone();
 	}
 	
 	void OnTriggerEnter(Collider other) {
