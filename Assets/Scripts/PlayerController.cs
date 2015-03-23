@@ -69,6 +69,8 @@ public class PlayerController : MonoBehaviour {
 	public AudioSource dropping_resources;
 	public AudioSource stealing_resources;
 	public AudioSource swinging_sword;
+	public AudioSource splat_sound;
+	public AudioSource arrow_sound;
 
 //	public GameObject sword;
 	public bool hasWeapon = false;
@@ -396,6 +398,7 @@ public class PlayerController : MonoBehaviour {
 	public void takeDamage(int damage, GameObject enemy_base_GO){
 		if(Time.time > vulnerable_at_time){
 			health -= damage;
+			splat_sound.Play();
 			//update health bar
 			health_slider.value = health;
 			vulnerable_at_time = Time.time + INVULNERABLE_TIME;
@@ -456,6 +459,7 @@ public class PlayerController : MonoBehaviour {
 			}
 		}  else if (currentWeapon is BowScript){
 			if(Time.time > next_fire_at_time){
+				arrow_sound.Play();
 				GameObject newArrow = Instantiate(arrow, transform.position + transform.forward, Quaternion.AngleAxis(90, transform.right)) as GameObject;
 				newArrow.GetComponent<Arrow>().homeBase_GO = homeBase_GO;
 				next_fire_at_time = Time.time + FIRE_RATE_TIME;
