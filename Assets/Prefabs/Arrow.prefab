@@ -85,9 +85,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 149b7a6da642a46d8b7020b69738482f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LIFE_TIME: 3
+  LIFE_TIME: 1.5
   damage_amount: 2
-  speed_multiplier: 25
+  speed_multiplier: 40
   homeBase_GO: {fileID: 0}
 --- !u!136 &13693964
 CapsuleCollider:
