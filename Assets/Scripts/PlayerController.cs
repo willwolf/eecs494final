@@ -83,6 +83,8 @@ public class PlayerController : MonoBehaviour {
 	public ShopMenu shopMenu;
 	public bool shopOpen;
 	public GameObject arrow;
+	public GameObject aim;
+	private GameObject aimLine;
 
 	// Use this for initialization
 	void Start () {
@@ -133,7 +135,7 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		if (dead) {
-			if (Time.time > respawn_at_time) {
+			if (Time.time > respawn_at_time || Input.GetKeyDown(KeyCode.T)) {
 				mid_screen_text.text = "";
 				awakePlayer();
 			} else {
@@ -188,6 +190,10 @@ public class PlayerController : MonoBehaviour {
 				TakeAction();
 			} if(device.RightTrigger.IsPressed && !shopOpen){
 				Attack();
+			} if(device.LeftTrigger.IsPressed && !shopOpen){
+				Aim();
+			} else if(aimLine){
+				Destroy(aimLine);
 			}
 		} else if (Input.GetButton("Action_" + (player_num % 2).ToString())) {
 			if(!shopOpen){
@@ -449,6 +455,20 @@ public class PlayerController : MonoBehaviour {
 		} 
 	}
 
+	void Aim(){
+		if(!aimLine){
+			aimLine = Instantiate(aim, transform.position + transform.forward * 5, Quaternion.AngleAxis(90, transform.right)) as GameObject;
+		}
+		if(currentWeapon is SwordScript){
+			aimLine.GetComponent<LineRenderer>().SetPosition(0, transform.position);
+			aimLine.GetComponent<LineRenderer>().SetPosition(1, transform.position + transform.forward * 1.6f);
+		} else if (currentWeapon is BowScript){
+			aimLine.GetComponent<LineRenderer>().SetPosition(0, transform.position);
+			aimLine.GetComponent<LineRenderer>().SetPosition(1, transform.position + transform.forward * 60);
+		}
+
+	}
+	
 	void ToggleStore() {
 		if(!shopOpen){
 			shopOpen = true;
