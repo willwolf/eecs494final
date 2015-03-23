@@ -86,6 +86,10 @@ public class PlayerController : MonoBehaviour {
 	public GameObject aim;
 	private GameObject aimLine;
 
+	public Material normMat;
+	public Color hitColor;
+	public Color normColor;
+
 	// Use this for initialization
 	void Start () {
 		Time.timeScale = 1;
@@ -121,11 +125,15 @@ public class PlayerController : MonoBehaviour {
 			device.LeftStickX.LowerDeadZone = controller_sensitivity;
 			device.LeftStickY.LowerDeadZone = controller_sensitivity;
 		}
+
+		normMat = this.renderer.material;
+		normColor = this.renderer.material.color; 
+		hitColor = Color.white;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+
 		if (player_num == 0) {
 			throw new UnassignedReferenceException("PlayerController::playerNum must be non-zero");
 		}
@@ -195,7 +203,7 @@ public class PlayerController : MonoBehaviour {
 			} else if(aimLine){
 				Destroy(aimLine);
 			}
-		} else if (Input.GetButton("Action_" + (player_num % 2).ToString())) {
+		} else if (Input.GetButton("Action_" + Mathf.Ceil(player_num % 2.0f).ToString())) {
 			if(!shopOpen){
 				Attack();
 			}
@@ -205,7 +213,7 @@ public class PlayerController : MonoBehaviour {
 			if (device.DPadUp.WasPressed && inBase) {
 				ToggleStore();
 			}
-		} else if (Input.GetButtonDown("Store_Open_" + (player_num % 2).ToString()) && inBase) {
+		} else if (Input.GetButtonDown("Store_Open_" + Mathf.Ceil(player_num % 2.0f).ToString()) && inBase) {
 			ToggleStore();
 		}
 	}
@@ -240,8 +248,8 @@ public class PlayerController : MonoBehaviour {
 				}
 			}
 		} else {
-			rotate_input = Input.GetAxis("Horizontal_" + (player_num % 2).ToString());
-			forward_input = Input.GetAxis("Vertical_" + (player_num % 2).ToString());
+			rotate_input = Input.GetAxis("Horizontal_" + Mathf.Ceil(player_num % 2.0f).ToString());
+			forward_input = Input.GetAxis("Vertical_" + Mathf.Ceil(player_num % 2.0f).ToString());
 		}
 		
 		transform.Rotate(Vector3.up, rotate_speed * Time.deltaTime * rotate_input);
@@ -283,7 +291,7 @@ public class PlayerController : MonoBehaviour {
 				HandlePurchase(item);
 			}
 		} else {
-			float vertInput = Input.GetAxis("Vertical_" + (player_num % 2).ToString());
+			float vertInput = Input.GetAxis("Vertical_" + (player_num % 2.0f).ToString());
 			if (vertInput < 0) {
 				shopMenu.ScrollDown();
 			}else if (vertInput > 0) {
@@ -343,6 +351,12 @@ public class PlayerController : MonoBehaviour {
 	void HandleBaseUpgrade(BaseUpgradeItem upgrade) {
 		if (upgrade is WallScript) {
 			homeBase.TurnOnWalls();
+		} else if (upgrade is CatapultArmScript) {
+			gm.AddCatapultPart(homeBase_GO.GetInstanceID(), CatapultPart.arm);
+		} else if (upgrade is CatapultLegScript) {
+			gm.AddCatapultPart(homeBase_GO.GetInstanceID(), CatapultPart.legs);
+		} else if (upgrade is CatapultStoneScript) {
+			gm.AddCatapultPart(homeBase_GO.GetInstanceID(), CatapultPart.stone);
 		}
 	}
 
@@ -361,6 +375,24 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
+	public  IEnumerator colorFlash(){
+		int index = 0;
+		while(Time.time < vulnerable_at_time){
+			this.renderer.material = null;
+			if(index % 2 == 0){
+				this.renderer.material.color = normColor;
+				this.renderer.material = normMat;
+			}
+			else{
+				this.renderer.material.color = hitColor;
+			}
+			++index;
+			yield return new WaitForSeconds(.1f);  
+		}
+		this.renderer.material.color = normColor;
+		this.renderer.material = normMat;
+	}
+
 	public void takeDamage(int damage, GameObject enemy_base_GO){
 		if(Time.time > vulnerable_at_time){
 			health -= damage;
@@ -368,6 +400,7 @@ public class PlayerController : MonoBehaviour {
 			health_slider.value = health;
 			vulnerable_at_time = Time.time + INVULNERABLE_TIME;
 			Debug.Log("Player " + player_num + " health is " + health);
+			StartCoroutine(colorFlash());
 		}
 
 		if(health <= 0){
@@ -387,8 +420,9 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		// Drop all resources in enemy's base upon death
-//		gm.AddResources(enemy_base_GO.GetInstanceID(), ResourceType.stone, curr_stone_resource);
-//		gm.AddResources(enemy_base_GO.GetInstanceID(), ResourceType.wood, curr_wood_resource);
+		GameManager gm = GameObject.Find("GameManager").GetComponent<GameManager>();
+		gm.AddResources(enemy_base_GO.GetInstanceID(), ResourceType.stone, curr_stone_resource);
+		gm.AddResources(enemy_base_GO.GetInstanceID(), ResourceType.wood, curr_wood_resource);
 
 		curr_wood_resource = curr_stone_resource = 0;
 		updateStoneText();
@@ -414,7 +448,7 @@ public class PlayerController : MonoBehaviour {
 			weapons[currentWeaponIndex].GetComponent<SwordScript>().Swing();
 			swinging_sword.Play();
 			RaycastHit hitinfo;
-			if (IsInRange(out hitinfo, "Player")){
+			if (IsInRange(out hitinfo, "Player") && !inEnemyBase){
 				PlayerController other = hitinfo.transform.GetComponent<PlayerController>();
 				if (other.homeBase_GO.GetInstanceID() != this.gameObject.GetInstanceID()) {
 					other.takeDamage(damage_amount, homeBase_GO);
@@ -541,13 +575,13 @@ public class PlayerController : MonoBehaviour {
 	}
 	
 	void CollectStone(string message){
-		updateMidScreenText("Player " + player_num.ToString() + message);
+		updateMidScreenText("Player " + Mathf.Ceil(player_num % 2.0f).ToString() + message);
 		curr_stone_resource++;
 		updateStoneText();
 	}
 
 	void CollectWood(string message){
-		updateMidScreenText("Player " + player_num.ToString() + message);
+		updateMidScreenText("Player " + Mathf.Ceil(player_num % 2.0f).ToString() + message);
 		curr_wood_resource++;
 		updateWoodText();
 	}

@@ -15,6 +15,12 @@ public class MultiValueDictionary<Key, Value> : Dictionary<Key, List<Value>> {
 	}
 }
 
+public enum CatapultPart {
+	arm,
+	legs,
+	stone
+}
+
 public class CatapultTracker {
 	public bool has_arm = false;
 	public bool has_projectile = false;
@@ -151,18 +157,18 @@ public class GameManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		foreach(KeyValuePair<int, ResourceCount> team in teamResources){
-			if(team.Value.wood >= winningWood && team.Value.stone >= winningStone){
-				print (team.Key + " team resources: " + team.Value.wood + " winning: " + winningWood);
-				winningTeam = team.Key;
-			}
-		}
-//		foreach(KeyValuePair<int, CatapultTracker> team in teamCatapultStatus) {
-//			if (team.Value.has_arm && team.Value.has_legs && team.Value.has_projectile) {
+//		foreach(KeyValuePair<int, ResourceCount> team in teamResources){
+//			if(team.Value.wood >= winningWood && team.Value.stone >= winningStone){
+//				print (team.Key + " team resources: " + team.Value.wood + " winning: " + winningWood);
 //				winningTeam = team.Key;
-//				break;
 //			}
 //		}
+		foreach(KeyValuePair<int, CatapultTracker> team in teamCatapultStatus) {
+			if (team.Value.has_arm && team.Value.has_legs && team.Value.has_projectile) {
+				winningTeam = team.Key;
+				break;
+			}
+		}
 		if (Time.timeScale == 0 && winningTeam != -1) {
 			if(Input.GetKeyDown(KeyCode.R)){
 				Application.LoadLevel(Application.loadedLevel);
@@ -230,4 +236,18 @@ public class GameManager : MonoBehaviour {
 	public ResourceCount GetTeamResourceInfo(int team_id) {
 		return teamResources[team_id];
 	}
+
+	public void AddCatapultPart(int team_id, CatapultPart part) {
+		switch (part) {
+		case CatapultPart.arm:
+			teamCatapultStatus[team_id].has_arm = true;
+			break;
+		case CatapultPart.legs:
+			teamCatapultStatus[team_id].has_legs = true;
+			break;
+		case CatapultPart.stone:
+			teamCatapultStatus[team_id].has_projectile = true;
+			break;
+		}
+	} 
 }
