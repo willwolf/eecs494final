@@ -155,6 +155,15 @@ public class GameManager : MonoBehaviour {
 
 			}		
 		}
+
+		//Testing purposes only
+		if(Input.GetKeyDown(KeyCode.T)){
+			foreach(KeyValuePair<int, ResourceCount> kvp in teamResources){
+				kvp.Value.wood += 10;
+				kvp.Value.stone += 10;
+				updateTeamText(kvp.Key);
+			}
+		}
 	}
 
 	public void playerInBase(bool inBase, int baseId) {
