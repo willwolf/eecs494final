@@ -241,6 +241,7 @@ public class GameManager : MonoBehaviour {
 		switch (part) {
 		case CatapultPart.arm:
 			teamCatapultStatus[team_id].has_arm = true;
+
 			break;
 		case CatapultPart.legs:
 			teamCatapultStatus[team_id].has_legs = true;
