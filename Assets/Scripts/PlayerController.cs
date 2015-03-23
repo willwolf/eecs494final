@@ -84,6 +84,10 @@ public class PlayerController : MonoBehaviour {
 	public bool shopOpen;
 	public GameObject arrow;
 
+	public Material normMat;
+	public Color hitColor;
+	public Color normColor;
+
 	// Use this for initialization
 	void Start () {
 		Time.timeScale = 1;
@@ -119,6 +123,10 @@ public class PlayerController : MonoBehaviour {
 			device.LeftStickX.LowerDeadZone = controller_sensitivity;
 			device.LeftStickY.LowerDeadZone = controller_sensitivity;
 		}
+
+		normMat = this.renderer.material;
+		normColor = this.renderer.material.color; 
+		hitColor = Color.white;
 	}
 	
 	// Update is called once per frame
@@ -189,7 +197,7 @@ public class PlayerController : MonoBehaviour {
 			} if(device.RightTrigger.IsPressed && !shopOpen){
 				Attack();
 			}
-		} else if (Input.GetButton("Action_" + (player_num % 2).ToString())) {
+		} else if (Input.GetButton("Action_" + Mathf.Ceil(player_num % 2.0f).ToString())) {
 			if(!shopOpen){
 				Attack();
 			}
@@ -199,7 +207,7 @@ public class PlayerController : MonoBehaviour {
 			if (device.DPadUp.WasPressed && inBase) {
 				ToggleStore();
 			}
-		} else if (Input.GetButtonDown("Store_Open_" + (player_num % 2).ToString()) && inBase) {
+		} else if (Input.GetButtonDown("Store_Open_" + Mathf.Ceil(player_num % 2.0f).ToString()) && inBase) {
 			ToggleStore();
 		}
 	}
@@ -234,8 +242,8 @@ public class PlayerController : MonoBehaviour {
 				}
 			}
 		} else {
-			rotate_input = Input.GetAxis("Horizontal_" + (player_num % 2).ToString());
-			forward_input = Input.GetAxis("Vertical_" + (player_num % 2).ToString());
+			rotate_input = Input.GetAxis("Horizontal_" + Mathf.Ceil(player_num % 2.0f).ToString());
+			forward_input = Input.GetAxis("Vertical_" + Mathf.Ceil(player_num % 2.0f).ToString());
 		}
 		
 		transform.Rotate(Vector3.up, rotate_speed * Time.deltaTime * rotate_input);
@@ -277,7 +285,7 @@ public class PlayerController : MonoBehaviour {
 				HandlePurchase(item);
 			}
 		} else {
-			float vertInput = Input.GetAxis("Vertical_" + (player_num % 2).ToString());
+			float vertInput = Input.GetAxis("Vertical_" + (player_num % 2.0f).ToString());
 			if (vertInput < 0) {
 				shopMenu.ScrollDown();
 			}else if (vertInput > 0) {
@@ -361,6 +369,17 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
+	public  IEnumerator colorFlash(){
+
+		print ("HitColor: " + renderer.material.color.ToString());		
+		this.renderer.material = null;
+		this.renderer.material.color = hitColor;
+		yield return new WaitForSeconds(0.1f);
+		this.renderer.material = normMat;
+		this.renderer.material.color = normColor;   
+		print ("NormColor: " + renderer.material.color.ToString());
+	}
+
 	public void takeDamage(int damage, GameObject enemy_base_GO){
 		if(Time.time > vulnerable_at_time){
 			health -= damage;
@@ -368,6 +387,15 @@ public class PlayerController : MonoBehaviour {
 			health_slider.value = health;
 			vulnerable_at_time = Time.time + INVULNERABLE_TIME;
 			Debug.Log("Player " + player_num + " health is " + health);
+			StartCoroutine(colorFlash());
+			/*
+			print ("HitColor: " + renderer.material.color.ToString());		
+			this.renderer.material = null;
+			this.renderer.material.color = hitColor;
+			yield return new WaitForSeconds(0.1f);
+			this.renderer.material = normMat;
+			this.renderer.material.color = normColor;   
+			print ("NormColor: " + renderer.material.color.ToString());*/
 		}
 
 		if(health <= 0){
@@ -414,7 +442,7 @@ public class PlayerController : MonoBehaviour {
 			weapons[currentWeaponIndex].GetComponent<SwordScript>().Swing();
 			swinging_sword.Play();
 			RaycastHit hitinfo;
-			if (IsInRange(out hitinfo, "Player") && !inEnemyBase){
+			if (IsInRange(out hitinfo, "Player")){
 				PlayerController other = hitinfo.transform.GetComponent<PlayerController>();
 				if (other.homeBase_GO.GetInstanceID() != this.gameObject.GetInstanceID()) {
 					other.takeDamage(damage_amount, homeBase_GO);
@@ -527,13 +555,13 @@ public class PlayerController : MonoBehaviour {
 	}
 	
 	void CollectStone(string message){
-		updateMidScreenText("Player " + player_num.ToString() + message);
+		updateMidScreenText("Player " + Mathf.Ceil(player_num % 2.0f).ToString() + message);
 		curr_stone_resource++;
 		updateStoneText();
 	}
 
 	void CollectWood(string message){
-		updateMidScreenText("Player " + player_num.ToString() + message);
+		updateMidScreenText("Player " + Mathf.Ceil(player_num % 2.0f).ToString() + message);
 		curr_wood_resource++;
 		updateWoodText();
 	}
