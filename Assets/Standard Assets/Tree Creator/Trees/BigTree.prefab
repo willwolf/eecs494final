@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 16.5620651, y: 2.6211009, z: 1.25034332}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.20000005, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -19359,6 +19359,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  amountLeft: 0
 --- !u!136 &13671708
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -19369,7 +19370,7 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 2
-  m_Height: 11.0393562
+  m_Height: 14
   m_Direction: 1
   m_Center: {x: -.506586075, y: 5.51967812, z: .762636662}
 --- !u!193 &19300000
