@@ -35,7 +35,6 @@ public class PlayerController : MonoBehaviour {
 	public int stone_gather_val = 1;
 	public int MAX_RESOURCES = 30;
 	public static int MAX_STONE_PER_ROCK = 10;
-//	public bool backpackFull = false;
 
 	public float COLLECTION_COOLDOWN_TIME = 0.5f;
 	private float collect_at_time;
@@ -209,7 +208,7 @@ public class PlayerController : MonoBehaviour {
 			} else if(aimLine){
 				Destroy(aimLine);
 			}
-		} else if (Input.GetButton("Action_" + Mathf.Ceil(player_num % 2.0f).ToString())) {
+		} else if (Input.GetButton("Action_" + (player_num % 2).ToString())) {
 			if(!shopOpen && !hasBox){
 				Attack();
 			}
@@ -219,7 +218,7 @@ public class PlayerController : MonoBehaviour {
 			if (device.DPadUp.WasPressed && inBase) {
 				ToggleStore();
 			}
-		} else if (Input.GetButtonDown("Store_Open_" + Mathf.Ceil(player_num % 2.0f).ToString()) && inBase) {
+		} else if (Input.GetButtonDown("Store_Open_" + (player_num % 2).ToString()) && inBase) {
 			ToggleStore();
 		}
 	}
@@ -254,8 +253,8 @@ public class PlayerController : MonoBehaviour {
 				}
 			}
 		} else {
-			rotate_input = Input.GetAxis("Horizontal_" + Mathf.Ceil(player_num % 2.0f).ToString());
-			forward_input = Input.GetAxis("Vertical_" + Mathf.Ceil(player_num % 2.0f).ToString());
+			rotate_input = Input.GetAxis("Horizontal_" + (player_num % 2).ToString());
+			forward_input = Input.GetAxis("Vertical_" + (player_num % 2).ToString());
 		}
 		
 		transform.Rotate(Vector3.up, rotate_speed * Time.deltaTime * rotate_input);
@@ -295,7 +294,7 @@ public class PlayerController : MonoBehaviour {
 				HandlePurchase(item);
 			}
 		} else {
-			float vertInput = Input.GetAxis("Vertical_" + (player_num % 2.0f).ToString());
+			float vertInput = Input.GetAxis("Vertical_" + (player_num % 2).ToString());
 			if (vertInput < 0) {
 				shopMenu.ScrollDown();
 			}else if (vertInput > 0) {
@@ -335,18 +334,14 @@ public class PlayerController : MonoBehaviour {
 	void HandleWeapon(WeaponItem weapon) {
 		weapons[currentWeaponIndex].SetActive(false);
 		if (weapon is SwordScript) {
-			hasWeapon = true;
-			currentWeapon = weapon;
 			currentWeaponIndex = 0;
 		} else if (weapon is BowScript) {
-			hasWeapon = true;
-			currentWeapon = weapon;
 			currentWeaponIndex = 1;
 		} else if (weapon is StealthScript) {
-			hasWeapon = true;
-			currentWeapon = weapon;
 			currentWeaponIndex = 2;
 		}
+		hasWeapon = true;
+		currentWeapon = weapon;
 		weapons[currentWeaponIndex].SetActive(true);
 		//set to visible
 		foreach (MeshRenderer renderer in weapons[currentWeaponIndex].GetComponentsInChildren<MeshRenderer>()) {
@@ -355,8 +350,6 @@ public class PlayerController : MonoBehaviour {
 		foreach (Collider collider in weapons[currentWeaponIndex].GetComponentsInChildren<Collider>()) {
 			collider.enabled = true;
 		}
-
-
 	}
 
 	void HandleBaseUpgrade(BaseUpgradeItem upgrade) {
@@ -457,7 +450,6 @@ public class PlayerController : MonoBehaviour {
 			hasBox = false;
 		}
 		
-		//		backpackFull = false;
 		curr_wood_resource = curr_stone_resource = 0;
 		updateStoneText();
 		updateWoodText();
@@ -567,7 +559,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void CollectResource(GameObject resource, ResourceType type){
-		if(Time.time > collect_at_time && !IsPackFull()) {//!backpackFull){
+		if(Time.time > collect_at_time && !IsPackFull()) {
 			if(type == ResourceType.stone){
 				CollectStone(" is mining!");
 				mining_stone.Play();
@@ -577,12 +569,11 @@ public class PlayerController : MonoBehaviour {
 			}
 			decreaseResource(resource);
 			collect_at_time = Time.time + COLLECTION_COOLDOWN_TIME;
-//			backpackFull = (curr_stone_resource + curr_wood_resource >= MAX_RESOURCES);
 		}
 	}
 
 	void StealResource(DropPoint drop){
-		if(Time.time > steal_at_time && !IsPackFull()) {//!backpackFull){
+		if(Time.time > steal_at_time && !IsPackFull()) {
 			if(drop.resourceType == ResourceType.wood){
 				if(gm.teamResources[drop.playerBaseGO.GetInstanceID()].wood == 0){
 					updateMidScreenText("No resources to steal");
@@ -600,7 +591,6 @@ public class PlayerController : MonoBehaviour {
 			}
 			stealing_resources.Play();
 			steal_at_time = Time.time + STEAL_COOLDOWN_TIME;
-//			backpackFull = (curr_stone_resource + curr_wood_resource >= MAX_RESOURCES);
 		}
 	}
 
@@ -612,7 +602,6 @@ public class PlayerController : MonoBehaviour {
 				drop.DepositResources(curr_stone_resource);
 				curr_stone_resource = 0;
 				updateStoneText();
-//				backpackFull = false;
 			} if(hasBox && rbox.stone > 0){
 				drop.DepositResources(rbox.stone);
 				rbox.stone = 0;
@@ -627,7 +616,6 @@ public class PlayerController : MonoBehaviour {
 				drop.DepositResources(curr_wood_resource);
 				curr_wood_resource = 0;
 				updateWoodText();
-//				backpackFull = false;
 			} if(hasBox && rbox.wood > 0){
 				drop.DepositResources(rbox.wood);
 				rbox.wood = 0;
@@ -642,13 +630,13 @@ public class PlayerController : MonoBehaviour {
 	}
 	
 	void CollectStone(string message){
-		updateMidScreenText("Player " + Mathf.Ceil(player_num % 2.0f).ToString() + message);
+		updateMidScreenText("Player " + (player_num % 2).ToString() + message);
 		curr_stone_resource++;
 		updateStoneText();
 	}
 
 	void CollectWood(string message){
-		updateMidScreenText("Player " + Mathf.Ceil(player_num % 2.0f).ToString() + message);
+		updateMidScreenText("Player " + (player_num % 2).ToString() + message);
 		curr_wood_resource++;
 		updateWoodText();
 	}
