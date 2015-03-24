@@ -78,7 +78,10 @@ public class Base : MonoBehaviour {
 		if (other.gameObject.layer != LayerMask.NameToLayer("Player"))
 			return;
 
-		PlayerController player = other.GetComponent<PlayerController>();
+		PlayerController player = FindPlayerController(other);
+		if (player == null) {
+			return;
+		}
 		if (player.homeBase_GO.GetInstanceID() == this.gameObject.GetInstanceID()) {
 			player.inBase = true;
 		} else {
@@ -92,12 +95,27 @@ public class Base : MonoBehaviour {
 		if (other.gameObject.layer != LayerMask.NameToLayer("Player"))
 			return;
 		
-		PlayerController player = other.GetComponent<PlayerController>();
+		PlayerController player = FindPlayerController(other);
+		if (player == null) {
+			return;
+		}
 		if (player.homeBase_GO.GetInstanceID() == this.gameObject.GetInstanceID()) {
 			player.inBase = false;
 		} else {
 			player.inEnemyBase = false;
 			gm.playerInBase(false, this.gameObject.GetInstanceID());
 		}
+	}
+
+	PlayerController FindPlayerController(Collider other) {
+		Transform other_GO = other.transform;
+		PlayerController player = other_GO.GetComponent<PlayerController>();
+		while (player == null && other_GO != null) {
+			other_GO = other_GO.parent;
+			if (other_GO) {
+				player = other_GO.GetComponent<PlayerController>();
+			}
+		}
+		return player;
 	}
 }
