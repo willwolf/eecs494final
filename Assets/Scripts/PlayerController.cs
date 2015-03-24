@@ -447,11 +447,11 @@ public class PlayerController : MonoBehaviour {
 
 
 		} if(hasBox){
-			GameObject box_GO = Instantiate(resourceBox, this.transform.position - this.transform.up * 0.5f, this.transform.rotation) as GameObject;
+			GameObject box_GO = Instantiate(resourceBox, this.transform.position - this.transform.up * 0.5f + this.transform.forward, this.transform.rotation) as GameObject;
 			ResourceBox rbox = box_GO.GetComponent<ResourceBox>();
 
 			rbox.wood = box.GetComponent<ResourceBox>().wood;
-			rbox.stone = box.GetComponent<ResourceBox>().wood;
+			rbox.stone = box.GetComponent<ResourceBox>().stone;
 			
 			box.SetActive(false);
 			hasBox = false;
