@@ -25,29 +25,28 @@ public class Resource : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+		Debug.DrawRay(transform.position, transform.forward, Color.red);
+		Debug.DrawRay(transform.position, -transform.forward, Color.red);
+		
+		Debug.DrawRay(transform.position, transform.right, Color.blue);
+		Debug.DrawRay(transform.position, -transform.right, Color.blue);
+
+		Debug.DrawRay(transform.position, transform.up, Color.green);
+		Debug.DrawRay(transform.position, -transform.up, Color.green);
 	}
 
-	Quaternion RandomQuaternion() {
-		return new Quaternion(Random.Range(0f,360f),
-		                      Random.Range(0f,360f),
-		                      Random.Range(0f,360f),
-		                      Random.Range(0f,360f));
-	}
+//	if (type == ResourceType.wood) {
+//		spawnSpot = origin.position + (origin.up * Random.Range(2f, 3f)) + 
+//			(origin.right * Random.Range(-2f, 3f) + (origin.forward * Random.Range(-2f, 3f)));
+//	} else {
+//		spawnSpot = transform.position + (origin.up * Random.Range(-2f, 3f)) + 
+//			(transform.right * Random.Range(1f, 2.1f) + (transform.forward * Random.Range(-2f, 3f)));
+//	}
+
 	public void Gather() {
 		amountLeft--;
 		if (scatterObject) {
-			Vector3 spawnSpot = Vector3.zero;
-			if (type == ResourceType.wood) {
-				spawnSpot = transform.position + (transform.up * Random.Range(2f, 3f)) + 
-					(transform.right * Random.Range(-2f, 3f) + (transform.forward * Random.Range(-2f, 3f)));
-			} else {
-				spawnSpot = transform.position + (transform.up * Random.Range(-2f, 3f)) + 
-					(transform.right * Random.Range(1f, 2.1f) + (transform.forward * Random.Range(-2f, 3f)));
-			}
-//			Instantiate(scatterObject, spawnSpot, scatterObject.transform.rotation);
-			Instantiate(scatterObject, spawnSpot, RandomQuaternion());
-			
+			GameManager.SpawnScatteredObject(scatterObject, transform.position);
 		} else {
 			print ("Resource has not scatterObject assigned!");
 		}

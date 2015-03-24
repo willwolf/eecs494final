@@ -233,6 +233,19 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 
+	static Quaternion RandomQuaternion() {
+		return new Quaternion(Random.Range(0f,360f),
+		                      Random.Range(0f,360f),
+		                      Random.Range(0f,360f),
+		                      Random.Range(0f,360f));
+	}
+	public static void SpawnScatteredObject(GameObject scatteredObj, Vector3 origin) {
+		Vector3 spawnSpot = Vector3.zero;
+		// Should never push object below map
+		spawnSpot = origin + (Vector3.up * Random.Range(2,3)) + (Vector3.right * Random.Range(-2,3)) + (Vector3.forward * Random.Range(-2,3));
+		Instantiate(scatteredObj, spawnSpot, RandomQuaternion());
+	}
+
 	public ResourceCount GetTeamResourceInfo(int team_id) {
 		return teamResources[team_id];
 	}

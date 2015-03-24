@@ -123,7 +123,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 1
   canPickUpAt: 0
-  disableTime: 2
+  disableTime: .5
 --- !u!136 &13625448
 CapsuleCollider:
   m_ObjectHideFlags: 1

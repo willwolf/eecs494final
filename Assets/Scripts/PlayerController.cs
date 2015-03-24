@@ -487,6 +487,10 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
+	void ScatterResources() {
+//		while ()
+	}
+
 	void Attack(){
 		if(currentWeapon is SwordScript){
 			weapons[currentWeaponIndex].GetComponent<SwordScript>().Swing();
