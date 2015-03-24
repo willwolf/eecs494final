@@ -703,8 +703,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 15, z: 1}
+  m_Center: {x: 0, y: 5, z: 0}
 --- !u!65 &6590362
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -815,7 +815,6 @@ MonoBehaviour:
   gm: {fileID: 0}
   playerBaseGO: {fileID: 190338}
   resourceType: 1
-  currentResourceCount: 0
 --- !u!114 &11488100
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -830,7 +829,6 @@ MonoBehaviour:
   gm: {fileID: 0}
   playerBaseGO: {fileID: 190338}
   resourceType: 2
-  currentResourceCount: 0
 --- !u!114 &11490338
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -843,6 +841,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasWalls: 0
+  catapult_GO: {fileID: 0}
+  catapult: {fileID: 0}
 --- !u!114 &11490362
 MonoBehaviour:
   m_ObjectHideFlags: 1
