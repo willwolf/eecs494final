@@ -112,6 +112,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
+  scatterObject: {fileID: 114658, guid: f4ac657ae594e41d7a0dcc9a7edd1db4, type: 2}
+  amountLeft: 0
 --- !u!135 &13509024
 SphereCollider:
   m_ObjectHideFlags: 1

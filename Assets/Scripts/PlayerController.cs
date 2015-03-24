@@ -656,10 +656,11 @@ public class PlayerController : MonoBehaviour {
 	void decreaseResource(GameObject resource){
 		//		print ("Amount of " + resource.ToString () + " left: " + 
 		//						resource.GetComponent<Resource> ().amountLeft);
-		resource.GetComponent<Resource>().amountLeft--; //dec first to not get off by 1 error
-		if(resource.GetComponent<Resource>().amountLeft == 0){
-			Destroy(resource);
-		}
+//		resource.GetComponent<Resource>().amountLeft--; //dec first to not get off by 1 error
+//		if(resource.GetComponent<Resource>().amountLeft == 0){
+//			Destroy(resource);
+//		}
+		resource.GetComponent<Resource>().Gather();
 	}
 
 	

@@ -10,6 +10,7 @@ public enum ResourceType {
 public class Resource : MonoBehaviour {
 	
 	public ResourceType type = ResourceType.none;
+	public GameObject scatterObject;
 	public int amountLeft = 0;
 
 	// Use this for initialization
@@ -25,5 +26,25 @@ public class Resource : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	
+	}
+
+	public void Gather() {
+		amountLeft--;
+		if (scatterObject) {
+			Vector3 spawnSpot = Vector3.zero;
+			if (type == ResourceType.wood) {
+				spawnSpot = transform.position + (transform.up * Random.Range(2f, 3f)) + 
+					(transform.right * Random.Range(-2f, 3f) + (transform.forward * Random.Range(-2f, 3f)));
+			} else {
+				spawnSpot = transform.position + (transform.up * Random.Range(-2f, 3f)) + 
+					(transform.right * Random.Range(-2f, 3f) + (transform.forward * Random.Range(-2f, 0f)));
+			}
+			Instantiate(scatterObject, spawnSpot, scatterObject.transform.rotation);
+		} else {
+			print ("Resource has not scatterObject assigned!");
+		}
+		if (amountLeft == 0) {
+			Destroy(this.gameObject);
+		}
 	}
 }
