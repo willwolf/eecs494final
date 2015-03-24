@@ -87,6 +87,7 @@ public class PlayerController : MonoBehaviour {
 	public GameObject arrow;
 	public GameObject aim;
 	private GameObject aimLine;
+	public GameObject resourceBox;
 
 	public Material normMat;
 	public Color hitColor;
@@ -433,6 +434,13 @@ public class PlayerController : MonoBehaviour {
 		// Drop all resources in enemy's base upon death
 //		gm.AddResources(enemy_base_GO.GetInstanceID(), ResourceType.stone, curr_stone_resource);
 //		gm.AddResources(enemy_base_GO.GetInstanceID(), ResourceType.wood, curr_wood_resource);
+		if(curr_stone_resource + curr_wood_resource > 0){
+			//drop resource box
+			GameObject box_GO = Instantiate(resourceBox, this.transform.position - this.transform.up * 0.5f, this.transform.rotation) as GameObject;
+			ResourceBox rbox = box_GO.GetComponent<ResourceBox>();
+			rbox.wood = curr_wood_resource;
+			rbox.stone = curr_stone_resource;
+		}
 
 //		backpackFull = false;
 		curr_wood_resource = curr_stone_resource = 0;
@@ -498,7 +506,10 @@ public class PlayerController : MonoBehaviour {
 			} else {
 				StealResource(drop);
 			}
-		} 
+		} else if(IsInRange(out hitinfo, "ResourceBox") && !shopOpen){
+			//pick up resource box
+
+		}
 	}
 
 	void Aim(){

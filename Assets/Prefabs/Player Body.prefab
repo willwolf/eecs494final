@@ -1652,7 +1652,6 @@ MonoBehaviour:
   curr_stone_resource: 0
   stone_gather_val: 1
   MAX_RESOURCES: 12
-  backpackFull: 0
   COLLECTION_COOLDOWN_TIME: .5
   STEAL_COOLDOWN_TIME: .25
   MIDTEXT_COOLDOWN_TIME: 1
@@ -1683,6 +1682,7 @@ MonoBehaviour:
   shopOpen: 0
   arrow: {fileID: 193964, guid: bbb61d06d237441deb88b644408f120c, type: 2}
   aim: {fileID: 194822, guid: 244bbb1404626448e8ee6750331f2d9b, type: 2}
+  resourceBox: {fileID: 108120, guid: 314fa5cfd211149d0bbf212d89e76e81, type: 2}
   normMat: {fileID: 0}
   hitColor: {r: 0, g: 0, b: 0, a: 0}
   normColor: {r: 0, g: 0, b: 0, a: 0}
