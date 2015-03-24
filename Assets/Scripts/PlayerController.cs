@@ -92,6 +92,9 @@ public class PlayerController : MonoBehaviour {
 	private GameObject aimLine;
 	public GameObject resourceBox;
 
+	public GameObject stone_scatterObj;
+	public GameObject wood_scatterObj;
+
 	public Material normMat;
 	public Color hitColor;
 	public Color normColor;
@@ -445,6 +448,8 @@ public class PlayerController : MonoBehaviour {
 		// Drop all resources in enemy's base upon death
 		if (!USE_SCATTER)
 			DropResourceBox();
+		else
+			ScatterResources();
 		
 		curr_wood_resource = curr_stone_resource = 0;
 		updateStoneText();
@@ -488,7 +493,16 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void ScatterResources() {
-//		while ()
+		while (curr_stone_resource > 0 || curr_wood_resource > 0) {
+			if (curr_stone_resource > 0) {
+				GameManager.SpawnScatteredObject(stone_scatterObj, transform.position);
+				curr_stone_resource--;
+			}
+			if (curr_wood_resource > 0) {
+				GameManager.SpawnScatteredObject(wood_scatterObj, transform.position);
+				curr_wood_resource--;
+			}
+		}
 	}
 
 	void Attack(){
