@@ -5,9 +5,7 @@ using UnityEngine.UI;
 using InControl;
 
 public class PlayerController : MonoBehaviour {
-
-	public const bool USE_SCATTER = true;
-
+	
 	public int RESPAWN_TIME = 20;
 	private bool dead = false;
 	private float respawn_at_time;
@@ -446,7 +444,7 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		// Drop all resources in enemy's base upon death
-		if (!USE_SCATTER)
+		if (!GameManager.USE_SCATTER)
 			DropResourceBox();
 		else
 			ScatterResources();
@@ -597,11 +595,11 @@ public class PlayerController : MonoBehaviour {
 	void CollectResource(GameObject resource, ResourceType type){
 		if(Time.time > collect_at_time && !IsPackFull()) {
 			if(type == ResourceType.stone){
-				if (!USE_SCATTER)
+				if (!GameManager.USE_SCATTER)
 					CollectStone(" is mining!");
 				mining_stone.Play();
 			} if(type == ResourceType.wood){
-				if (!USE_SCATTER)
+				if (!GameManager.USE_SCATTER)
 					CollectWood(" is chopping wood!");
 				chopping_wood.Play();
 			}

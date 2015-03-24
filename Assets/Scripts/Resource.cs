@@ -35,20 +35,14 @@ public class Resource : MonoBehaviour {
 		Debug.DrawRay(transform.position, -transform.up, Color.green);
 	}
 
-//	if (type == ResourceType.wood) {
-//		spawnSpot = origin.position + (origin.up * Random.Range(2f, 3f)) + 
-//			(origin.right * Random.Range(-2f, 3f) + (origin.forward * Random.Range(-2f, 3f)));
-//	} else {
-//		spawnSpot = transform.position + (origin.up * Random.Range(-2f, 3f)) + 
-//			(transform.right * Random.Range(1f, 2.1f) + (transform.forward * Random.Range(-2f, 3f)));
-//	}
-
 	public void Gather() {
 		amountLeft--;
-		if (scatterObject) {
-			GameManager.SpawnScatteredObject(scatterObject, transform.position);
-		} else {
-			print ("Resource has not scatterObject assigned!");
+		if (GameManager.USE_SCATTER) {
+			if (scatterObject) {
+				GameManager.SpawnScatteredObject(scatterObject, transform.position);
+			} else {
+				print ("Resource has not scatterObject assigned!");
+			}
 		}
 		if (amountLeft == 0) {
 			Destroy(this.gameObject);

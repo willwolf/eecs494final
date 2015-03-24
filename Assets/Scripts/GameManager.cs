@@ -28,7 +28,7 @@ public class CatapultTracker {
 }
 
 public class GameManager : MonoBehaviour {
-
+	public const bool USE_SCATTER = false;
 	
 	private Dictionary<string, string> teamNames = new Dictionary<string, string>() {
 		{ "Player 1 Base", "Team 1" },
