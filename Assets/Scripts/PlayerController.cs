@@ -606,6 +606,7 @@ public class PlayerController : MonoBehaviour {
 				drop.DepositResources(curr_stone_resource);
 				curr_stone_resource = 0;
 				updateStoneText();
+				dropping_resources.Play();
 			} if(hasBox && rbox.stone > 0){
 				drop.DepositResources(rbox.stone);
 				rbox.stone = 0;
@@ -613,6 +614,7 @@ public class PlayerController : MonoBehaviour {
 					box.SetActive(false);
 					hasBox = false;
 				}
+				dropping_resources.Play();
 			}
 			break;
 		case ResourceType.wood:
@@ -620,6 +622,7 @@ public class PlayerController : MonoBehaviour {
 				drop.DepositResources(curr_wood_resource);
 				curr_wood_resource = 0;
 				updateWoodText();
+				dropping_resources.Play();
 			} if(hasBox && rbox.wood > 0){
 				drop.DepositResources(rbox.wood);
 				rbox.wood = 0;
@@ -627,10 +630,10 @@ public class PlayerController : MonoBehaviour {
 					box.SetActive(false);
 					hasBox = false;
 				}
+				dropping_resources.Play();
 			}
 			break;
 		}
-		dropping_resources.Play();
 	}
 	
 	void CollectStone(string message){
