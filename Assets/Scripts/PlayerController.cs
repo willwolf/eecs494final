@@ -430,25 +430,7 @@ public class PlayerController : MonoBehaviour {
 		// Drop all resources in enemy's base upon death
 //		gm.AddResources(enemy_base_GO.GetInstanceID(), ResourceType.stone, curr_stone_resource);
 //		gm.AddResources(enemy_base_GO.GetInstanceID(), ResourceType.wood, curr_wood_resource);
-		if(curr_stone_resource + curr_wood_resource > 0){
-			//drop resource box
-			GameObject box_GO = Instantiate(resourceBox, this.transform.position - this.transform.up * 0.5f, this.transform.rotation) as GameObject;
-			ResourceBox rbox = box_GO.GetComponent<ResourceBox>();
-
-			rbox.wood = curr_wood_resource;
-			rbox.stone = curr_stone_resource;
-
-
-		} if(hasBox){
-			GameObject box_GO = Instantiate(resourceBox, this.transform.position - this.transform.up * 0.5f + this.transform.forward, this.transform.rotation) as GameObject;
-			ResourceBox rbox = box_GO.GetComponent<ResourceBox>();
-
-			rbox.wood = box.GetComponent<ResourceBox>().wood;
-			rbox.stone = box.GetComponent<ResourceBox>().stone;
-			
-			box.SetActive(false);
-			hasBox = false;
-		}
+		DropResourceBox();
 		
 		curr_wood_resource = curr_stone_resource = 0;
 		updateStoneText();
@@ -467,6 +449,28 @@ public class PlayerController : MonoBehaviour {
 		}
 		inEnemyBase = false;
 		respawn_at_time = Time.time + RESPAWN_TIME;
+	}
+
+	void DropResourceBox() {
+		if(curr_stone_resource + curr_wood_resource > 0){
+			//drop resource box
+			GameObject box_GO = Instantiate(resourceBox, this.transform.position - this.transform.up * 0.5f, this.transform.rotation) as GameObject;
+			ResourceBox rbox = box_GO.GetComponent<ResourceBox>();
+			
+			rbox.wood = curr_wood_resource;
+			rbox.stone = curr_stone_resource;
+			
+			
+		} if(hasBox){
+			GameObject box_GO = Instantiate(resourceBox, this.transform.position - this.transform.up * 0.5f + this.transform.forward, this.transform.rotation) as GameObject;
+			ResourceBox rbox = box_GO.GetComponent<ResourceBox>();
+			
+			rbox.wood = box.GetComponent<ResourceBox>().wood;
+			rbox.stone = box.GetComponent<ResourceBox>().stone;
+			
+			box.SetActive(false);
+			hasBox = false;
+		}
 	}
 
 	void Attack(){
@@ -509,7 +513,7 @@ public class PlayerController : MonoBehaviour {
 			}
 
 			if (drop.playerBaseGO.GetInstanceID() == homeBase_GO.GetInstanceID()) {
-				DropResource(drop);
+				DepositResources(drop);
 			} else {
 				StealResource(drop);
 			}
@@ -594,7 +598,7 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
-	void DropResource(DropPoint drop){
+	void DepositResources(DropPoint drop){
 		ResourceBox rbox = box.GetComponent<ResourceBox>();
 		switch (drop.resourceType) {
 		case ResourceType.stone:
