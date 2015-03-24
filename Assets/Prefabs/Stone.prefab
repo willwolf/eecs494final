@@ -13,7 +13,8 @@ GameObject:
   - 23: {fileID: 2314658}
   - 54: {fileID: 5414658}
   - 108: {fileID: 10814658}
-  m_Layer: 8
+  - 114: {fileID: 11467872}
+  m_Layer: 15
   m_Name: Stone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -66,7 +67,7 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 114658}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: .00100000005
   m_Drag: 0
   m_AngularDrag: .0500000007
   m_UseGravity: 1
@@ -109,6 +110,20 @@ Light:
   m_ShadowAngle: 0
   m_IndirectIntensity: 1
   m_AreaSize: {x: 1, y: 1}
+--- !u!114 &11467872
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 114658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad912d9cd39ba41239a554535b34a8a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 2
+  canPickUpAt: 0
+  disableTime: 2
 --- !u!135 &13514658
 SphereCollider:
   m_ObjectHideFlags: 1

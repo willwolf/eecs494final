@@ -37,7 +37,7 @@ public class Resource : MonoBehaviour {
 					(transform.right * Random.Range(-2f, 3f) + (transform.forward * Random.Range(-2f, 3f)));
 			} else {
 				spawnSpot = transform.position + (transform.up * Random.Range(-2f, 3f)) + 
-					(transform.right * Random.Range(-2f, 3f) + (transform.forward * Random.Range(-2f, 0f)));
+					(transform.right * Random.Range(1f, 2.1f) + (transform.forward * Random.Range(-2f, 3f)));
 			}
 			Instantiate(scatterObject, spawnSpot, scatterObject.transform.rotation);
 		} else {

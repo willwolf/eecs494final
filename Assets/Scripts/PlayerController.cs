@@ -228,13 +228,15 @@ public class PlayerController : MonoBehaviour {
 	void LateUpdate(){
 
 	}
-
-	void OnTriggerEnter(Collider coll) {
-		//currently friendly fire is enabled
-		if (coll.gameObject.layer == LayerMask.NameToLayer ("Weapon")) {
-			//takeDamage(damage_amount, homeBase_GO);		
-		}
 		
+	void OnCollisionEnter(Collision collision) {
+		if (collision.gameObject.layer == LayerMask.NameToLayer("ScatteredObject")) {
+			print("Collided with a scattered resource!");
+		}
+	}
+
+	void OnCollisionStay(Collision collision) {
+		OnCollisionEnter(collision);
 	}
 
 
