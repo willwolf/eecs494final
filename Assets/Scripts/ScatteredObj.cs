@@ -4,7 +4,7 @@ using System.Collections;
 public class ScatteredObj : MonoBehaviour {
 	public ResourceType type = ResourceType.none;
 	public float canPickUpAt = 0f;
-	public float disableTime = 2f;
+	public float disableTime = 0.5f;
 
 	// Use this for initialization
 	void Start () {

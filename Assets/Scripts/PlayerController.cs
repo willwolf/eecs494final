@@ -231,7 +231,18 @@ public class PlayerController : MonoBehaviour {
 		
 	void OnCollisionEnter(Collision collision) {
 		if (collision.gameObject.layer == LayerMask.NameToLayer("ScatteredObject")) {
-			print("Collided with a scattered resource!");
+			ScatteredObj s = collision.gameObject.GetComponent<ScatteredObj>();
+			if (s.CanPickUp() && !IsPackFull()) {
+				switch (s.type) {
+				case ResourceType.stone:
+					CollectStone(" picked up some stone!");
+					break;
+				case ResourceType.wood:
+					CollectWood(" picked up some wood!");
+					break;
+				}
+				Destroy(s.gameObject);
+			}
 		}
 	}
 
@@ -568,10 +579,12 @@ public class PlayerController : MonoBehaviour {
 	void CollectResource(GameObject resource, ResourceType type){
 		if(Time.time > collect_at_time && !IsPackFull()) {
 			if(type == ResourceType.stone){
-				CollectStone(" is mining!");
+				if (!USE_SCATTER)
+					CollectStone(" is mining!");
 				mining_stone.Play();
 			} if(type == ResourceType.wood){
-				CollectWood(" is chopping wood!");
+				if (!USE_SCATTER)
+					CollectWood(" is chopping wood!");
 				chopping_wood.Play();
 			}
 			decreaseResource(resource);
@@ -638,15 +651,13 @@ public class PlayerController : MonoBehaviour {
 	
 	void CollectStone(string message){
 		updateMidScreenText("Player " + player_num.ToString() + message);
-		if (!USE_SCATTER)
-			curr_stone_resource++;
+		curr_stone_resource++;
 		updateStoneText();
 	}
 
 	void CollectWood(string message){
 		updateMidScreenText("Player " + player_num.ToString() + message);
-		if (!USE_SCATTER)
-			curr_wood_resource++;
+		curr_wood_resource++;
 		updateWoodText();
 	}
 

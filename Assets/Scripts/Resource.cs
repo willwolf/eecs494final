@@ -28,6 +28,12 @@ public class Resource : MonoBehaviour {
 	
 	}
 
+	Quaternion RandomQuaternion() {
+		return new Quaternion(Random.Range(0f,360f),
+		                      Random.Range(0f,360f),
+		                      Random.Range(0f,360f),
+		                      Random.Range(0f,360f));
+	}
 	public void Gather() {
 		amountLeft--;
 		if (scatterObject) {
@@ -39,7 +45,9 @@ public class Resource : MonoBehaviour {
 				spawnSpot = transform.position + (transform.up * Random.Range(-2f, 3f)) + 
 					(transform.right * Random.Range(1f, 2.1f) + (transform.forward * Random.Range(-2f, 3f)));
 			}
-			Instantiate(scatterObject, spawnSpot, scatterObject.transform.rotation);
+//			Instantiate(scatterObject, spawnSpot, scatterObject.transform.rotation);
+			Instantiate(scatterObject, spawnSpot, RandomQuaternion());
+			
 		} else {
 			print ("Resource has not scatterObject assigned!");
 		}
