@@ -84,6 +84,8 @@ public class PlayerController : MonoBehaviour {
 	public GameObject shop;
 	public ShopMenu shopMenu;
 	public bool shopOpen;
+	public GameObject box;
+	public bool hasBox;
 	public GameObject arrow;
 	public GameObject aim;
 	private GameObject aimLine;
@@ -114,6 +116,7 @@ public class PlayerController : MonoBehaviour {
 
 		shopOpen = false;
 		shop.SetActive(false);
+		box.SetActive(false);
 
 		health = startingHealth;
 		gm = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -199,15 +202,15 @@ public class PlayerController : MonoBehaviour {
 		if (device != null) {
 			if (device.Action1.IsPressed) {
 				TakeAction();
-			} if(device.RightTrigger.IsPressed && !shopOpen){
+			} if(device.RightTrigger.IsPressed && !shopOpen && !hasBox){
 				Attack();
-			} if(device.LeftTrigger.IsPressed && !shopOpen){
+			} if(device.LeftTrigger.IsPressed && !shopOpen && !hasBox){
 				Aim();
 			} else if(aimLine){
 				Destroy(aimLine);
 			}
 		} else if (Input.GetButton("Action_" + Mathf.Ceil(player_num % 2.0f).ToString())) {
-			if(!shopOpen){
+			if(!shopOpen && !hasBox){
 				Attack();
 			}
 			TakeAction();
@@ -438,11 +441,23 @@ public class PlayerController : MonoBehaviour {
 			//drop resource box
 			GameObject box_GO = Instantiate(resourceBox, this.transform.position - this.transform.up * 0.5f, this.transform.rotation) as GameObject;
 			ResourceBox rbox = box_GO.GetComponent<ResourceBox>();
+
 			rbox.wood = curr_wood_resource;
 			rbox.stone = curr_stone_resource;
-		}
 
-//		backpackFull = false;
+
+		} if(hasBox){
+			GameObject box_GO = Instantiate(resourceBox, this.transform.position - this.transform.up * 0.5f, this.transform.rotation) as GameObject;
+			ResourceBox rbox = box_GO.GetComponent<ResourceBox>();
+
+			rbox.wood = box.GetComponent<ResourceBox>().wood;
+			rbox.stone = box.GetComponent<ResourceBox>().wood;
+			
+			box.SetActive(false);
+			hasBox = false;
+		}
+		
+		//		backpackFull = false;
 		curr_wood_resource = curr_stone_resource = 0;
 		updateStoneText();
 		updateWoodText();
@@ -506,9 +521,19 @@ public class PlayerController : MonoBehaviour {
 			} else {
 				StealResource(drop);
 			}
-		} else if(IsInRange(out hitinfo, "ResourceBox") && !shopOpen){
+		} else if(IsInRange(out hitinfo, "ResourceBox") && !shopOpen && !hasBox){
 			//pick up resource box
+			ResourceBox r = hitinfo.transform.GetComponent<ResourceBox>();
+			box.SetActive(true);
+			box.GetComponent<ResourceBox>().wood = r.wood;
+			box.GetComponent<ResourceBox>().stone = r.stone;
 
+			hasBox = true;
+			foreach (MeshRenderer renderer in box.GetComponentsInChildren<MeshRenderer>()) {
+				renderer.enabled = true;
+			}
+
+			Destroy(r.gameObject);
 		}
 	}
 
@@ -580,6 +605,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void DropResource(DropPoint drop){
+		ResourceBox rbox = box.GetComponent<ResourceBox>();
 		switch (drop.resourceType) {
 		case ResourceType.stone:
 			if(curr_stone_resource > 0) {
@@ -587,6 +613,13 @@ public class PlayerController : MonoBehaviour {
 				curr_stone_resource = 0;
 				updateStoneText();
 //				backpackFull = false;
+			} if(hasBox && rbox.stone > 0){
+				drop.DepositResources(rbox.stone);
+				rbox.stone = 0;
+				if(rbox.stone + rbox.wood == 0){
+					box.SetActive(false);
+					hasBox = false;
+				}
 			}
 			break;
 		case ResourceType.wood:
@@ -595,6 +628,13 @@ public class PlayerController : MonoBehaviour {
 				curr_wood_resource = 0;
 				updateWoodText();
 //				backpackFull = false;
+			} if(hasBox && rbox.wood > 0){
+				drop.DepositResources(rbox.wood);
+				rbox.wood = 0;
+				if(rbox.stone + rbox.wood == 0){
+					box.SetActive(false);
+					hasBox = false;
+				}
 			}
 			break;
 		}
