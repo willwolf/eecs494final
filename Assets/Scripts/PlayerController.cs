@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour {
 	public int stone_gather_val = 1;
 	public int MAX_RESOURCES = 30;
 	public static int MAX_STONE_PER_ROCK = 10;
-	public bool backpackFull = false;
+//	public bool backpackFull = false;
 
 	public float COLLECTION_COOLDOWN_TIME = 0.5f;
 	private float collect_at_time;
@@ -431,10 +431,10 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		// Drop all resources in enemy's base upon death
-		GameManager gm = GameObject.Find("GameManager").GetComponent<GameManager>();
-		gm.AddResources(enemy_base_GO.GetInstanceID(), ResourceType.stone, curr_stone_resource);
-		gm.AddResources(enemy_base_GO.GetInstanceID(), ResourceType.wood, curr_wood_resource);
+//		gm.AddResources(enemy_base_GO.GetInstanceID(), ResourceType.stone, curr_stone_resource);
+//		gm.AddResources(enemy_base_GO.GetInstanceID(), ResourceType.wood, curr_wood_resource);
 
+//		backpackFull = false;
 		curr_wood_resource = curr_stone_resource = 0;
 		updateStoneText();
 		updateWoodText();
@@ -526,8 +526,12 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
+	bool IsPackFull() {
+		return curr_stone_resource + curr_wood_resource >= MAX_RESOURCES; 
+	}
+
 	void CollectResource(GameObject resource, ResourceType type){
-		if(Time.time > collect_at_time && !backpackFull){
+		if(Time.time > collect_at_time && !IsPackFull()) {//!backpackFull){
 			if(type == ResourceType.stone){
 				CollectStone(" is mining!");
 				mining_stone.Play();
@@ -537,12 +541,12 @@ public class PlayerController : MonoBehaviour {
 			}
 			decreaseResource(resource);
 			collect_at_time = Time.time + COLLECTION_COOLDOWN_TIME;
-			backpackFull = (curr_stone_resource + curr_wood_resource >= MAX_RESOURCES);
+//			backpackFull = (curr_stone_resource + curr_wood_resource >= MAX_RESOURCES);
 		}
 	}
 
 	void StealResource(DropPoint drop){
-		if(Time.time > steal_at_time && !backpackFull){
+		if(Time.time > steal_at_time && !IsPackFull()) {//!backpackFull){
 			if(drop.resourceType == ResourceType.wood){
 				if(gm.teamResources[drop.playerBaseGO.GetInstanceID()].wood == 0){
 					updateMidScreenText("No resources to steal");
@@ -560,7 +564,7 @@ public class PlayerController : MonoBehaviour {
 			}
 			stealing_resources.Play();
 			steal_at_time = Time.time + STEAL_COOLDOWN_TIME;
-			backpackFull = (curr_stone_resource + curr_wood_resource >= MAX_RESOURCES);
+//			backpackFull = (curr_stone_resource + curr_wood_resource >= MAX_RESOURCES);
 		}
 	}
 
@@ -571,7 +575,7 @@ public class PlayerController : MonoBehaviour {
 				drop.DepositResources(curr_stone_resource);
 				curr_stone_resource = 0;
 				updateStoneText();
-				backpackFull = false;
+//				backpackFull = false;
 			}
 			break;
 		case ResourceType.wood:
@@ -579,7 +583,7 @@ public class PlayerController : MonoBehaviour {
 				drop.DepositResources(curr_wood_resource);
 				curr_wood_resource = 0;
 				updateWoodText();
-				backpackFull = false;
+//				backpackFull = false;
 			}
 			break;
 		}
