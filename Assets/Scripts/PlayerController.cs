@@ -6,6 +6,8 @@ using InControl;
 
 public class PlayerController : MonoBehaviour {
 
+	public const bool USE_SCATTER = true;
+
 	public int RESPAWN_TIME = 20;
 	private bool dead = false;
 	private float respawn_at_time;
@@ -428,9 +430,8 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		// Drop all resources in enemy's base upon death
-//		gm.AddResources(enemy_base_GO.GetInstanceID(), ResourceType.stone, curr_stone_resource);
-//		gm.AddResources(enemy_base_GO.GetInstanceID(), ResourceType.wood, curr_wood_resource);
-		DropResourceBox();
+		if (!USE_SCATTER)
+			DropResourceBox();
 		
 		curr_wood_resource = curr_stone_resource = 0;
 		updateStoneText();
@@ -634,14 +635,16 @@ public class PlayerController : MonoBehaviour {
 	}
 	
 	void CollectStone(string message){
-		updateMidScreenText("Player " + (player_num % 2).ToString() + message);
-		curr_stone_resource++;
+		updateMidScreenText("Player " + player_num.ToString() + message);
+		if (!USE_SCATTER)
+			curr_stone_resource++;
 		updateStoneText();
 	}
 
 	void CollectWood(string message){
-		updateMidScreenText("Player " + (player_num % 2).ToString() + message);
-		curr_wood_resource++;
+		updateMidScreenText("Player " + player_num.ToString() + message);
+		if (!USE_SCATTER)
+			curr_wood_resource++;
 		updateWoodText();
 	}
 
@@ -654,12 +657,6 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void decreaseResource(GameObject resource){
-		//		print ("Amount of " + resource.ToString () + " left: " + 
-		//						resource.GetComponent<Resource> ().amountLeft);
-//		resource.GetComponent<Resource>().amountLeft--; //dec first to not get off by 1 error
-//		if(resource.GetComponent<Resource>().amountLeft == 0){
-//			Destroy(resource);
-//		}
 		resource.GetComponent<Resource>().Gather();
 	}
 
