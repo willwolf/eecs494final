@@ -35,10 +35,14 @@ public class GameManager : MonoBehaviour {
 		{ "Player 2 Base", "Team 2" }
 	};
 
+
+	private const int MAX_LAYER = 31;
+
 	private MultiValueDictionary<int, Text> teamTexts =  new MultiValueDictionary<int, Text>();
 	private MultiValueDictionary<int, Text> opponentTexts = new MultiValueDictionary<int,Text>();
 	private MultiValueDictionary<int, Text> enemyInBaseTexts = new MultiValueDictionary<int, Text>();
 	private Dictionary<int, Material> teamMats = new Dictionary<int, Material>();
+	public Dictionary<int, int> teamTrapLayer { get; private set; }
 
 	public Dictionary<int, string> baseNames;
 	public Dictionary<int, ResourceCount> teamResources;
@@ -68,8 +72,14 @@ public class GameManager : MonoBehaviour {
 		Canvas canvas = (Instantiate(playerCanvasBase, new Vector3(), new Quaternion()) as GameObject).GetComponent<Canvas>();
 		Camera cam = player.GetComponentInChildren<Camera>();
 		cam.rect = viewport;
-		Debug.Log(cam.rect);
 		canvas.worldCamera = player.GetComponentInChildren<Camera>();
+
+		int trapLayer = teamTrapLayer[base1.GetInstanceID()];
+		for (int i = MAX_LAYER - teamTrapLayer.Count + 1; i <= MAX_LAYER; i++) {
+			if (i == trapLayer)
+				continue;
+			cam.cullingMask &= ~(1 << i);
+		}
 
 		PlayerController controller = player.GetComponent<PlayerController>();
 		controller.player_num = playerNum;
@@ -114,13 +124,14 @@ public class GameManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		teamTrapLayer = new Dictionary<int, int>();
 
 		teamResources = new Dictionary<int, ResourceCount>();
 
 		baseNames = new Dictionary<int, string>();
 
+		int trapLayer = MAX_LAYER;
 		int teamNum = 0;
-		int playerNum = 1;
 		int numPlayers = InputManager.Devices.Count >= 2 ? 4 : 2;
 		foreach (KeyValuePair<string, string> pair in teamNames) {
 			GameObject baseObj = GameObject.Find(pair.Key);
@@ -128,10 +139,16 @@ public class GameManager : MonoBehaviour {
 			teamResources.Add(baseObj.GetInstanceID(), new ResourceCount());
 			teamMats.Add(baseObj.GetInstanceID(), mats[teamNum++]);
 			teamCatapultStatus.Add(baseObj.GetInstanceID(), new CatapultTracker());
+			teamTrapLayer.Add(baseObj.GetInstanceID(), trapLayer--);
+		}
 
+		int playerNum = 1;
+		foreach (KeyValuePair<string, string> pair in teamNames) {
+			GameObject baseObj = GameObject.Find(pair.Key);
 			addPlayer(baseObj, getViewport(numPlayers, playerNum), playerNum);
 			playerNum++;
 		}
+
 		if (numPlayers == 4) {
 			// Add the remaining two players in the event of there are 4 players
 			foreach (KeyValuePair<string, string> pair in teamNames) {
