@@ -486,7 +486,8 @@ public class PlayerController : MonoBehaviour {
 		}  else if (currentWeapon is BowScript){
 			if(Time.time > next_fire_at_time){
 				arrow_sound.Play();
-				GameObject newArrow = Instantiate(arrow, transform.position + transform.forward, Quaternion.AngleAxis(90, transform.right)) as GameObject;
+				GameObject newArrow = Instantiate(arrow, transform.position + transform.forward * 1.5f + transform.up * 0.2f,
+				                                  Quaternion.AngleAxis(90, transform.right)) as GameObject;
 				newArrow.GetComponent<Arrow>().homeBase_GO = homeBase_GO;
 				next_fire_at_time = Time.time + FIRE_RATE_TIME;
 			}
