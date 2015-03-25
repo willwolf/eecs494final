@@ -238,9 +238,9 @@ public class PlayerController : MonoBehaviour {
 
 	}
 		
-	void OnCollisionEnter(Collision collision) {
-		if (collision.gameObject.layer == LayerMask.NameToLayer("ScatteredObject")) {
-			ScatteredObj s = collision.gameObject.GetComponent<ScatteredObj>();
+	void OnTriggerEnter(Collider col) {
+		if (col.gameObject.layer == LayerMask.NameToLayer("ScatteredObject")) {
+			ScatteredObj s = col.transform.GetComponentInParent<ScatteredObj>();
 			if (s.CanPickUp() && !IsPackFull()) {
 				switch (s.type) {
 				case ResourceType.stone:
@@ -255,9 +255,9 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
-	void OnCollisionStay(Collision collision) {
-		OnCollisionEnter(collision);
-	}
+//	void OnTriggerStay(Collider col) {
+//		OnTriggerEnter(col);
+//	}
 
 	private bool frozen = false;
 	private float frozenUntil;
