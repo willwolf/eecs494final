@@ -83,6 +83,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
+  scatterObject: {fileID: 114658, guid: f4ac657ae594e41d7a0dcc9a7edd1db4, type: 2}
+  amountLeft: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

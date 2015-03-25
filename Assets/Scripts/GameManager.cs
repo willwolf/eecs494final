@@ -28,7 +28,7 @@ public class CatapultTracker {
 }
 
 public class GameManager : MonoBehaviour {
-
+	public const bool USE_SCATTER = false;
 	
 	private Dictionary<string, string> teamNames = new Dictionary<string, string>() {
 		{ "Player 1 Base", "Team 1" },
@@ -231,6 +231,19 @@ public class GameManager : MonoBehaviour {
 		} finally {
 			updateTeamText(baseId);
 		}
+	}
+
+	static Quaternion RandomQuaternion() {
+		return new Quaternion(Random.Range(0f,360f),
+		                      Random.Range(0f,360f),
+		                      Random.Range(0f,360f),
+		                      Random.Range(0f,360f));
+	}
+	public static void SpawnScatteredObject(GameObject scatteredObj, Vector3 origin) {
+		Vector3 spawnSpot = Vector3.zero;
+		// Should never push object below map
+		spawnSpot = origin + (Vector3.up * Random.Range(2,3)) + (Vector3.right * Random.Range(-2,3)) + (Vector3.forward * Random.Range(-2,3));
+		Instantiate(scatteredObj, spawnSpot, RandomQuaternion());
 	}
 
 	public ResourceCount GetTeamResourceInfo(int team_id) {
