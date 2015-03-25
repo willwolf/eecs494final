@@ -186,7 +186,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 105894}
-  m_LocalRotation: {x: .382683456, y: 0, z: 0, w: .923879504}
+  m_LocalRotation: {x: .382683486, y: 0, z: 0, w: .923879564}
   m_LocalPosition: {x: 0, y: -.519999981, z: 1.44000006}
   m_LocalScale: {x: .769999981, y: .750370026, z: 5}
   m_Children: []
@@ -252,7 +252,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 105904}
-  m_LocalRotation: {x: .382683456, y: 0, z: 0, w: .923879504}
+  m_LocalRotation: {x: .382683486, y: 0, z: 0, w: .923879564}
   m_LocalPosition: {x: 0, y: -.519999981, z: 1.44000006}
   m_LocalScale: {x: .769999981, y: .750370026, z: 5}
   m_Children: []
@@ -515,7 +515,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f4d2d4cffe704cdb91cd2eed6a98410, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: e26127ff83dd3724d871fed4b8a21a29, type: 3}
   item_name: Catapult Legs
   stone_cost: 0
   wood_cost: 25

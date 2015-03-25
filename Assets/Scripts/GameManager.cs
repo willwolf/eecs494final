@@ -28,7 +28,7 @@ public class CatapultTracker {
 }
 
 public class GameManager : MonoBehaviour {
-	public const bool USE_SCATTER = false;
+	public const bool USE_SCATTER = true;
 	
 	private Dictionary<string, string> teamNames = new Dictionary<string, string>() {
 		{ "Player 1 Base", "Team 1" },
@@ -154,7 +154,8 @@ public class GameManager : MonoBehaviour {
 		foreach (Text text in teamTexts[baseId]) {
 			ResourceCount counts = teamResources[baseId];
 
-			text.text = baseNames[baseId] + " Wood: " + counts.wood + " Stone: " + counts.stone;
+			text.text = baseNames[baseId] + " Wood: " + counts.wood + 
+				" Stone: " + counts.stone + catapultText(baseId);
 		}
 	}
 
@@ -164,19 +165,38 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 
-	//this only works if there are 2 teams, but currently that's how the whole UI works as well
+
 	void updateOppText(int baseId){
 		foreach (Text text in opponentTexts[baseId]) {
 		text.text = "";
 			foreach (KeyValuePair<int,string> pair in baseNames) {
 				if (baseId != pair.Key){
 					ResourceCount counts = teamResources[pair.Key];
-					text.text += baseNames[pair.Key] + " Wood: " + counts.wood + " Stone: " + counts.stone + "\n";
+					text.text += baseNames[pair.Key] + " Wood: " + counts.wood + 
+						" Stone: " + counts.stone + catapultText(pair.Key) + "\n";
 				}		
 			}
 		}
 	}
 
+	string catapultText(int baseId){
+		string cataText = "";
+		if(teamCatapultStatus [baseId].has_arm ||
+			teamCatapultStatus[baseId].has_legs ||
+		teamCatapultStatus[baseId].has_projectile){
+			cataText = " Obtained Catapult Parts: ";
+			if (teamCatapultStatus [baseId].has_arm) {
+				cataText += "Arm ";
+			}
+			if(teamCatapultStatus[baseId].has_legs){
+				cataText += "Base ";
+			}
+			if(teamCatapultStatus[baseId].has_projectile){
+				cataText += "Stone";
+			}
+		}
+		return cataText;
+	}
 
 	// Update is called once per frame
 	void Update () {
@@ -278,17 +298,22 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void AddCatapultPart(int team_id, CatapultPart part) {
-		switch (part) {
-		case CatapultPart.arm:
-			teamCatapultStatus[team_id].has_arm = true;
+		try{
+			switch (part) {
+			case CatapultPart.arm:
+				teamCatapultStatus[team_id].has_arm = true;
 
-			break;
-		case CatapultPart.legs:
-			teamCatapultStatus[team_id].has_legs = true;
-			break;
-		case CatapultPart.stone:
-			teamCatapultStatus[team_id].has_projectile = true;
-			break;
+				break;
+			case CatapultPart.legs:
+				teamCatapultStatus[team_id].has_legs = true;
+				break;
+			case CatapultPart.stone:
+				teamCatapultStatus[team_id].has_projectile = true;
+				break;
+			}
+		} finally {
+			updateTeamText(team_id);
+			updateAllOppTexts();
 		}
 	} 
 }
