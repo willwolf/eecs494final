@@ -459,7 +459,7 @@ public class PlayerController : MonoBehaviour {
 			
 			rbox.wood = curr_wood_resource;
 			rbox.stone = curr_stone_resource;
-			
+			rbox.GetComponentInChildren<TextMesh>().text = "W-" + curr_wood_resource + " S-" + curr_stone_resource;
 			
 		} if(hasBox){
 			GameObject box_GO = Instantiate(resourceBox, this.transform.position - this.transform.up * 0.5f + this.transform.forward, this.transform.rotation) as GameObject;
