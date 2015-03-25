@@ -124,13 +124,16 @@ MonoBehaviour:
   type: 1
   canPickUpAt: 0
   disableTime: .5
+  stopRollingAt: 0
+  rollTime: 2
+  speedSlow: .0500000007
 --- !u!136 &13625448
 CapsuleCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 125448}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 498e49e46eeee426090cc94bff84790f, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: .5
