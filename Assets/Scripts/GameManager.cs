@@ -171,7 +171,7 @@ public class GameManager : MonoBehaviour {
 		foreach (Text text in teamTexts[baseId]) {
 			ResourceCount counts = teamResources[baseId];
 
-			text.text = baseNames[baseId] + " Wood: " + counts.wood + 
+			text.text = "Us: Wood: " + counts.wood + 
 				" Stone: " + counts.stone + catapultText(baseId);
 		}
 	}
@@ -189,7 +189,7 @@ public class GameManager : MonoBehaviour {
 			foreach (KeyValuePair<int,string> pair in baseNames) {
 				if (baseId != pair.Key){
 					ResourceCount counts = teamResources[pair.Key];
-					text.text += baseNames[pair.Key] + " Wood: " + counts.wood + 
+					text.text += "Them: Wood: " + counts.wood + 
 						" Stone: " + counts.stone + catapultText(pair.Key) + "\n";
 				}		
 			}
