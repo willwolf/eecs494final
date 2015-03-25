@@ -70,6 +70,7 @@ public class PlayerController : MonoBehaviour {
 	public AudioSource swinging_sword;
 	public AudioSource splat_sound;
 	public AudioSource arrow_sound;
+	public AudioSource purchasing_sound;
 
 //	public GameObject sword;
 	public bool hasWeapon = false;
@@ -307,6 +308,9 @@ public class PlayerController : MonoBehaviour {
 					return;
 				}
 				item = shopMenu.MakePurchase(homeBase_GO.GetInstanceID());
+				if(item){
+					purchasing_sound.Play();
+				}
 				HandlePurchase(item);
 			}
 		} else {
@@ -322,6 +326,9 @@ public class PlayerController : MonoBehaviour {
 					return;
 				}
 				item = shopMenu.MakePurchase(homeBase_GO.GetInstanceID());
+				if(item){
+					purchasing_sound.Play();
+				}
 				HandlePurchase(item);
 			}
 		}
