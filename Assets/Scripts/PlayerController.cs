@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using InControl;
 
 public class PlayerController : MonoBehaviour {
-
+	
 	public int RESPAWN_TIME = 20;
 	private bool dead = false;
 	private float respawn_at_time;
@@ -89,6 +89,9 @@ public class PlayerController : MonoBehaviour {
 	public GameObject aim;
 	private GameObject aimLine;
 	public GameObject resourceBox;
+
+	public GameObject stone_scatterObj;
+	public GameObject wood_scatterObj;
 
 	public Material normMat;
 	public Color hitColor;
@@ -226,13 +229,26 @@ public class PlayerController : MonoBehaviour {
 	void LateUpdate(){
 
 	}
-
-	void OnTriggerEnter(Collider coll) {
-		//currently friendly fire is enabled
-		if (coll.gameObject.layer == LayerMask.NameToLayer ("Weapon")) {
-			//takeDamage(damage_amount, homeBase_GO);		
-		}
 		
+	void OnCollisionEnter(Collision collision) {
+		if (collision.gameObject.layer == LayerMask.NameToLayer("ScatteredObject")) {
+			ScatteredObj s = collision.gameObject.GetComponent<ScatteredObj>();
+			if (s.CanPickUp() && !IsPackFull()) {
+				switch (s.type) {
+				case ResourceType.stone:
+					CollectStone(" picked up some stone!");
+					break;
+				case ResourceType.wood:
+					CollectWood(" picked up some wood!");
+					break;
+				}
+				Destroy(s.gameObject);
+			}
+		}
+	}
+
+	void OnCollisionStay(Collision collision) {
+		OnCollisionEnter(collision);
 	}
 
 
@@ -428,9 +444,10 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		// Drop all resources in enemy's base upon death
-//		gm.AddResources(enemy_base_GO.GetInstanceID(), ResourceType.stone, curr_stone_resource);
-//		gm.AddResources(enemy_base_GO.GetInstanceID(), ResourceType.wood, curr_wood_resource);
-		DropResourceBox();
+		if (!GameManager.USE_SCATTER)
+			DropResourceBox();
+		else
+			ScatterResources();
 		
 		curr_wood_resource = curr_stone_resource = 0;
 		updateStoneText();
@@ -469,6 +486,19 @@ public class PlayerController : MonoBehaviour {
 			
 			box.SetActive(false);
 			hasBox = false;
+		}
+	}
+
+	void ScatterResources() {
+		while (curr_stone_resource > 0 || curr_wood_resource > 0) {
+			if (curr_stone_resource > 0) {
+				GameManager.SpawnScatteredObject(stone_scatterObj, transform.position);
+				curr_stone_resource--;
+			}
+			if (curr_wood_resource > 0) {
+				GameManager.SpawnScatteredObject(wood_scatterObj, transform.position);
+				curr_wood_resource--;
+			}
 		}
 	}
 
@@ -565,10 +595,12 @@ public class PlayerController : MonoBehaviour {
 	void CollectResource(GameObject resource, ResourceType type){
 		if(Time.time > collect_at_time && !IsPackFull()) {
 			if(type == ResourceType.stone){
-				CollectStone(" is mining!");
+				if (!GameManager.USE_SCATTER)
+					CollectStone(" is mining!");
 				mining_stone.Play();
 			} if(type == ResourceType.wood){
-				CollectWood(" is chopping wood!");
+				if (!GameManager.USE_SCATTER)
+					CollectWood(" is chopping wood!");
 				chopping_wood.Play();
 			}
 			decreaseResource(resource);
@@ -637,13 +669,13 @@ public class PlayerController : MonoBehaviour {
 	}
 	
 	void CollectStone(string message){
-		updateMidScreenText("Player " + (player_num % 2).ToString() + message);
+		updateMidScreenText("Player " + player_num.ToString() + message);
 		curr_stone_resource++;
 		updateStoneText();
 	}
 
 	void CollectWood(string message){
-		updateMidScreenText("Player " + (player_num % 2).ToString() + message);
+		updateMidScreenText("Player " + player_num.ToString() + message);
 		curr_wood_resource++;
 		updateWoodText();
 	}
@@ -657,12 +689,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void decreaseResource(GameObject resource){
-		//		print ("Amount of " + resource.ToString () + " left: " + 
-		//						resource.GetComponent<Resource> ().amountLeft);
-		resource.GetComponent<Resource>().amountLeft--; //dec first to not get off by 1 error
-		if(resource.GetComponent<Resource>().amountLeft == 0){
-			Destroy(resource);
-		}
+		resource.GetComponent<Resource>().Gather();
 	}
 
 	

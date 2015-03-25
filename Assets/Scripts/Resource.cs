@@ -10,6 +10,7 @@ public enum ResourceType {
 public class Resource : MonoBehaviour {
 	
 	public ResourceType type = ResourceType.none;
+	public GameObject scatterObject;
 	public int amountLeft = 0;
 
 	// Use this for initialization
@@ -24,6 +25,27 @@ public class Resource : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+		Debug.DrawRay(transform.position, transform.forward, Color.red);
+		Debug.DrawRay(transform.position, -transform.forward, Color.red);
+		
+		Debug.DrawRay(transform.position, transform.right, Color.blue);
+		Debug.DrawRay(transform.position, -transform.right, Color.blue);
+
+		Debug.DrawRay(transform.position, transform.up, Color.green);
+		Debug.DrawRay(transform.position, -transform.up, Color.green);
+	}
+
+	public void Gather() {
+		amountLeft--;
+		if (GameManager.USE_SCATTER) {
+			if (scatterObject) {
+				GameManager.SpawnScatteredObject(scatterObject, transform.position);
+			} else {
+				print ("Resource has not scatterObject assigned!");
+			}
+		}
+		if (amountLeft == 0) {
+			Destroy(this.gameObject);
+		}
 	}
 }
