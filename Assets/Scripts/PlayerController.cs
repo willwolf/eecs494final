@@ -142,6 +142,13 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if (frozen && Time.time > frozenUntil) {
+			frozen = false;
+			updateMidScreenText("Unfrozen!");
+		}
+		if (frozen) {
+			updateMidScreenText("Frozen for " + Mathf.Floor(frozenUntil - Time.time).ToString("0") + " seconds");
+		}
 
 		if (player_num == 0) {
 			throw new UnassignedReferenceException("PlayerController::playerNum must be non-zero");
@@ -184,14 +191,6 @@ public class PlayerController : MonoBehaviour {
 			updateMidScreenText("Backpack Full");
 		}
 
-
-
-		if (!shopOpen) {
-			Move();
-		} else {
-			CheckShopInputs();
-		}
-
 		foreach (Renderer renderer in this.GetComponentsInChildren<Renderer>()) {
 			Color col = renderer.material.color;
 			if (hasWeapon && currentWeapon is StealthScript) {
@@ -202,28 +201,36 @@ public class PlayerController : MonoBehaviour {
 			renderer.material.color = col;
 		}
 
-		if (device != null) {
-			if (device.Action1.IsPressed) {
+		if (!frozen) {
+			if (!shopOpen) {
+				Move();
+			} else {
+				CheckShopInputs();
+			}
+
+			if (device != null) {
+				if (device.Action1.IsPressed) {
+					TakeAction();
+				} if(device.RightTrigger.IsPressed && !shopOpen && !hasBox){
+					Attack();
+				} if(device.LeftTrigger.IsPressed && !shopOpen && !hasBox){
+					Aim();
+				} else if(aimLine){
+					Destroy(aimLine);
+				}
+			} else if (Input.GetButton("Action_" + (player_num % 2).ToString())) {
+				if(!shopOpen && !hasBox){
+					Attack();
+				}
 				TakeAction();
-			} if(device.RightTrigger.IsPressed && !shopOpen && !hasBox){
-				Attack();
-			} if(device.LeftTrigger.IsPressed && !shopOpen && !hasBox){
-				Aim();
-			} else if(aimLine){
-				Destroy(aimLine);
 			}
-		} else if (Input.GetButton("Action_" + (player_num % 2).ToString())) {
-			if(!shopOpen && !hasBox){
-				Attack();
-			}
-			TakeAction();
-		}
-		if (device != null) {
-			if (device.DPadUp.WasPressed && inBase) {
+			if (device != null) {
+				if (device.DPadUp.WasPressed && inBase) {
+					ToggleStore();
+				}
+			} else if (Input.GetButtonDown("Store_Open_" + (player_num % 2).ToString()) && inBase) {
 				ToggleStore();
 			}
-		} else if (Input.GetButtonDown("Store_Open_" + (player_num % 2).ToString()) && inBase) {
-			ToggleStore();
 		}
 	}
 
@@ -250,6 +257,14 @@ public class PlayerController : MonoBehaviour {
 
 	void OnCollisionStay(Collision collision) {
 		OnCollisionEnter(collision);
+	}
+
+	private bool frozen = false;
+	private float frozenUntil;
+
+	public void freeze(float duration) {
+		frozen = true;
+		frozenUntil = Time.time + duration;
 	}
 
 
