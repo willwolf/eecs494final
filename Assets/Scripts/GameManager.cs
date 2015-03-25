@@ -36,6 +36,7 @@ public class GameManager : MonoBehaviour {
 	};
 
 	private MultiValueDictionary<int, Text> teamTexts =  new MultiValueDictionary<int, Text>();
+	private MultiValueDictionary<int, Text> opponentTexts = new MultiValueDictionary<int,Text>();
 	private MultiValueDictionary<int, Text> enemyInBaseTexts = new MultiValueDictionary<int, Text>();
 	private Dictionary<int, Material> teamMats = new Dictionary<int, Material>();
 
@@ -76,6 +77,7 @@ public class GameManager : MonoBehaviour {
 		controller.canvas = canvas;
 
 		teamTexts.Add(base1.GetInstanceID(), canvas.transform.FindChild("Team_Vals").GetComponent<Text>());
+		opponentTexts.Add(base1.GetInstanceID(), canvas.transform.FindChild("Opponent_Vals").GetComponent<Text>());
 
 		Text enemyWarning = canvas.transform.FindChild("Enemy_Warning").GetComponent<Text>();
 		enemyWarning.enabled = false;
@@ -143,6 +145,7 @@ public class GameManager : MonoBehaviour {
 		foreach (KeyValuePair<int, string> pair in baseNames) {
 			updateTeamText(pair.Key);
 		}
+		updateAllOppTexts ();
 		print ("winning wood: " + winningWood + " stone: " + winningStone);
 
 	}
@@ -154,7 +157,27 @@ public class GameManager : MonoBehaviour {
 			text.text = baseNames[baseId] + " Wood: " + counts.wood + " Stone: " + counts.stone;
 		}
 	}
-	
+
+	void updateAllOppTexts(){
+		foreach (KeyValuePair<int, string> pair in baseNames) {
+			updateOppText (pair.Key);
+		}
+	}
+
+	//this only works if there are 2 teams, but currently that's how the whole UI works as well
+	void updateOppText(int baseId){
+		foreach (Text text in opponentTexts[baseId]) {
+		text.text = "";
+			foreach (KeyValuePair<int,string> pair in baseNames) {
+				if (baseId != pair.Key){
+					ResourceCount counts = teamResources[pair.Key];
+					text.text += baseNames[pair.Key] + " Wood: " + counts.wood + " Stone: " + counts.stone + "\n";
+				}		
+			}
+		}
+	}
+
+
 	// Update is called once per frame
 	void Update () {
 //		foreach(KeyValuePair<int, ResourceCount> team in teamResources){
@@ -183,6 +206,7 @@ public class GameManager : MonoBehaviour {
 				kvp.Value.stone += 10;
 				updateTeamText(kvp.Key);
 			}
+			updateAllOppTexts();
 		}
 	}
 
@@ -202,6 +226,8 @@ public class GameManager : MonoBehaviour {
 			break;
 		}
 		updateTeamText(baseId);
+		updateAllOppTexts ();
+
 	}
 
 
@@ -230,6 +256,7 @@ public class GameManager : MonoBehaviour {
 			return 0;
 		} finally {
 			updateTeamText(baseId);
+			updateAllOppTexts();
 		}
 	}
 
