@@ -19359,6 +19359,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  scatterObject: {fileID: 125448, guid: f6d2150e021c24c06b940440b5efabcc, type: 2}
   amountLeft: 0
 --- !u!136 &13671708
 CapsuleCollider:
