@@ -603,6 +603,7 @@ public class PlayerController : MonoBehaviour {
 		if(!shopOpen){
 			shopOpen = true;
 			shop.SetActive (true);
+			shop.GetComponent<ShopMenu>().OpenShop(homeBase_GO.GetInstanceID());
 		}
 		else{
 			shopOpen = false;

@@ -25,14 +25,7 @@ public class Resource : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		Debug.DrawRay(transform.position, transform.forward, Color.red);
-		Debug.DrawRay(transform.position, -transform.forward, Color.red);
-		
-		Debug.DrawRay(transform.position, transform.right, Color.blue);
-		Debug.DrawRay(transform.position, -transform.right, Color.blue);
 
-		Debug.DrawRay(transform.position, transform.up, Color.green);
-		Debug.DrawRay(transform.position, -transform.up, Color.green);
 	}
 
 	public void Gather() {

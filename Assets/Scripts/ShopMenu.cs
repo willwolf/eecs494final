@@ -22,6 +22,7 @@ public class ShopMenu : MonoBehaviour {
 	public Transform contentPanel;
 	public Transform scrollView;
 	public List<GameObject> menuButtons = new List<GameObject>();
+	public List<Button> buttonList = new List<Button>();
 
 	// Use this for initialization
 	void Awake () {
@@ -38,8 +39,10 @@ public class ShopMenu : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		// Treat the current button like it has a mouse hovering over it
-		var pointer = new PointerEventData(EventSystem.current);
-		ExecuteEvents.Execute(menuButtons[current_item], pointer, ExecuteEvents.pointerEnterHandler);
+		if (current_item >= 0 && current_item < menuButtons.Count) {
+			var pointer = new PointerEventData(EventSystem.current);
+			ExecuteEvents.Execute(menuButtons[current_item], pointer, ExecuteEvents.pointerEnterHandler);
+		}
 		if (lerpV) {
 			contentPanel.localPosition = Vector3.Lerp(contentPanel.localPosition, target_point, 75 * scroll.elasticity * Time.deltaTime);
 			if (scroll.verticalNormalizedPosition < 0) {
@@ -55,9 +58,11 @@ public class ShopMenu : MonoBehaviour {
 
 	public void ScrollDown() {
 		Scroll(1);
+		FindNextAvailableDown();
 	}
 	public void ScrollUp() {
 		Scroll(-1);
+		FindNextAvailableUp();
 	}
 	void Scroll(int shift) { 
 		if (Time.time < allow_scroll_at) {
@@ -80,6 +85,40 @@ public class ShopMenu : MonoBehaviour {
 		target_point = new Vector3(contentPanel.localPosition.x, content_y_offset + current_item * button_size, contentPanel.localPosition.z);
 		lerpV = true;
 	}
+	 
+	void FindNextAvailableDown() {
+		FindNextAvailable(1);
+	}
+	void FindNextAvailableUp() {
+		FindNextAvailable(-1);
+	}
+	void FindNextAvailable(int adjust) {
+		if (current_item < 0) {
+			current_item = 0;
+		} else if (current_item >= menuButtons.Count) {
+			current_item = menuButtons.Count - 1;
+		}
+
+		Button b = buttonList[current_item];
+		int tempCur = current_item;
+		while (!b.interactable && tempCur >= 0 && tempCur < menuButtons.Count) {
+			tempCur += adjust;
+			if (tempCur < menuButtons.Count && tempCur >= 0) {
+				b = buttonList[tempCur];
+			}
+		}
+
+		if (tempCur != current_item && (tempCur < menuButtons.Count && tempCur >= 0)) {
+			current_item = tempCur;
+			// Remove the pointer event on the previous item
+			var pointer = new PointerEventData(EventSystem.current);
+			ExecuteEvents.Execute(menuButtons[current_item], pointer, ExecuteEvents.pointerExitHandler);
+
+			// Scroll to next item
+			target_point = new Vector3(contentPanel.localPosition.x, content_y_offset + current_item * button_size, contentPanel.localPosition.z);
+			lerpV = true;
+		}
+	}
 
 	public ShopItem GetCurrentItem() {
 		return shoplist.items[current_item].GetComponent<ShopItem>();
@@ -91,6 +130,8 @@ public class ShopMenu : MonoBehaviour {
 		if (CanPurchase(item, team_count)) {
 			manager.RemoveResources(team_id, ResourceType.stone, item.stone_cost);
 			manager.RemoveResources(team_id, ResourceType.wood, item.wood_cost);
+			UpdateShop(team_id);
+			FindNextAvailableUp();
 			return item;
 		} 
 		return null;
@@ -111,7 +152,25 @@ public class ShopMenu : MonoBehaviour {
 			button.stoneLabel.text = "Stone: " + i.stone_cost.ToString();
 			newButton.transform.SetParent (contentPanel);
 			menuButtons.Add (newButton);
+			buttonList.Add(newButton.GetComponent<Button>());
 		}
 	}
 
+	public void OpenShop(int team_id) {
+		UpdateShop(team_id);
+	}
+
+	public void UpdateShop(int team_id) {
+		ResourceCount team_count = manager.GetTeamResourceInfo(team_id);
+		for (int i = 0; i < shoplist.items.Count; i++) {
+			GameObject go = shoplist.items[i];
+			ShopItem item = go.GetComponent<ShopItem>();
+			
+			Button b = buttonList[i];
+			b.interactable = false;
+			if (CanPurchase(item, team_count)) {
+				b.interactable = true;
+			}
+		}
+	}
 }

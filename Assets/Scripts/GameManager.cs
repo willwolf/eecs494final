@@ -43,6 +43,7 @@ public class GameManager : MonoBehaviour {
 	private MultiValueDictionary<int, Text> enemyInBaseTexts = new MultiValueDictionary<int, Text>();
 	private Dictionary<int, Material> teamMats = new Dictionary<int, Material>();
 	public Dictionary<int, int> teamTrapLayer { get; private set; }
+	public Dictionary<int, List<ShopMenu>> playerShops = new Dictionary<int, List<ShopMenu>>();
 
 	public Dictionary<int, string> baseNames;
 	public Dictionary<int, ResourceCount> teamResources;
@@ -73,6 +74,7 @@ public class GameManager : MonoBehaviour {
 		Camera cam = player.GetComponentInChildren<Camera>();
 		cam.rect = viewport;
 		canvas.worldCamera = player.GetComponentInChildren<Camera>();
+		playerShops[base1.GetInstanceID()].Add(canvas.GetComponentInChildren<ShopMenu>());
 
 		int trapLayer = teamTrapLayer[base1.GetInstanceID()];
 		for (int i = MAX_LAYER - teamTrapLayer.Count + 1; i <= MAX_LAYER; i++) {
@@ -135,6 +137,7 @@ public class GameManager : MonoBehaviour {
 		int numPlayers = InputManager.Devices.Count >= 2 ? 4 : 2;
 		foreach (KeyValuePair<string, string> pair in teamNames) {
 			GameObject baseObj = GameObject.Find(pair.Key);
+			playerShops.Add(baseObj.GetInstanceID(), new List<ShopMenu>());
 			baseNames.Add(baseObj.GetInstanceID(), pair.Value);
 			teamResources.Add(baseObj.GetInstanceID(), new ResourceCount());
 			teamMats.Add(baseObj.GetInstanceID(), mats[teamNum++]);
@@ -217,12 +220,6 @@ public class GameManager : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-//		foreach(KeyValuePair<int, ResourceCount> team in teamResources){
-//			if(team.Value.wood >= winningWood && team.Value.stone >= winningStone){
-//				print (team.Key + " team resources: " + team.Value.wood + " winning: " + winningWood);
-//				winningTeam = team.Key;
-//			}
-//		}
 		foreach(KeyValuePair<int, CatapultTracker> team in teamCatapultStatus) {
 			if (team.Value.has_arm && team.Value.has_legs && team.Value.has_projectile) {
 				winningTeam = team.Key;
@@ -264,7 +261,9 @@ public class GameManager : MonoBehaviour {
 		}
 		updateTeamText(baseId);
 		updateAllOppTexts ();
-
+		foreach (ShopMenu s in playerShops[baseId]) {
+			s.UpdateShop(baseId);
+		}
 	}
 
 
@@ -294,6 +293,9 @@ public class GameManager : MonoBehaviour {
 		} finally {
 			updateTeamText(baseId);
 			updateAllOppTexts();
+			foreach (ShopMenu s in playerShops[baseId]) {
+				s.UpdateShop(baseId);
+			}
 		}
 	}
 
