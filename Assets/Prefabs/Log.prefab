@@ -21,6 +21,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &177568
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 477568}
+  - 135: {fileID: 13577568}
+  m_Layer: 15
+  m_Name: PickupRad
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!4 &425448
 Transform:
   m_ObjectHideFlags: 1
@@ -30,8 +46,21 @@ Transform:
   m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106709}
   m_LocalPosition: {x: 33.4000015, y: 5, z: 76.5}
   m_LocalScale: {x: .75, y: .75, z: .75}
-  m_Children: []
+  m_Children:
+  - {fileID: 477568}
   m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!4 &477568
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 177568}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 425448}
   m_RootOrder: 0
 --- !u!23 &2325448
 Renderer:
@@ -124,13 +153,28 @@ MonoBehaviour:
   type: 1
   canPickUpAt: 0
   disableTime: .5
+  stopRollingAt: 0
+  rollTime: 2
+  speedSlow: .0500000007
+--- !u!135 &13577568
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 177568}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 3
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!136 &13625448
 CapsuleCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 125448}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 498e49e46eeee426090cc94bff84790f, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: .5

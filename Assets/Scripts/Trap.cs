@@ -32,4 +32,14 @@ public class Trap : MonoBehaviour {
 			init();
 		}
 	}
+
+	void OnTriggerEnter(Collider other) {
+		PlayerController player = other.gameObject.GetComponent<PlayerController>();
+		if (player == null) 
+			return;
+
+		if (player.homeBase_GO.GetInstanceID() != owner_base.GetInstanceID()) {
+			player.freeze(10);
+		}
+	}
 }

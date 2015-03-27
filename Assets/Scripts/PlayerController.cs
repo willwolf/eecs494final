@@ -70,6 +70,7 @@ public class PlayerController : MonoBehaviour {
 	public AudioSource swinging_sword;
 	public AudioSource splat_sound;
 	public AudioSource arrow_sound;
+	public AudioSource purchasing_sound;
 
 //	public GameObject sword;
 	public bool hasWeapon = false;
@@ -140,6 +141,13 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if (frozen && Time.time > frozenUntil) {
+			frozen = false;
+			updateMidScreenText("Unfrozen!");
+		}
+		if (frozen) {
+			updateMidScreenText("Frozen for " + Mathf.Floor(frozenUntil - Time.time).ToString("0") + " seconds");
+		}
 
 		if (player_num == 0) {
 			throw new UnassignedReferenceException("PlayerController::playerNum must be non-zero");
@@ -182,14 +190,6 @@ public class PlayerController : MonoBehaviour {
 			updateMidScreenText("Backpack Full");
 		}
 
-
-
-		if (!shopOpen) {
-			Move();
-		} else {
-			CheckShopInputs();
-		}
-
 		foreach (Renderer renderer in this.GetComponentsInChildren<Renderer>()) {
 			Color col = renderer.material.color;
 			if (hasWeapon && currentWeapon is StealthScript) {
@@ -200,30 +200,38 @@ public class PlayerController : MonoBehaviour {
 			renderer.material.color = col;
 		}
 
-		if (device != null) {
-			if (device.Action1.IsPressed) {
+		if (!frozen) {
+			if (!shopOpen) {
+				Move();
+			} else {
+				CheckShopInputs();
+			}
+
+			if (device != null) {
+				if (device.Action1.IsPressed) {
+					TakeAction();
+				} if(device.RightTrigger.IsPressed && !shopOpen && !hasBox){
+					Attack();
+				} if(device.LeftTrigger.IsPressed && !shopOpen && !hasBox){
+					Aim();
+				} else if(aimLine){
+					Destroy(aimLine);
+				} if(device.Action3.IsPressed){
+					DropResourceBox();
+				}
+			} else if (Input.GetButton("Action_" + (player_num % 2).ToString())) {
+				if(!shopOpen && !hasBox){
+					Attack();
+				}
 				TakeAction();
-			} if(device.RightTrigger.IsPressed && !shopOpen && !hasBox){
-				Attack();
-			} if(device.LeftTrigger.IsPressed && !shopOpen && !hasBox){
-				Aim();
-			} else if(aimLine){
-				Destroy(aimLine);
-			} if(device.Action3.IsPressed){
-				DropResourceBox();
 			}
-		} else if (Input.GetButton("Action_" + (player_num % 2).ToString())) {
-			if(!shopOpen && !hasBox){
-				Attack();
-			}
-			TakeAction();
-		}
-		if (device != null) {
-			if (device.DPadUp.WasPressed && inBase) {
+			if (device != null) {
+				if (device.DPadUp.WasPressed && inBase) {
+					ToggleStore();
+				}
+			} else if (Input.GetButtonDown("Store_Open_" + (player_num % 2).ToString()) && inBase) {
 				ToggleStore();
 			}
-		} else if (Input.GetButtonDown("Store_Open_" + (player_num % 2).ToString()) && inBase) {
-			ToggleStore();
 		}
 	}
 
@@ -231,9 +239,9 @@ public class PlayerController : MonoBehaviour {
 
 	}
 		
-	void OnCollisionEnter(Collision collision) {
-		if (collision.gameObject.layer == LayerMask.NameToLayer("ScatteredObject")) {
-			ScatteredObj s = collision.gameObject.GetComponent<ScatteredObj>();
+	void OnTriggerEnter(Collider col) {
+		if (col.gameObject.layer == LayerMask.NameToLayer("ScatteredObject")) {
+			ScatteredObj s = col.transform.GetComponentInParent<ScatteredObj>();
 			if (s.CanPickUp() && !IsPackFull()) {
 				switch (s.type) {
 				case ResourceType.stone:
@@ -248,8 +256,16 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
-	void OnCollisionStay(Collision collision) {
-		OnCollisionEnter(collision);
+//	void OnTriggerStay(Collider col) {
+//		OnTriggerEnter(col);
+//	}
+
+	private bool frozen = false;
+	private float frozenUntil;
+
+	public void freeze(float duration) {
+		frozen = true;
+		frozenUntil = Time.time + duration;
 	}
 
 
@@ -308,6 +324,9 @@ public class PlayerController : MonoBehaviour {
 					return;
 				}
 				item = shopMenu.MakePurchase(homeBase_GO.GetInstanceID());
+				if(item){
+					purchasing_sound.Play();
+				}
 				HandlePurchase(item);
 			}
 		} else {
@@ -323,6 +342,9 @@ public class PlayerController : MonoBehaviour {
 					return;
 				}
 				item = shopMenu.MakePurchase(homeBase_GO.GetInstanceID());
+				if(item){
+					purchasing_sound.Play();
+				}
 				HandlePurchase(item);
 			}
 		}
@@ -595,6 +617,7 @@ public class PlayerController : MonoBehaviour {
 		if(!shopOpen){
 			shopOpen = true;
 			shop.SetActive (true);
+			shop.GetComponent<ShopMenu>().OpenShop(homeBase_GO.GetInstanceID());
 		}
 		else{
 			shopOpen = false;
