@@ -7,7 +7,6 @@ public class Arrow : MonoBehaviour {
 	private float kill_at_time;
 	public int damage_amount = 2;
 	public float speed_multiplier = 20;
-	public GameObject homeBase_GO;
 
 	// Use this for initialization
 	void Start () {
@@ -27,8 +26,10 @@ public class Arrow : MonoBehaviour {
 			Debug.Log("Hit!");
 			PlayerController player = other.transform.GetComponent<PlayerController>();
 			//friendly fire allowed
-			player.takeDamage(damage_amount, homeBase_GO);
-		}
+			player.takeDamage(damage_amount);
+		} else if (other.gameObject.layer == LayerMask.NameToLayer("Enemy")){
+			other.gameObject.GetComponent<EnemyScript>().takeDamage(damage_amount);
+		} 
 		Destroy(this.gameObject);
 	}
 }

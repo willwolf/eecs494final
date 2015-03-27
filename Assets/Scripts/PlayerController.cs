@@ -439,7 +439,7 @@ public class PlayerController : MonoBehaviour {
 		this.renderer.material = normMat;
 	}
 
-	public void takeDamage(int damage, GameObject enemy_base_GO){
+	public void takeDamage(int damage){
 		if(Time.time > vulnerable_at_time){
 			health -= damage;
 			splat_sound.Play();
@@ -451,11 +451,11 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		if(health <= 0){
-			killPlayer(enemy_base_GO);
+			killPlayer();
 		}
 	}
 
-	public void killPlayer(GameObject enemy_base_GO) {
+	public void killPlayer() {
 		foreach (MeshRenderer renderer in GetComponentsInChildren<MeshRenderer>()) {
 			renderer.enabled = false;
 		}
@@ -542,15 +542,16 @@ public class PlayerController : MonoBehaviour {
 			if (IsInRange(out hitinfo, "Player") && !inEnemyBase){
 				PlayerController other = hitinfo.transform.GetComponent<PlayerController>();
 				if (other.homeBase_GO.GetInstanceID() != this.gameObject.GetInstanceID()) {
-					other.takeDamage(damage_amount, homeBase_GO);
+					other.takeDamage(damage_amount);
 				}
-			}
+			} else if (IsInRange(out hitinfo, "Enemy")){
+				hitinfo.transform.GetComponent<EnemyScript>().takeDamage(damage_amount);
+			} 
 		}  else if (currentWeapon is BowScript){
 			if(Time.time > next_fire_at_time){
 				arrow_sound.Play();
 				GameObject newArrow = Instantiate(arrow, transform.position + transform.forward * 1.5f + transform.up * 0.2f,
 				                                  Quaternion.AngleAxis(90, transform.right)) as GameObject;
-				newArrow.GetComponent<Arrow>().homeBase_GO = homeBase_GO;
 				next_fire_at_time = Time.time + FIRE_RATE_TIME;
 			}
 
@@ -767,5 +768,9 @@ public class PlayerController : MonoBehaviour {
 
 	public bool hasWon(int baseID){
 		return homeBase_GO.GetInstanceID() == baseID;
+	}
+
+	public bool isDead(){
+		return dead;
 	}
 }
