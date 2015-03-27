@@ -236,11 +236,9 @@ public class GameManager : MonoBehaviour {
 		//Testing purposes only
 		if(Input.GetKeyDown(KeyCode.T)){
 			foreach(KeyValuePair<int, ResourceCount> kvp in teamResources){
-				kvp.Value.wood += 10;
-				kvp.Value.stone += 10;
-				updateTeamText(kvp.Key);
+				AddResources(kvp.Key, ResourceType.stone, 10);
+				AddResources(kvp.Key, ResourceType.wood, 10);
 			}
-			updateAllOppTexts();
 		}
 	}
 
