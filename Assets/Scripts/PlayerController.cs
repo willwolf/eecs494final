@@ -364,14 +364,26 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
+
+
 	bool CantMakePurchaseOn(ShopItem item) {
+		if (item is CatapultArmScript) {
+			if(homeBase.hasCatapultArm || !homeBase.hasCatapultLegs){
+				return true;
+			}
+			return false;
+		}else if(item is CatapultStoneScript){
+			if( homeBase.hasCatapultStone || 
+			   !homeBase.hasCatapultLegs || !homeBase.hasCatapultArm){
+				return true;
+			}
+			return false;
+		}
 		return (item is SwordScript && currentWeapon is SwordScript) || 
 				(item is BowScript && currentWeapon is BowScript) || 
 				(item is StealthScript && currentWeapon is StealthScript) || 
 				(item is WallScript && homeBase.HasWalls()) ||
-				(item is CatapultArmScript && homeBase.hasCatapultArm) ||
-				(item is CatapultLegScript && homeBase.hasCatapultLegs) ||
-				(item is CatapultStoneScript && homeBase.hasCatapultStone);
+				(item is CatapultLegScript && homeBase.hasCatapultLegs);
 	}
 	
 	void HandlePurchase(ShopItem item) {
