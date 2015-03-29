@@ -57,6 +57,9 @@ public class PlayerController : MonoBehaviour {
 	public bool stealthActive = false;
 	private double stealthAmount = 1;
 
+	private bool frozen = false;
+	private float frozenUntil;
+	private float stunTime = 0.4f;
 	
 	private Text stone_text;
 	private Text wood_text;
@@ -260,9 +263,6 @@ public class PlayerController : MonoBehaviour {
 //		OnTriggerEnter(col);
 //	}
 
-	private bool frozen = false;
-	private float frozenUntil;
-
 	public void freeze(float duration) {
 		frozen = true;
 		frozenUntil = Time.time + duration;
@@ -412,6 +412,7 @@ public class PlayerController : MonoBehaviour {
 		dead = false;
 		health = startingHealth;
 		health_slider.value = health;
+		vulnerable_at_time = Time.time + INVULNERABLE_TIME;
 		foreach (Collider collider in GetComponentsInChildren<Collider>()) {
 			collider.enabled = true;
 		}
@@ -421,6 +422,7 @@ public class PlayerController : MonoBehaviour {
 		foreach (Rigidbody rb in GetComponentsInChildren<Rigidbody>()) {
 			rb.isKinematic = false;
 		}
+		//StartCoroutine(colorFlash());
 	}
 
 	public  IEnumerator colorFlash(){
@@ -458,13 +460,13 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	public void killPlayer() {
+		if(hasBox){
+			DropResourceBox();
+		}
+
 		if (!GameManager.USE_SCATTER){
 			DropResourceBox();
-			DropResourceBox(); //called twice in case player has a box
 		} else {
-			if(hasBox){
-				DropResourceBox();
-			}
 			ScatterResources();
 		}
 
@@ -480,7 +482,7 @@ public class PlayerController : MonoBehaviour {
 		}
 
 
-		this.transform.position = homeBase_GO.transform.position;
+		this.transform.position = homeBase_GO.transform.position + homeBase_GO.transform.up * 1;
 
 		stealthActive = false;
 		hasWeapon = false;
@@ -498,10 +500,12 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void DropResourceBox() {
+		Vector3 drop_at_position = this.transform.position - this.transform.up * 0.5f + this.transform.forward * 1.5f;
+
 		if(hasBox){
 			ResourceBox rbox = this.GetComponentInChildren<ResourceBox>();
 			rbox.transform.SetParent(null);
-			rbox.transform.position = this.transform.position - this.transform.up * 0.5f + this.transform.forward;
+			rbox.transform.position = drop_at_position;
 
 
 //			GameObject box_GO = Instantiate(resourceBox, this.transform.position - this.transform.up * 0.5f + this.transform.forward, this.transform.rotation) as GameObject;
@@ -514,7 +518,7 @@ public class PlayerController : MonoBehaviour {
 			hasBox = false;
 		} else if(curr_stone_resource + curr_wood_resource > 0){
 			//drop resource box
-			GameObject box_GO = Instantiate(resourceBox, this.transform.position - this.transform.up * 0.5f, this.transform.rotation) as GameObject;
+			GameObject box_GO = Instantiate(resourceBox, drop_at_position, this.transform.rotation) as GameObject;
 			ResourceBox rbox = box_GO.GetComponent<ResourceBox>();
 			
 			rbox.wood = curr_wood_resource;
@@ -550,7 +554,7 @@ public class PlayerController : MonoBehaviour {
 				PlayerController other = hitinfo.transform.GetComponent<PlayerController>();
 				if (other.homeBase_GO.GetInstanceID() != this.gameObject.GetInstanceID()) {
 					other.takeDamage(damage_amount);
-					other.freeze(0.5f);
+					other.freeze(stunTime);
 				}
 			} else if (IsInRange(out hitinfo, "Enemy")){
 				hitinfo.transform.GetComponent<EnemyScript>().takeDamage(damage_amount);
