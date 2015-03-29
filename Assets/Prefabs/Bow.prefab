@@ -505,7 +505,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 5087536b1df2449f1b0bf8933d2a0303, type: 3}
   item_name: Bow
-  stone_cost: 0
+  stone_cost: 6
   wood_cost: 6
 --- !u!136 &13620150
 CapsuleCollider:

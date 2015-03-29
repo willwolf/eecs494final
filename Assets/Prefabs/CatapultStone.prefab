@@ -71,8 +71,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 31af43228f7a749448b8b0e969ca76f7, type: 3}
   item_name: Catapult Stone
-  stone_cost: 35
-  wood_cost: 0
+  stone_cost: 15
+  wood_cost: 15
 --- !u!135 &13541588
 SphereCollider:
   m_ObjectHideFlags: 1

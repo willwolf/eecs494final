@@ -1721,13 +1721,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f94a2812731e43568d43664a23a6a24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RESPAWN_TIME: 20
-  startingHealth: 10
+  RESPAWN_TIME: 15
+  startingHealth: 6
   damage_amount: 2
   INVULNERABLE_TIME: 1
   HEALTH_REGEN_TIME: 1
   FIRE_RATE_TIME: .5
-  SLOW_DURATION: .75
   player_num: 1
   controller_sensitivity: .5
   jump_height: 5
@@ -1735,7 +1734,6 @@ MonoBehaviour:
   walk_speed: 15
   enemy_base_speed_multiplier: .5
   encumberPercent: .5
-  slowPercent: .5
   curr_wood_resource: 0
   wood_gather_val: 1
   curr_stone_resource: 0

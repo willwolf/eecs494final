@@ -143,10 +143,10 @@ public class PlayerController : MonoBehaviour {
 	void Update () {
 		if (frozen && Time.time > frozenUntil) {
 			frozen = false;
-			updateMidScreenText("Unfrozen!");
+//			updateMidScreenText("Unfrozen!");
 		}
 		if (frozen) {
-			updateMidScreenText("Frozen for " + Mathf.Floor(frozenUntil - Time.time).ToString("0") + " seconds");
+//			updateMidScreenText("Frozen for " + Mathf.Floor(frozenUntil - Time.time).ToString("0") + " seconds");
 		}
 
 		if (player_num == 0) {
@@ -167,7 +167,7 @@ public class PlayerController : MonoBehaviour {
 			}
 		} else if(inBase) {
 			if(Time.time > regen_at_time){
-				health += 1;
+//				health += 1;
 				if(health > startingHealth) {
 					health = startingHealth;
 				}
@@ -328,6 +328,8 @@ public class PlayerController : MonoBehaviour {
 					purchasing_sound.Play();
 				}
 				HandlePurchase(item);
+				//close shop
+//				ToggleStore();
 			}
 		} else {
 			float vertInput = Input.GetAxis("Vertical_" + (player_num % 2).ToString());
@@ -456,6 +458,17 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	public void killPlayer() {
+		if (!GameManager.USE_SCATTER){
+			DropResourceBox();
+			DropResourceBox(); //called twice in case player has a box
+		} else {
+			if(hasBox){
+				DropResourceBox();
+			}
+			ScatterResources();
+		}
+
+
 		foreach (MeshRenderer renderer in GetComponentsInChildren<MeshRenderer>()) {
 			renderer.enabled = false;
 		}
@@ -466,13 +479,6 @@ public class PlayerController : MonoBehaviour {
 			collider.enabled = false;
 		}
 
-		// Drop all resources in enemy's base upon death
-		if (!GameManager.USE_SCATTER){
-			DropResourceBox();
-			DropResourceBox(); //called twice in case player has a box
-		} else {
-			ScatterResources();
-		}
 
 		this.transform.position = homeBase_GO.transform.position;
 
@@ -544,6 +550,7 @@ public class PlayerController : MonoBehaviour {
 				PlayerController other = hitinfo.transform.GetComponent<PlayerController>();
 				if (other.homeBase_GO.GetInstanceID() != this.gameObject.GetInstanceID()) {
 					other.takeDamage(damage_amount);
+					other.freeze(0.5f);
 				}
 			} else if (IsInRange(out hitinfo, "Enemy")){
 				hitinfo.transform.GetComponent<EnemyScript>().takeDamage(damage_amount);
