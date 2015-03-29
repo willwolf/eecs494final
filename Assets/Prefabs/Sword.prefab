@@ -251,8 +251,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 2e7961b82d2c63a4fbd1d0045d061e0c, type: 3}
   item_name: Sword
-  stone_cost: 3
-  wood_cost: 3
+  stone_cost: 6
+  wood_cost: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

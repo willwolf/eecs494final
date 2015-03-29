@@ -46,14 +46,14 @@ public class SwordScript : WeaponItem {
 		if (collision.gameObject.name == this.transform.parent.gameObject.name) {
 			return;		
 		}
-		print ("poke");
+
 		foreach (ContactPoint contact in collision.contacts) {
 			Debug.DrawRay(contact.point, contact.normal, Color.white);
 		}
 	}
 
 	void OnTriggerEnter(Collider coll) {
-		print ("It's a trigger!");
+//		print ("It's a trigger!");
 	}
 
 	public void Swing(){
