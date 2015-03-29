@@ -28,7 +28,7 @@ public class CatapultTracker {
 }
 
 public class GameManager : MonoBehaviour {
-	public const bool USE_SCATTER = false;
+	public const bool USE_SCATTER = true;
 	
 	private Dictionary<string, string> teamNames = new Dictionary<string, string>() {
 		{ "Player 1 Base", "Team 1" },
@@ -41,6 +41,7 @@ public class GameManager : MonoBehaviour {
 	private MultiValueDictionary<int, Text> teamTexts =  new MultiValueDictionary<int, Text>();
 	private MultiValueDictionary<int, Text> opponentTexts = new MultiValueDictionary<int,Text>();
 	private MultiValueDictionary<int, Text> enemyInBaseTexts = new MultiValueDictionary<int, Text>();
+	public List<GameObject> allPlayers = new List<GameObject>();
 	private Dictionary<int, Material> teamMats = new Dictionary<int, Material>();
 	public Dictionary<int, int> teamTrapLayer { get; private set; }
 	public Dictionary<int, List<ShopMenu>> playerShops = new Dictionary<int, List<ShopMenu>>();
@@ -90,6 +91,7 @@ public class GameManager : MonoBehaviour {
 
 		teamTexts.Add(base1.GetInstanceID(), canvas.transform.FindChild("Team_Vals").GetComponent<Text>());
 		opponentTexts.Add(base1.GetInstanceID(), canvas.transform.FindChild("Opponent_Vals").GetComponent<Text>());
+		allPlayers.Add (player);
 
 		Text enemyWarning = canvas.transform.FindChild("Enemy_Warning").GetComponent<Text>();
 		enemyWarning.enabled = false;

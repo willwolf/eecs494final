@@ -18,7 +18,8 @@ public class PlayerController : MonoBehaviour {
 	private float regen_at_time;
 	public float FIRE_RATE_TIME = 0.5f;
 	private float next_fire_at_time;
-	
+	public float SLOW_DURATION = .75f;
+	private float unslow_time;
 	public int player_num  = 0;
 	public InputDevice device = null;
 	public float controller_sensitivity = 0.5f;
@@ -27,6 +28,7 @@ public class PlayerController : MonoBehaviour {
 	public float walk_speed = 8f;
 	public float enemy_base_speed_multiplier = 0.5f;
 	public float encumberPercent = 0.5f;
+	public float slowPercent = 0.5f;
 
 	public int curr_wood_resource = 0;
 	public int wood_gather_val = 1;
@@ -153,7 +155,16 @@ public class PlayerController : MonoBehaviour {
 			throw new UnassignedReferenceException("PlayerController::playerNum must be non-zero");
 		}
 		if (hasWon (GameManager.winningTeam)) {
-			updateMidScreenText("You won!\nPress 'R' to Replay");
+			foreach (GameObject go in gm.allPlayers) {
+
+				if(hasWon(go.GetComponent<PlayerController>().homeBase_GO.GetInstanceID())){
+					go.GetComponent<PlayerController>().updateMidScreenText("Your team won!\nPress 'R' to Replay");
+				}
+				else{
+					go.GetComponent<PlayerController>().updateMidScreenText("Your team lost...\nPress 'R' to Replay");
+				}
+			}
+
 			Time.timeScale = 0;
 		}
 
@@ -300,13 +311,16 @@ public class PlayerController : MonoBehaviour {
 
 	Vector3 CalculateMoveSpeed(Vector3 direction, float input_data) {
 		Vector3 moveSpeed = direction * walk_speed * input_data * Time.deltaTime;
-		if (!inEnemyBase) {
+		if(Time.time < unslow_time){
+			return moveSpeed * slowPercent;		
+		}else if (!inEnemyBase) {
 			float encumbered = 1f;
 			// max encumberance == 1 - enemy_base_speed_multiplier
 			encumbered -= Mathf.Min(((1.0f * curr_wood_resource + curr_stone_resource) / MAX_RESOURCES), 
 			                        enemy_base_speed_multiplier)*encumberPercent;
 			return moveSpeed * encumbered ;
-		} else {
+		}
+		else {
 			return moveSpeed * enemy_base_speed_multiplier;
 		}
 	}
@@ -446,6 +460,7 @@ public class PlayerController : MonoBehaviour {
 			//update health bar
 			health_slider.value = health;
 			vulnerable_at_time = Time.time + INVULNERABLE_TIME;
+			unslow_time = Time.time + SLOW_DURATION;
 			Debug.Log("Player " + player_num + " health is " + health);
 			StartCoroutine(colorFlash());
 		}
