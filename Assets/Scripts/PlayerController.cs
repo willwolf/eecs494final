@@ -219,7 +219,7 @@ public class PlayerController : MonoBehaviour {
 					Aim();
 				} else if(aimLine){
 					Destroy(aimLine);
-				} if(device.Action3.IsPressed){
+				} if(device.Action2.IsPressed){
 					DropResourceBox();
 				}
 			} else if (Input.GetButton("Action_" + (player_num % 2).ToString())) {
@@ -229,7 +229,7 @@ public class PlayerController : MonoBehaviour {
 				TakeAction();
 			}
 			if (device != null) {
-				if (device.DPadUp.WasPressed && inBase) {
+				if (device.Action3.WasPressed && inBase) {
 					ToggleStore();
 				}
 			} else if (Input.GetButtonDown("Store_Open_" + (player_num % 2).ToString()) && inBase) {
@@ -254,15 +254,11 @@ public class PlayerController : MonoBehaviour {
 					CollectWood(" picked up some wood!");
 					break;
 				}
-//				Destroy(s.gameObject);
 				s.PickUp();
 			}
 		}
 	}
-
-//	void OnTriggerStay(Collider col) {
-//		OnTriggerEnter(col);
-//	}
+	
 
 	public void freeze(float duration) {
 		frozen = true;
