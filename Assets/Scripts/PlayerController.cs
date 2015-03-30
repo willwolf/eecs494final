@@ -406,22 +406,22 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void HandleWeapon(WeaponItem weapon) {
-		weapons[currentWeaponIndex].SetActive(false);
-		if (weapon is BowScript) {
-			currentWeaponIndex = 2;
-		} else if (weapon is StealthScript) {
-			currentWeaponIndex = 3;
-		}
-		hasWeapon = true;
-		currentWeapon = weapon;
-		weapons[currentWeaponIndex].SetActive(true);
-		//set to visible
-		foreach (MeshRenderer renderer in weapons[currentWeaponIndex].GetComponentsInChildren<MeshRenderer>()) {
-			renderer.enabled = true;
-		}
-		foreach (Collider collider in weapons[currentWeaponIndex].GetComponentsInChildren<Collider>()) {
-			collider.enabled = true;
-		}
+//		weapons[currentWeaponIndex].SetActive(false);
+//		if (weapon is BowScript) {
+//			currentWeaponIndex = 2;
+//		} else if (weapon is StealthScript) {
+//			currentWeaponIndex = 3;
+//		}
+//		hasWeapon = true;
+//		currentWeapon = weapon;
+//		weapons[currentWeaponIndex].SetActive(true);
+//		//set to visible
+//		foreach (MeshRenderer renderer in weapons[currentWeaponIndex].GetComponentsInChildren<MeshRenderer>()) {
+//			renderer.enabled = true;
+//		}
+//		foreach (Collider collider in weapons[currentWeaponIndex].GetComponentsInChildren<Collider>()) {
+//			collider.enabled = true;
+//		}
 	}
 
 	void HandleBaseUpgrade(BaseUpgradeItem upgrade) {
