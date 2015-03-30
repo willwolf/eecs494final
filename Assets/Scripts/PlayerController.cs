@@ -622,7 +622,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void CollectResource(GameObject resource, ResourceType type){
-		if(Time.time > collect_at_time && !IsPackFull()) {
+		if(Time.time > collect_at_time) {
 			if(type == ResourceType.stone){
 				if (!GameManager.USE_SCATTER)
 					CollectStone(" is mining!");
