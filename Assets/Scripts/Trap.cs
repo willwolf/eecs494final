@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Trap : MonoBehaviour {
+public class Trap : ShopItem {
 
 	public GameObject owner_base;
 
@@ -15,7 +15,7 @@ public class Trap : MonoBehaviour {
 
 	}
 
-	private void init() {
+	public void init() {
 		gm = GameObject.Find("GameManager").GetComponent<GameManager>();
 		
 		if (owner_base == null) {
@@ -25,12 +25,14 @@ public class Trap : MonoBehaviour {
 		gameObject.layer = gm.teamTrapLayer[owner_base.GetInstanceID()];
 	}
 
+	public override bool CanPurchase() {
+		return true;
+	}
+
 	
 	// Update is called once per frame
 	void Update () {
-		if (!initilized) {
-			init();
-		}
+
 	}
 
 	void OnTriggerEnter(Collider other) {
