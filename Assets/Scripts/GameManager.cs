@@ -53,6 +53,7 @@ public class GameManager : MonoBehaviour {
 	public int winningStone = 500;
 
 
+
 	public GameObject playerBase;
 	public GameObject playerCanvasBase;
 
@@ -89,7 +90,13 @@ public class GameManager : MonoBehaviour {
 		controller.homeBase_GO = base1;
 		controller.canvas = canvas;
 
-		teamTexts.Add(base1.GetInstanceID(), canvas.transform.FindChild("Team_Vals").GetComponent<Text>());
+		Text teamText = canvas.transform.FindChild ("Team_Vals").GetComponent<Text> ();
+		teamText.color = teamMats [base1.GetInstanceID ()].color;
+		teamTexts.Add(base1.GetInstanceID(), teamText);
+
+
+
+
 		opponentTexts.Add(base1.GetInstanceID(), canvas.transform.FindChild("Opponent_Vals").GetComponent<Text>());
 		allPlayers.Add (player);
 
@@ -168,6 +175,8 @@ public class GameManager : MonoBehaviour {
 			updateTeamText(pair.Key);
 		}
 		updateAllOppTexts ();
+		//updateAllOppCataIcons ();
+
 		print ("winning wood: " + winningWood + " stone: " + winningStone);
 
 	}
@@ -177,7 +186,7 @@ public class GameManager : MonoBehaviour {
 			ResourceCount counts = teamResources[baseId];
 
 			text.text = "Us: Wood: " + counts.wood + 
-				" Stone: " + counts.stone + catapultText(baseId);
+				" Stone: " + counts.stone;// + catapultText(baseId);
 		}
 	}
 
@@ -187,6 +196,29 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 
+	void updateAllOppCataIcons(){
+		foreach (KeyValuePair<int, string> pair in baseNames) {
+				updateOppCataIcons(pair.Key);	
+		}
+	}
+
+	void updateOppCataIcons(int oppId){
+		foreach (GameObject p in allPlayers){
+			if(p.GetComponent<PlayerController>().homeBase_GO.GetInstanceID() != oppId){
+				print ("oppid: " + oppId + " arm " + teamCatapultStatus [oppId].has_arm +
+				       " base " + teamCatapultStatus[oppId].has_legs + " stone " + teamCatapultStatus[oppId].has_projectile);
+				if (teamCatapultStatus [oppId].has_arm) {
+					p.GetComponent<PlayerController>().oppCataArm.enabled = true;
+				}
+				if(teamCatapultStatus[oppId].has_legs){
+					p.GetComponent<PlayerController>().oppCataBase.enabled = true;
+				}
+				if(teamCatapultStatus[oppId].has_projectile){
+					p.GetComponent<PlayerController>().oppCataStone.enabled = true;
+				}
+			}
+		}
+	}
 
 	void updateOppText(int baseId){
 		foreach (Text text in opponentTexts[baseId]) {
@@ -194,8 +226,9 @@ public class GameManager : MonoBehaviour {
 			foreach (KeyValuePair<int,string> pair in baseNames) {
 				if (baseId != pair.Key){
 					ResourceCount counts = teamResources[pair.Key];
+					text.color = teamMats[pair.Key].color;
 					text.text += "Them: Wood: " + counts.wood + 
-						" Stone: " + counts.stone + catapultText(pair.Key) + "\n";
+						" Stone: " + counts.stone;// + catapultText(pair.Key) + "\n";
 				}		
 			}
 		}
@@ -261,6 +294,7 @@ public class GameManager : MonoBehaviour {
 		}
 		updateTeamText(baseId);
 		updateAllOppTexts ();
+		//updateAllOppCataIcons ();
 		foreach (ShopMenu s in playerShops[baseId]) {
 			s.UpdateShop(baseId);
 		}
@@ -293,6 +327,7 @@ public class GameManager : MonoBehaviour {
 		} finally {
 			updateTeamText(baseId);
 			updateAllOppTexts();
+			//updateAllOppCataIcons();
 			foreach (ShopMenu s in playerShops[baseId]) {
 				s.UpdateShop(baseId);
 			}
@@ -333,6 +368,7 @@ public class GameManager : MonoBehaviour {
 		} finally {
 			updateTeamText(team_id);
 			updateAllOppTexts();
+			updateAllOppCataIcons();
 		}
 	} 
 }
