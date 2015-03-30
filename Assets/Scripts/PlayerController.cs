@@ -503,15 +503,6 @@ public class PlayerController : MonoBehaviour {
 			ResourceBox rbox = this.GetComponentInChildren<ResourceBox>();
 			rbox.transform.SetParent(null);
 			rbox.transform.position = drop_at_position;
-
-
-//			GameObject box_GO = Instantiate(resourceBox, this.transform.position - this.transform.up * 0.5f + this.transform.forward, this.transform.rotation) as GameObject;
-//			ResourceBox rbox = box_GO.GetComponent<ResourceBox>();
-//			
-//			rbox.wood = box.GetComponent<ResourceBox>().wood;
-//			rbox.stone = box.GetComponent<ResourceBox>().stone;
-//			
-//			box.SetActive(false);
 			hasBox = false;
 		} else if(curr_stone_resource + curr_wood_resource > 0){
 			//drop resource box
@@ -594,18 +585,6 @@ public class PlayerController : MonoBehaviour {
 			hitinfo.transform.position = this.transform.position + this.transform.up * 0.5f + this.transform.forward;
 			hitinfo.transform.SetParent(this.transform);
 			hasBox = true;
-
-//			ResourceBox r = hitinfo.transform.GetComponent<ResourceBox>();
-//			box.SetActive(true);
-//			box.GetComponent<ResourceBox>().wood = r.wood;
-//			box.GetComponent<ResourceBox>().stone = r.stone;
-//
-//			hasBox = true;
-//			foreach (MeshRenderer renderer in box.GetComponentsInChildren<MeshRenderer>()) {
-//				renderer.enabled = true;
-//			}
-//
-//			Destroy(r.gameObject);
 		}
 	}
 
