@@ -368,11 +368,15 @@ public class PlayerController : MonoBehaviour {
 	void HandleWeapon(WeaponItem weapon) {
 		weapons[currentWeaponIndex].SetActive(false);
 		if (weapon is SwordScript) {
-			currentWeaponIndex = 0;
+			if(weapon.item_name.Contains("Stone")){
+				currentWeaponIndex = 0;
+			} else {
+				currentWeaponIndex = 1;
+			}
 		} else if (weapon is BowScript) {
-			currentWeaponIndex = 1;
-		} else if (weapon is StealthScript) {
 			currentWeaponIndex = 2;
+		} else if (weapon is StealthScript) {
+			currentWeaponIndex = 3;
 		}
 		hasWeapon = true;
 		currentWeapon = weapon;
