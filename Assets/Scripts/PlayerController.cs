@@ -67,6 +67,7 @@ public class PlayerController : MonoBehaviour {
 	private Slider health_slider;
 	private Slider wood_slider;
 	private Slider stone_slider;
+	private Slider armor_slider;
 
 	public AudioSource mining_stone;
 	public AudioSource chopping_wood;
@@ -126,7 +127,8 @@ public class PlayerController : MonoBehaviour {
 		stone_slider = canvas.transform.FindChild ("StoneSlide").GetComponent<Slider> ();
 		wood_slider.value = curr_wood_resource;
 		stone_slider.value = curr_stone_resource;
-
+		armor_slider = canvas.transform.FindChild ("ArmorSlide").GetComponent<Slider> ();
+		armor_slider.value = 0;
 
 		mid_screen_text.text = "";
 		updateStoneText();
@@ -442,6 +444,7 @@ public class PlayerController : MonoBehaviour {
 			armor = Instantiate(armorPrefab, transform.position, transform.rotation) as GameObject;
 			armor.transform.parent = transform;
 			playerArmor = armor.GetComponent<ArmorScript>();
+			armor_slider.value = playerArmor.armorHealth;
 		}
 	}
 
@@ -484,6 +487,7 @@ public class PlayerController : MonoBehaviour {
 		if(Time.time > vulnerable_at_time){
 			if (playerArmor != null) {
 				playerArmor.TakeDamage(damage);
+				armor_slider.value = playerArmor.armorHealth;
 				if (playerArmor.IsDestroyed()) {
 					Destroy(armor);
 					armor = null;
