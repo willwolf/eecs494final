@@ -17,8 +17,12 @@ public class ArmorScript : BaseUpgradeItem {
 	}
 
 	override
-	public bool CanPurchase() {
+	public bool CanPurchase(int teamId, GameManager gm) {
 		return true;
+	}
+
+	override public void MakePurchase(int teamId, GameManager gm) {
+		
 	}
 
 	public void TakeDamage(int damage) {

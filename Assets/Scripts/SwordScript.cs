@@ -38,8 +38,12 @@ public class SwordScript : WeaponItem {
 	}
 
 	override
-	public bool CanPurchase() {
+	public bool CanPurchase(int teamId, GameManager gm) {
 		return true;
+	}
+
+	override public void MakePurchase(int teamId, GameManager gm) {
+		
 	}
 
 	void OnCollisionEnter(Collision collision) {

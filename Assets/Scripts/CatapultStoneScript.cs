@@ -14,7 +14,11 @@ public class CatapultStoneScript : BaseUpgradeItem {
 	}
 
 	override
-	public bool CanPurchase() {
-		return true;
+	public bool CanPurchase(int teamId, GameManager gm) {
+		return !gm.teamCatapultStatus[teamId].has_projectile;
+	}
+
+	override public void MakePurchase(int teamId, GameManager gm) {
+		gm.teamCatapultStatus[teamId].has_projectile = true;
 	}
 }
