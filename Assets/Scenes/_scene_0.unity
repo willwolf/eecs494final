@@ -727,7 +727,7 @@ AudioSource:
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 109024, guid: dabdc1be5a8854b2fb0a4866fd166ae9, type: 2}
-  m_PrefabInternal: {fileID: 1926843165}
+  m_PrefabInternal: {fileID: 678121521}
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 91402010}
@@ -744,7 +744,7 @@ SphereCollider:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 13509024, guid: dabdc1be5a8854b2fb0a4866fd166ae9,
     type: 2}
-  m_PrefabInternal: {fileID: 1926843165}
+  m_PrefabInternal: {fileID: 678121521}
   m_GameObject: {fileID: 91402008}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -756,7 +756,7 @@ SphereCollider:
 Transform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 409024, guid: dabdc1be5a8854b2fb0a4866fd166ae9, type: 2}
-  m_PrefabInternal: {fileID: 1926843165}
+  m_PrefabInternal: {fileID: 678121521}
   m_GameObject: {fileID: 91402008}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.19999695, y: .699996948, z: .699996948}
@@ -1129,6 +1129,7 @@ GameObject:
   - 23: {fileID: 119709720}
   - 64: {fileID: 119709719}
   - 114: {fileID: 119709718}
+  - 65: {fileID: 119709722}
   m_Layer: 8
   m_Name: Rock1
   m_TagString: Untagged
@@ -1173,7 +1174,7 @@ MeshCollider:
   m_GameObject: {fileID: 119709716}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_SmoothSphereCollisions: 1
   m_Convex: 0
@@ -1207,6 +1208,19 @@ MeshFilter:
   m_PrefabInternal: {fileID: 1438852425}
   m_GameObject: {fileID: 119709716}
   m_Mesh: {fileID: 4300002, guid: b170a071d9c685343bdda95ed3bf48ef, type: 3}
+--- !u!65 &119709722
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6533254, guid: dabdc1be5a8854b2fb0a4866fd166ae9,
+    type: 2}
+  m_PrefabInternal: {fileID: 1438852425}
+  m_GameObject: {fileID: 119709716}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 32, y: 32, z: 32}
+  m_Center: {x: -.857749939, y: .874025345, z: -.0699243546}
 --- !u!1001 &127217375
 Prefab:
   m_ObjectHideFlags: 0
@@ -1441,6 +1455,7 @@ GameObject:
   - 23: {fileID: 170884630}
   - 64: {fileID: 170884629}
   - 114: {fileID: 170884628}
+  - 65: {fileID: 170884632}
   m_Layer: 8
   m_Name: Rock1
   m_TagString: Untagged
@@ -1485,7 +1500,7 @@ MeshCollider:
   m_GameObject: {fileID: 170884626}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_SmoothSphereCollisions: 1
   m_Convex: 0
@@ -1519,6 +1534,19 @@ MeshFilter:
   m_PrefabInternal: {fileID: 1936721562}
   m_GameObject: {fileID: 170884626}
   m_Mesh: {fileID: 4300002, guid: b170a071d9c685343bdda95ed3bf48ef, type: 3}
+--- !u!65 &170884632
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6533254, guid: dabdc1be5a8854b2fb0a4866fd166ae9,
+    type: 2}
+  m_PrefabInternal: {fileID: 1936721562}
+  m_GameObject: {fileID: 170884626}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 32, y: 32, z: 32}
+  m_Center: {x: -.857749939, y: .874025345, z: -.0699243546}
 --- !u!1 &171958361
 GameObject:
   m_ObjectHideFlags: 0
@@ -2390,6 +2418,7 @@ GameObject:
   - 23: {fileID: 309518508}
   - 64: {fileID: 309518507}
   - 114: {fileID: 309518506}
+  - 65: {fileID: 309518510}
   m_Layer: 8
   m_Name: Rock1
   m_TagString: Untagged
@@ -2434,7 +2463,7 @@ MeshCollider:
   m_GameObject: {fileID: 309518504}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_SmoothSphereCollisions: 1
   m_Convex: 0
@@ -2468,6 +2497,19 @@ MeshFilter:
   m_PrefabInternal: {fileID: 800505665}
   m_GameObject: {fileID: 309518504}
   m_Mesh: {fileID: 4300002, guid: b170a071d9c685343bdda95ed3bf48ef, type: 3}
+--- !u!65 &309518510
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6533254, guid: dabdc1be5a8854b2fb0a4866fd166ae9,
+    type: 2}
+  m_PrefabInternal: {fileID: 800505665}
+  m_GameObject: {fileID: 309518504}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 32, y: 32, z: 32}
+  m_Center: {x: -.857749939, y: .874025345, z: -.0699243546}
 --- !u!1 &317692610
 GameObject:
   m_ObjectHideFlags: 0
@@ -2620,6 +2662,7 @@ GameObject:
   - 23: {fileID: 333609302}
   - 64: {fileID: 333609301}
   - 114: {fileID: 333609300}
+  - 65: {fileID: 333609304}
   m_Layer: 8
   m_Name: Rock1
   m_TagString: Untagged
@@ -2664,7 +2707,7 @@ MeshCollider:
   m_GameObject: {fileID: 333609298}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_SmoothSphereCollisions: 1
   m_Convex: 0
@@ -2698,6 +2741,19 @@ MeshFilter:
   m_PrefabInternal: {fileID: 53926339}
   m_GameObject: {fileID: 333609298}
   m_Mesh: {fileID: 4300002, guid: b170a071d9c685343bdda95ed3bf48ef, type: 3}
+--- !u!65 &333609304
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6533254, guid: dabdc1be5a8854b2fb0a4866fd166ae9,
+    type: 2}
+  m_PrefabInternal: {fileID: 53926339}
+  m_GameObject: {fileID: 333609298}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 32, y: 32, z: 32}
+  m_Center: {x: -.857749939, y: .874025345, z: -.0699243546}
 --- !u!1 &339902537
 GameObject:
   m_ObjectHideFlags: 0
@@ -2974,6 +3030,7 @@ GameObject:
   - 23: {fileID: 390478161}
   - 64: {fileID: 390478160}
   - 114: {fileID: 390478159}
+  - 65: {fileID: 390478163}
   m_Layer: 8
   m_Name: Rock1
   m_TagString: Untagged
@@ -3018,7 +3075,7 @@ MeshCollider:
   m_GameObject: {fileID: 390478157}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_SmoothSphereCollisions: 1
   m_Convex: 0
@@ -3052,6 +3109,19 @@ MeshFilter:
   m_PrefabInternal: {fileID: 908957556}
   m_GameObject: {fileID: 390478157}
   m_Mesh: {fileID: 4300002, guid: b170a071d9c685343bdda95ed3bf48ef, type: 3}
+--- !u!65 &390478163
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6533254, guid: dabdc1be5a8854b2fb0a4866fd166ae9,
+    type: 2}
+  m_PrefabInternal: {fileID: 908957556}
+  m_GameObject: {fileID: 390478157}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 32, y: 32, z: 32}
+  m_Center: {x: -.857749939, y: .874025345, z: -.0699243546}
 --- !u!1 &390928627
 GameObject:
   m_ObjectHideFlags: 0
@@ -3259,6 +3329,7 @@ GameObject:
   - 23: {fileID: 430365823}
   - 64: {fileID: 430365822}
   - 114: {fileID: 430365821}
+  - 65: {fileID: 430365825}
   m_Layer: 8
   m_Name: Rock1
   m_TagString: Untagged
@@ -3303,7 +3374,7 @@ MeshCollider:
   m_GameObject: {fileID: 430365819}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_SmoothSphereCollisions: 1
   m_Convex: 0
@@ -3337,6 +3408,19 @@ MeshFilter:
   m_PrefabInternal: {fileID: 1827531450}
   m_GameObject: {fileID: 430365819}
   m_Mesh: {fileID: 4300002, guid: b170a071d9c685343bdda95ed3bf48ef, type: 3}
+--- !u!65 &430365825
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6533254, guid: dabdc1be5a8854b2fb0a4866fd166ae9,
+    type: 2}
+  m_PrefabInternal: {fileID: 1827531450}
+  m_GameObject: {fileID: 430365819}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 32, y: 32, z: 32}
+  m_Center: {x: -.857749939, y: .874025345, z: -.0699243546}
 --- !u!1 &439739387
 GameObject:
   m_ObjectHideFlags: 0
@@ -3349,6 +3433,7 @@ GameObject:
   - 23: {fileID: 439739390}
   - 64: {fileID: 439739389}
   - 114: {fileID: 439739388}
+  - 65: {fileID: 439739393}
   m_Layer: 8
   m_Name: Rock1
   m_TagString: Untagged
@@ -3380,7 +3465,7 @@ MeshCollider:
   m_GameObject: {fileID: 439739387}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_SmoothSphereCollisions: 1
   m_Convex: 0
@@ -3427,6 +3512,19 @@ Transform:
   - {fileID: 1654926041}
   m_Father: {fileID: 933836389}
   m_RootOrder: 23
+--- !u!65 &439739393
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6533254, guid: dabdc1be5a8854b2fb0a4866fd166ae9,
+    type: 2}
+  m_PrefabInternal: {fileID: 1108279221}
+  m_GameObject: {fileID: 439739387}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 32, y: 32, z: 32}
+  m_Center: {x: -.857749939, y: .874025345, z: -.0699243546}
 --- !u!1 &443739393
 GameObject:
   m_ObjectHideFlags: 0
@@ -3439,6 +3537,7 @@ GameObject:
   - 23: {fileID: 443739397}
   - 64: {fileID: 443739396}
   - 114: {fileID: 443739395}
+  - 65: {fileID: 443739399}
   m_Layer: 8
   m_Name: Rock1
   m_TagString: Untagged
@@ -3483,7 +3582,7 @@ MeshCollider:
   m_GameObject: {fileID: 443739393}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_SmoothSphereCollisions: 1
   m_Convex: 0
@@ -3517,6 +3616,19 @@ MeshFilter:
   m_PrefabInternal: {fileID: 1559165931}
   m_GameObject: {fileID: 443739393}
   m_Mesh: {fileID: 4300002, guid: b170a071d9c685343bdda95ed3bf48ef, type: 3}
+--- !u!65 &443739399
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6533254, guid: dabdc1be5a8854b2fb0a4866fd166ae9,
+    type: 2}
+  m_PrefabInternal: {fileID: 1559165931}
+  m_GameObject: {fileID: 443739393}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 32, y: 32, z: 32}
+  m_Center: {x: -.857749939, y: .874025345, z: -.0699243546}
 --- !u!1001 &446725257
 Prefab:
   m_ObjectHideFlags: 0
@@ -3773,6 +3885,7 @@ GameObject:
   - 23: {fileID: 507917113}
   - 64: {fileID: 507917112}
   - 114: {fileID: 507917111}
+  - 65: {fileID: 507917115}
   m_Layer: 8
   m_Name: Rock1
   m_TagString: Untagged
@@ -3817,7 +3930,7 @@ MeshCollider:
   m_GameObject: {fileID: 507917109}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_SmoothSphereCollisions: 1
   m_Convex: 0
@@ -3851,6 +3964,19 @@ MeshFilter:
   m_PrefabInternal: {fileID: 1486035898}
   m_GameObject: {fileID: 507917109}
   m_Mesh: {fileID: 4300002, guid: b170a071d9c685343bdda95ed3bf48ef, type: 3}
+--- !u!65 &507917115
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6533254, guid: dabdc1be5a8854b2fb0a4866fd166ae9,
+    type: 2}
+  m_PrefabInternal: {fileID: 1486035898}
+  m_GameObject: {fileID: 507917109}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 32, y: 32, z: 32}
+  m_Center: {x: -.857749939, y: .874025345, z: -.0699243546}
 --- !u!1001 &510217134
 Prefab:
   m_ObjectHideFlags: 0
@@ -3956,6 +4082,7 @@ GameObject:
   - 23: {fileID: 520559958}
   - 64: {fileID: 520559957}
   - 114: {fileID: 520559956}
+  - 65: {fileID: 520559960}
   m_Layer: 8
   m_Name: Rock1
   m_TagString: Untagged
@@ -4000,7 +4127,7 @@ MeshCollider:
   m_GameObject: {fileID: 520559954}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_SmoothSphereCollisions: 1
   m_Convex: 0
@@ -4034,6 +4161,19 @@ MeshFilter:
   m_PrefabInternal: {fileID: 446725257}
   m_GameObject: {fileID: 520559954}
   m_Mesh: {fileID: 4300002, guid: b170a071d9c685343bdda95ed3bf48ef, type: 3}
+--- !u!65 &520559960
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6533254, guid: dabdc1be5a8854b2fb0a4866fd166ae9,
+    type: 2}
+  m_PrefabInternal: {fileID: 446725257}
+  m_GameObject: {fileID: 520559954}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 32, y: 32, z: 32}
+  m_Center: {x: -.857749939, y: .874025345, z: -.0699243546}
 --- !u!1 &545942413
 GameObject:
   m_ObjectHideFlags: 0
@@ -4203,6 +4343,7 @@ GameObject:
   - 23: {fileID: 562758478}
   - 64: {fileID: 562758477}
   - 114: {fileID: 562758476}
+  - 65: {fileID: 562758480}
   m_Layer: 8
   m_Name: Rock1
   m_TagString: Untagged
@@ -4247,7 +4388,7 @@ MeshCollider:
   m_GameObject: {fileID: 562758474}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_SmoothSphereCollisions: 1
   m_Convex: 0
@@ -4281,6 +4422,19 @@ MeshFilter:
   m_PrefabInternal: {fileID: 1732463197}
   m_GameObject: {fileID: 562758474}
   m_Mesh: {fileID: 4300002, guid: b170a071d9c685343bdda95ed3bf48ef, type: 3}
+--- !u!65 &562758480
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6533254, guid: dabdc1be5a8854b2fb0a4866fd166ae9,
+    type: 2}
+  m_PrefabInternal: {fileID: 1732463197}
+  m_GameObject: {fileID: 562758474}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 32, y: 32, z: 32}
+  m_Center: {x: -.857749939, y: .874025345, z: -.0699243546}
 --- !u!1001 &566123696
 Prefab:
   m_ObjectHideFlags: 0
@@ -4768,6 +4922,7 @@ GameObject:
   - 23: {fileID: 626994715}
   - 64: {fileID: 626994714}
   - 114: {fileID: 626994713}
+  - 65: {fileID: 626994717}
   m_Layer: 8
   m_Name: Rock1
   m_TagString: Untagged
@@ -4812,7 +4967,7 @@ MeshCollider:
   m_GameObject: {fileID: 626994711}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_SmoothSphereCollisions: 1
   m_Convex: 0
@@ -4846,6 +5001,19 @@ MeshFilter:
   m_PrefabInternal: {fileID: 176948165}
   m_GameObject: {fileID: 626994711}
   m_Mesh: {fileID: 4300002, guid: b170a071d9c685343bdda95ed3bf48ef, type: 3}
+--- !u!65 &626994717
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6533254, guid: dabdc1be5a8854b2fb0a4866fd166ae9,
+    type: 2}
+  m_PrefabInternal: {fileID: 176948165}
+  m_GameObject: {fileID: 626994711}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 32, y: 32, z: 32}
+  m_Center: {x: -.857749939, y: .874025345, z: -.0699243546}
 --- !u!1001 &629125975
 Prefab:
   m_ObjectHideFlags: 0
@@ -4974,6 +5142,7 @@ GameObject:
   - 23: {fileID: 647701752}
   - 64: {fileID: 647701751}
   - 114: {fileID: 647701750}
+  - 65: {fileID: 647701754}
   m_Layer: 8
   m_Name: Rock1
   m_TagString: Untagged
@@ -5018,7 +5187,7 @@ MeshCollider:
   m_GameObject: {fileID: 647701748}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_SmoothSphereCollisions: 1
   m_Convex: 0
@@ -5052,6 +5221,19 @@ MeshFilter:
   m_PrefabInternal: {fileID: 1241248463}
   m_GameObject: {fileID: 647701748}
   m_Mesh: {fileID: 4300002, guid: b170a071d9c685343bdda95ed3bf48ef, type: 3}
+--- !u!65 &647701754
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6533254, guid: dabdc1be5a8854b2fb0a4866fd166ae9,
+    type: 2}
+  m_PrefabInternal: {fileID: 1241248463}
+  m_GameObject: {fileID: 647701748}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 32, y: 32, z: 32}
+  m_Center: {x: -.857749939, y: .874025345, z: -.0699243546}
 --- !u!1 &647708731
 GameObject:
   m_ObjectHideFlags: 0
@@ -5275,6 +5457,50 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e4653981d47f64b72a78b214de0304e4, type: 2}
   m_RootGameObject: {fileID: 40916795}
+  m_IsPrefabParent: 0
+  m_IsExploded: 1
+--- !u!1001 &678121521
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 933836389}
+    m_Modifications:
+    - target: {fileID: 406210, guid: dabdc1be5a8854b2fb0a4866fd166ae9, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 244
+      objectReference: {fileID: 0}
+    - target: {fileID: 406210, guid: dabdc1be5a8854b2fb0a4866fd166ae9, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -87
+      objectReference: {fileID: 0}
+    - target: {fileID: 406210, guid: dabdc1be5a8854b2fb0a4866fd166ae9, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -25
+      objectReference: {fileID: 0}
+    - target: {fileID: 406210, guid: dabdc1be5a8854b2fb0a4866fd166ae9, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 406210, guid: dabdc1be5a8854b2fb0a4866fd166ae9, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 406210, guid: dabdc1be5a8854b2fb0a4866fd166ae9, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 406210, guid: dabdc1be5a8854b2fb0a4866fd166ae9, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 406210, guid: dabdc1be5a8854b2fb0a4866fd166ae9, type: 2}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: dabdc1be5a8854b2fb0a4866fd166ae9, type: 2}
+  m_RootGameObject: {fileID: 1118793972}
   m_IsPrefabParent: 0
   m_IsExploded: 1
 --- !u!1001 &691052449
@@ -5522,6 +5748,7 @@ GameObject:
   - 23: {fileID: 726787770}
   - 64: {fileID: 726787769}
   - 114: {fileID: 726787768}
+  - 65: {fileID: 726787772}
   m_Layer: 8
   m_Name: Rock1
   m_TagString: Untagged
@@ -5566,7 +5793,7 @@ MeshCollider:
   m_GameObject: {fileID: 726787766}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_SmoothSphereCollisions: 1
   m_Convex: 0
@@ -5600,6 +5827,19 @@ MeshFilter:
   m_PrefabInternal: {fileID: 1964360637}
   m_GameObject: {fileID: 726787766}
   m_Mesh: {fileID: 4300002, guid: b170a071d9c685343bdda95ed3bf48ef, type: 3}
+--- !u!65 &726787772
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6533254, guid: dabdc1be5a8854b2fb0a4866fd166ae9,
+    type: 2}
+  m_PrefabInternal: {fileID: 1964360637}
+  m_GameObject: {fileID: 726787766}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 32, y: 32, z: 32}
+  m_Center: {x: -.857749939, y: .874025345, z: -.0699243546}
 --- !u!1001 &733248909
 Prefab:
   m_ObjectHideFlags: 0
@@ -5807,6 +6047,7 @@ GameObject:
   - 23: {fileID: 744143438}
   - 64: {fileID: 744143437}
   - 114: {fileID: 744143436}
+  - 65: {fileID: 744143440}
   m_Layer: 8
   m_Name: Rock1
   m_TagString: Untagged
@@ -5851,7 +6092,7 @@ MeshCollider:
   m_GameObject: {fileID: 744143434}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_SmoothSphereCollisions: 1
   m_Convex: 0
@@ -5885,6 +6126,19 @@ MeshFilter:
   m_PrefabInternal: {fileID: 740395132}
   m_GameObject: {fileID: 744143434}
   m_Mesh: {fileID: 4300002, guid: b170a071d9c685343bdda95ed3bf48ef, type: 3}
+--- !u!65 &744143440
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6533254, guid: dabdc1be5a8854b2fb0a4866fd166ae9,
+    type: 2}
+  m_PrefabInternal: {fileID: 740395132}
+  m_GameObject: {fileID: 744143434}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 32, y: 32, z: 32}
+  m_Center: {x: -.857749939, y: .874025345, z: -.0699243546}
 --- !u!1 &756846364
 GameObject:
   m_ObjectHideFlags: 0
@@ -6178,6 +6432,7 @@ GameObject:
   - 23: {fileID: 767381787}
   - 64: {fileID: 767381786}
   - 114: {fileID: 767381785}
+  - 65: {fileID: 767381789}
   m_Layer: 8
   m_Name: Rock1
   m_TagString: Untagged
@@ -6222,7 +6477,7 @@ MeshCollider:
   m_GameObject: {fileID: 767381783}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_SmoothSphereCollisions: 1
   m_Convex: 0
@@ -6256,6 +6511,19 @@ MeshFilter:
   m_PrefabInternal: {fileID: 230921462}
   m_GameObject: {fileID: 767381783}
   m_Mesh: {fileID: 4300002, guid: b170a071d9c685343bdda95ed3bf48ef, type: 3}
+--- !u!65 &767381789
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6533254, guid: dabdc1be5a8854b2fb0a4866fd166ae9,
+    type: 2}
+  m_PrefabInternal: {fileID: 230921462}
+  m_GameObject: {fileID: 767381783}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 32, y: 32, z: 32}
+  m_Center: {x: -.857749939, y: .874025345, z: -.0699243546}
 --- !u!1001 &777397426
 Prefab:
   m_ObjectHideFlags: 0
@@ -6485,6 +6753,7 @@ GameObject:
   - 23: {fileID: 788840613}
   - 64: {fileID: 788840612}
   - 114: {fileID: 788840611}
+  - 65: {fileID: 788840615}
   m_Layer: 8
   m_Name: Rock1
   m_TagString: Untagged
@@ -6529,7 +6798,7 @@ MeshCollider:
   m_GameObject: {fileID: 788840609}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_SmoothSphereCollisions: 1
   m_Convex: 0
@@ -6563,6 +6832,19 @@ MeshFilter:
   m_PrefabInternal: {fileID: 154065269}
   m_GameObject: {fileID: 788840609}
   m_Mesh: {fileID: 4300002, guid: b170a071d9c685343bdda95ed3bf48ef, type: 3}
+--- !u!65 &788840615
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6533254, guid: dabdc1be5a8854b2fb0a4866fd166ae9,
+    type: 2}
+  m_PrefabInternal: {fileID: 154065269}
+  m_GameObject: {fileID: 788840609}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 32, y: 32, z: 32}
+  m_Center: {x: -.857749939, y: .874025345, z: -.0699243546}
 --- !u!1 &790087567
 GameObject:
   m_ObjectHideFlags: 0
@@ -6575,6 +6857,7 @@ GameObject:
   - 23: {fileID: 790087571}
   - 64: {fileID: 790087570}
   - 114: {fileID: 790087569}
+  - 65: {fileID: 790087573}
   m_Layer: 8
   m_Name: Rock1
   m_TagString: Untagged
@@ -6619,7 +6902,7 @@ MeshCollider:
   m_GameObject: {fileID: 790087567}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_SmoothSphereCollisions: 1
   m_Convex: 0
@@ -6653,6 +6936,19 @@ MeshFilter:
   m_PrefabInternal: {fileID: 566123696}
   m_GameObject: {fileID: 790087567}
   m_Mesh: {fileID: 4300002, guid: b170a071d9c685343bdda95ed3bf48ef, type: 3}
+--- !u!65 &790087573
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6533254, guid: dabdc1be5a8854b2fb0a4866fd166ae9,
+    type: 2}
+  m_PrefabInternal: {fileID: 566123696}
+  m_GameObject: {fileID: 790087567}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 32, y: 32, z: 32}
+  m_Center: {x: -.857749939, y: .874025345, z: -.0699243546}
 --- !u!1 &791814145
 GameObject:
   m_ObjectHideFlags: 0
@@ -6879,6 +7175,7 @@ GameObject:
   - 23: {fileID: 825657274}
   - 64: {fileID: 825657273}
   - 114: {fileID: 825657272}
+  - 65: {fileID: 825657276}
   m_Layer: 8
   m_Name: Rock1
   m_TagString: Untagged
@@ -6923,7 +7220,7 @@ MeshCollider:
   m_GameObject: {fileID: 825657270}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_SmoothSphereCollisions: 1
   m_Convex: 0
@@ -6957,6 +7254,19 @@ MeshFilter:
   m_PrefabInternal: {fileID: 1205687169}
   m_GameObject: {fileID: 825657270}
   m_Mesh: {fileID: 4300002, guid: b170a071d9c685343bdda95ed3bf48ef, type: 3}
+--- !u!65 &825657276
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6533254, guid: dabdc1be5a8854b2fb0a4866fd166ae9,
+    type: 2}
+  m_PrefabInternal: {fileID: 1205687169}
+  m_GameObject: {fileID: 825657270}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 32, y: 32, z: 32}
+  m_Center: {x: -.857749939, y: .874025345, z: -.0699243546}
 --- !u!1 &829489990
 GameObject:
   m_ObjectHideFlags: 0
@@ -7057,6 +7367,7 @@ GameObject:
   - 23: {fileID: 829823253}
   - 64: {fileID: 829823252}
   - 114: {fileID: 829823251}
+  - 65: {fileID: 829823255}
   m_Layer: 8
   m_Name: Rock1
   m_TagString: Untagged
@@ -7101,7 +7412,7 @@ MeshCollider:
   m_GameObject: {fileID: 829823249}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_SmoothSphereCollisions: 1
   m_Convex: 0
@@ -7135,6 +7446,19 @@ MeshFilter:
   m_PrefabInternal: {fileID: 1899584306}
   m_GameObject: {fileID: 829823249}
   m_Mesh: {fileID: 4300002, guid: b170a071d9c685343bdda95ed3bf48ef, type: 3}
+--- !u!65 &829823255
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6533254, guid: dabdc1be5a8854b2fb0a4866fd166ae9,
+    type: 2}
+  m_PrefabInternal: {fileID: 1899584306}
+  m_GameObject: {fileID: 829823249}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 32, y: 32, z: 32}
+  m_Center: {x: -.857749939, y: .874025345, z: -.0699243546}
 --- !u!1 &830699473
 GameObject:
   m_ObjectHideFlags: 0
@@ -7147,6 +7471,7 @@ GameObject:
   - 23: {fileID: 830699477}
   - 64: {fileID: 830699476}
   - 114: {fileID: 830699475}
+  - 65: {fileID: 830699479}
   m_Layer: 8
   m_Name: Rock1
   m_TagString: Untagged
@@ -7191,7 +7516,7 @@ MeshCollider:
   m_GameObject: {fileID: 830699473}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_SmoothSphereCollisions: 1
   m_Convex: 0
@@ -7225,6 +7550,19 @@ MeshFilter:
   m_PrefabInternal: {fileID: 102060950}
   m_GameObject: {fileID: 830699473}
   m_Mesh: {fileID: 4300002, guid: b170a071d9c685343bdda95ed3bf48ef, type: 3}
+--- !u!65 &830699479
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6533254, guid: dabdc1be5a8854b2fb0a4866fd166ae9,
+    type: 2}
+  m_PrefabInternal: {fileID: 102060950}
+  m_GameObject: {fileID: 830699473}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 32, y: 32, z: 32}
+  m_Center: {x: -.857749939, y: .874025345, z: -.0699243546}
 --- !u!1001 &832309728
 Prefab:
   m_ObjectHideFlags: 0
@@ -7675,6 +8013,7 @@ GameObject:
   - 23: {fileID: 924951579}
   - 64: {fileID: 924951578}
   - 114: {fileID: 924951577}
+  - 65: {fileID: 924951581}
   m_Layer: 8
   m_Name: Rock1
   m_TagString: Untagged
@@ -7719,7 +8058,7 @@ MeshCollider:
   m_GameObject: {fileID: 924951575}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_SmoothSphereCollisions: 1
   m_Convex: 0
@@ -7753,6 +8092,19 @@ MeshFilter:
   m_PrefabInternal: {fileID: 823697979}
   m_GameObject: {fileID: 924951575}
   m_Mesh: {fileID: 4300002, guid: b170a071d9c685343bdda95ed3bf48ef, type: 3}
+--- !u!65 &924951581
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6533254, guid: dabdc1be5a8854b2fb0a4866fd166ae9,
+    type: 2}
+  m_PrefabInternal: {fileID: 823697979}
+  m_GameObject: {fileID: 924951575}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 32, y: 32, z: 32}
+  m_Center: {x: -.857749939, y: .874025345, z: -.0699243546}
 --- !u!1 &926209175
 GameObject:
   m_ObjectHideFlags: 0
@@ -8943,7 +9295,7 @@ SphereCollider:
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 106210, guid: dabdc1be5a8854b2fb0a4866fd166ae9, type: 2}
-  m_PrefabInternal: {fileID: 1926843165}
+  m_PrefabInternal: {fileID: 678121521}
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1118793977}
@@ -8951,6 +9303,7 @@ GameObject:
   - 23: {fileID: 1118793975}
   - 64: {fileID: 1118793974}
   - 114: {fileID: 1118793973}
+  - 65: {fileID: 1118793978}
   m_Layer: 8
   m_Name: Rock1
   m_TagString: Untagged
@@ -8963,7 +9316,7 @@ MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 11406210, guid: dabdc1be5a8854b2fb0a4866fd166ae9,
     type: 2}
-  m_PrefabInternal: {fileID: 1926843165}
+  m_PrefabInternal: {fileID: 678121521}
   m_GameObject: {fileID: 1118793972}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -8978,11 +9331,11 @@ MeshCollider:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 6406210, guid: dabdc1be5a8854b2fb0a4866fd166ae9,
     type: 2}
-  m_PrefabInternal: {fileID: 1926843165}
+  m_PrefabInternal: {fileID: 678121521}
   m_GameObject: {fileID: 1118793972}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_SmoothSphereCollisions: 1
   m_Convex: 0
@@ -8992,7 +9345,7 @@ Renderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 2306210, guid: dabdc1be5a8854b2fb0a4866fd166ae9,
     type: 2}
-  m_PrefabInternal: {fileID: 1926843165}
+  m_PrefabInternal: {fileID: 678121521}
   m_GameObject: {fileID: 1118793972}
   m_Enabled: 1
   m_CastShadows: 1
@@ -9013,14 +9366,14 @@ MeshFilter:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 3306210, guid: dabdc1be5a8854b2fb0a4866fd166ae9,
     type: 2}
-  m_PrefabInternal: {fileID: 1926843165}
+  m_PrefabInternal: {fileID: 678121521}
   m_GameObject: {fileID: 1118793972}
   m_Mesh: {fileID: 4300002, guid: b170a071d9c685343bdda95ed3bf48ef, type: 3}
 --- !u!4 &1118793977
 Transform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 406210, guid: dabdc1be5a8854b2fb0a4866fd166ae9, type: 2}
-  m_PrefabInternal: {fileID: 1926843165}
+  m_PrefabInternal: {fileID: 678121521}
   m_GameObject: {fileID: 1118793972}
   m_LocalRotation: {x: 0, y: -0, z: 0, w: 1}
   m_LocalPosition: {x: 244, y: -87, z: -25}
@@ -9029,6 +9382,19 @@ Transform:
   - {fileID: 91402010}
   m_Father: {fileID: 933836389}
   m_RootOrder: 0
+--- !u!65 &1118793978
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6533254, guid: dabdc1be5a8854b2fb0a4866fd166ae9,
+    type: 2}
+  m_PrefabInternal: {fileID: 678121521}
+  m_GameObject: {fileID: 1118793972}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 32, y: 32, z: 32}
+  m_Center: {x: -.857749939, y: .874025345, z: -.0699243546}
 --- !u!1001 &1127761109
 Prefab:
   m_ObjectHideFlags: 0
@@ -9530,6 +9896,7 @@ GameObject:
   - 23: {fileID: 1225446740}
   - 64: {fileID: 1225446739}
   - 114: {fileID: 1225446738}
+  - 65: {fileID: 1225446742}
   m_Layer: 8
   m_Name: Rock1
   m_TagString: Untagged
@@ -9574,7 +9941,7 @@ MeshCollider:
   m_GameObject: {fileID: 1225446736}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_SmoothSphereCollisions: 1
   m_Convex: 0
@@ -9608,6 +9975,19 @@ MeshFilter:
   m_PrefabInternal: {fileID: 1127761109}
   m_GameObject: {fileID: 1225446736}
   m_Mesh: {fileID: 4300002, guid: b170a071d9c685343bdda95ed3bf48ef, type: 3}
+--- !u!65 &1225446742
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6533254, guid: dabdc1be5a8854b2fb0a4866fd166ae9,
+    type: 2}
+  m_PrefabInternal: {fileID: 1127761109}
+  m_GameObject: {fileID: 1225446736}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 32, y: 32, z: 32}
+  m_Center: {x: -.857749939, y: .874025345, z: -.0699243546}
 --- !u!1 &1228746844
 GameObject:
   m_ObjectHideFlags: 0
@@ -9890,6 +10270,7 @@ GameObject:
   - 23: {fileID: 1245414487}
   - 64: {fileID: 1245414486}
   - 114: {fileID: 1245414485}
+  - 65: {fileID: 1245414489}
   m_Layer: 8
   m_Name: Rock1
   m_TagString: Untagged
@@ -9934,7 +10315,7 @@ MeshCollider:
   m_GameObject: {fileID: 1245414483}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_SmoothSphereCollisions: 1
   m_Convex: 0
@@ -9968,6 +10349,19 @@ MeshFilter:
   m_PrefabInternal: {fileID: 629125975}
   m_GameObject: {fileID: 1245414483}
   m_Mesh: {fileID: 4300002, guid: b170a071d9c685343bdda95ed3bf48ef, type: 3}
+--- !u!65 &1245414489
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6533254, guid: dabdc1be5a8854b2fb0a4866fd166ae9,
+    type: 2}
+  m_PrefabInternal: {fileID: 629125975}
+  m_GameObject: {fileID: 1245414483}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 32, y: 32, z: 32}
+  m_Center: {x: -.857749939, y: .874025345, z: -.0699243546}
 --- !u!1 &1261799850
 GameObject:
   m_ObjectHideFlags: 0
@@ -9980,6 +10374,7 @@ GameObject:
   - 23: {fileID: 1261799854}
   - 64: {fileID: 1261799853}
   - 114: {fileID: 1261799852}
+  - 65: {fileID: 1261799856}
   m_Layer: 8
   m_Name: Rock1
   m_TagString: Untagged
@@ -10024,7 +10419,7 @@ MeshCollider:
   m_GameObject: {fileID: 1261799850}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_SmoothSphereCollisions: 1
   m_Convex: 0
@@ -10058,6 +10453,19 @@ MeshFilter:
   m_PrefabInternal: {fileID: 1700169541}
   m_GameObject: {fileID: 1261799850}
   m_Mesh: {fileID: 4300002, guid: b170a071d9c685343bdda95ed3bf48ef, type: 3}
+--- !u!65 &1261799856
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6533254, guid: dabdc1be5a8854b2fb0a4866fd166ae9,
+    type: 2}
+  m_PrefabInternal: {fileID: 1700169541}
+  m_GameObject: {fileID: 1261799850}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 32, y: 32, z: 32}
+  m_Center: {x: -.857749939, y: .874025345, z: -.0699243546}
 --- !u!1001 &1265321892
 Prefab:
   m_ObjectHideFlags: 0
@@ -10246,6 +10654,7 @@ GameObject:
   - 23: {fileID: 1288878651}
   - 64: {fileID: 1288878650}
   - 114: {fileID: 1288878649}
+  - 65: {fileID: 1288878653}
   m_Layer: 8
   m_Name: Rock1
   m_TagString: Untagged
@@ -10290,7 +10699,7 @@ MeshCollider:
   m_GameObject: {fileID: 1288878647}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_SmoothSphereCollisions: 1
   m_Convex: 0
@@ -10324,6 +10733,19 @@ MeshFilter:
   m_PrefabInternal: {fileID: 1881585452}
   m_GameObject: {fileID: 1288878647}
   m_Mesh: {fileID: 4300002, guid: b170a071d9c685343bdda95ed3bf48ef, type: 3}
+--- !u!65 &1288878653
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6533254, guid: dabdc1be5a8854b2fb0a4866fd166ae9,
+    type: 2}
+  m_PrefabInternal: {fileID: 1881585452}
+  m_GameObject: {fileID: 1288878647}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 32, y: 32, z: 32}
+  m_Center: {x: -.857749939, y: .874025345, z: -.0699243546}
 --- !u!1001 &1289826084
 Prefab:
   m_ObjectHideFlags: 0
@@ -10421,6 +10843,7 @@ GameObject:
   - 23: {fileID: 1300393104}
   - 64: {fileID: 1300393103}
   - 114: {fileID: 1300393102}
+  - 65: {fileID: 1300393106}
   m_Layer: 8
   m_Name: Rock1
   m_TagString: Untagged
@@ -10465,7 +10888,7 @@ MeshCollider:
   m_GameObject: {fileID: 1300393100}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_SmoothSphereCollisions: 1
   m_Convex: 0
@@ -10499,6 +10922,19 @@ MeshFilter:
   m_PrefabInternal: {fileID: 1599435393}
   m_GameObject: {fileID: 1300393100}
   m_Mesh: {fileID: 4300002, guid: b170a071d9c685343bdda95ed3bf48ef, type: 3}
+--- !u!65 &1300393106
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6533254, guid: dabdc1be5a8854b2fb0a4866fd166ae9,
+    type: 2}
+  m_PrefabInternal: {fileID: 1599435393}
+  m_GameObject: {fileID: 1300393100}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 32, y: 32, z: 32}
+  m_Center: {x: -.857749939, y: .874025345, z: -.0699243546}
 --- !u!1 &1300835225
 GameObject:
   m_ObjectHideFlags: 0
@@ -10761,6 +11197,7 @@ GameObject:
   - 23: {fileID: 1317705719}
   - 64: {fileID: 1317705718}
   - 114: {fileID: 1317705717}
+  - 65: {fileID: 1317705721}
   m_Layer: 8
   m_Name: Rock1
   m_TagString: Untagged
@@ -10805,7 +11242,7 @@ MeshCollider:
   m_GameObject: {fileID: 1317705715}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_SmoothSphereCollisions: 1
   m_Convex: 0
@@ -10839,6 +11276,19 @@ MeshFilter:
   m_PrefabInternal: {fileID: 708506760}
   m_GameObject: {fileID: 1317705715}
   m_Mesh: {fileID: 4300002, guid: b170a071d9c685343bdda95ed3bf48ef, type: 3}
+--- !u!65 &1317705721
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6533254, guid: dabdc1be5a8854b2fb0a4866fd166ae9,
+    type: 2}
+  m_PrefabInternal: {fileID: 708506760}
+  m_GameObject: {fileID: 1317705715}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 32, y: 32, z: 32}
+  m_Center: {x: -.857749939, y: .874025345, z: -.0699243546}
 --- !u!1 &1323134205
 GameObject:
   m_ObjectHideFlags: 0
@@ -11574,6 +12024,7 @@ GameObject:
   - 23: {fileID: 1414573068}
   - 64: {fileID: 1414573067}
   - 114: {fileID: 1414573066}
+  - 65: {fileID: 1414573070}
   m_Layer: 8
   m_Name: Rock1
   m_TagString: Untagged
@@ -11618,7 +12069,7 @@ MeshCollider:
   m_GameObject: {fileID: 1414573064}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_SmoothSphereCollisions: 1
   m_Convex: 0
@@ -11652,6 +12103,19 @@ MeshFilter:
   m_PrefabInternal: {fileID: 1017300805}
   m_GameObject: {fileID: 1414573064}
   m_Mesh: {fileID: 4300002, guid: b170a071d9c685343bdda95ed3bf48ef, type: 3}
+--- !u!65 &1414573070
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6533254, guid: dabdc1be5a8854b2fb0a4866fd166ae9,
+    type: 2}
+  m_PrefabInternal: {fileID: 1017300805}
+  m_GameObject: {fileID: 1414573064}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 32, y: 32, z: 32}
+  m_Center: {x: -.857749939, y: .874025345, z: -.0699243546}
 --- !u!1 &1420632821
 GameObject:
   m_ObjectHideFlags: 0
@@ -11664,6 +12128,7 @@ GameObject:
   - 23: {fileID: 1420632825}
   - 64: {fileID: 1420632824}
   - 114: {fileID: 1420632823}
+  - 65: {fileID: 1420632827}
   m_Layer: 8
   m_Name: Rock1
   m_TagString: Untagged
@@ -11708,7 +12173,7 @@ MeshCollider:
   m_GameObject: {fileID: 1420632821}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_SmoothSphereCollisions: 1
   m_Convex: 0
@@ -11742,6 +12207,19 @@ MeshFilter:
   m_PrefabInternal: {fileID: 969756477}
   m_GameObject: {fileID: 1420632821}
   m_Mesh: {fileID: 4300002, guid: b170a071d9c685343bdda95ed3bf48ef, type: 3}
+--- !u!65 &1420632827
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6533254, guid: dabdc1be5a8854b2fb0a4866fd166ae9,
+    type: 2}
+  m_PrefabInternal: {fileID: 969756477}
+  m_GameObject: {fileID: 1420632821}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 32, y: 32, z: 32}
+  m_Center: {x: -.857749939, y: .874025345, z: -.0699243546}
 --- !u!1001 &1438852425
 Prefab:
   m_ObjectHideFlags: 0
@@ -11996,6 +12474,7 @@ GameObject:
   - 23: {fileID: 1466078426}
   - 64: {fileID: 1466078425}
   - 114: {fileID: 1466078424}
+  - 65: {fileID: 1466078428}
   m_Layer: 8
   m_Name: Rock1
   m_TagString: Untagged
@@ -12040,7 +12519,7 @@ MeshCollider:
   m_GameObject: {fileID: 1466078422}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_SmoothSphereCollisions: 1
   m_Convex: 0
@@ -12074,6 +12553,19 @@ MeshFilter:
   m_PrefabInternal: {fileID: 1173065770}
   m_GameObject: {fileID: 1466078422}
   m_Mesh: {fileID: 4300002, guid: b170a071d9c685343bdda95ed3bf48ef, type: 3}
+--- !u!65 &1466078428
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6533254, guid: dabdc1be5a8854b2fb0a4866fd166ae9,
+    type: 2}
+  m_PrefabInternal: {fileID: 1173065770}
+  m_GameObject: {fileID: 1466078422}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 32, y: 32, z: 32}
+  m_Center: {x: -.857749939, y: .874025345, z: -.0699243546}
 --- !u!1 &1466918913
 GameObject:
   m_ObjectHideFlags: 0
@@ -12530,6 +13022,7 @@ GameObject:
   - 23: {fileID: 1565639632}
   - 64: {fileID: 1565639631}
   - 114: {fileID: 1565639630}
+  - 65: {fileID: 1565639634}
   m_Layer: 8
   m_Name: Rock1
   m_TagString: Untagged
@@ -12574,7 +13067,7 @@ MeshCollider:
   m_GameObject: {fileID: 1565639628}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_SmoothSphereCollisions: 1
   m_Convex: 0
@@ -12608,6 +13101,19 @@ MeshFilter:
   m_PrefabInternal: {fileID: 102912309}
   m_GameObject: {fileID: 1565639628}
   m_Mesh: {fileID: 4300002, guid: b170a071d9c685343bdda95ed3bf48ef, type: 3}
+--- !u!65 &1565639634
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6533254, guid: dabdc1be5a8854b2fb0a4866fd166ae9,
+    type: 2}
+  m_PrefabInternal: {fileID: 102912309}
+  m_GameObject: {fileID: 1565639628}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 32, y: 32, z: 32}
+  m_Center: {x: -.857749939, y: .874025345, z: -.0699243546}
 --- !u!1 &1566080714
 GameObject:
   m_ObjectHideFlags: 0
@@ -12620,6 +13126,7 @@ GameObject:
   - 23: {fileID: 1566080718}
   - 64: {fileID: 1566080717}
   - 114: {fileID: 1566080716}
+  - 65: {fileID: 1566080720}
   m_Layer: 8
   m_Name: Rock1
   m_TagString: Untagged
@@ -12664,7 +13171,7 @@ MeshCollider:
   m_GameObject: {fileID: 1566080714}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_SmoothSphereCollisions: 1
   m_Convex: 0
@@ -12698,6 +13205,19 @@ MeshFilter:
   m_PrefabInternal: {fileID: 1527457785}
   m_GameObject: {fileID: 1566080714}
   m_Mesh: {fileID: 4300002, guid: b170a071d9c685343bdda95ed3bf48ef, type: 3}
+--- !u!65 &1566080720
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6533254, guid: dabdc1be5a8854b2fb0a4866fd166ae9,
+    type: 2}
+  m_PrefabInternal: {fileID: 1527457785}
+  m_GameObject: {fileID: 1566080714}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 32, y: 32, z: 32}
+  m_Center: {x: -.857749939, y: .874025345, z: -.0699243546}
 --- !u!1 &1578107295
 GameObject:
   m_ObjectHideFlags: 0
@@ -13113,6 +13633,7 @@ GameObject:
   - 23: {fileID: 1622401538}
   - 64: {fileID: 1622401537}
   - 114: {fileID: 1622401536}
+  - 65: {fileID: 1622401540}
   m_Layer: 8
   m_Name: Rock1
   m_TagString: Untagged
@@ -13157,7 +13678,7 @@ MeshCollider:
   m_GameObject: {fileID: 1622401534}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_SmoothSphereCollisions: 1
   m_Convex: 0
@@ -13191,6 +13712,19 @@ MeshFilter:
   m_PrefabInternal: {fileID: 1038528003}
   m_GameObject: {fileID: 1622401534}
   m_Mesh: {fileID: 4300002, guid: b170a071d9c685343bdda95ed3bf48ef, type: 3}
+--- !u!65 &1622401540
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6533254, guid: dabdc1be5a8854b2fb0a4866fd166ae9,
+    type: 2}
+  m_PrefabInternal: {fileID: 1038528003}
+  m_GameObject: {fileID: 1622401534}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 32, y: 32, z: 32}
+  m_Center: {x: -.857749939, y: .874025345, z: -.0699243546}
 --- !u!1001 &1648483035
 Prefab:
   m_ObjectHideFlags: 0
@@ -13409,6 +13943,7 @@ GameObject:
   - 23: {fileID: 1672591991}
   - 64: {fileID: 1672591990}
   - 114: {fileID: 1672591989}
+  - 65: {fileID: 1672591993}
   m_Layer: 8
   m_Name: Rock1
   m_TagString: Untagged
@@ -13453,7 +13988,7 @@ MeshCollider:
   m_GameObject: {fileID: 1672591987}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_SmoothSphereCollisions: 1
   m_Convex: 0
@@ -13487,6 +14022,19 @@ MeshFilter:
   m_PrefabInternal: {fileID: 260771480}
   m_GameObject: {fileID: 1672591987}
   m_Mesh: {fileID: 4300002, guid: b170a071d9c685343bdda95ed3bf48ef, type: 3}
+--- !u!65 &1672591993
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6533254, guid: dabdc1be5a8854b2fb0a4866fd166ae9,
+    type: 2}
+  m_PrefabInternal: {fileID: 260771480}
+  m_GameObject: {fileID: 1672591987}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 32, y: 32, z: 32}
+  m_Center: {x: -.857749939, y: .874025345, z: -.0699243546}
 --- !u!1 &1683804435
 GameObject:
   m_ObjectHideFlags: 0
@@ -13499,6 +14047,7 @@ GameObject:
   - 23: {fileID: 1683804439}
   - 64: {fileID: 1683804438}
   - 114: {fileID: 1683804437}
+  - 65: {fileID: 1683804441}
   m_Layer: 8
   m_Name: Rock1
   m_TagString: Untagged
@@ -13543,7 +14092,7 @@ MeshCollider:
   m_GameObject: {fileID: 1683804435}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_SmoothSphereCollisions: 1
   m_Convex: 0
@@ -13577,6 +14126,19 @@ MeshFilter:
   m_PrefabInternal: {fileID: 2080792707}
   m_GameObject: {fileID: 1683804435}
   m_Mesh: {fileID: 4300002, guid: b170a071d9c685343bdda95ed3bf48ef, type: 3}
+--- !u!65 &1683804441
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6533254, guid: dabdc1be5a8854b2fb0a4866fd166ae9,
+    type: 2}
+  m_PrefabInternal: {fileID: 2080792707}
+  m_GameObject: {fileID: 1683804435}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 32, y: 32, z: 32}
+  m_Center: {x: -.857749939, y: .874025345, z: -.0699243546}
 --- !u!1 &1693536855
 GameObject:
   m_ObjectHideFlags: 0
@@ -13678,6 +14240,7 @@ GameObject:
   - 23: {fileID: 1695552089}
   - 64: {fileID: 1695552088}
   - 114: {fileID: 1695552087}
+  - 65: {fileID: 1695552091}
   m_Layer: 8
   m_Name: Rock1
   m_TagString: Untagged
@@ -13722,7 +14285,7 @@ MeshCollider:
   m_GameObject: {fileID: 1695552085}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_SmoothSphereCollisions: 1
   m_Convex: 0
@@ -13756,6 +14319,19 @@ MeshFilter:
   m_PrefabInternal: {fileID: 127217375}
   m_GameObject: {fileID: 1695552085}
   m_Mesh: {fileID: 4300002, guid: b170a071d9c685343bdda95ed3bf48ef, type: 3}
+--- !u!65 &1695552091
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6533254, guid: dabdc1be5a8854b2fb0a4866fd166ae9,
+    type: 2}
+  m_PrefabInternal: {fileID: 127217375}
+  m_GameObject: {fileID: 1695552085}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 32, y: 32, z: 32}
+  m_Center: {x: -.857749939, y: .874025345, z: -.0699243546}
 --- !u!1001 &1700169541
 Prefab:
   m_ObjectHideFlags: 0
@@ -13853,6 +14429,7 @@ GameObject:
   - 23: {fileID: 1726483037}
   - 64: {fileID: 1726483036}
   - 114: {fileID: 1726483035}
+  - 65: {fileID: 1726483039}
   m_Layer: 8
   m_Name: Rock1
   m_TagString: Untagged
@@ -13897,7 +14474,7 @@ MeshCollider:
   m_GameObject: {fileID: 1726483033}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_SmoothSphereCollisions: 1
   m_Convex: 0
@@ -13931,6 +14508,19 @@ MeshFilter:
   m_PrefabInternal: {fileID: 548379193}
   m_GameObject: {fileID: 1726483033}
   m_Mesh: {fileID: 4300002, guid: b170a071d9c685343bdda95ed3bf48ef, type: 3}
+--- !u!65 &1726483039
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6533254, guid: dabdc1be5a8854b2fb0a4866fd166ae9,
+    type: 2}
+  m_PrefabInternal: {fileID: 548379193}
+  m_GameObject: {fileID: 1726483033}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 32, y: 32, z: 32}
+  m_Center: {x: -.857749939, y: .874025345, z: -.0699243546}
 --- !u!1001 &1732463197
 Prefab:
   m_ObjectHideFlags: 0
@@ -14660,6 +15250,7 @@ GameObject:
   - 23: {fileID: 1805057901}
   - 64: {fileID: 1805057900}
   - 114: {fileID: 1805057899}
+  - 65: {fileID: 1805057903}
   m_Layer: 8
   m_Name: Rock1
   m_TagString: Untagged
@@ -14704,7 +15295,7 @@ MeshCollider:
   m_GameObject: {fileID: 1805057897}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_SmoothSphereCollisions: 1
   m_Convex: 0
@@ -14738,6 +15329,19 @@ MeshFilter:
   m_PrefabInternal: {fileID: 1048949507}
   m_GameObject: {fileID: 1805057897}
   m_Mesh: {fileID: 4300002, guid: b170a071d9c685343bdda95ed3bf48ef, type: 3}
+--- !u!65 &1805057903
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6533254, guid: dabdc1be5a8854b2fb0a4866fd166ae9,
+    type: 2}
+  m_PrefabInternal: {fileID: 1048949507}
+  m_GameObject: {fileID: 1805057897}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 32, y: 32, z: 32}
+  m_Center: {x: -.857749939, y: .874025345, z: -.0699243546}
 --- !u!1 &1812458911
 GameObject:
   m_ObjectHideFlags: 0
@@ -14986,6 +15590,7 @@ GameObject:
   - 23: {fileID: 1840931442}
   - 64: {fileID: 1840931441}
   - 114: {fileID: 1840931440}
+  - 65: {fileID: 1840931444}
   m_Layer: 8
   m_Name: Rock1
   m_TagString: Untagged
@@ -15030,7 +15635,7 @@ MeshCollider:
   m_GameObject: {fileID: 1840931438}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_SmoothSphereCollisions: 1
   m_Convex: 0
@@ -15064,6 +15669,19 @@ MeshFilter:
   m_PrefabInternal: {fileID: 1499221538}
   m_GameObject: {fileID: 1840931438}
   m_Mesh: {fileID: 4300002, guid: b170a071d9c685343bdda95ed3bf48ef, type: 3}
+--- !u!65 &1840931444
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6533254, guid: dabdc1be5a8854b2fb0a4866fd166ae9,
+    type: 2}
+  m_PrefabInternal: {fileID: 1499221538}
+  m_GameObject: {fileID: 1840931438}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 32, y: 32, z: 32}
+  m_Center: {x: -.857749939, y: .874025345, z: -.0699243546}
 --- !u!1 &1846697776
 GameObject:
   m_ObjectHideFlags: 0
@@ -15282,6 +15900,7 @@ GameObject:
   - 23: {fileID: 1872143598}
   - 64: {fileID: 1872143597}
   - 114: {fileID: 1872143596}
+  - 65: {fileID: 1872143600}
   m_Layer: 8
   m_Name: Rock1
   m_TagString: Untagged
@@ -15326,7 +15945,7 @@ MeshCollider:
   m_GameObject: {fileID: 1872143594}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_SmoothSphereCollisions: 1
   m_Convex: 0
@@ -15360,6 +15979,19 @@ MeshFilter:
   m_PrefabInternal: {fileID: 1289826084}
   m_GameObject: {fileID: 1872143594}
   m_Mesh: {fileID: 4300002, guid: b170a071d9c685343bdda95ed3bf48ef, type: 3}
+--- !u!65 &1872143600
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6533254, guid: dabdc1be5a8854b2fb0a4866fd166ae9,
+    type: 2}
+  m_PrefabInternal: {fileID: 1289826084}
+  m_GameObject: {fileID: 1872143594}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 32, y: 32, z: 32}
+  m_Center: {x: -.857749939, y: .874025345, z: -.0699243546}
 --- !u!1 &1872758200
 GameObject:
   m_ObjectHideFlags: 0
@@ -15938,50 +16570,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1619672636}
   m_RootOrder: 1
---- !u!1001 &1926843165
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 933836389}
-    m_Modifications:
-    - target: {fileID: 406210, guid: dabdc1be5a8854b2fb0a4866fd166ae9, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 244
-      objectReference: {fileID: 0}
-    - target: {fileID: 406210, guid: dabdc1be5a8854b2fb0a4866fd166ae9, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: -87
-      objectReference: {fileID: 0}
-    - target: {fileID: 406210, guid: dabdc1be5a8854b2fb0a4866fd166ae9, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: -25
-      objectReference: {fileID: 0}
-    - target: {fileID: 406210, guid: dabdc1be5a8854b2fb0a4866fd166ae9, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 406210, guid: dabdc1be5a8854b2fb0a4866fd166ae9, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 406210, guid: dabdc1be5a8854b2fb0a4866fd166ae9, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 406210, guid: dabdc1be5a8854b2fb0a4866fd166ae9, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 406210, guid: dabdc1be5a8854b2fb0a4866fd166ae9, type: 2}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: dabdc1be5a8854b2fb0a4866fd166ae9, type: 2}
-  m_RootGameObject: {fileID: 1118793972}
-  m_IsPrefabParent: 0
-  m_IsExploded: 1
 --- !u!1 &1931381076
 GameObject:
   m_ObjectHideFlags: 0
@@ -15994,6 +16582,7 @@ GameObject:
   - 23: {fileID: 1931381080}
   - 64: {fileID: 1931381079}
   - 114: {fileID: 1931381078}
+  - 65: {fileID: 1931381082}
   m_Layer: 8
   m_Name: Rock1
   m_TagString: Untagged
@@ -16038,7 +16627,7 @@ MeshCollider:
   m_GameObject: {fileID: 1931381076}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_SmoothSphereCollisions: 1
   m_Convex: 0
@@ -16072,6 +16661,19 @@ MeshFilter:
   m_PrefabInternal: {fileID: 801707389}
   m_GameObject: {fileID: 1931381076}
   m_Mesh: {fileID: 4300002, guid: b170a071d9c685343bdda95ed3bf48ef, type: 3}
+--- !u!65 &1931381082
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6533254, guid: dabdc1be5a8854b2fb0a4866fd166ae9,
+    type: 2}
+  m_PrefabInternal: {fileID: 801707389}
+  m_GameObject: {fileID: 1931381076}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 32, y: 32, z: 32}
+  m_Center: {x: -.857749939, y: .874025345, z: -.0699243546}
 --- !u!1001 &1936721562
 Prefab:
   m_ObjectHideFlags: 0
@@ -16274,6 +16876,7 @@ GameObject:
   - 23: {fileID: 1986684553}
   - 64: {fileID: 1986684552}
   - 114: {fileID: 1986684551}
+  - 65: {fileID: 1986684555}
   m_Layer: 8
   m_Name: Rock1
   m_TagString: Untagged
@@ -16318,7 +16921,7 @@ MeshCollider:
   m_GameObject: {fileID: 1986684549}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_SmoothSphereCollisions: 1
   m_Convex: 0
@@ -16352,6 +16955,19 @@ MeshFilter:
   m_PrefabInternal: {fileID: 596583097}
   m_GameObject: {fileID: 1986684549}
   m_Mesh: {fileID: 4300002, guid: b170a071d9c685343bdda95ed3bf48ef, type: 3}
+--- !u!65 &1986684555
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6533254, guid: dabdc1be5a8854b2fb0a4866fd166ae9,
+    type: 2}
+  m_PrefabInternal: {fileID: 596583097}
+  m_GameObject: {fileID: 1986684549}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 32, y: 32, z: 32}
+  m_Center: {x: -.857749939, y: .874025345, z: -.0699243546}
 --- !u!1 &1992108884
 GameObject:
   m_ObjectHideFlags: 0
@@ -16482,6 +17098,7 @@ GameObject:
   - 23: {fileID: 2007147632}
   - 64: {fileID: 2007147631}
   - 114: {fileID: 2007147630}
+  - 65: {fileID: 2007147634}
   m_Layer: 8
   m_Name: Rock1
   m_TagString: Untagged
@@ -16526,7 +17143,7 @@ MeshCollider:
   m_GameObject: {fileID: 2007147628}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_SmoothSphereCollisions: 1
   m_Convex: 0
@@ -16560,6 +17177,19 @@ MeshFilter:
   m_PrefabInternal: {fileID: 1023996158}
   m_GameObject: {fileID: 2007147628}
   m_Mesh: {fileID: 4300002, guid: b170a071d9c685343bdda95ed3bf48ef, type: 3}
+--- !u!65 &2007147634
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6533254, guid: dabdc1be5a8854b2fb0a4866fd166ae9,
+    type: 2}
+  m_PrefabInternal: {fileID: 1023996158}
+  m_GameObject: {fileID: 2007147628}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 32, y: 32, z: 32}
+  m_Center: {x: -.857749939, y: .874025345, z: -.0699243546}
 --- !u!1 &2014269473
 GameObject:
   m_ObjectHideFlags: 0
@@ -17472,6 +18102,7 @@ GameObject:
   - 23: {fileID: 2098853257}
   - 64: {fileID: 2098853256}
   - 114: {fileID: 2098853255}
+  - 65: {fileID: 2098853259}
   m_Layer: 8
   m_Name: Rock1
   m_TagString: Untagged
@@ -17516,7 +18147,7 @@ MeshCollider:
   m_GameObject: {fileID: 2098853253}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_SmoothSphereCollisions: 1
   m_Convex: 0
@@ -17550,6 +18181,19 @@ MeshFilter:
   m_PrefabInternal: {fileID: 962344952}
   m_GameObject: {fileID: 2098853253}
   m_Mesh: {fileID: 4300002, guid: b170a071d9c685343bdda95ed3bf48ef, type: 3}
+--- !u!65 &2098853259
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6533254, guid: dabdc1be5a8854b2fb0a4866fd166ae9,
+    type: 2}
+  m_PrefabInternal: {fileID: 962344952}
+  m_GameObject: {fileID: 2098853253}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 32, y: 32, z: 32}
+  m_Center: {x: -.857749939, y: .874025345, z: -.0699243546}
 --- !u!1001 &2110820238
 Prefab:
   m_ObjectHideFlags: 0
@@ -17614,6 +18258,7 @@ GameObject:
   - 23: {fileID: 2111102360}
   - 64: {fileID: 2111102359}
   - 114: {fileID: 2111102358}
+  - 65: {fileID: 2111102362}
   m_Layer: 8
   m_Name: Rock1
   m_TagString: Untagged
@@ -17658,7 +18303,7 @@ MeshCollider:
   m_GameObject: {fileID: 2111102356}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_SmoothSphereCollisions: 1
   m_Convex: 0
@@ -17692,6 +18337,19 @@ MeshFilter:
   m_PrefabInternal: {fileID: 18904804}
   m_GameObject: {fileID: 2111102356}
   m_Mesh: {fileID: 4300002, guid: b170a071d9c685343bdda95ed3bf48ef, type: 3}
+--- !u!65 &2111102362
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6533254, guid: dabdc1be5a8854b2fb0a4866fd166ae9,
+    type: 2}
+  m_PrefabInternal: {fileID: 18904804}
+  m_GameObject: {fileID: 2111102356}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 32, y: 32, z: 32}
+  m_Center: {x: -.857749939, y: .874025345, z: -.0699243546}
 --- !u!1 &2115509468
 GameObject:
   m_ObjectHideFlags: 0
