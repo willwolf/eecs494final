@@ -203,6 +203,12 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 
+	void UpdateTeamShops(int baseId) {
+		foreach (ShopMenu s in playerShops[baseId]) {
+			s.UpdateShop(baseId);
+		}
+	}
+
 	string catapultText(int baseId){
 		string cataText = "";
 		if(teamCatapultStatus [baseId].has_arm ||
@@ -263,9 +269,7 @@ public class GameManager : MonoBehaviour {
 		}
 		updateTeamText(baseId);
 		updateAllOppTexts ();
-		foreach (ShopMenu s in playerShops[baseId]) {
-			s.UpdateShop(baseId);
-		}
+		UpdateTeamShops(baseId);
 	}
 
 
@@ -295,9 +299,7 @@ public class GameManager : MonoBehaviour {
 		} finally {
 			updateTeamText(baseId);
 			updateAllOppTexts();
-			foreach (ShopMenu s in playerShops[baseId]) {
-				s.UpdateShop(baseId);
-			}
+			UpdateTeamShops(baseId);
 		}
 	}
 

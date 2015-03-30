@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour {
 	private bool dead = false;
 	private float respawn_at_time;
 	public int startingHealth = 10;
-	private int health;
+	public int health;
 	public int damage_amount = 2;
 	public float INVULNERABLE_TIME = 2;
 	private float vulnerable_at_time;
@@ -78,6 +78,9 @@ public class PlayerController : MonoBehaviour {
 //	public GameObject sword;
 	public bool hasWeapon = false;
 	public int currentWeaponIndex = 0;
+	public GameObject armorPrefab = null;
+	public GameObject armor = null;
+	public ArmorScript playerArmor = null;
 	public List<GameObject> weapons = new List<GameObject>();
 	public WeaponItem currentWeapon = null;
 
@@ -402,6 +405,10 @@ public class PlayerController : MonoBehaviour {
 		} else if (upgrade is CatapultStoneScript) {
 			gm.AddCatapultPart(homeBase_GO.GetInstanceID(), CatapultPart.stone);
 			homeBase.TurnOnCatapultStone();
+		} else if (upgrade is ArmorScript) {
+			armor = Instantiate(armorPrefab, transform.position, transform.rotation) as GameObject;
+			armor.transform.parent = transform;
+			playerArmor = armor.GetComponent<ArmorScript>();
 		}
 	}
 
@@ -442,12 +449,21 @@ public class PlayerController : MonoBehaviour {
 
 	public void takeDamage(int damage){
 		if(Time.time > vulnerable_at_time){
-			health -= damage;
-			splat_sound.Play();
-			//update health bar
-			health_slider.value = health;
+			if (playerArmor != null) {
+				playerArmor.TakeDamage(damage);
+				if (playerArmor.IsDestroyed()) {
+					Destroy(armor);
+					armor = null;
+					playerArmor = null;
+				}
+			} else {
+				health -= damage;
+				splat_sound.Play();
+				//update health bar
+				health_slider.value = health;
+				Debug.Log("Player " + player_num + " health is " + health);
+			}
 			vulnerable_at_time = Time.time + INVULNERABLE_TIME;
-			Debug.Log("Player " + player_num + " health is " + health);
 			StartCoroutine(colorFlash());
 		}
 

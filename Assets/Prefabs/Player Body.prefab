@@ -1977,6 +1977,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RESPAWN_TIME: 15
   startingHealth: 6
+  health: 0
   damage_amount: 2
   INVULNERABLE_TIME: 1
   HEALTH_REGEN_TIME: 1
@@ -2012,6 +2013,9 @@ MonoBehaviour:
   purchasing_sound: {fileID: 8257844}
   hasWeapon: 0
   currentWeaponIndex: 0
+  armorPrefab: {fileID: 134498, guid: 3c18ddfb35df747c0ba407e569a36e6c, type: 2}
+  armor: {fileID: 0}
+  playerArmor: {fileID: 0}
   weapons:
   - {fileID: 121854}
   - {fileID: 152980}
