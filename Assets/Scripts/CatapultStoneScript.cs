@@ -19,6 +19,6 @@ public class CatapultStoneScript : BaseUpgradeItem {
 	}
 
 	override public void MakePurchase(int teamId, GameManager gm) {
-		gm.teamCatapultStatus[teamId].has_projectile = true;
+		gm.AddCatapultPart(teamId, CatapultPart.stone);
 	}
 }

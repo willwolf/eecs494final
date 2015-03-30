@@ -19,6 +19,6 @@ public class CatapultLegScript : BaseUpgradeItem {
 	}
 
 	override public void MakePurchase(int teamId, GameManager gm) {
-		gm.teamCatapultStatus[teamId].has_legs = true;
+		gm.AddCatapultPart(teamId, CatapultPart.legs);
 	}
 }

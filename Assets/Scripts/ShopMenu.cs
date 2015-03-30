@@ -131,7 +131,7 @@ public class ShopMenu : MonoBehaviour {
 			manager.RemoveResources(team_id, ResourceType.stone, item.stone_cost);
 			manager.RemoveResources(team_id, ResourceType.wood, item.wood_cost);
 			item.MakePurchase(team_id, manager);
-			UpdateShop(team_id);
+			manager.UpdateTeamShops(team_id);
 			FindNextAvailableUp();
 			return item;
 		} 

@@ -426,21 +426,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void HandleBaseUpgrade(BaseUpgradeItem upgrade) {
-		if (upgrade is WallScript) {
-			homeBase.TurnOnWalls();
-		} else if (upgrade is CatapultArmScript) {
-			gm.AddCatapultPart(homeBase_GO.GetInstanceID(), CatapultPart.arm);
-			cataArm.enabled = true;
-			homeBase.TurnOnCatapultArm();
-		} else if (upgrade is CatapultLegScript) {
-			gm.AddCatapultPart(homeBase_GO.GetInstanceID(), CatapultPart.legs);
-			cataBase.enabled = true;
-			homeBase.TurnOnCatapultLegs();
-		} else if (upgrade is CatapultStoneScript) {
-			gm.AddCatapultPart(homeBase_GO.GetInstanceID(), CatapultPart.stone);
-			cataStone.enabled = true;
-			homeBase.TurnOnCatapultStone();
-		} else if (upgrade is ArmorScript) {
+		if (upgrade is ArmorScript) {
 			armor = Instantiate(armorPrefab, transform.position, transform.rotation) as GameObject;
 			armor.transform.parent = transform;
 			playerArmor = armor.GetComponent<ArmorScript>();

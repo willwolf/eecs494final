@@ -41,11 +41,12 @@ public class GameManager : MonoBehaviour {
 	private MultiValueDictionary<int, Text> teamTexts =  new MultiValueDictionary<int, Text>();
 	private MultiValueDictionary<int, Text> opponentTexts = new MultiValueDictionary<int,Text>();
 	private MultiValueDictionary<int, Text> enemyInBaseTexts = new MultiValueDictionary<int, Text>();
-	public List<GameObject> allPlayers = new List<GameObject>();
+	public List<PlayerController> allPlayers = new List<PlayerController>();
 	private Dictionary<int, Material> teamMats = new Dictionary<int, Material>();
 	public Dictionary<int, int> teamTrapLayer { get; private set; }
 	public Dictionary<int, List<ShopMenu>> playerShops = new Dictionary<int, List<ShopMenu>>();
 
+	public Dictionary<int, Base> teamBases = new Dictionary<int, Base>();
 	public Dictionary<int, string> baseNames;
 	public Dictionary<int, ResourceCount> teamResources;
 	public Dictionary<int, CatapultTracker> teamCatapultStatus = new Dictionary<int, CatapultTracker>(); 
@@ -100,7 +101,7 @@ public class GameManager : MonoBehaviour {
 
 
 		opponentTexts.Add(base1.GetInstanceID(), canvas.transform.FindChild("Opponent_Vals").GetComponent<Text>());
-		allPlayers.Add (player);
+		allPlayers.Add (controller);
 
 		Text enemyWarning = canvas.transform.FindChild("Enemy_Warning").GetComponent<Text>();
 		enemyWarning.enabled = false;
@@ -148,6 +149,7 @@ public class GameManager : MonoBehaviour {
 		int numPlayers = InputManager.Devices.Count >= 2 ? 4 : 2;
 		foreach (KeyValuePair<string, string> pair in teamNames) {
 			GameObject baseObj = GameObject.Find(pair.Key);
+			teamBases.Add (baseObj.GetInstanceID(), baseObj.GetComponent<Base>());
 			playerShops.Add(baseObj.GetInstanceID(), new List<ShopMenu>());
 			baseNames.Add(baseObj.GetInstanceID(), pair.Value);
 			teamResources.Add(baseObj.GetInstanceID(), new ResourceCount());
@@ -178,6 +180,7 @@ public class GameManager : MonoBehaviour {
 		}
 		updateAllOppTexts ();
 		//updateAllOppCataIcons ();
+		UpdateAllCatapultIcons();
 
 		print ("winning wood: " + winningWood + " stone: " + winningStone);
 
@@ -198,6 +201,29 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 
+	void UpdateAllCatapultIcons() {
+		foreach (KeyValuePair<int, string> pair in baseNames) {
+			UpdateTeamCatapultIcons (pair.Key);
+			updateOppCataIcons(pair.Key);
+		}
+	}
+
+	void UpdateTeamCatapultIcons(int teamId) {
+		foreach (PlayerController p in allPlayers) {
+			if (p.homeBase_GO.GetInstanceID() == teamId) {
+				if (teamCatapultStatus [teamId].has_arm) {
+					p.cataArm.enabled = true;
+				}
+				if(teamCatapultStatus[teamId].has_legs){
+					p.cataBase.enabled = true;
+				}
+				if(teamCatapultStatus[teamId].has_projectile){
+					p.cataStone.enabled = true;
+				}
+			}
+		}
+	}
+
 	void updateAllOppCataIcons(){
 		foreach (KeyValuePair<int, string> pair in baseNames) {
 				updateOppCataIcons(pair.Key);	
@@ -205,18 +231,18 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void updateOppCataIcons(int oppId){
-		foreach (GameObject p in allPlayers){
-			if(p.GetComponent<PlayerController>().homeBase_GO.GetInstanceID() != oppId){
+		foreach (PlayerController p in allPlayers){
+			if(p.homeBase_GO.GetInstanceID() != oppId){
 				print ("oppid: " + oppId + " arm " + teamCatapultStatus [oppId].has_arm +
 				       " base " + teamCatapultStatus[oppId].has_legs + " stone " + teamCatapultStatus[oppId].has_projectile);
 				if (teamCatapultStatus [oppId].has_arm) {
-					p.GetComponent<PlayerController>().oppCataArm.enabled = true;
+					p.oppCataArm.enabled = true;
 				}
 				if(teamCatapultStatus[oppId].has_legs){
-					p.GetComponent<PlayerController>().oppCataBase.enabled = true;
+					p.oppCataBase.enabled = true;
 				}
 				if(teamCatapultStatus[oppId].has_projectile){
-					p.GetComponent<PlayerController>().oppCataStone.enabled = true;
+					p.oppCataStone.enabled = true;
 				}
 			}
 		}
@@ -236,7 +262,7 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 
-	void UpdateTeamShops(int baseId) {
+	public void UpdateTeamShops(int baseId) {
 		foreach (ShopMenu s in playerShops[baseId]) {
 			s.UpdateShop(baseId);
 		}
@@ -359,19 +385,22 @@ public class GameManager : MonoBehaviour {
 			switch (part) {
 			case CatapultPart.arm:
 				teamCatapultStatus[team_id].has_arm = true;
-
+				teamBases[team_id].TurnOnCatapultArm();
 				break;
 			case CatapultPart.legs:
 				teamCatapultStatus[team_id].has_legs = true;
+				teamBases[team_id].TurnOnCatapultLegs();
 				break;
 			case CatapultPart.stone:
 				teamCatapultStatus[team_id].has_projectile = true;
+				teamBases[team_id].TurnOnCatapultStone();
 				break;
 			}
 		} finally {
 			updateTeamText(team_id);
 			updateAllOppTexts();
-			updateAllOppCataIcons();
+//			updateAllOppCataIcons();
+			UpdateAllCatapultIcons();
 		}
 	} 
 }

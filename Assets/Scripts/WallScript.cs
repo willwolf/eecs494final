@@ -15,10 +15,10 @@ public class WallScript : BaseUpgradeItem {
 
 	override
 	public bool CanPurchase(int teamId, GameManager gm) {
-		return true;
+		return !gm.teamBases[teamId].hasWalls;
 	}
 
 	override public void MakePurchase(int teamId, GameManager gm) {
-
+		gm.teamBases[teamId].TurnOnWalls();
 	}
 }
