@@ -295,6 +295,8 @@ public class PlayerController : MonoBehaviour {
 	public void freeze(float duration) {
 		frozen = true;
 		frozenUntil = Time.time + duration;
+		vulnerable_at_time = frozenUntil;
+		StartCoroutine(colorFlash());
 	}
 
 
@@ -389,7 +391,7 @@ public class PlayerController : MonoBehaviour {
 	void HandlePurchase(ShopItem item) {
 		if (item) {
 			if (item is Trap) {
-				Vector3 drop_at_position = this.transform.position - this.transform.up * 1.5f + this.transform.forward * 1.5f;
+				Vector3 drop_at_position = this.transform.position - this.transform.up * 0.5f + this.transform.forward * 1.5f;
 				GameObject t = Instantiate(trapGO, drop_at_position, transform.rotation) as GameObject;
 				t.transform.parent = this.transform;
 

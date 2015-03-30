@@ -5,6 +5,8 @@ public class Trap : ShopItem {
 
 	public GameObject owner_base;
 
+	public int FREEZE_DURATION = 10;
+
 	private GameManager gm;
 
 	bool initilized = false;
@@ -23,6 +25,7 @@ public class Trap : ShopItem {
 		}
 		
 		gameObject.layer = gm.teamTrapLayer[owner_base.GetInstanceID()];
+		this.transform.localScale = new Vector3(3f, .5f, 3f);
 	}
 
 	public override bool CanPurchase(PlayerController p, int teamId, GameManager gm) {
@@ -32,9 +35,19 @@ public class Trap : ShopItem {
 	public override void MakePurchase(PlayerController p, int teamId, GameManager gm) {
 
 	}
+
+	bool activated = false;
+	float frozen_until;
 	
 	// Update is called once per frame
 	void Update () {
+		if (activated) {
+			gameObject.layer = 0;
+
+			if (Time.time > frozen_until) {
+				Destroy(this.gameObject);
+			}
+		}
 
 	}
 
@@ -44,7 +57,9 @@ public class Trap : ShopItem {
 			return;
 
 		if (player.homeBase_GO.GetInstanceID() != owner_base.GetInstanceID()) {
-			player.freeze(10);
+			player.freeze(FREEZE_DURATION);
+			activated = true;
+			frozen_until = Time.time + FREEZE_DURATION;
 		}
 	}
 }

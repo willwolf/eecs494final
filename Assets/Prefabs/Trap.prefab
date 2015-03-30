@@ -26,8 +26,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 194302}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 50, y: 0, z: 44}
-  m_LocalScale: {x: 2, y: 1, z: 2}
+  m_LocalPosition: {x: 1.80767822, y: .5, z: 77.3389893}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -43,7 +43,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 0771da666fe8245f5a46946069e8b77d, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -68,8 +68,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 3.17876339, z: 1}
-  m_Center: {x: 0, y: 1.08938169, z: 0}
+  m_Size: {x: .800000012, y: 10, z: .800000012}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &11494302
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -82,10 +82,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 0}
-  item_name: Trap
-  stone_cost: 0
-  wood_cost: 0
+  item_name: Feeze Trap
+  stone_cost: 1
+  wood_cost: 1
   owner_base: {fileID: 0}
+  FREEZE_DURATION: 12
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
