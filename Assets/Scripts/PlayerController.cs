@@ -82,6 +82,9 @@ public class PlayerController : MonoBehaviour {
 
 	public GameManager gm;
 	public Canvas canvas;
+	public Image cataArm;
+	public Image cataStone;
+	public Image cataBase;
 
 	public GameObject shop;
 	public ShopMenu shopMenu;
@@ -113,6 +116,14 @@ public class PlayerController : MonoBehaviour {
 		mid_screen_text.text = "";
 		updateStoneText();
 		updateWoodText();
+
+		
+		cataBase = canvas.transform.FindChild ("Team_Catapult_Base_Icon").GetComponent<Image> ();
+		cataArm = canvas.transform.FindChild ("Team_Catapult_Arm_Icon").GetComponent<Image> ();
+		cataStone = canvas.transform.FindChild ("Team_Catapult_Stone_Icon").GetComponent<Image> ();
+		cataBase.enabled = false;
+		cataArm.enabled = false;
+		cataBase.enabled = false;
 
 		homeBase = homeBase_GO.GetComponent<Base>();
 		shop = canvas.transform.FindChild ("Shop_Menu").gameObject;
@@ -422,12 +433,15 @@ public class PlayerController : MonoBehaviour {
 			homeBase.TurnOnWalls();
 		} else if (upgrade is CatapultArmScript) {
 			gm.AddCatapultPart(homeBase_GO.GetInstanceID(), CatapultPart.arm);
+			cataArm.enabled = true;
 			homeBase.TurnOnCatapultArm();
 		} else if (upgrade is CatapultLegScript) {
 			gm.AddCatapultPart(homeBase_GO.GetInstanceID(), CatapultPart.legs);
+			cataBase.enabled = true;
 			homeBase.TurnOnCatapultLegs();
 		} else if (upgrade is CatapultStoneScript) {
 			gm.AddCatapultPart(homeBase_GO.GetInstanceID(), CatapultPart.stone);
+			cataStone.enabled = true;
 			homeBase.TurnOnCatapultStone();
 		}
 	}
