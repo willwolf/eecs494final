@@ -138,8 +138,8 @@ public class PlayerController : MonoBehaviour {
 
 		//Currently hardcoded assuming just 2 teams
 		oppCataBase = canvas.transform.FindChild ("Opp_Catapult_Base_Icon").GetComponent<Image> ();
-		oppCataArm = canvas.transform.FindChild ("Opp_Catapult_Base_Icon").GetComponent<Image> ();
-		oppCataStone = canvas.transform.FindChild ("Opp_Catapult_Base_Icon").GetComponent<Image> ();
+		oppCataArm = canvas.transform.FindChild ("Opp_Catapult_Arm_Icon").GetComponent<Image> ();
+		oppCataStone = canvas.transform.FindChild ("Opp_Catapult_Stone_Icon").GetComponent<Image> ();
 		oppCataBase.enabled = false;
 		oppCataArm.enabled = false;
 		oppCataStone.enabled = false;
