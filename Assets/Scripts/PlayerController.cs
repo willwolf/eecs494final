@@ -67,7 +67,7 @@ public class PlayerController : MonoBehaviour {
 	private Slider health_slider;
 	private Slider wood_slider;
 	private Slider stone_slider;
-	private Slider armor_slider;
+	public Slider armor_slider;
 
 	public AudioSource mining_stone;
 	public AudioSource chopping_wood;
@@ -382,19 +382,12 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	bool CantMakePurchaseOn(ShopItem item) {
-		return (item is SwordScript && currentWeapon is SwordScript) || 
-				(item is BowScript && currentWeapon is BowScript) || 
-				(item is StealthScript && currentWeapon is StealthScript) || 
-				(item is Trap && this.GetComponentsInChildren<Trap>()==null);
+		return (item is Trap && this.GetComponentsInChildren<Trap>()==null);
 	}
 	
 	void HandlePurchase(ShopItem item) {
 		if (item) {
-			if (item is WeaponItem) {
-				HandleWeapon((WeaponItem)item);
-			} else if (item is BaseUpgradeItem) {
-				HandleBaseUpgrade((BaseUpgradeItem)item);
-			} else if (item is Trap) {
+			if (item is Trap) {
 				GameObject t = Instantiate(trapGO, transform.position, transform.rotation) as GameObject;
 				t.transform.parent = this.transform;
 
@@ -402,34 +395,6 @@ public class PlayerController : MonoBehaviour {
 				trap.owner_base = homeBase_GO;
 				hasBox = true;
 			}
-		}
-	}
-
-	void HandleWeapon(WeaponItem weapon) {
-//		weapons[currentWeaponIndex].SetActive(false);
-//		if (weapon is BowScript) {
-//			currentWeaponIndex = 2;
-//		} else if (weapon is StealthScript) {
-//			currentWeaponIndex = 3;
-//		}
-//		hasWeapon = true;
-//		currentWeapon = weapon;
-//		weapons[currentWeaponIndex].SetActive(true);
-//		//set to visible
-//		foreach (MeshRenderer renderer in weapons[currentWeaponIndex].GetComponentsInChildren<MeshRenderer>()) {
-//			renderer.enabled = true;
-//		}
-//		foreach (Collider collider in weapons[currentWeaponIndex].GetComponentsInChildren<Collider>()) {
-//			collider.enabled = true;
-//		}
-	}
-
-	void HandleBaseUpgrade(BaseUpgradeItem upgrade) {
-		if (upgrade is ArmorScript) {
-			armor = Instantiate(armorPrefab, transform.position, transform.rotation) as GameObject;
-			armor.transform.parent = transform;
-			playerArmor = armor.GetComponent<ArmorScript>();
-			armor_slider.value = playerArmor.armorHealth;
 		}
 	}
 
