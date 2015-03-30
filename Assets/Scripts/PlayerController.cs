@@ -355,10 +355,10 @@ public class PlayerController : MonoBehaviour {
 				item = shopMenu.MakePurchase(this, homeBase_GO.GetInstanceID());
 				if(item){
 					purchasing_sound.Play();
+					ToggleStore();
 				}
 				HandlePurchase(item);
 				//close shop
-//				ToggleStore();
 			}
 		} else {
 			float vertInput = Input.GetAxis("Vertical_" + (player_num % 2).ToString());
@@ -375,6 +375,7 @@ public class PlayerController : MonoBehaviour {
 				item = shopMenu.MakePurchase(this, homeBase_GO.GetInstanceID());
 				if(item){
 					purchasing_sound.Play();
+					ToggleStore();
 				}
 				HandlePurchase(item);
 			}
@@ -543,6 +544,7 @@ public class PlayerController : MonoBehaviour {
 				curr_wood_resource--;
 			}
 		}
+		updateSliders();
 		updateStoneText();
 		updateWoodText();
 	}
