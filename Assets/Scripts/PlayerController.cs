@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour {
 	public float walk_speed = 8f;
 	public float enemy_base_speed_multiplier = 0.5f;
 	public float encumberPercent = 0.5f;
+	public float wincumberPercent = 0.05f;
 
 	public int curr_wood_resource = 0;
 	public int wood_gather_val = 1;
@@ -329,14 +330,26 @@ public class PlayerController : MonoBehaviour {
 		transform.rigidbody.velocity = newVel;
 	}
 
+	private float CalculateWinningEncumbered(){
+		float percent = 0;
+		if(homeBase.hasCatapultLegs) percent += wincumberPercent;
+		if(homeBase.hasCatapultArm) percent += wincumberPercent;
+		if(homeBase.hasCatapultStone) percent += wincumberPercent;
+		return percent;
+	}
+
 	Vector3 CalculateMoveSpeed(Vector3 direction, float input_data) {
 		Vector3 moveSpeed = direction * walk_speed * input_data * Time.deltaTime;
+		if(GameManager.ENCUMBER_WINNERS){
+			encumberPercent += CalculateWinningEncumbered();
+		}
+
 		if (!inEnemyBase) {
 			float encumbered = 1f;
 			// max encumberance == 1 - enemy_base_speed_multiplier
 			encumbered -= Mathf.Min(((1.0f * curr_wood_resource + curr_stone_resource) / MAX_RESOURCES), 
 			                        enemy_base_speed_multiplier)*encumberPercent;
-			return moveSpeed * encumbered ;
+			return moveSpeed * encumbered;
 		} else {
 			return moveSpeed * enemy_base_speed_multiplier;
 		}
