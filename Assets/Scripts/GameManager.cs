@@ -88,6 +88,8 @@ public class GameManager : MonoBehaviour {
 		controller.player_num = playerNum;
 		controller.homeBase_GO = base1;
 		controller.canvas = canvas;
+		Slider health_slider = canvas.GetComponentInChildren<Slider>();
+		health_slider.maxValue = health_slider.value = controller.startingHealth;
 
 		teamTexts.Add(base1.GetInstanceID(), canvas.transform.FindChild("Team_Vals").GetComponent<Text>());
 		opponentTexts.Add(base1.GetInstanceID(), canvas.transform.FindChild("Opponent_Vals").GetComponent<Text>());
