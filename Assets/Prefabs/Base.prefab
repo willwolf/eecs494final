@@ -11,7 +11,7 @@ GameObject:
   - 33: {fileID: 3300872}
   - 65: {fileID: 6500874}
   - 23: {fileID: 2300872}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27,7 +27,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400866}
   - 114: {fileID: 11400886}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: CatapultLegs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45,7 +45,7 @@ GameObject:
   - 33: {fileID: 3300874}
   - 65: {fileID: 6500876}
   - 23: {fileID: 2300874}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -78,7 +78,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400872}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400874}
   - 114: {fileID: 11400888}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Catapult
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -112,7 +112,7 @@ GameObject:
   - 33: {fileID: 3300878}
   - 65: {fileID: 6500880}
   - 23: {fileID: 2300878}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -148,7 +148,7 @@ GameObject:
   - 33: {fileID: 3300882}
   - 65: {fileID: 6500884}
   - 23: {fileID: 2300882}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Bottom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -166,7 +166,7 @@ GameObject:
   - 33: {fileID: 3300884}
   - 65: {fileID: 6500886}
   - 23: {fileID: 2300884}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Bottom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -185,7 +185,7 @@ GameObject:
   - 65: {fileID: 6500888}
   - 23: {fileID: 2300886}
   - 114: {fileID: 11400890}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: CatapultArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -203,7 +203,7 @@ GameObject:
   - 33: {fileID: 3300888}
   - 65: {fileID: 6500890}
   - 23: {fileID: 2300888}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -218,7 +218,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400888}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -237,7 +237,7 @@ GameObject:
   - 23: {fileID: 2300890}
   - 135: {fileID: 13500892}
   - 114: {fileID: 11400892}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: CatapultStone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -701,7 +701,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 190338}
   m_LocalRotation: {x: 0, y: .382683456, z: 0, w: .923879504}
-  m_LocalPosition: {x: 29.2000008, y: 0, z: 114.199997}
+  m_LocalPosition: {x: -3, y: 0, z: 82}
   m_LocalScale: {x: 39.9999962, y: .5, z: 40}
   m_Children:
   - {fileID: 488100}
