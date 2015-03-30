@@ -15,7 +15,10 @@ public class CatapultArmScript: BaseUpgradeItem {
 
 	override
 	public bool CanPurchase(PlayerController p, int teamId, GameManager gm) {
-		return !gm.teamCatapultStatus[teamId].has_arm;
+		if (!GameManager.FORCE_CATAPULT_ORDER)
+			return !gm.teamCatapultStatus[teamId].has_arm;
+		else
+			return gm.teamCatapultStatus[teamId].has_legs && !gm.teamCatapultStatus[teamId].has_arm;
 	}
 
 	override public void MakePurchase(PlayerController p, int teamId, GameManager gm) {

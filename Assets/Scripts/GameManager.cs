@@ -29,6 +29,7 @@ public class CatapultTracker {
 
 public class GameManager : MonoBehaviour {
 	public const bool USE_SCATTER = true;
+	public const bool FORCE_CATAPULT_ORDER = true;
 	
 	private Dictionary<string, string> teamNames = new Dictionary<string, string>() {
 		{ "Player 1 Base", "Team 1" },

@@ -15,7 +15,10 @@ public class CatapultStoneScript : BaseUpgradeItem {
 
 	override
 	public bool CanPurchase(PlayerController p, int teamId, GameManager gm) {
-		return !gm.teamCatapultStatus[teamId].has_projectile;
+		if (!GameManager.FORCE_CATAPULT_ORDER)
+			return !gm.teamCatapultStatus[teamId].has_projectile;
+		else
+			return gm.teamCatapultStatus[teamId].has_arm && !gm.teamCatapultStatus[teamId].has_projectile;
 	}
 
 	override public void MakePurchase(PlayerController p, int teamId, GameManager gm) {
