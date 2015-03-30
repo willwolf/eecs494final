@@ -227,9 +227,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 0}
   item_name: Armor
-  stone_cost: 0
-  wood_cost: 0
-  armorHealth: 6
+  stone_cost: 5
+  wood_cost: 5
+  STARTING_HEALTH: 4
+  armorHealth: 4
 --- !u!136 &13634498
 CapsuleCollider:
   m_ObjectHideFlags: 1
