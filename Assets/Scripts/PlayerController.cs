@@ -389,7 +389,8 @@ public class PlayerController : MonoBehaviour {
 	void HandlePurchase(ShopItem item) {
 		if (item) {
 			if (item is Trap) {
-				GameObject t = Instantiate(trapGO, transform.position, transform.rotation) as GameObject;
+				Vector3 drop_at_position = this.transform.position - this.transform.up * 1.5f + this.transform.forward * 1.5f;
+				GameObject t = Instantiate(trapGO, drop_at_position, transform.rotation) as GameObject;
 				t.transform.parent = this.transform;
 
 				Trap trap = t.GetComponent<Trap>();
