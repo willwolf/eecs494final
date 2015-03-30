@@ -14,11 +14,11 @@ public class CatapultArmScript: BaseUpgradeItem {
 	}
 
 	override
-	public bool CanPurchase(int teamId, GameManager gm) {
+	public bool CanPurchase(PlayerController p, int teamId, GameManager gm) {
 		return !gm.teamCatapultStatus[teamId].has_arm;
 	}
 
-	override public void MakePurchase(int teamId, GameManager gm) {
+	override public void MakePurchase(PlayerController p, int teamId, GameManager gm) {
 		gm.AddCatapultPart(teamId, CatapultPart.arm);
 	}
 }

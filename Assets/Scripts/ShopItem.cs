@@ -20,6 +20,6 @@ public abstract class ShopItem : MonoBehaviour {
 		wood_cost = w_c;
 	}
 
- 	public abstract bool CanPurchase(int teamId, GameManager gm);
-	public abstract void MakePurchase(int teamId, GameManager gm);
+ 	public abstract bool CanPurchase(PlayerController p, int teamId, GameManager gm);
+	public abstract void MakePurchase(PlayerController p, int teamId, GameManager gm);
 }

@@ -352,7 +352,7 @@ public class PlayerController : MonoBehaviour {
 				if (CantMakePurchaseOn(item)) {
 					return;
 				}
-				item = shopMenu.MakePurchase(homeBase_GO.GetInstanceID());
+				item = shopMenu.MakePurchase(this, homeBase_GO.GetInstanceID());
 				if(item){
 					purchasing_sound.Play();
 				}
@@ -372,7 +372,7 @@ public class PlayerController : MonoBehaviour {
 				if (CantMakePurchaseOn(item)) {
 					return;
 				}
-				item = shopMenu.MakePurchase(homeBase_GO.GetInstanceID());
+				item = shopMenu.MakePurchase(this, homeBase_GO.GetInstanceID());
 				if(item){
 					purchasing_sound.Play();
 				}
@@ -385,10 +385,6 @@ public class PlayerController : MonoBehaviour {
 		return (item is SwordScript && currentWeapon is SwordScript) || 
 				(item is BowScript && currentWeapon is BowScript) || 
 				(item is StealthScript && currentWeapon is StealthScript) || 
-				(item is WallScript && homeBase.HasWalls()) ||
-				(item is CatapultArmScript && homeBase.hasCatapultArm) ||
-				(item is CatapultLegScript && homeBase.hasCatapultLegs) ||
-				(item is CatapultStoneScript && homeBase.hasCatapultStone) ||
 				(item is Trap && this.GetComponentsInChildren<Trap>()==null);
 	}
 	
@@ -411,13 +407,7 @@ public class PlayerController : MonoBehaviour {
 
 	void HandleWeapon(WeaponItem weapon) {
 		weapons[currentWeaponIndex].SetActive(false);
-		if (weapon is SwordScript) {
-			if(weapon.item_name.Contains("Stone")){
-				currentWeaponIndex = 0;
-			} else {
-				currentWeaponIndex = 1;
-			}
-		} else if (weapon is BowScript) {
+		if (weapon is BowScript) {
 			currentWeaponIndex = 2;
 		} else if (weapon is StealthScript) {
 			currentWeaponIndex = 3;
@@ -665,7 +655,7 @@ public class PlayerController : MonoBehaviour {
 		if(!shopOpen){
 			shopOpen = true;
 			shop.SetActive (true);
-			shop.GetComponent<ShopMenu>().OpenShop(homeBase_GO.GetInstanceID());
+			shop.GetComponent<ShopMenu>().OpenShop(this, homeBase_GO.GetInstanceID());
 		}
 		else{
 			shopOpen = false;

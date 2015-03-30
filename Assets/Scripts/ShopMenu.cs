@@ -124,13 +124,13 @@ public class ShopMenu : MonoBehaviour {
 		return shoplist.items[current_item].GetComponent<ShopItem>();
 	}
 
-	public ShopItem MakePurchase(int team_id) {
+	public ShopItem MakePurchase(PlayerController pc, int team_id) {
 		ResourceCount team_count = manager.GetTeamResourceInfo(team_id);
 		ShopItem item = shoplist.items[current_item].GetComponent<ShopItem>();
-		if (CanPurchase(team_id, item, team_count)) {
+		if (CanPurchase(pc, team_id, item, team_count)) {
 			manager.RemoveResources(team_id, ResourceType.stone, item.stone_cost);
 			manager.RemoveResources(team_id, ResourceType.wood, item.wood_cost);
-			item.MakePurchase(team_id, manager);
+			item.MakePurchase(pc, team_id, manager);
 			manager.UpdateTeamShops(team_id);
 			FindNextAvailableUp();
 			return item;
@@ -138,9 +138,9 @@ public class ShopMenu : MonoBehaviour {
 		return null;
 	}
 	
-	bool CanPurchase(int teamId, ShopItem item, ResourceCount resource_count) {
+	bool CanPurchase(PlayerController pc, int teamId, ShopItem item, ResourceCount resource_count) {
 		return item.wood_cost <= resource_count.wood && item.stone_cost <= resource_count.stone &&
-			   item.CanPurchase(teamId, manager);
+			   item.CanPurchase(pc, teamId, manager);
 	}
 
 	public void populateList(){
@@ -158,11 +158,11 @@ public class ShopMenu : MonoBehaviour {
 		}
 	}
 
-	public void OpenShop(int team_id) {
-		UpdateShop(team_id);
+	public void OpenShop(PlayerController pc, int team_id) {
+		UpdateShop(pc, team_id);
 	}
 
-	public void UpdateShop(int team_id) {
+	public void UpdateShop(PlayerController pc, int team_id) {
 		ResourceCount team_count = manager.GetTeamResourceInfo(team_id);
 		for (int i = 0; i < shoplist.items.Count; i++) {
 			GameObject go = shoplist.items[i];
@@ -170,7 +170,7 @@ public class ShopMenu : MonoBehaviour {
 			
 			Button b = buttonList[i];
 			b.interactable = false;
-			if (CanPurchase(team_id, item, team_count)) {
+			if (CanPurchase(pc, team_id, item, team_count)) {
 				b.interactable = true;
 			}
 		}

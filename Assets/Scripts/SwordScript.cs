@@ -38,12 +38,27 @@ public class SwordScript : WeaponItem {
 	}
 
 	override
-	public bool CanPurchase(int teamId, GameManager gm) {
-		return true;
+	public bool CanPurchase(PlayerController p, int teamId, GameManager gm) {
+		return !(p.currentWeapon is SwordScript);
 	}
 
-	override public void MakePurchase(int teamId, GameManager gm) {
-		
+	override public void MakePurchase(PlayerController p, int teamId, GameManager gm) {
+		p.weapons[p.currentWeaponIndex].SetActive(false);
+		if (item_name.Contains("Stone")) {
+			p.currentWeaponIndex = 0;
+		} else {
+			p.currentWeaponIndex = 1;
+		}
+		p.hasWeapon = true;
+		p.currentWeapon = this;
+		p.weapons[p.currentWeaponIndex].SetActive(true);
+		//set to visible
+		foreach (MeshRenderer renderer in p.weapons[p.currentWeaponIndex].GetComponentsInChildren<MeshRenderer>()) {
+			renderer.enabled = true;
+		}
+		foreach (Collider collider in p.weapons[p.currentWeaponIndex].GetComponentsInChildren<Collider>()) {
+			collider.enabled = true;
+		}
 	}
 
 	void OnCollisionEnter(Collision collision) {

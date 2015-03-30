@@ -25,10 +25,13 @@ public class Trap : ShopItem {
 		gameObject.layer = gm.teamTrapLayer[owner_base.GetInstanceID()];
 	}
 
-	public override bool CanPurchase() {
+	public override bool CanPurchase(PlayerController p, int teamId, GameManager gm) {
 		return true;
 	}
 
+	public override void MakePurchase(PlayerController p, int teamId, GameManager gm) {
+
+	}
 	
 	// Update is called once per frame
 	void Update () {

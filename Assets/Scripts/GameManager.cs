@@ -264,7 +264,11 @@ public class GameManager : MonoBehaviour {
 
 	public void UpdateTeamShops(int baseId) {
 		foreach (ShopMenu s in playerShops[baseId]) {
-			s.UpdateShop(baseId);
+			foreach (PlayerController p in allPlayers) {
+				if (p.homeBase_GO.GetInstanceID() == baseId) {
+					s.UpdateShop(p, baseId);
+				}
+			}
 		}
 	}
 
