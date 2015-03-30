@@ -340,15 +340,17 @@ public class PlayerController : MonoBehaviour {
 
 	Vector3 CalculateMoveSpeed(Vector3 direction, float input_data) {
 		Vector3 moveSpeed = direction * walk_speed * input_data * Time.deltaTime;
-		if(GameManager.ENCUMBER_WINNERS){
-			encumberPercent += CalculateWinningEncumbered();
-		}
+
 
 		if (!inEnemyBase) {
 			float encumbered = 1f;
+			float ecP = encumberPercent;
+			if(GameManager.ENCUMBER_WINNERS){
+				ecP += CalculateWinningEncumbered();
+			}
 			// max encumberance == 1 - enemy_base_speed_multiplier
 			encumbered -= Mathf.Min(((1.0f * curr_wood_resource + curr_stone_resource) / MAX_RESOURCES), 
-			                        enemy_base_speed_multiplier)*encumberPercent;
+			                        enemy_base_speed_multiplier)*ecP;
 			return moveSpeed * encumbered;
 		} else {
 			return moveSpeed * enemy_base_speed_multiplier;
