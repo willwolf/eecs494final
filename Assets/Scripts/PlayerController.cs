@@ -65,6 +65,8 @@ public class PlayerController : MonoBehaviour {
 	private Text wood_text;
 	private Text mid_screen_text;
 	private Slider health_slider;
+	private Slider wood_slider;
+	private Slider stone_slider;
 
 	public AudioSource mining_stone;
 	public AudioSource chopping_wood;
@@ -86,6 +88,13 @@ public class PlayerController : MonoBehaviour {
 
 	public GameManager gm;
 	public Canvas canvas;
+	public Image cataArm;
+	public Image cataStone;
+	public Image cataBase;
+
+	public Image oppCataArm;
+	public Image oppCataStone;
+	public Image oppCataBase;
 
 	public GameObject shop;
 	public ShopMenu shopMenu;
@@ -113,10 +122,31 @@ public class PlayerController : MonoBehaviour {
 		stone_text = canvas.transform.FindChild("Stone_Text").GetComponent<Text>();
 		mid_screen_text = canvas.transform.FindChild("mid_screen_text").GetComponent<Text>();
 		health_slider = canvas.transform.FindChild("Slider").GetComponent<Slider>();
+		wood_slider = canvas.transform.FindChild ("WoodSlide").GetComponent<Slider> ();
+		stone_slider = canvas.transform.FindChild ("StoneSlide").GetComponent<Slider> ();
+		wood_slider.value = curr_wood_resource;
+		stone_slider.value = curr_stone_resource;
+
 
 		mid_screen_text.text = "";
 		updateStoneText();
 		updateWoodText();
+
+		
+		cataBase = canvas.transform.FindChild ("Team_Catapult_Base_Icon").GetComponent<Image> ();
+		cataArm = canvas.transform.FindChild ("Team_Catapult_Arm_Icon").GetComponent<Image> ();
+		cataStone = canvas.transform.FindChild ("Team_Catapult_Stone_Icon").GetComponent<Image> ();
+		cataBase.enabled = false;
+		cataArm.enabled = false;
+		cataStone.enabled = false;
+
+		//Currently hardcoded assuming just 2 teams
+		oppCataBase = canvas.transform.FindChild ("Opp_Catapult_Base_Icon").GetComponent<Image> ();
+		oppCataArm = canvas.transform.FindChild ("Opp_Catapult_Arm_Icon").GetComponent<Image> ();
+		oppCataStone = canvas.transform.FindChild ("Opp_Catapult_Stone_Icon").GetComponent<Image> ();
+		oppCataBase.enabled = false;
+		oppCataArm.enabled = false;
+		oppCataStone.enabled = false;
 
 		homeBase = homeBase_GO.GetComponent<Base>();
 		shop = canvas.transform.FindChild ("Shop_Menu").gameObject;
@@ -398,12 +428,15 @@ public class PlayerController : MonoBehaviour {
 			homeBase.TurnOnWalls();
 		} else if (upgrade is CatapultArmScript) {
 			gm.AddCatapultPart(homeBase_GO.GetInstanceID(), CatapultPart.arm);
+			cataArm.enabled = true;
 			homeBase.TurnOnCatapultArm();
 		} else if (upgrade is CatapultLegScript) {
 			gm.AddCatapultPart(homeBase_GO.GetInstanceID(), CatapultPart.legs);
+			cataBase.enabled = true;
 			homeBase.TurnOnCatapultLegs();
 		} else if (upgrade is CatapultStoneScript) {
 			gm.AddCatapultPart(homeBase_GO.GetInstanceID(), CatapultPart.stone);
+			cataStone.enabled = true;
 			homeBase.TurnOnCatapultStone();
 		} else if (upgrade is ArmorScript) {
 			armor = Instantiate(armorPrefab, transform.position, transform.rotation) as GameObject;
@@ -529,6 +562,7 @@ public class PlayerController : MonoBehaviour {
 			rbox.stone = curr_stone_resource;
 			curr_wood_resource = 0;
 			curr_stone_resource = 0;
+			updateSliders();
 			updateStoneText();
 			updateWoodText();
 		} 
@@ -682,6 +716,7 @@ public class PlayerController : MonoBehaviour {
 			if(curr_stone_resource > 0) {
 				drop.DepositResources(curr_stone_resource);
 				curr_stone_resource = 0;
+				updateSliders();
 				updateStoneText();
 				dropping_resources.Play();
 			} if(hasBox && rbox.stone > 0){
@@ -699,6 +734,7 @@ public class PlayerController : MonoBehaviour {
 				drop.DepositResources(curr_wood_resource);
 				curr_wood_resource = 0;
 				updateWoodText();
+				updateSliders();
 				dropping_resources.Play();
 			} if(hasBox && rbox.wood > 0){
 				drop.DepositResources(rbox.wood);
@@ -712,16 +748,24 @@ public class PlayerController : MonoBehaviour {
 			break;
 		}
 	}
-	
+
+	void updateSliders(){
+		stone_slider.value = curr_stone_resource;
+		//this is because wood is underneath, must show past stone
+		wood_slider.value = curr_wood_resource + curr_stone_resource;
+	}
+
 	void CollectStone(string message){
 		updateMidScreenText("Player " + player_num.ToString() + message);
 		curr_stone_resource++;
+		updateSliders ();
 		updateStoneText();
 	}
 
 	void CollectWood(string message){
 		updateMidScreenText("Player " + player_num.ToString() + message);
 		curr_wood_resource++;
+		updateSliders ();
 		updateWoodText();
 	}
 
