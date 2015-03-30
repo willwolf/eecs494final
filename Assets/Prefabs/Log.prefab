@@ -151,6 +151,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  pickupRad: {fileID: 13577568}
   canPickUpAt: 0
   disableTime: .5
   stopRollingAt: 0
