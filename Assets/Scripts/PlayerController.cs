@@ -189,10 +189,6 @@ public class PlayerController : MonoBehaviour {
 			} 
 		}
 
-		if (curr_wood_resource + curr_stone_resource >= MAX_RESOURCES) {
-			updateMidScreenText("Backpack Full");
-		}
-
 		foreach (Renderer renderer in this.GetComponentsInChildren<Renderer>()) {
 			Color col = renderer.material.color;
 			if (hasWeapon && currentWeapon is StealthScript) {
@@ -640,6 +636,9 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	bool IsPackFull() {
+		if (curr_wood_resource + curr_stone_resource >= MAX_RESOURCES) {
+			updateMidScreenText("Backpack Full");
+		}
 		return curr_stone_resource + curr_wood_resource >= MAX_RESOURCES; 
 	}
 
