@@ -86,7 +86,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LIFE_TIME: 1.5
-  damage_amount: 1
+  damage_amount: 2
   speed_multiplier: 40
 --- !u!136 &13693964
 CapsuleCollider:
