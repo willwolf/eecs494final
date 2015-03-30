@@ -81,6 +81,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: daea85c04a4d94329bcdde5965e70d99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  icon: {fileID: 0}
+  item_name: Trap
+  stone_cost: 0
+  wood_cost: 0
   owner_base: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:

@@ -2024,6 +2024,12 @@ MonoBehaviour:
   currentWeapon: {fileID: 0}
   gm: {fileID: 0}
   canvas: {fileID: 0}
+  cataArm: {fileID: 0}
+  cataStone: {fileID: 0}
+  cataBase: {fileID: 0}
+  oppCataArm: {fileID: 0}
+  oppCataStone: {fileID: 0}
+  oppCataBase: {fileID: 0}
   shop: {fileID: 0}
   shopMenu: {fileID: 0}
   shopOpen: 0
@@ -2031,6 +2037,7 @@ MonoBehaviour:
   arrow: {fileID: 193964, guid: bbb61d06d237441deb88b644408f120c, type: 2}
   aim: {fileID: 194822, guid: 244bbb1404626448e8ee6750331f2d9b, type: 2}
   resourceBox: {fileID: 108120, guid: 314fa5cfd211149d0bbf212d89e76e81, type: 2}
+  trapGO: {fileID: 194302, guid: 995a3727bc29e43b896b529fc131e875, type: 2}
   stone_scatterObj: {fileID: 182868, guid: fa2dd373544cd4632b7e3982da493bb4, type: 2}
   wood_scatterObj: {fileID: 125448, guid: f6d2150e021c24c06b940440b5efabcc, type: 2}
   normMat: {fileID: 0}

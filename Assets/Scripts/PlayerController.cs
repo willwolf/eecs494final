@@ -105,6 +105,7 @@ public class PlayerController : MonoBehaviour {
 	public GameObject aim;
 	private GameObject aimLine;
 	public GameObject resourceBox;
+	public GameObject trapGO;
 
 	public GameObject stone_scatterObj;
 	public GameObject wood_scatterObj;
@@ -387,7 +388,8 @@ public class PlayerController : MonoBehaviour {
 				(item is WallScript && homeBase.HasWalls()) ||
 				(item is CatapultArmScript && homeBase.hasCatapultArm) ||
 				(item is CatapultLegScript && homeBase.hasCatapultLegs) ||
-				(item is CatapultStoneScript && homeBase.hasCatapultStone);
+				(item is CatapultStoneScript && homeBase.hasCatapultStone) ||
+				(item is Trap && this.GetComponentsInChildren<Trap>()==null);
 	}
 	
 	void HandlePurchase(ShopItem item) {
@@ -396,6 +398,13 @@ public class PlayerController : MonoBehaviour {
 				HandleWeapon((WeaponItem)item);
 			} else if (item is BaseUpgradeItem) {
 				HandleBaseUpgrade((BaseUpgradeItem)item);
+			} else if (item is Trap) {
+				GameObject t = Instantiate(trapGO, transform.position, transform.rotation) as GameObject;
+				t.transform.parent = this.transform;
+
+				Trap trap = t.GetComponent<Trap>();
+				trap.owner_base = homeBase_GO;
+				hasBox = true;
 			}
 		}
 	}
@@ -554,9 +563,19 @@ public class PlayerController : MonoBehaviour {
 
 		if(hasBox){
 			ResourceBox rbox = this.GetComponentInChildren<ResourceBox>();
-			rbox.transform.SetParent(null);
-			rbox.transform.position = drop_at_position;
-			hasBox = false;
+			if (rbox != null) {
+				rbox.transform.SetParent(null);
+				rbox.transform.position = drop_at_position;
+				hasBox = false;
+			}
+
+			Trap trap = this.GetComponentInChildren<Trap>();
+			if (trap != null) {
+				trap.transform.SetParent(null);
+				trap.transform.position = drop_at_position;
+				hasBox = false;
+				trap.init();
+			}
 		} else if(curr_stone_resource + curr_wood_resource > 0){
 			//drop resource box
 			GameObject box_GO = Instantiate(resourceBox, drop_at_position, this.transform.rotation) as GameObject;
@@ -723,7 +742,7 @@ public class PlayerController : MonoBehaviour {
 				updateSliders();
 				updateStoneText();
 				dropping_resources.Play();
-			} if(hasBox && rbox.stone > 0){
+			} if(rbox != null && rbox.stone > 0){
 				drop.DepositResources(rbox.stone);
 				rbox.stone = 0;
 				if(rbox.stone + rbox.wood == 0){
@@ -740,7 +759,7 @@ public class PlayerController : MonoBehaviour {
 				updateWoodText();
 				updateSliders();
 				dropping_resources.Play();
-			} if(hasBox && rbox.wood > 0){
+			} if(rbox != null && rbox.wood > 0){
 				drop.DepositResources(rbox.wood);
 				rbox.wood = 0;
 				if(rbox.stone + rbox.wood == 0){
