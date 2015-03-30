@@ -254,7 +254,8 @@ public class PlayerController : MonoBehaviour {
 					CollectWood(" picked up some wood!");
 					break;
 				}
-				Destroy(s.gameObject);
+//				Destroy(s.gameObject);
+				s.PickUp();
 			}
 		}
 	}
