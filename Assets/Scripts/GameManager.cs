@@ -36,6 +36,7 @@ public class GameManager : MonoBehaviour {
 		{ "Player 1 Base", "Team 1" },
 		{ "Player 2 Base", "Team 2" }
 	};
+	private GameObject centerPoint;
 
 
 	private const int MAX_LAYER = 31;
@@ -70,6 +71,13 @@ public class GameManager : MonoBehaviour {
 		pos.x += playerNum % 3;
 
 		GameObject player = Instantiate(playerBase, pos, new Quaternion()) as GameObject;
+
+		// Force the player to look at the center
+		player.transform.LookAt(centerPoint.transform.position);
+		Quaternion q = player.transform.rotation;
+		q.x = q.z = 0;
+		player.transform.rotation = q;
+
 		var devices = InputManager.Devices;
 		if (playerNum - 1 < devices.Count) {
 			player.GetComponent<PlayerController>().device = devices[playerNum - 1];
@@ -140,6 +148,7 @@ public class GameManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		centerPoint = GameObject.Find("CenterPoint");
 		teamTrapLayer = new Dictionary<int, int>();
 
 		teamResources = new Dictionary<int, ResourceCount>();
@@ -161,17 +170,9 @@ public class GameManager : MonoBehaviour {
 		}
 
 		int playerNum = 1;
-		foreach (KeyValuePair<string, string> pair in teamNames) {
-			GameObject baseObj = GameObject.Find(pair.Key);
-			addPlayer(baseObj, getViewport(numPlayers, playerNum), playerNum);
-			playerNum++;
-		}
-
-		if (numPlayers == 4) {
-			// Add the remaining two players in the event of there are 4 players
+		while(playerNum < numPlayers) {
 			foreach (KeyValuePair<string, string> pair in teamNames) {
 				GameObject baseObj = GameObject.Find(pair.Key);
-				
 				addPlayer(baseObj, getViewport(numPlayers, playerNum), playerNum);
 				playerNum++;
 			}
