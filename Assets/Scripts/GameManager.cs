@@ -66,6 +66,13 @@ public class GameManager : MonoBehaviour {
 
 	public static int winningTeam = -1;
 
+	public Quaternion LookAtCenter(Transform currentPos) {
+		currentPos.LookAt(centerPoint.transform.position);
+		Quaternion q = currentPos.rotation;
+		q.x = q.z = 0;
+		return q;
+	} 
+
 	void addPlayer(GameObject base1, Rect viewport, int playerNum) {
 		Vector3 pos = base1.transform.position;
 		pos.x += playerNum % 3;
@@ -74,9 +81,7 @@ public class GameManager : MonoBehaviour {
 
 		// Force the player to look at the center
 		player.transform.LookAt(centerPoint.transform.position);
-		Quaternion q = player.transform.rotation;
-		q.x = q.z = 0;
-		player.transform.rotation = q;
+		player.transform.rotation = LookAtCenter(player.transform);
 
 		var devices = InputManager.Devices;
 		if (playerNum - 1 < devices.Count) {

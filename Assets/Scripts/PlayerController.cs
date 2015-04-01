@@ -404,6 +404,8 @@ public class PlayerController : MonoBehaviour {
 		foreach (Rigidbody rb in GetComponentsInChildren<Rigidbody>()) {
 			rb.isKinematic = false;
 		}
+		transform.LookAt(GameObject.Find("CenterPoint").transform.position);
+		transform.rotation = gm.LookAtCenter(transform);
 		//StartCoroutine(colorFlash());
 	}
 
