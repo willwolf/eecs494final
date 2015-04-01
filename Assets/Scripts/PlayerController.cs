@@ -596,17 +596,13 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void Aim(){
-		if(!aimLine){
-			aimLine = Instantiate(aim, transform.position + transform.forward * 5, Quaternion.AngleAxis(90, transform.right)) as GameObject;
-		}
-		if(currentWeapon is SwordScript){
-			aimLine.GetComponent<LineRenderer>().SetPosition(0, transform.position);
-			aimLine.GetComponent<LineRenderer>().SetPosition(1, transform.position + transform.forward * 1.6f);
-		} else if (currentWeapon is BowScript){
+		if (currentWeapon is BowScript) {
+			if (!aimLine) {
+				aimLine = Instantiate(aim, transform.position + transform.forward * 5, Quaternion.AngleAxis(90, transform.right)) as GameObject;
+			}
 			aimLine.GetComponent<LineRenderer>().SetPosition(0, transform.position);
 			aimLine.GetComponent<LineRenderer>().SetPosition(1, transform.position + transform.forward * 60);
 		}
-
 	}
 	
 	void ToggleStore() {
