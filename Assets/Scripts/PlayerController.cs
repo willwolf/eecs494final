@@ -195,7 +195,7 @@ public class PlayerController : MonoBehaviour {
 		if (hasWon (GameManager.winningTeam)) {
 			updateMidScreenText("You won!\nPress 'R' to Replay");
 			Time.timeScale = 0;
-		} else {
+		} else if(GameManager.winningTeam == EnemyBaseId) {
 			updateMidScreenText("You lost!\nPress 'R' to Replay");
 			Time.timeScale = 0;
 		}
