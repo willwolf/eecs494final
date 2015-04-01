@@ -155,6 +155,7 @@ public class GameManager : MonoBehaviour {
 	void Start () {
 		centerPoint = GameObject.Find("CenterPoint");
 		teamTrapLayer = new Dictionary<int, int>();
+		winningTeam = -1;
 
 		teamResources = new Dictionary<int, ResourceCount>();
 
@@ -310,7 +311,6 @@ public class GameManager : MonoBehaviour {
 		if (Time.timeScale == 0 && winningTeam != -1) {
 			if(Input.GetKeyDown(KeyCode.R)){
 				Application.LoadLevel(Application.loadedLevel);
-
 			}		
 		}
 
