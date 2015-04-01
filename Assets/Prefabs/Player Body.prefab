@@ -1989,7 +1989,7 @@ MonoBehaviour:
   walk_speed: 15
   enemy_base_speed_multiplier: .5
   encumberPercent: .5
-  wincumberPercent: .0399999991
+  wincumberPercent: .00999999978
   curr_wood_resource: 0
   wood_gather_val: 1
   curr_stone_resource: 0
