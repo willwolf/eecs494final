@@ -81,7 +81,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: daea85c04a4d94329bcdde5965e70d99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: b6289423bfaf68a4fb37b57c44bf0026, type: 3}
   item_name: Feeze Trap
   stone_cost: 1
   wood_cost: 1
