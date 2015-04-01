@@ -299,7 +299,8 @@ public class PlayerController : MonoBehaviour {
 	public void freeze(float duration) {
 		frozen = true;
 		frozenUntil = Time.time + duration;
-		vulnerable_at_time = frozenUntil;
+		if(Time.time > vulnerable_at_time)
+			vulnerable_at_time = frozenUntil;
 		StartCoroutine(colorFlash());
 	}
 
