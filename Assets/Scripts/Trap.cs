@@ -29,11 +29,17 @@ public class Trap : ShopItem {
 	}
 
 	public override bool CanPurchase(PlayerController p, int teamId, GameManager gm) {
-		return true;
+		return !p.hasBox && p.GetComponentInChildren<Trap>() == null;
 	}
 
 	public override void MakePurchase(PlayerController p, int teamId, GameManager gm) {
-
+		Vector3 drop_at_position = p.transform.position - p.transform.up * 0.5f + p.transform.forward * 1.5f;
+		GameObject t = Instantiate(p.trapGO, drop_at_position, p.transform.rotation) as GameObject;
+		t.transform.parent = p.transform;
+		
+		Trap trap = t.GetComponent<Trap>();
+		trap.owner_base = p.homeBase_GO;
+		p.hasBox = true;
 	}
 
 	bool activated = false;

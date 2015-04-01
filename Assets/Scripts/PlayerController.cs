@@ -252,7 +252,7 @@ public class PlayerController : MonoBehaviour {
 					Aim();
 				} else if(aimLine){
 					Destroy(aimLine);
-				} if(device.Action2.IsPressed){
+				} if(device.Action2.WasPressed){
 					DropResourceBox();
 				}
 			} else if (Input.GetButton("Action_" + (player_num % 2).ToString())) {
@@ -365,17 +365,12 @@ public class PlayerController : MonoBehaviour {
 				shopMenu.ScrollUp();
 			}
 			if (device.Action1.WasPressed) {
-				ShopItem item = shopMenu.GetCurrentItem();
-				if (CantMakePurchaseOn(item)) {
-					return;
-				}
-				item = shopMenu.MakePurchase(this, homeBase_GO.GetInstanceID());
+				ShopItem item = shopMenu.MakePurchase(this, homeBase_GO.GetInstanceID());
 				if(item){
 					purchasing_sound.Play();
+					// Close shop after making transaction
 					ToggleStore();
 				}
-				HandlePurchase(item);
-				//close shop
 			}
 		} else {
 			float vertInput = Input.GetAxis("Vertical_" + (player_num % 2).ToString());
@@ -385,34 +380,12 @@ public class PlayerController : MonoBehaviour {
 				shopMenu.ScrollUp();
 			}
 			if (Input.GetButtonDown("Action_" + (player_num % 2).ToString())) {
-				ShopItem item = shopMenu.GetCurrentItem();
-				if (CantMakePurchaseOn(item)) {
-					return;
-				}
-				item = shopMenu.MakePurchase(this, homeBase_GO.GetInstanceID());
+				ShopItem item = shopMenu.MakePurchase(this, homeBase_GO.GetInstanceID());
 				if(item){
 					purchasing_sound.Play();
+					// Close shop after making transaction
 					ToggleStore();
 				}
-				HandlePurchase(item);
-			}
-		}
-	}
-
-	bool CantMakePurchaseOn(ShopItem item) {
-		return (item is Trap && this.GetComponentsInChildren<Trap>()==null);
-	}
-	
-	void HandlePurchase(ShopItem item) {
-		if (item) {
-			if (item is Trap) {
-				Vector3 drop_at_position = this.transform.position - this.transform.up * 0.5f + this.transform.forward * 1.5f;
-				GameObject t = Instantiate(trapGO, drop_at_position, transform.rotation) as GameObject;
-				t.transform.parent = this.transform;
-
-				Trap trap = t.GetComponent<Trap>();
-				trap.owner_base = homeBase_GO;
-				hasBox = true;
 			}
 		}
 	}
@@ -521,20 +494,18 @@ public class PlayerController : MonoBehaviour {
 	void DropResourceBox() {
 		Vector3 drop_at_position = this.transform.position - this.transform.up * 0.5f + this.transform.forward * 1.5f;
 
-		if(hasBox){
+		Trap trap = this.GetComponentInChildren<Trap>();
+		if (trap != null) {
+			trap.transform.SetParent(null);
+			trap.transform.position = drop_at_position;
+			hasBox = false;
+			trap.init();
+		} else if(hasBox){
 			ResourceBox rbox = this.GetComponentInChildren<ResourceBox>();
 			if (rbox != null) {
 				rbox.transform.SetParent(null);
 				rbox.transform.position = drop_at_position;
 				hasBox = false;
-			}
-
-			Trap trap = this.GetComponentInChildren<Trap>();
-			if (trap != null) {
-				trap.transform.SetParent(null);
-				trap.transform.position = drop_at_position;
-				hasBox = false;
-				trap.init();
 			}
 		} else if(curr_stone_resource + curr_wood_resource > 0){
 			//drop resource box
