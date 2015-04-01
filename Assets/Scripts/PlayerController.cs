@@ -248,6 +248,18 @@ public class PlayerController : MonoBehaviour {
 				CheckShopInputs();
 			}
 
+			RaycastHit hitinfo;
+			if (IsInRange(out hitinfo, "DropPoint") && !shopOpen) {
+				DropPoint drop = hitinfo.transform.GetComponent<DropPoint>();
+				if (drop == null) {
+					throw new UnassignedReferenceException("DropPoint layer object does not have a DropPoint script attached");
+				}
+				
+				if (drop.playerBaseGO.GetInstanceID() == homeBase_GO.GetInstanceID()) {
+					DepositResources(drop);
+				}
+			}
+
 			if (device != null) {
 				if (device.Action1.IsPressed) {
 					TakeAction();
@@ -588,9 +600,7 @@ public class PlayerController : MonoBehaviour {
 				throw new UnassignedReferenceException("DropPoint layer object does not have a DropPoint script attached");
 			}
 
-			if (drop.playerBaseGO.GetInstanceID() == homeBase_GO.GetInstanceID()) {
-				DepositResources(drop);
-			} else {
+			if (drop.playerBaseGO.GetInstanceID() != homeBase_GO.GetInstanceID()) {
 				StealResource(drop);
 			}
 		} else if(IsInRange(out hitinfo, "ResourceBox") && !shopOpen && !hasBox){
