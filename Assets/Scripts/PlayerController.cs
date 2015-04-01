@@ -599,6 +599,7 @@ public class PlayerController : MonoBehaviour {
 		if (currentWeapon is BowScript) {
 			if (!aimLine) {
 				aimLine = Instantiate(aim, transform.position + transform.forward * 5, Quaternion.AngleAxis(90, transform.right)) as GameObject;
+				aimLine.layer = gm.teamTrapLayer[homeBase.gameObject.GetInstanceID()];
 			}
 			aimLine.GetComponent<LineRenderer>().SetPosition(0, transform.position);
 			aimLine.GetComponent<LineRenderer>().SetPosition(1, transform.position + transform.forward * 60);
