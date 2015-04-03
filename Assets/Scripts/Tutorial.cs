@@ -111,7 +111,7 @@ public class Tutorial : MonoBehaviour {
 		case 3:
 			return "Collect a full backpack. The more resources in your backpack, the slower you go!";
 		case 4:
-			return "Luckily, you can carry boxes in your hands as well. Hit B to drop a box and A to pick it up";
+			return "Luckily, you can carry resources in your hands as well. Hit B to drop a box and A to pick it up";
 		case 5:
 			return "Deposit boxes by walking up to the resource bins. Drop boxes by pressing B again";
 		case 6:
@@ -131,7 +131,7 @@ public class Tutorial : MonoBehaviour {
 		case 13:
 			return "You can also purchase stealth, which makes you invisible, but doesn't allow you to hold a weapon";
 		case 14:
-			return "Armor can help you survive longer";
+			return "Armor can help you survive longer. Purchase armor in the store";
 		case 15:
 			return "Stealth can help you steal resources. You can steal by pressing the A button on the enemies storages";
 		case 16:
