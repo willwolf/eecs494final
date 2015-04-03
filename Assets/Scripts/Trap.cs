@@ -9,7 +9,7 @@ public class Trap : ShopItem {
 
 	private GameManager gm;
 
-	bool initilized = false;
+//	bool initilized = false;
 
 	// Use this for initialization
 	void Start () {
