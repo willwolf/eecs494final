@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour {
 	private float collect_at_time;
 	private bool stole_resorces;
 	public float STEAL_COOLDOWN_TIME = 0.25f;
-	private float steal_at_time;
+	public float steal_at_time;
 
 
 	public int MIDTEXT_COOLDOWN_TIME = 5;
@@ -54,9 +54,9 @@ public class PlayerController : MonoBehaviour {
 	public bool inEnemyBase = false;
 	public int EnemyBaseId;
 
-	public bool hasStealth = false;
-	public bool stealthActive = false;
-	private double stealthAmount = 1;
+//	public bool hasStealth = false;
+//	public bool stealthActive = false;
+//	private double stealthAmount = 1;
 
 	private bool frozen = false;
 	private float frozenUntil;
@@ -496,11 +496,11 @@ public class PlayerController : MonoBehaviour {
 
 		this.transform.position = homeBase_GO.transform.position + homeBase_GO.transform.up * 1;
 
-		stealthActive = false;
+//		stealthActive = false;
 		hasWeapon = false;
 		currentWeapon = null;
 		weapons[currentWeaponIndex].SetActive(false);
-		hasStealth = false;
+//		hasStealth = false;
 		if(aimLine) Destroy(aimLine);
 
 		dead = true;
@@ -634,7 +634,7 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
-	bool IsPackFull() {
+	public bool IsPackFull() {
 		if (curr_wood_resource + curr_stone_resource >= MAX_RESOURCES) {
 			updateMidScreenText("Backpack Full");
 		}
@@ -779,7 +779,7 @@ public class PlayerController : MonoBehaviour {
 		return Physics.Raycast(origin, transform.forward, out info, 1.5f, layerMask);
 	}
 
-	private void updateMidScreenText(string newText){
+	public void updateMidScreenText(string newText){
 		showing = true;
 		zero_at_time = Time.time + MIDTEXT_COOLDOWN_TIME;
 	

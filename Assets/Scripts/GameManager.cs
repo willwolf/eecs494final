@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour {
 	public const bool USE_SCATTER = true;
 	public const bool FORCE_CATAPULT_ORDER = true;
 	public const bool ENCUMBER_WINNERS = true;
+	public bool TUTORIAL = false;
 	
 	private Dictionary<string, string> teamNames = new Dictionary<string, string>() {
 		{ "Player 1 Base", "Team 1" },
@@ -107,6 +108,10 @@ public class GameManager : MonoBehaviour {
 		controller.canvas = canvas;
 		Slider health_slider = canvas.GetComponentInChildren<Slider>();
 		health_slider.maxValue = health_slider.value = controller.startingHealth;
+		if(!TUTORIAL){
+			canvas.transform.FindChild("Tutorial").gameObject.SetActive(false);
+			canvas.transform.FindChild("Tutorial_Text").gameObject.SetActive(false);
+		}
 
 		Text teamText = canvas.transform.FindChild ("Team_Vals").GetComponent<Text> ();
 		teamText.color = teamMats [base1.GetInstanceID ()].color;
@@ -381,6 +386,7 @@ public class GameManager : MonoBehaviour {
 		                      Random.Range(0f,360f),
 		                      Random.Range(0f,360f));
 	}
+
 	public static void SpawnScatteredObject(GameObject scatteredObj, Vector3 origin) {
 		Vector3 spawnSpot = Vector3.zero;
 		// Should never push object below map
