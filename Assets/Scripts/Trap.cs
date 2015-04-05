@@ -63,7 +63,7 @@ public class Trap : ShopItem {
 			return;
 
 		if (player.homeBase_GO.GetInstanceID() != owner_base.GetInstanceID()) {
-			player.freeze(FREEZE_DURATION);
+			player.freeze(FREEZE_DURATION, true);
 			activated = true;
 			frozen_until = Time.time + FREEZE_DURATION;
 		}

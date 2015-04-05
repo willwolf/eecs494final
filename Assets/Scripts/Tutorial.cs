@@ -12,6 +12,7 @@ public class Tutorial : MonoBehaviour {
 	private List<int> tutorialSteps = new List<int>();
 	private Dictionary<int, string> tutorialTexts = new Dictionary<int, string>();
 	private float startTime;
+	private float startGameTime;
 	private bool wallDrop = false;
 	private bool allDone = false;
 
@@ -24,7 +25,7 @@ public class Tutorial : MonoBehaviour {
 		for(int i = 0; i <= num_steps; i++) {
 			tutorialTexts[i] = i + ") " + getText(i);
 		}
-		startTime = Time.time + 5;
+		startTime = Time.time + 4;
 	}
 	
 	// Update is called once per frame
@@ -35,7 +36,7 @@ public class Tutorial : MonoBehaviour {
 			if(getTask(pc)) {
 				if(tutorialSteps[pc.player_num - 1] != 0){
 					pc.updateMidScreenText("Task Complete!");
-					pc.freeze(2);
+					pc.freeze(2, false);
 				}
 				tutorialSteps[pc.player_num - 1]++;
 				string nextText = tutorialTexts[tutorialSteps[pc.player_num - 1]];
@@ -51,10 +52,12 @@ public class Tutorial : MonoBehaviour {
 			foreach(PlayerController pc in gm.allPlayers){
 				string nextText = "Tutorial Complete! Press any button to start a game";
 				pc.canvas.transform.Find("Tutorial_Text").gameObject.GetComponent<Text>().text = nextText;
-				if(pc.device.AnyButton){
+				if(pc.device.AnyButton && Time.time > startGameTime){
 					Application.LoadLevel(0);
 				}
 			}
+		} else {
+			startGameTime = Time.time + 5;
 		}
 	}
 
@@ -117,13 +120,13 @@ public class Tutorial : MonoBehaviour {
 		case 6:
 			return "You can toggle the shop menu when you are in your base by pressing X. Purchase a sword by pressing A";
 		case 7:
-			return "You can use Right Trigger to attack enemy players. Next, purchase a bow";
+			return "You can use Right Trigger to swing the sword. Next, purchase a bow";
 		case 8:
 			return "Use Right Trigger to fire arrows";
 		case 9:
 			return "Use Left Trigger to show the aim line";
 		case 10:
-			return "Traps can be very useful for slowing down you enemy. Purchase a trap from the store";
+			return "Traps can be very useful for slowing down your enemy. Purchase a trap from the store";
 		case 11:
 			return "You can place traps by pressing B. Placement can make a big difference!";
 		case 12:
@@ -143,7 +146,7 @@ public class Tutorial : MonoBehaviour {
 
 	bool task0(PlayerController pc){
 		//great job!
-		pc.freeze(1);
+		pc.freeze(1, false);
 		pc.canvas.transform.Find("Tutorial_Text").gameObject.GetComponent<Text>().text = getText(0);
 		return Time.time > startTime;
 	}
@@ -190,12 +193,20 @@ public class Tutorial : MonoBehaviour {
 
 	bool task8(PlayerController pc){
 		//fire arrows
-		return pc.device.RightTrigger.IsPressed;
+		if(pc.currentWeapon is BowScript && pc.device.RightTrigger.IsPressed){
+			pc.Attack();
+			return true;
+		}
+		return false;
 	}
 
 	bool task9(PlayerController pc){
 		//show aim line
-		return pc.device.LeftTrigger.IsPressed;
+		if(pc.currentWeapon is BowScript && pc.device.LeftTrigger.IsPressed){
+			pc.Aim();
+			return true;
+		}
+		return false;
 	}
 
 	bool task10(PlayerController pc){

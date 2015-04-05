@@ -310,12 +310,13 @@ public class PlayerController : MonoBehaviour {
 	}
 	
 
-	public void freeze(float duration) {
+	public void freeze(float duration, bool flash) {
 		frozen = true;
 		frozenUntil = Time.time + duration;
 		if(Time.time > vulnerable_at_time)
 			vulnerable_at_time = frozenUntil;
-		StartCoroutine(colorFlash());
+		if(flash)
+			StartCoroutine(colorFlash());
 	}
 
 
@@ -558,7 +559,7 @@ public class PlayerController : MonoBehaviour {
 		updateWoodText();
 	}
 
-	void Attack(){
+	public void Attack(){
 		if(currentWeapon is SwordScript){
 			weapons[currentWeaponIndex].GetComponent<SwordScript>().Swing();
 			swinging_sword.Play();
@@ -567,7 +568,7 @@ public class PlayerController : MonoBehaviour {
 				PlayerController other = hitinfo.transform.GetComponent<PlayerController>();
 				if (other.homeBase_GO.GetInstanceID() != this.gameObject.GetInstanceID()) {
 					other.takeDamage(damage_amount);
-					other.freeze(stunTime);
+					other.freeze(stunTime, true);
 				}
 			} else if (IsInRange(out hitinfo, "Enemy")){
 				hitinfo.transform.GetComponent<EnemyScript>().takeDamage(damage_amount);
@@ -611,7 +612,7 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
-	void Aim(){
+	public void Aim(){
 		if (currentWeapon is BowScript) {
 			if (!aimLine) {
 				aimLine = Instantiate(aim, transform.position + transform.forward * 5, Quaternion.AngleAxis(90, transform.right)) as GameObject;
