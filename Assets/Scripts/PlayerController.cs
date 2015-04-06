@@ -315,6 +315,10 @@ public class PlayerController : MonoBehaviour {
 			}
 		}
 	}
+
+	void OnTriggerStay(Collider col) {
+		OnTriggerEnter(col);
+	}
 	
 
 	public void freeze(float duration, bool flash) {
