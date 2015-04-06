@@ -110,13 +110,13 @@ public class Tutorial : MonoBehaviour {
 		case 1:
 			return "Collect 3 wood or 3 stone by pressing A when close to the trees or rocks";
 		case 2:
-			return "Deposit resources in bins by walking up to them";
+			return "Resources are automatically deposited when you enter your base.";
 		case 3:
 			return "Collect a full backpack. The more resources in your backpack, the slower you go!";
 		case 4:
-			return "Luckily, you can carry resources in your hands as well. Hit B to drop a box and A to pick it up";
+			return "Luckily, you can carry resources in your hands as well. Hit B to drop a box and A to pick it up.";
 		case 5:
-			return "Deposit boxes by walking up to the resource bins. Drop boxes by pressing B again";
+			return "Boxes do not slow you down, but prevent you from using a weapon. You can drop boxes by pressing B again";
 		case 6:
 			return "You can toggle the shop menu when you are in your base by pressing X. Purchase a sword by pressing A";
 		case 7:
@@ -138,7 +138,7 @@ public class Tutorial : MonoBehaviour {
 		case 15:
 			return "Stealth can help you steal resources. You can steal by pressing the A button on the enemies storages";
 		case 16:
-			return "Good work! You are now ready to take on the enemy!";
+			return "Good work! You are now ready to take on the enemy! First team to build their catapult wins!";
 		default:
 			return "";
 		}

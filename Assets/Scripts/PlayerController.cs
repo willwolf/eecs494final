@@ -247,17 +247,23 @@ public class PlayerController : MonoBehaviour {
 				CheckShopInputs();
 			}
 
-			RaycastHit hitinfo;
-			if (IsInRange(out hitinfo, "DropPoint") && !shopOpen) {
-				DropPoint drop = hitinfo.transform.GetComponent<DropPoint>();
-				if (drop == null) {
-					throw new UnassignedReferenceException("DropPoint layer object does not have a DropPoint script attached");
-				}
-				
-				if (drop.playerBaseGO.GetInstanceID() == homeBase_GO.GetInstanceID()) {
+			if(inBase && (curr_wood_resource > 0 || curr_stone_resource > 0)) {
+				foreach(DropPoint drop in homeBase_GO.GetComponentsInChildren<DropPoint>()){
 					DepositResources(drop);
 				}
 			}
+
+//			RaycastHit hitinfo;
+//			if (IsInRange(out hitinfo, "DropPoint") && !shopOpen) {
+//				DropPoint drop = hitinfo.transform.GetComponent<DropPoint>();
+//				if (drop == null) {
+//					throw new UnassignedReferenceException("DropPoint layer object does not have a DropPoint script attached");
+//				}
+//				
+//				if (drop.playerBaseGO.GetInstanceID() == homeBase_GO.GetInstanceID()) {
+//					DepositResources(drop);
+//				}
+//			}
 
 			if (device != null) {
 				if (device.Action1.IsPressed) {
@@ -585,6 +591,7 @@ public class PlayerController : MonoBehaviour {
 				arrow_sound.Play();
 				GameObject newArrow = Instantiate(arrow, transform.position + transform.forward * 1.5f + transform.up * 0.2f,
 				                                  Quaternion.AngleAxis(90, transform.right)) as GameObject;
+				newArrow.GetComponent<Arrow>().homebase_GO = homeBase_GO;
 				next_fire_at_time = Time.time + FIRE_RATE_TIME;
 			}
 
