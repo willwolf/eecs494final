@@ -193,7 +193,7 @@ public class Tutorial : MonoBehaviour {
 
 	bool task8(PlayerController pc){
 		//fire arrows
-		if(pc.currentWeapon is BowScript && pc.device.RightTrigger.IsPressed){
+		if(pc.currentWeapon is BowScript && (pc.device.RightTrigger.IsPressed || pc.device.RightBumper.IsPressed)){
 			pc.Attack();
 			return true;
 		}
@@ -202,7 +202,7 @@ public class Tutorial : MonoBehaviour {
 
 	bool task9(PlayerController pc){
 		//show aim line
-		if(pc.currentWeapon is BowScript && pc.device.LeftTrigger.IsPressed){
+		if(pc.currentWeapon is BowScript && (pc.device.LeftTrigger.IsPressed || pc.device.LeftBumper.IsPressed)){
 			pc.Aim();
 			return true;
 		}

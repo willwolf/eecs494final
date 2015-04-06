@@ -268,9 +268,9 @@ public class PlayerController : MonoBehaviour {
 			if (device != null) {
 				if (device.Action1.IsPressed) {
 					TakeAction();
-				} if(device.RightTrigger.IsPressed && !shopOpen && !hasBox){
+				} if((device.RightTrigger.IsPressed || device.RightBumper.IsPressed) && !shopOpen && !hasBox){
 					Attack();
-				} if(device.LeftTrigger.IsPressed && !shopOpen && !hasBox){
+				} if((device.LeftTrigger.IsPressed || device.LeftBumper.IsPressed) && !shopOpen && !hasBox){
 					Aim();
 				} else if(aimLine){
 					Destroy(aimLine);
