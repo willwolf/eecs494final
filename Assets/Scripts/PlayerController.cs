@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour {
 	public float jump_height = 5f;
 	public float rotate_speed = 90f;
 	public float walk_speed = 8f;
+	public float backPedalMult = 0.5f; // Higher value means faster backpedal
 	public float enemy_base_speed_multiplier = 0.5f;
 	public float encumberPercent = 0.5f;
 	public float wincumberPercent = 0.05f;
@@ -355,8 +356,8 @@ public class PlayerController : MonoBehaviour {
 		}
 		
 		transform.Rotate(Vector3.up, rotate_speed * Time.deltaTime * rotate_input);
-		transform.localPosition += (CalculateMoveSpeed(transform.forward, forward_input) +
-		                            CalculateMoveSpeed(transform.right, sidestep_input));
+		transform.localPosition += (CalculateMoveSpeed(transform.forward, forward_input, forward_input < 0) +
+		                            CalculateMoveSpeed(transform.right, sidestep_input, false));
 		Vector3 newVel = transform.rigidbody.velocity;
 		newVel.y += jump_input * jump_height;
 		transform.rigidbody.velocity = newVel;
@@ -370,9 +371,11 @@ public class PlayerController : MonoBehaviour {
 		return percent;
 	}
 
-	Vector3 CalculateMoveSpeed(Vector3 direction, float input_data) {
+	Vector3 CalculateMoveSpeed(Vector3 direction, float input_data, bool isBackpedal) {
 		Vector3 moveSpeed = direction * walk_speed * input_data * Time.deltaTime;
-
+		if (isBackpedal) {
+			moveSpeed *= backPedalMult;
+		}
 
 		if (!inEnemyBase) {
 			float encumbered = 1f;

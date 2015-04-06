@@ -1987,6 +1987,7 @@ MonoBehaviour:
   jump_height: 5
   rotate_speed: 180
   walk_speed: 15
+  backPedalMult: .5
   enemy_base_speed_multiplier: .5
   encumberPercent: .5
   wincumberPercent: .00999999978
@@ -1997,13 +1998,12 @@ MonoBehaviour:
   MAX_RESOURCES: 12
   COLLECTION_COOLDOWN_TIME: .5
   STEAL_COOLDOWN_TIME: .25
+  steal_at_time: 0
   MIDTEXT_COOLDOWN_TIME: 1
   homeBase_GO: {fileID: 0}
   inBase: 0
   inEnemyBase: 0
   EnemyBaseId: 0
-  hasStealth: 0
-  stealthActive: 0
   armor_slider: {fileID: 0}
   mining_stone: {fileID: 8256042}
   chopping_wood: {fileID: 8249478}
@@ -2045,6 +2045,8 @@ MonoBehaviour:
   normMat: {fileID: 0}
   hitColor: {r: 0, g: 0, b: 0, a: 0}
   normColor: {r: 0, g: 0, b: 0, a: 0}
+  STARTING_ARROWS: 10
+  arrows: 0
 --- !u!114 &11475506
 MonoBehaviour:
   m_ObjectHideFlags: 1
