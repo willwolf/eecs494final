@@ -36,7 +36,7 @@ public class Tutorial : MonoBehaviour {
 			if(getTask(pc)) {
 				if(tutorialSteps[pc.player_num - 1] != 0){
 					pc.updateMidScreenText("Task Complete!");
-					pc.freeze(2, false);
+					pc.freeze(1, false);
 				}
 				tutorialSteps[pc.player_num - 1]++;
 				string nextText = tutorialTexts[tutorialSteps[pc.player_num - 1]];

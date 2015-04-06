@@ -470,7 +470,7 @@ public class PlayerController : MonoBehaviour {
 				splat_sound.Play();
 				//update health bar
 				health_slider.value = health;
-				Debug.Log("Player " + player_num + " health is " + health);
+//				Debug.Log("Player " + player_num + " health is " + health);
 			}
 			vulnerable_at_time = Time.time + INVULNERABLE_TIME;
 			if(frozen){
@@ -741,14 +741,14 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void CollectStone(string message){
-		updateMidScreenText("Player " + player_num.ToString() + message);
+//		updateMidScreenText("Player " + player_num.ToString() + message);
 		curr_stone_resource++;
 		updateSliders ();
 		updateStoneText();
 	}
 
 	void CollectWood(string message){
-		updateMidScreenText("Player " + player_num.ToString() + message);
+//		updateMidScreenText("Player " + player_num.ToString() + message);
 		curr_wood_resource++;
 		updateSliders ();
 		updateWoodText();
