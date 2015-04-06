@@ -247,7 +247,7 @@ public class PlayerController : MonoBehaviour {
 				CheckShopInputs();
 			}
 
-			if(inBase && (curr_wood_resource > 0 || curr_stone_resource > 0)) {
+			if(inBase && (curr_wood_resource > 0 || curr_stone_resource > 0 || hasBox)) {
 				foreach(DropPoint drop in homeBase_GO.GetComponentsInChildren<DropPoint>()){
 					DepositResources(drop);
 				}
@@ -579,7 +579,7 @@ public class PlayerController : MonoBehaviour {
 			RaycastHit hitinfo;
 			if (IsInRange(out hitinfo, "Player")){
 				PlayerController other = hitinfo.transform.GetComponent<PlayerController>();
-				if (other.homeBase_GO.GetInstanceID() != this.gameObject.GetInstanceID()) {
+				if (other.homeBase_GO.GetInstanceID() != this.homeBase_GO.GetInstanceID()) {
 					other.takeDamage(damage_amount);
 					other.freeze(stunTime, true);
 				}

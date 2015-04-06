@@ -40,7 +40,16 @@ public class Tutorial : MonoBehaviour {
 				}
 				tutorialSteps[pc.player_num - 1]++;
 				string nextText = tutorialTexts[tutorialSteps[pc.player_num - 1]];
-				pc.canvas.transform.Find("Tutorial_Text").gameObject.GetComponent<Text>().text = nextText;
+				Text tut_text = pc.canvas.transform.Find("Tutorial_Text").gameObject.GetComponent<Text>();
+				tut_text.text = nextText;
+				int colorChoice = tutorialSteps[pc.player_num - 1] % 3;
+				if(colorChoice == 0){
+					tut_text.color = Color.blue;
+				} else if(colorChoice == 1){
+					tut_text.color = Color.red;
+				} else {
+					tut_text.color = Color.black;
+				}
 			}
 			allDone = allDone && (tutorialSteps[pc.player_num - 1] >= num_steps);
 			wallDrop = wallDrop && (tutorialSteps[pc.player_num - 1] >= wall_drop);
@@ -116,7 +125,7 @@ public class Tutorial : MonoBehaviour {
 		case 4:
 			return "Luckily, you can carry resources in your hands as well. Hit B to drop a box and A to pick it up.";
 		case 5:
-			return "Boxes do not slow you down, but prevent you from using a weapon. You can drop boxes by pressing B again";
+			return "Boxes do not slow you down, but prevent weapon use. Drop boxes by pressing B, or deposit by walking into your base.";
 		case 6:
 			return "You can toggle the shop menu when you are in your base by pressing X. Purchase a sword by pressing A";
 		case 7:
@@ -128,7 +137,7 @@ public class Tutorial : MonoBehaviour {
 		case 10:
 			return "Traps can be very useful for slowing down your enemy. Purchase a trap from the store";
 		case 11:
-			return "You can place traps by pressing B. Placement can make a big difference!";
+			return "You can place traps by pressing B. Your enemy can't see your trap once you place it down";
 		case 12:
 			return "Walls help protect your base and the resources behind them. Purchase walls for your base";
 		case 13:
