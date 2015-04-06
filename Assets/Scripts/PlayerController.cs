@@ -519,7 +519,8 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void DropResourceBox() {
-		Vector3 drop_at_position = this.transform.position - this.transform.up * 0.5f + this.transform.forward * 1.5f;
+		Vector3 drop_at_position = this.transform.position + this.transform.forward * 1.5f;
+		drop_at_position.y = 0.5f; //so it doesn't drop in the air, not the best solution
 
 		Trap trap = this.GetComponentInChildren<Trap>();
 		if (trap != null) {
