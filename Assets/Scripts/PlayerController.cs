@@ -31,11 +31,10 @@ public class PlayerController : MonoBehaviour {
 
 	public int curr_wood_resource = 0;
 	public int wood_gather_val = 1;
-	public static int MAX_WOOD_PER_TREE = 10;
+
 	public int curr_stone_resource = 0;
 	public int stone_gather_val = 1;
 	public int MAX_RESOURCES = 30;
-	public static int MAX_STONE_PER_ROCK = 10;
 
 	public float COLLECTION_COOLDOWN_TIME = 0.5f;
 	private float collect_at_time;
@@ -275,6 +274,8 @@ public class PlayerController : MonoBehaviour {
 			} else if (Input.GetButton("Action_" + (player_num % 2).ToString())) {
 				if(!shopOpen && !hasBox){
 					Attack();
+				} else if(hasBox) {
+					DropResourceBox();
 				}
 				TakeAction();
 			}
@@ -313,10 +314,12 @@ public class PlayerController : MonoBehaviour {
 	public void freeze(float duration, bool flash) {
 		frozen = true;
 		frozenUntil = Time.time + duration;
-		if(Time.time > vulnerable_at_time)
-			vulnerable_at_time = frozenUntil;
-		if(flash)
+//		if(Time.time > vulnerable_at_time)
+//			vulnerable_at_time = frozenUntil;
+		if(flash) {
 			StartCoroutine(colorFlash());
+		}
+			
 	}
 
 
@@ -464,6 +467,9 @@ public class PlayerController : MonoBehaviour {
 				Debug.Log("Player " + player_num + " health is " + health);
 			}
 			vulnerable_at_time = Time.time + INVULNERABLE_TIME;
+			if(frozen){
+				frozen = false;
+			} 
 			StartCoroutine(colorFlash());
 		}
 
@@ -586,7 +592,7 @@ public class PlayerController : MonoBehaviour {
 
 	void TakeAction() {
 		RaycastHit hitinfo;
-		if (IsInRange(out hitinfo, "Resource") && !shopOpen) {
+		if (IsInRange(out hitinfo, "Resource") && !shopOpen && !hasBox) {
 			Resource r = hitinfo.transform.GetComponent<Resource>();
 			if (r == null) {
 				throw new UnassignedReferenceException("Resource layer object does not have Resource script attached");

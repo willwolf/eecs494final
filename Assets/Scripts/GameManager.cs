@@ -31,6 +31,8 @@ public class GameManager : MonoBehaviour {
 	public const bool USE_SCATTER = true;
 	public const bool FORCE_CATAPULT_ORDER = true;
 	public const bool ENCUMBER_WINNERS = true;
+	public static int MAX_WOOD_PER_TREE = 10;
+	public static int MAX_STONE_PER_ROCK = 10;
 	public bool TUTORIAL = false;
 	
 	private Dictionary<string, string> teamNames = new Dictionary<string, string>() {

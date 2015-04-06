@@ -16,10 +16,10 @@ public class Resource : MonoBehaviour {
 	// Use this for initialization
 	void Awake () {
 		if (type == ResourceType.wood) {
-			amountLeft = PlayerController.MAX_WOOD_PER_TREE;	
+			amountLeft = GameManager.MAX_WOOD_PER_TREE;	
 		}
 		else if(type == ResourceType.stone){
-			amountLeft = PlayerController.MAX_STONE_PER_ROCK;
+			amountLeft = GameManager.MAX_STONE_PER_ROCK;
 		}
 	}
 	
