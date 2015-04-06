@@ -24,6 +24,7 @@ public class BowScript : WeaponItem {
 		p.hasWeapon = true;
 		p.currentWeapon = this;
 		p.weapons[p.currentWeaponIndex].SetActive(true);
+		p.arrows = p.STARTING_ARROWS;
 		//set to visible
 		foreach (MeshRenderer renderer in p.weapons[p.currentWeaponIndex].GetComponentsInChildren<MeshRenderer>()) {
 			renderer.enabled = true;

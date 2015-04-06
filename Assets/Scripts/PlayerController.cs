@@ -572,6 +572,9 @@ public class PlayerController : MonoBehaviour {
 		updateWoodText();
 	}
 
+	public int STARTING_ARROWS = 10;
+	public int arrows;
+
 	public void Attack(){
 		if(currentWeapon is SwordScript){
 			weapons[currentWeaponIndex].GetComponent<SwordScript>().Swing();
@@ -587,11 +590,13 @@ public class PlayerController : MonoBehaviour {
 				hitinfo.transform.GetComponent<EnemyScript>().takeDamage(damage_amount);
 			} 
 		}  else if (currentWeapon is BowScript){
-			if(Time.time > next_fire_at_time){
+			if(Time.time > next_fire_at_time && arrows > 0){
 				arrow_sound.Play();
 				GameObject newArrow = Instantiate(arrow, transform.position + transform.forward * 1.5f + transform.up * 0.2f,
 				                                  Quaternion.AngleAxis(90, transform.right)) as GameObject;
 				newArrow.GetComponent<Arrow>().homebase_GO = homeBase_GO;
+
+				arrows -= 1;
 				next_fire_at_time = Time.time + FIRE_RATE_TIME;
 			}
 
