@@ -205,7 +205,7 @@ GameObject:
   - 222: {fileID: 22224376}
   - 114: {fileID: 11424376}
   m_Layer: 5
-  m_Name: Text
+  m_Name: ArrowText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

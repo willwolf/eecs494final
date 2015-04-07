@@ -69,6 +69,8 @@ public class PlayerController : MonoBehaviour {
 	private Slider wood_slider;
 	private Slider stone_slider;
 	public Slider armor_slider;
+	public Slider arrow_slider;
+	private Text arrow_text;
 
 	public AudioSource mining_stone;
 	public AudioSource chopping_wood;
@@ -132,6 +134,9 @@ public class PlayerController : MonoBehaviour {
 		armor_slider = canvas.transform.FindChild ("ArmorSlide").GetComponent<Slider> ();
 		armor_slider.value = 0;
 
+		arrow_slider = canvas.transform.FindChild ("Arrow Slider").GetComponent<Slider> ();
+		arrow_text   = arrow_slider.transform.FindChild ("ArrowText").GetComponent<Text> ();
+
 		mid_screen_text.text = "";
 		updateStoneText();
 		updateWoodText();
@@ -181,6 +186,10 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if (!(currentWeapon is BowScript)) {
+			arrow_slider.gameObject.SetActive(false);
+		}
+
 		if (frozen && Time.time > frozenUntil) {
 			frozen = false;
 //			updateMidScreenText("Unfrozen!");
@@ -582,6 +591,12 @@ public class PlayerController : MonoBehaviour {
 	public int STARTING_ARROWS = 10;
 	public int arrows;
 
+	public void setNumArrows(int num) {
+		arrows = num;
+		arrow_slider.value = (float) arrows / STARTING_ARROWS;
+		arrow_text.text = "Arrows: " + arrows.ToString();
+	}
+
 	public void Attack(){
 		if(currentWeapon is SwordScript){
 			weapons[currentWeaponIndex].GetComponent<SwordScript>().Swing();
@@ -603,7 +618,7 @@ public class PlayerController : MonoBehaviour {
 				                                  Quaternion.AngleAxis(90, transform.right)) as GameObject;
 				newArrow.GetComponent<Arrow>().homebase_GO = homeBase_GO;
 
-				arrows -= 1;
+				setNumArrows(arrows - 1);
 				next_fire_at_time = Time.time + FIRE_RATE_TIME;
 			}
 		}
