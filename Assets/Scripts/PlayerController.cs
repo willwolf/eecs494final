@@ -216,7 +216,7 @@ public class PlayerController : MonoBehaviour {
 				mid_screen_text.text = "";
 				awakePlayer();
 			} else {
-				mid_screen_text.text = "Respawn in " + Mathf.Floor(respawn_at_time - Time.time).ToString("0") + " seconds";
+				mid_screen_text.text = "Respawn in " + Mathf.Floor(respawn_at_time - Time.time).ToString("0");
 				return;
 			}
 		} else if(inBase) {
