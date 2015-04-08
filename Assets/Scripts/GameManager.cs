@@ -94,6 +94,8 @@ public class GameManager : MonoBehaviour {
 		}
 
 		Canvas canvas = (Instantiate(playerCanvasBase, new Vector3(), new Quaternion()) as GameObject).GetComponent<Canvas>();
+		// Enable canvas scaler after instantiate to get buttons to scale
+		canvas.GetComponent<CanvasScaler>().enabled = true;
 		Camera cam = player.GetComponentInChildren<Camera>();
 		cam.rect = viewport;
 		canvas.worldCamera = player.GetComponentInChildren<Camera>();
