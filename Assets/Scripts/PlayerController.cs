@@ -26,7 +26,8 @@ public class PlayerController : MonoBehaviour {
 	public float rotate_speed = 90f;
 	public float walk_speed = 8f;
 	public float backPedalMult = 0.5f; // Higher value means faster backpedal
-	public Vector3 maxVelocity = new Vector3(14,14,14);
+	public float minMoveSpeed = 5;
+	public float maxMoveSpeed = 20;
 	public float enemy_base_speed_multiplier = 0.5f;
 	public float encumberPercent = 0.5f;
 	public float wincumberPercent = 0.05f;
@@ -364,30 +365,34 @@ public class PlayerController : MonoBehaviour {
 			transform.localPosition += (CalculateMoveSpeed(transform.forward, forward_input, forward_input < 0) +
 		                            	CalculateMoveSpeed(transform.right, sidestep_input, false));
 		} else {
-			transform.rigidbody.velocity += (CalculateMoveSpeed(transform.forward, forward_input, forward_input < 0) +
-			                                 CalculateMoveSpeed(transform.right, sidestep_input, false));
-			if (Mathf.Abs(transform.rigidbody.velocity.x) > maxVelocity.x) {
-				Vector3 vel = transform.rigidbody.velocity;
-				vel.x = maxVelocity.x * (vel.x < 0 ? -1 : 1);
-				if (forward_input < 0) {
-					vel.x *= backPedalMult;
-				}
-				transform.rigidbody.velocity = vel;
-			}
-			if (Mathf.Abs(transform.rigidbody.velocity.z) > maxVelocity.z) {
-				Vector3 vel = transform.rigidbody.velocity;
-				vel.z = maxVelocity.z * (vel.z < 0 ? -1 : 1);
-				if (forward_input < 0) {
-					vel.z *= backPedalMult;
-				}
-				transform.rigidbody.velocity = vel;
-			}
-			print (transform.rigidbody.velocity);
+			Vector3 forwardChange = CalculateMoveSpeed(transform.forward, forward_input, forward_input < 0),
+					sideStepChange = CalculateMoveSpeed(transform.right, sidestep_input, false);
+			transform.rigidbody.velocity += (forwardChange + sideStepChange);
+			AdjustVelocity(forward_input, sidestep_input);
+			print (rigidbody.velocity.magnitude);
 		}
 		
 		Vector3 newVel = transform.rigidbody.velocity;
 		newVel.y += jump_input * jump_height;
 		transform.rigidbody.velocity = newVel;
+	}
+	void AdjustVelocity(float forwardInput, float sidestepInput) {
+		if (!Mathf.Approximately(forwardInput, 0) || !Mathf.Approximately(sidestepInput, 0)) {
+			if (rigidbody.velocity.magnitude < minMoveSpeed) {
+				rigidbody.velocity = rigidbody.velocity.normalized * minMoveSpeed;
+			} else if (forwardInput < 0 && rigidbody.velocity.magnitude > maxMoveSpeed * backPedalMult) {
+				rigidbody.velocity = rigidbody.velocity.normalized * maxMoveSpeed * backPedalMult;
+			} else if (rigidbody.velocity.magnitude > maxMoveSpeed) {
+				rigidbody.velocity = rigidbody.velocity.normalized * maxMoveSpeed;
+				if (forwardInput < 0) {
+					rigidbody.velocity *= backPedalMult;
+				}
+			}
+		} else {
+			if (rigidbody.velocity.magnitude < minMoveSpeed) {
+				rigidbody.velocity = Vector3.zero;
+			}
+		}
 	}
 
 	private float CalculateWinningEncumbered(){

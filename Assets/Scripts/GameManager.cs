@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour {
 	public static int MAX_WOOD_PER_TREE = 10;
 	public static int MAX_STONE_PER_ROCK = 10;
 	public bool TUTORIAL = false;
-	public static bool PLAYER_VELOCITY = false;
+	public static bool PLAYER_VELOCITY = true;
 	
 	private Dictionary<string, string> teamNames = new Dictionary<string, string>() {
 		{ "Player 1 Base", "Team 1" },
@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour {
 	private MultiValueDictionary<int, Text> opponentTexts = new MultiValueDictionary<int,Text>();
 	private MultiValueDictionary<int, Text> enemyInBaseTexts = new MultiValueDictionary<int, Text>();
 	public List<PlayerController> allPlayers = new List<PlayerController>();
-  public Dictionary<int, Vector3> respawnPoints = new Dictionary<int, Vector3>();
+  	public Dictionary<int, Vector3> respawnPoints = new Dictionary<int, Vector3>();
 	private Dictionary<int, Material> teamMats = new Dictionary<int, Material>();
 	public Dictionary<int, int> teamTrapLayer { get; private set; }
 	public Dictionary<int, List<ShopMenu>> playerShops = new Dictionary<int, List<ShopMenu>>();
