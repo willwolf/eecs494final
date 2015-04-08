@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour {
 	public float rotate_speed = 90f;
 	public float walk_speed = 8f;
 	public float backPedalMult = 0.5f; // Higher value means faster backpedal
+	public Vector3 maxVelocity = new Vector3(14,14,14);
 	public float enemy_base_speed_multiplier = 0.5f;
 	public float encumberPercent = 0.5f;
 	public float wincumberPercent = 0.05f;
@@ -54,10 +55,6 @@ public class PlayerController : MonoBehaviour {
 	public bool inEnemyBase = false;
 	public int EnemyBaseId;
 
-//	public bool hasStealth = false;
-//	public bool stealthActive = false;
-//	private double stealthAmount = 1;
-
 	private bool frozen = false;
 	private float frozenUntil;
 	private float stunTime = 0.4f;
@@ -79,7 +76,6 @@ public class PlayerController : MonoBehaviour {
 	public AudioSource arrow_sound;
 	public AudioSource purchasing_sound;
 
-//	public GameObject sword;
 	public bool hasWeapon = false;
 	public int currentWeaponIndex = 0;
 	public GameObject armorPrefab = null;
@@ -158,7 +154,6 @@ public class PlayerController : MonoBehaviour {
 
 		shopOpen = false;
 		shop.SetActive(false);
-//		box.SetActive(false);
 
 		health = startingHealth;
 		gm = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -356,8 +351,31 @@ public class PlayerController : MonoBehaviour {
 		}
 		
 		transform.Rotate(Vector3.up, rotate_speed * Time.deltaTime * rotate_input);
-		transform.localPosition += (CalculateMoveSpeed(transform.forward, forward_input, forward_input < 0) +
-		                            CalculateMoveSpeed(transform.right, sidestep_input, false));
+		if (!GameManager.PLAYER_VELOCITY) {
+			transform.localPosition += (CalculateMoveSpeed(transform.forward, forward_input, forward_input < 0) +
+		                            	CalculateMoveSpeed(transform.right, sidestep_input, false));
+		} else {
+			transform.rigidbody.velocity += (CalculateMoveSpeed(transform.forward, forward_input, forward_input < 0) +
+			                                 CalculateMoveSpeed(transform.right, sidestep_input, false));
+			if (Mathf.Abs(transform.rigidbody.velocity.x) > maxVelocity.x) {
+				Vector3 vel = transform.rigidbody.velocity;
+				vel.x = maxVelocity.x * (vel.x < 0 ? -1 : 1);
+				if (forward_input < 0) {
+					vel.x *= backPedalMult;
+				}
+				transform.rigidbody.velocity = vel;
+			}
+			if (Mathf.Abs(transform.rigidbody.velocity.z) > maxVelocity.z) {
+				Vector3 vel = transform.rigidbody.velocity;
+				vel.z = maxVelocity.z * (vel.z < 0 ? -1 : 1);
+				if (forward_input < 0) {
+					vel.z *= backPedalMult;
+				}
+				transform.rigidbody.velocity = vel;
+			}
+			print (transform.rigidbody.velocity);
+		}
+		
 		Vector3 newVel = transform.rigidbody.velocity;
 		newVel.y += jump_input * jump_height;
 		transform.rigidbody.velocity = newVel;
