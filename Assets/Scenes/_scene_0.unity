@@ -6493,6 +6493,45 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 31, y: 31, z: 31}
   m_Center: {x: -.857749939, y: .874025345, z: -.0699243546}
+--- !u!1 &756696109
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 756696111}
+  - 114: {fileID: 756696110}
+  m_Layer: 0
+  m_Name: ScoreManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &756696110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 756696109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17869f3dade6b44efaeb990b08bcaa14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &756696111
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 756696109}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 76.7810211, y: 5.62276173, z: -3.13284922}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 13
 --- !u!1 &756846364
 GameObject:
   m_ObjectHideFlags: 0
@@ -17788,8 +17827,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TUTORIAL: 0
   allPlayers: []
-  winningWood: 50
-  winningStone: 50
+  INITIAL_FREEZE_DUR: 5
   playerBase: {fileID: 156056, guid: 59a29ccec391e473185f743761988bce, type: 2}
   playerCanvasBase: {fileID: 150072, guid: f862f544e71f443449d6a276abff306a, type: 2}
   mats:

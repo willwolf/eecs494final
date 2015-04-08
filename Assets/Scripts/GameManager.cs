@@ -58,9 +58,8 @@ public class GameManager : MonoBehaviour {
 	public Dictionary<int, string> baseNames;
 	public Dictionary<int, ResourceCount> teamResources;
 	public Dictionary<int, CatapultTracker> teamCatapultStatus = new Dictionary<int, CatapultTracker>(); 
-	public int winningWood = 500;
-	public int winningStone = 500;
-
+	
+	public int INITIAL_FREEZE_DUR = 5;
 
 
 	public GameObject playerBase;
@@ -133,6 +132,9 @@ public class GameManager : MonoBehaviour {
 		enemyInBaseTexts.Add(base1.GetInstanceID(), enemyWarning);
 
 		player.renderer.material = teamMats[base1.GetInstanceID()];
+
+
+		controller.freeze(INITIAL_FREEZE_DUR, false, true, "FIGHT!");
 	}
 
 	Rect getViewport(int numPlayers, int playerNum) {
@@ -200,8 +202,6 @@ public class GameManager : MonoBehaviour {
 		updateAllOppTexts ();
 		//updateAllOppCataIcons ();
 		UpdateAllCatapultIcons();
-
-		print ("winning wood: " + winningWood + " stone: " + winningStone);
 
 	}
 
