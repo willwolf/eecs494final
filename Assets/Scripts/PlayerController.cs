@@ -188,10 +188,12 @@ public class PlayerController : MonoBehaviour {
 
 		if (frozen && Time.time > frozenUntil) {
 			frozen = false;
-//			updateMidScreenText("Unfrozen!");
+			if (freeze_countdown) {
+				updateMidScreenText(freeze_expiration_msg);
+			}
 		}
-		if (frozen) {
-//			updateMidScreenText("Frozen for " + Mathf.Floor(frozenUntil - Time.time).ToString("0") + " seconds");
+		if (frozen && freeze_countdown) {
+			updateMidScreenText(Mathf.Ceil(frozenUntil - Time.time).ToString("0"));
 		}
 
 		if (player_num == 0) {
@@ -325,9 +327,11 @@ public class PlayerController : MonoBehaviour {
 	void OnTriggerStay(Collider col) {
 		OnTriggerEnter(col);
 	}
-	
 
-	public void freeze(float duration, bool flash) {
+	bool freeze_countdown = false;
+	string freeze_expiration_msg;
+
+	public void freeze(float duration, bool flash, bool show_countdown = false, string expiration_msg = "") {
 		frozen = true;
 		frozenUntil = Time.time + duration;
 //		if(Time.time > vulnerable_at_time)
@@ -335,7 +339,9 @@ public class PlayerController : MonoBehaviour {
 		if(flash) {
 			StartCoroutine(colorFlash());
 		}
-			
+
+		freeze_countdown = show_countdown;
+		freeze_expiration_msg = expiration_msg;
 	}
 
 
