@@ -26,6 +26,8 @@ public class PlayerController : MonoBehaviour {
 	public float rotate_speed = 90f;
 	public float walk_speed = 8f;
 	public float backPedalMult = 0.5f; // Higher value means faster backpedal
+	public float minMoveSpeed = 5;
+	public float maxMoveSpeed = 20;
 	public float enemy_base_speed_multiplier = 0.5f;
 	public float encumberPercent = 0.5f;
 	public float wincumberPercent = 0.05f;
@@ -54,10 +56,6 @@ public class PlayerController : MonoBehaviour {
 	public bool inEnemyBase = false;
 	public int EnemyBaseId;
 
-//	public bool hasStealth = false;
-//	public bool stealthActive = false;
-//	private double stealthAmount = 1;
-
 	private bool frozen = false;
 	private float frozenUntil;
 	private float stunTime = 0.4f;
@@ -81,7 +79,6 @@ public class PlayerController : MonoBehaviour {
 	public AudioSource arrow_sound;
 	public AudioSource purchasing_sound;
 
-//	public GameObject sword;
 	public bool hasWeapon = false;
 	public int currentWeaponIndex = 0;
 	public GameObject armorPrefab = null;
@@ -163,7 +160,6 @@ public class PlayerController : MonoBehaviour {
 
 		shopOpen = false;
 		shop.SetActive(false);
-//		box.SetActive(false);
 
 		health = startingHealth;
 		gm = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -192,10 +188,12 @@ public class PlayerController : MonoBehaviour {
 
 		if (frozen && Time.time > frozenUntil) {
 			frozen = false;
-//			updateMidScreenText("Unfrozen!");
+			if (freeze_countdown) {
+				updateMidScreenText(freeze_expiration_msg);
+			}
 		}
-		if (frozen) {
-//			updateMidScreenText("Frozen for " + Mathf.Floor(frozenUntil - Time.time).ToString("0") + " seconds");
+		if (frozen && freeze_countdown) {
+			updateMidScreenText(Mathf.Ceil(frozenUntil - Time.time).ToString("0"));
 		}
 
 		if (player_num == 0) {
@@ -329,9 +327,11 @@ public class PlayerController : MonoBehaviour {
 	void OnTriggerStay(Collider col) {
 		OnTriggerEnter(col);
 	}
-	
 
-	public void freeze(float duration, bool flash) {
+	bool freeze_countdown = false;
+	string freeze_expiration_msg;
+
+	public void freeze(float duration, bool flash, bool show_countdown = false, string expiration_msg = "") {
 		frozen = true;
 		frozenUntil = Time.time + duration;
 //		if(Time.time > vulnerable_at_time)
@@ -339,7 +339,9 @@ public class PlayerController : MonoBehaviour {
 		if(flash) {
 			StartCoroutine(colorFlash());
 		}
-			
+
+		freeze_countdown = show_countdown;
+		freeze_expiration_msg = expiration_msg;
 	}
 
 
@@ -365,11 +367,38 @@ public class PlayerController : MonoBehaviour {
 		}
 		
 		transform.Rotate(Vector3.up, rotate_speed * Time.deltaTime * rotate_input);
-		transform.localPosition += (CalculateMoveSpeed(transform.forward, forward_input, forward_input < 0) +
-		                            CalculateMoveSpeed(transform.right, sidestep_input, false));
+		if (!GameManager.PLAYER_VELOCITY) {
+			transform.localPosition += (CalculateMoveSpeed(transform.forward, forward_input, forward_input < 0) +
+		                            	CalculateMoveSpeed(transform.right, sidestep_input, false));
+		} else {
+			Vector3 forwardChange = CalculateMoveSpeed(transform.forward, forward_input, forward_input < 0),
+					sideStepChange = CalculateMoveSpeed(transform.right, sidestep_input, false);
+			transform.rigidbody.velocity += (forwardChange + sideStepChange);
+			AdjustVelocity(forward_input, sidestep_input);
+			print (rigidbody.velocity.magnitude);
+		}
+		
 		Vector3 newVel = transform.rigidbody.velocity;
 		newVel.y += jump_input * jump_height;
 		transform.rigidbody.velocity = newVel;
+	}
+	void AdjustVelocity(float forwardInput, float sidestepInput) {
+		if (!Mathf.Approximately(forwardInput, 0) || !Mathf.Approximately(sidestepInput, 0)) {
+			if (rigidbody.velocity.magnitude < minMoveSpeed) {
+				rigidbody.velocity = rigidbody.velocity.normalized * minMoveSpeed;
+			} else if (forwardInput < 0 && rigidbody.velocity.magnitude > maxMoveSpeed * backPedalMult) {
+				rigidbody.velocity = rigidbody.velocity.normalized * maxMoveSpeed * backPedalMult;
+			} else if (rigidbody.velocity.magnitude > maxMoveSpeed) {
+				rigidbody.velocity = rigidbody.velocity.normalized * maxMoveSpeed;
+				if (forwardInput < 0) {
+					rigidbody.velocity *= backPedalMult;
+				}
+			}
+		} else {
+			if (rigidbody.velocity.magnitude < minMoveSpeed) {
+				rigidbody.velocity = Vector3.zero;
+			}
+		}
 	}
 
 	private float CalculateWinningEncumbered(){
@@ -448,6 +477,7 @@ public class PlayerController : MonoBehaviour {
 		foreach (Rigidbody rb in GetComponentsInChildren<Rigidbody>()) {
 			rb.isKinematic = false;
 		}
+    transform.position = gm.respawnPoints[player_num];
 		transform.LookAt(GameObject.Find("CenterPoint").transform.position);
 		transform.rotation = gm.LookAtCenter(transform);
 		//StartCoroutine(colorFlash());

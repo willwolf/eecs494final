@@ -1988,6 +1988,8 @@ MonoBehaviour:
   rotate_speed: 180
   walk_speed: 15
   backPedalMult: .5
+  minMoveSpeed: 5
+  maxMoveSpeed: 15
   enemy_base_speed_multiplier: .5
   encumberPercent: .5
   wincumberPercent: .00999999978
@@ -2005,6 +2007,7 @@ MonoBehaviour:
   inEnemyBase: 0
   EnemyBaseId: 0
   armor_slider: {fileID: 0}
+  arrow_slider: {fileID: 0}
   mining_stone: {fileID: 8256042}
   chopping_wood: {fileID: 8249478}
   dropping_resources: {fileID: 8206876}
@@ -2036,7 +2039,7 @@ MonoBehaviour:
   shopMenu: {fileID: 0}
   shopOpen: 0
   hasBox: 0
-  arrow: {fileID: 193964, guid: bbb61d06d237441deb88b644408f120c, type: 2}
+  arrow: {fileID: 131156, guid: 04faed7e420d3074f84ca280a81c6d19, type: 2}
   aim: {fileID: 194822, guid: 244bbb1404626448e8ee6750331f2d9b, type: 2}
   resourceBox: {fileID: 108120, guid: 314fa5cfd211149d0bbf212d89e76e81, type: 2}
   trapGO: {fileID: 194302, guid: 995a3727bc29e43b896b529fc131e875, type: 2}

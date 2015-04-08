@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour {
 	public static int MAX_WOOD_PER_TREE = 10;
 	public static int MAX_STONE_PER_ROCK = 10;
 	public bool TUTORIAL = false;
+	public static bool PLAYER_VELOCITY = true;
 	
 	private Dictionary<string, string> teamNames = new Dictionary<string, string>() {
 		{ "Player 1 Base", "Team 1" },
@@ -48,6 +49,7 @@ public class GameManager : MonoBehaviour {
 	private MultiValueDictionary<int, Text> opponentTexts = new MultiValueDictionary<int,Text>();
 	private MultiValueDictionary<int, Text> enemyInBaseTexts = new MultiValueDictionary<int, Text>();
 	public List<PlayerController> allPlayers = new List<PlayerController>();
+  	public Dictionary<int, Vector3> respawnPoints = new Dictionary<int, Vector3>();
 	private Dictionary<int, Material> teamMats = new Dictionary<int, Material>();
 	public Dictionary<int, int> teamTrapLayer { get; private set; }
 	public Dictionary<int, List<ShopMenu>> playerShops = new Dictionary<int, List<ShopMenu>>();
@@ -56,9 +58,8 @@ public class GameManager : MonoBehaviour {
 	public Dictionary<int, string> baseNames;
 	public Dictionary<int, ResourceCount> teamResources;
 	public Dictionary<int, CatapultTracker> teamCatapultStatus = new Dictionary<int, CatapultTracker>(); 
-	public int winningWood = 500;
-	public int winningStone = 500;
-
+	
+	public int INITIAL_FREEZE_DUR = 5;
 
 
 	public GameObject playerBase;
@@ -85,6 +86,7 @@ public class GameManager : MonoBehaviour {
 		// Force the player to look at the center
 		player.transform.LookAt(centerPoint.transform.position);
 		player.transform.rotation = LookAtCenter(player.transform);
+    respawnPoints.Add(playerNum, pos);
 
 		var devices = InputManager.Devices;
 		if (playerNum - 1 < devices.Count) {
@@ -92,6 +94,8 @@ public class GameManager : MonoBehaviour {
 		}
 
 		Canvas canvas = (Instantiate(playerCanvasBase, new Vector3(), new Quaternion()) as GameObject).GetComponent<Canvas>();
+		// Enable canvas scaler after instantiate to get buttons to scale
+		canvas.GetComponent<CanvasScaler>().enabled = true;
 		Camera cam = player.GetComponentInChildren<Camera>();
 		cam.rect = viewport;
 		canvas.worldCamera = player.GetComponentInChildren<Camera>();
@@ -130,6 +134,9 @@ public class GameManager : MonoBehaviour {
 		enemyInBaseTexts.Add(base1.GetInstanceID(), enemyWarning);
 
 		player.renderer.material = teamMats[base1.GetInstanceID()];
+
+
+		controller.freeze(INITIAL_FREEZE_DUR, false, true, "FIGHT!");
 	}
 
 	Rect getViewport(int numPlayers, int playerNum) {
@@ -197,8 +204,6 @@ public class GameManager : MonoBehaviour {
 		updateAllOppTexts ();
 		//updateAllOppCataIcons ();
 		UpdateAllCatapultIcons();
-
-		print ("winning wood: " + winningWood + " stone: " + winningStone);
 
 	}
 
