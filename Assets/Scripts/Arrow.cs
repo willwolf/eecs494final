@@ -31,6 +31,8 @@ public class Arrow : MonoBehaviour {
 		} else if (other.gameObject.layer == LayerMask.NameToLayer("Enemy")){
 			other.gameObject.GetComponent<EnemyScript>().takeDamage(damage_amount);
 		} 
+
+		Debug.Log(other.gameObject);
 		Destroy(this.gameObject);
 	}
 }

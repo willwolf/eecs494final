@@ -375,7 +375,7 @@ public class PlayerController : MonoBehaviour {
 					sideStepChange = CalculateMoveSpeed(transform.right, sidestep_input, false);
 			transform.rigidbody.velocity += (forwardChange + sideStepChange);
 			AdjustVelocity(forward_input, sidestep_input);
-			print (rigidbody.velocity.magnitude);
+//			print (rigidbody.velocity.magnitude);
 		}
 		
 		Vector3 newVel = transform.rigidbody.velocity;
@@ -644,8 +644,9 @@ public class PlayerController : MonoBehaviour {
 		}  else if (currentWeapon is BowScript){
 			if(Time.time > next_fire_at_time && arrows > 0){
 				arrow_sound.Play();
-				GameObject newArrow = Instantiate(arrow, transform.position + transform.forward * 1.5f + transform.up * 0.2f,
+				GameObject newArrow = Instantiate(arrow, transform.position + transform.forward * 3.5f + transform.up * 0.2f,
 				                                  Quaternion.AngleAxis(90, transform.right)) as GameObject;
+//				Time.timeScale = 0;
 				newArrow.GetComponent<Arrow>().homebase_GO = homeBase_GO;
 
 				setNumArrows(arrows - 1);
