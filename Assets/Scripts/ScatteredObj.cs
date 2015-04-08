@@ -36,6 +36,7 @@ public class ScatteredObj : MonoBehaviour {
 		if (SlowRoll()) {
 			Vector3 decrement = rigidbody.velocity;
 			decrement *= speedSlow;
+			decrement.y = 0;
 			rigidbody.velocity -= decrement;
 		}
 	}
