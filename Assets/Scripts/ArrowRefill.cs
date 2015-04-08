@@ -17,6 +17,6 @@ public class ArrowRefill : ShopItem {
 		return p.arrows < p.STARTING_ARROWS && p.currentWeapon is BowScript;
 	}
 	public override void MakePurchase(PlayerController p, int teamId, GameManager gm) {
-		p.arrows = p.STARTING_ARROWS;
+		p.setNumArrows(p.STARTING_ARROWS);
 	}
 }

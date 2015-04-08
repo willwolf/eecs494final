@@ -32,5 +32,6 @@ public class BowScript : WeaponItem {
 		foreach (Collider collider in p.weapons[p.currentWeaponIndex].GetComponentsInChildren<Collider>()) {
 			collider.enabled = true;
 		}
+		p.arrow_slider.gameObject.SetActive(true);
 	}
 }
