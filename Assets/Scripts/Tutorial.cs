@@ -122,7 +122,7 @@ public class Tutorial : MonoBehaviour {
 		case 0:
 			return "Welcome to Base Race! This tutorial will teach you how to play";
 		case 1:
-			return "Collect 3 wood or 3 stone by pressing A when close to the trees or rocks";
+			return "Collect 3 wood or 3 stone by pressing and holding A when close to the trees or rocks";
 		case 2:
 			return "Resources are automatically deposited when you enter your base.";
 		case 3:
