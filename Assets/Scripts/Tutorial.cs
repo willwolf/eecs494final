@@ -68,6 +68,11 @@ public class Tutorial : MonoBehaviour {
 		} else {
 			startGameTime = Time.time + 5;
 		}
+
+		//quit tutorial, play game
+		if(Input.GetKeyDown(KeyCode.Alpha0)){
+			Application.LoadLevel(0);
+		}
 	}
 
 	bool getTask(PlayerController pc){
