@@ -448,6 +448,7 @@ public class PlayerController : MonoBehaviour {
 		foreach (Rigidbody rb in GetComponentsInChildren<Rigidbody>()) {
 			rb.isKinematic = false;
 		}
+    transform.position = gm.respawnPoints[player_num];
 		transform.LookAt(GameObject.Find("CenterPoint").transform.position);
 		transform.rotation = gm.LookAtCenter(transform);
 		//StartCoroutine(colorFlash());

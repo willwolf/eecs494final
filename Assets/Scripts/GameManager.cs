@@ -48,6 +48,7 @@ public class GameManager : MonoBehaviour {
 	private MultiValueDictionary<int, Text> opponentTexts = new MultiValueDictionary<int,Text>();
 	private MultiValueDictionary<int, Text> enemyInBaseTexts = new MultiValueDictionary<int, Text>();
 	public List<PlayerController> allPlayers = new List<PlayerController>();
+  public Dictionary<int, Vector3> respawnPoints = new Dictionary<int, Vector3>();
 	private Dictionary<int, Material> teamMats = new Dictionary<int, Material>();
 	public Dictionary<int, int> teamTrapLayer { get; private set; }
 	public Dictionary<int, List<ShopMenu>> playerShops = new Dictionary<int, List<ShopMenu>>();
@@ -85,6 +86,7 @@ public class GameManager : MonoBehaviour {
 		// Force the player to look at the center
 		player.transform.LookAt(centerPoint.transform.position);
 		player.transform.rotation = LookAtCenter(player.transform);
+    respawnPoints.Add(playerNum, pos);
 
 		var devices = InputManager.Devices;
 		if (playerNum - 1 < devices.Count) {
