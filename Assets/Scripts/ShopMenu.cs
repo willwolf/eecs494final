@@ -58,11 +58,11 @@ public class ShopMenu : MonoBehaviour {
 
 	public void ScrollDown() {
 		Scroll(1);
-		FindNextAvailableDown();
+//		FindNextAvailableDown();
 	}
 	public void ScrollUp() {
 		Scroll(-1);
-		FindNextAvailableUp();
+//		FindNextAvailableUp();
 	}
 	void Scroll(int shift) { 
 		if (Time.time < allow_scroll_at) {
@@ -133,7 +133,7 @@ public class ShopMenu : MonoBehaviour {
 			item.MakePurchase(pc, team_id, manager);
 			manager.UpdateTeamShops(team_id);
 			UpdateShop(pc, team_id);
-			FindNextAvailableUp();
+//			FindNextAvailableUp();
 			return item;
 		} 
 		return null;
@@ -170,7 +170,7 @@ public class ShopMenu : MonoBehaviour {
 			ShopItem item = go.GetComponent<ShopItem>();
 			
 			Button b = buttonList[i];
-			b.interactable = false;
+//			b.interactable = false;
 			if (CanPurchase(pc, team_id, item, team_count)) {
 				b.interactable = true;
 			}
