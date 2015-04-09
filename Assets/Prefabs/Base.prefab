@@ -236,8 +236,9 @@ GameObject:
   - 33: {fileID: 3300890}
   - 23: {fileID: 2300890}
   - 135: {fileID: 13500892}
+  - 54: {fileID: 5470012}
   - 114: {fileID: 11400892}
-  m_Layer: 11
+  m_Layer: 18
   m_Name: CatapultStone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -742,8 +743,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 190338}
-  m_LocalRotation: {x: 0, y: .382683456, z: 0, w: .923879504}
-  m_LocalPosition: {x: -3, y: 0, z: 82}
+  m_LocalRotation: {x: 0, y: -.923879564, z: 0, w: .382683307}
+  m_LocalPosition: {x: 70, y: 0, z: 2}
   m_LocalScale: {x: 39.9999962, y: .5, z: 40}
   m_Children:
   - {fileID: 488100}
@@ -1172,7 +1173,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: fc9095356999849a9a42dbc98ea16bea, type: 2}
+  - {fileID: 2100000, guid: e74fb53e4b15f40af972ea6fee8c3721, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -1481,6 +1482,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 194786}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!54 &5470012
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100890}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: .0500000007
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 1
 --- !u!65 &6500874
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -1804,6 +1820,12 @@ MonoBehaviour:
   item_name: Catapult Stone
   stone_cost: 35
   wood_cost: 0
+  target: {fileID: 0}
+  fired: 0
+  fire: {fileID: 109038, guid: 35bf1fbf05bd0470b8e9ac7b53637a52, type: 2}
+  num_fires: 30
+  radius_min: 5
+  radius_max: 20
 --- !u!114 &11488098
 MonoBehaviour:
   m_ObjectHideFlags: 1

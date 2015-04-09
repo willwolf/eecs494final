@@ -11096,8 +11096,9 @@ GameObject:
   - 33: {fileID: 1187709587}
   - 23: {fileID: 1187709586}
   - 135: {fileID: 1187709585}
+  - 54: {fileID: 1187709589}
   - 114: {fileID: 1187709584}
-  m_Layer: 11
+  m_Layer: 18
   m_Name: CatapultStone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11120,6 +11121,12 @@ MonoBehaviour:
   item_name: Catapult Stone
   stone_cost: 35
   wood_cost: 0
+  target: {fileID: 0}
+  fired: 0
+  fire: {fileID: 109038, guid: 35bf1fbf05bd0470b8e9ac7b53637a52, type: 2}
+  num_fires: 30
+  radius_min: 5
+  radius_max: 20
 --- !u!135 &1187709585
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -11174,6 +11181,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1139440422}
   m_RootOrder: 2
+--- !u!54 &1187709589
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 5470012, guid: 5f93fdd4e70a94e768133bb21d9dd9b0,
+    type: 2}
+  m_PrefabInternal: {fileID: 403047557}
+  m_GameObject: {fileID: 1187709583}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: .0500000007
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 1
 --- !u!1 &1188770893
 GameObject:
   m_ObjectHideFlags: 0
@@ -18226,8 +18249,9 @@ GameObject:
   - 33: {fileID: 2051975961}
   - 23: {fileID: 2051975960}
   - 135: {fileID: 2051975959}
+  - 54: {fileID: 2051975962}
   - 114: {fileID: 2051975958}
-  m_Layer: 11
+  m_Layer: 18
   m_Name: CatapultStone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18262,6 +18286,12 @@ MonoBehaviour:
   item_name: Catapult Stone
   stone_cost: 35
   wood_cost: 0
+  target: {fileID: 0}
+  fired: 0
+  fire: {fileID: 109038, guid: 35bf1fbf05bd0470b8e9ac7b53637a52, type: 2}
+  num_fires: 30
+  radius_min: 5
+  radius_max: 20
 --- !u!135 &2051975959
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -18304,6 +18334,22 @@ MeshFilter:
   m_PrefabInternal: {fileID: 1286935450}
   m_GameObject: {fileID: 2051975956}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!54 &2051975962
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 5470012, guid: 5f93fdd4e70a94e768133bb21d9dd9b0,
+    type: 2}
+  m_PrefabInternal: {fileID: 1286935450}
+  m_GameObject: {fileID: 2051975956}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: .0500000007
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 1
 --- !u!1 &2052904447
 GameObject:
   m_ObjectHideFlags: 0

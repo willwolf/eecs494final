@@ -317,6 +317,9 @@ public class GameManager : MonoBehaviour {
 		foreach(KeyValuePair<int, CatapultTracker> team in teamCatapultStatus) {
 			if (team.Value.has_arm && team.Value.has_legs && team.Value.has_projectile) {
 				winningTeam = team.Key;
+				if(!teamBases[team.Key].catapult.stone.GetComponent<CatapultStoneScript>().fired){
+					teamBases[team.Key].catapult.stone.GetComponent<CatapultStoneScript>().Fire();
+				}
 				break;
 			}
 		}

@@ -19,7 +19,7 @@ public class ProjectileTest : MonoBehaviour {
 		float distance = direction.magnitude;
 		direction = direction.normalized;
 		float velocity = Mathf.Sqrt(distance * Physics.gravity.magnitude);
-		this.rigidbody.velocity = new Vector3(velocity * direction.x, 0.46f * velocity, velocity * direction.z);
+		this.rigidbody.velocity = new Vector3(0.68f * velocity * direction.x, 0.7f * velocity, 0.68f * velocity * direction.z);
 	}
 	
 	// Update is called once per frame
@@ -42,7 +42,9 @@ public class ProjectileTest : MonoBehaviour {
 		rigidbody.freezeRotation = true;
 		rigidbody.velocity = Vector3.zero;
 		rotate = false;
-
+		this.collider.enabled = false;
+		this.rigidbody.useGravity = false;
+		this.transform.position = new Vector3(this.transform.position.x, other.transform.position.y + 0.5f, this.transform.position.z);
 
 		Vector3 pointPos;
 		for(int i = 0; i < num_fires;i++){
