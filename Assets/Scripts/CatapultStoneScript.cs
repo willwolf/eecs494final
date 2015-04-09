@@ -10,7 +10,7 @@ public class CatapultStoneScript : BaseUpgradeItem {
 	
 	// Update is called once per frame
 	void Update () {
-	
+		
 	}
 
 	override

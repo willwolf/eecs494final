@@ -910,7 +910,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 149b7a6da642a46d8b7020b69738482f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LIFE_TIME: 8
+  LIFE_TIME: .800000012
   damage_amount: 2
   speed_multiplier: 70
   homebase_GO: {fileID: 0}

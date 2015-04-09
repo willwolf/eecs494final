@@ -170,7 +170,7 @@ public class ShopMenu : MonoBehaviour {
 			ShopItem item = go.GetComponent<ShopItem>();
 			
 			Button b = buttonList[i];
-//			b.interactable = false;
+			b.interactable = false;
 			if (CanPurchase(pc, team_id, item, team_count)) {
 				b.interactable = true;
 			}

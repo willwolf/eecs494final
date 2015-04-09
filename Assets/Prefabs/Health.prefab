@@ -41,8 +41,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 035e4df4e1316914eafde4fe4df8e327, type: 3}
   item_name: Health Refill
-  stone_cost: 0
-  wood_cost: 0
+  stone_cost: 2
+  wood_cost: 2
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

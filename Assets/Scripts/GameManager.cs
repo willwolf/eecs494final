@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour {
 	public static int MAX_WOOD_PER_TREE = 10;
 	public static int MAX_STONE_PER_ROCK = 10;
 	public bool TUTORIAL = false;
-	public static bool PLAYER_VELOCITY = true;
+	public static bool PLAYER_VELOCITY = false;
 	
 	private Dictionary<string, string> teamNames = new Dictionary<string, string>() {
 		{ "Player 1 Base", "Team 1" },
@@ -320,7 +320,7 @@ public class GameManager : MonoBehaviour {
 				break;
 			}
 		}
-		if (Time.timeScale == 0 && winningTeam != -1) {
+		if (winningTeam != -1) {
 			if(Input.GetKeyDown(KeyCode.R)){
 				Application.LoadLevel(Application.loadedLevel);
 			}		

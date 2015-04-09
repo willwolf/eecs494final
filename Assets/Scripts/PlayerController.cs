@@ -182,6 +182,16 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if (hasWon (GameManager.winningTeam)) {
+			updateMidScreenText("You won!\nPress 'R' to Replay");
+			//			Time.timeScale = 0;
+			return;
+		} else if(GameManager.winningTeam != -1) {
+			updateMidScreenText("You lost!\nPress 'R' to Replay");
+			//			Time.timeScale = 0;
+			return;
+		}
+
 		if (!(currentWeapon is BowScript)) {
 			arrow_slider.gameObject.SetActive(false);
 		}
@@ -198,15 +208,6 @@ public class PlayerController : MonoBehaviour {
 
 		if (player_num == 0) {
 			throw new UnassignedReferenceException("PlayerController::playerNum must be non-zero");
-		}
-		if (hasWon (GameManager.winningTeam)) {
-			updateMidScreenText("You won!\nPress 'R' to Replay");
-			Time.timeScale = 0;
-			return;
-		} else if(GameManager.winningTeam != -1) {
-			updateMidScreenText("You lost!\nPress 'R' to Replay");
-			Time.timeScale = 0;
-			return;
 		}
 
 		if (dead) {
