@@ -82,7 +82,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: b6289423bfaf68a4fb37b57c44bf0026, type: 3}
-  item_name: Feeze Trap
+  item_name: Freeze Trap
   stone_cost: 5
   wood_cost: 5
   owner_base: {fileID: 0}
