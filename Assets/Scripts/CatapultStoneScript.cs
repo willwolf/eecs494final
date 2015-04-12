@@ -13,6 +13,9 @@ public class CatapultStoneScript : BaseUpgradeItem {
 	public float radius_min = 5;
 	public float radius_max = 20;
 	private Vector3 vel;
+	public AudioSource catapult_sound;
+	public AudioSource explosion_sound;
+	public AudioSource flame_sound;
 
 	// Use this for initialization
 	void Start () {
@@ -65,14 +68,12 @@ public class CatapultStoneScript : BaseUpgradeItem {
 		this.collider.enabled = false;
 		this.rigidbody.useGravity = false;
 		this.transform.position = new Vector3(this.transform.position.x, other.transform.position.y + 0.5f, this.transform.position.z);
-		
+
 		Vector3 pointPos;
 		for(int i = 0; i < num_fires;i++){
 			//randomize the radius fo where the fire spawns
 			float radiusX = Random.Range(radius_min, radius_max);
 			float radiusZ = Random.Range(radius_min, radius_max);
-			Debug.Log(radiusX);
-			Debug.Log(radiusZ);
 			
 			//multiply 'i' by '1.0f' to ensure the result is a fraction
 			float pointNum = (i*1.0f)/num_fires;
@@ -90,6 +91,7 @@ public class CatapultStoneScript : BaseUpgradeItem {
 			//place the prefab at given position
 			Instantiate (fire, pointPos, Quaternion.identity);
 		}
+		flame_sound.Play();
 	}
 
 	public void Fire(){
@@ -97,5 +99,7 @@ public class CatapultStoneScript : BaseUpgradeItem {
 		this.transform.SetParent(null);
 		this.rigidbody.velocity = vel;
 		rigidbody.useGravity = true;
+		catapult_sound.Play();
+		explosion_sound.Play();
 	}
 }
