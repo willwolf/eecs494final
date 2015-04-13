@@ -1980,7 +1980,7 @@ MonoBehaviour:
   health: 0
   damage_amount: 2
   INVULNERABLE_TIME: 1
-  HEALTH_REGEN_TIME: 1
+  HEALTH_REGEN_TIME: 5
   FIRE_RATE_TIME: .5
   player_num: 1
   controller_sensitivity: .5

@@ -220,7 +220,7 @@ public class PlayerController : MonoBehaviour {
 			}
 		} else if(inBase) {
 			if(Time.time > regen_at_time){
-//				health += 1;
+				health += 1;
 				if(health > startingHealth) {
 					health = startingHealth;
 				}
