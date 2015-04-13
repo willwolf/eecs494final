@@ -63,11 +63,9 @@ public class ShopMenu : MonoBehaviour {
 
 	public void ScrollDown() {
 		Scroll(1);
-//		FindNextAvailableDown();
 	}
 	public void ScrollUp() {
 		Scroll(-1);
-//		FindNextAvailableUp();
 	}
 	void Scroll(int shift) { 
 		if (Time.time < allow_scroll_at) {
@@ -87,42 +85,11 @@ public class ShopMenu : MonoBehaviour {
 		}
 
 		// Place content panel at the top of the current item
+		SetNewScrollPoint();
+	}
+	void SetNewScrollPoint() {
 		target_point = new Vector3(contentPanel.localPosition.x, content_y_offset + current_item * button_size, contentPanel.localPosition.z);
 		lerpV = true;
-	}
-	 
-	void FindNextAvailableDown() {
-		FindNextAvailable(1);
-	}
-	void FindNextAvailableUp() {
-		FindNextAvailable(-1);
-	}
-	void FindNextAvailable(int adjust) {
-		if (current_item < 0) {
-			current_item = 0;
-		} else if (current_item >= menuButtons.Count) {
-			current_item = menuButtons.Count - 1;
-		}
-
-		Button b = buttonList[current_item];
-		int tempCur = current_item;
-		while (!b.interactable && tempCur >= 0 && tempCur < menuButtons.Count) {
-			tempCur += adjust;
-			if (tempCur < menuButtons.Count && tempCur >= 0) {
-				b = buttonList[tempCur];
-			}
-		}
-
-		if (tempCur != current_item && (tempCur < menuButtons.Count && tempCur >= 0)) {
-			current_item = tempCur;
-			// Remove the pointer event on the previous item
-			var pointer = new PointerEventData(EventSystem.current);
-			ExecuteEvents.Execute(menuButtons[current_item], pointer, ExecuteEvents.pointerExitHandler);
-
-			// Scroll to next item
-			target_point = new Vector3(contentPanel.localPosition.x, content_y_offset + current_item * button_size, contentPanel.localPosition.z);
-			lerpV = true;
-		}
 	}
 
 	public ShopItem GetCurrentItem() {
@@ -138,7 +105,6 @@ public class ShopMenu : MonoBehaviour {
 			item.MakePurchase(pc, team_id, manager);
 			manager.UpdateTeamShops(team_id);
 			UpdateShop(pc, team_id);
-//			FindNextAvailableUp();
 			return item;
 		} 
 		return null;
@@ -165,6 +131,10 @@ public class ShopMenu : MonoBehaviour {
 	}
 
 	public void OpenShop(PlayerController pc, int team_id) {
+		// force cursor to be at top of menu on open
+		current_item = 0;
+		lerpV = false;
+		contentPanel.localPosition = new Vector3(contentPanel.localPosition.x, content_y_offset, contentPanel.localPosition.z);
 		UpdateShop(pc, team_id);
 	}
 
