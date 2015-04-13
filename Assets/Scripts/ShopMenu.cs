@@ -24,6 +24,11 @@ public class ShopMenu : MonoBehaviour {
 	public List<GameObject> menuButtons = new List<GameObject>();
 	public List<Button> buttonList = new List<Button>();
 
+	public Color canPurchaseHighlight = new Color();
+	public Color canPurchaseBackground = new Color();
+	public Color cannotPurchaseHighlight = new Color();
+	public Color cannotPurchaseBackground = new Color();
+
 	// Use this for initialization
 	void Awake () {
 		GameObject gm = GameObject.Find("GameManager");
@@ -170,10 +175,14 @@ public class ShopMenu : MonoBehaviour {
 			ShopItem item = go.GetComponent<ShopItem>();
 			
 			Button b = buttonList[i];
-			b.interactable = false;
+			ColorBlock cb = b.colors;
+			cb.normalColor = cannotPurchaseBackground;
+			cb.highlightedColor = cannotPurchaseHighlight;
 			if (CanPurchase(pc, team_id, item, team_count)) {
-				b.interactable = true;
+				cb.normalColor = canPurchaseBackground;
+				cb.highlightedColor = canPurchaseHighlight;
 			}
+			b.colors = cb;
 		}
 	}
 }

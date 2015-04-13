@@ -1577,6 +1577,10 @@ MonoBehaviour:
   scrollView: {fileID: 22436892}
   menuButtons: []
   buttonList: []
+  canPurchaseHighlight: {r: .407843143, g: .800000012, b: .282352954, a: .490196079}
+  canPurchaseBackground: {r: 1, g: 1, b: 1, a: 1}
+  cannotPurchaseHighlight: {r: .926470578, g: .306552768, b: .306552768, a: .490196079}
+  cannotPurchaseBackground: {r: .745098054, g: .745098054, b: .745098054, a: 1}
 --- !u!114 &11436880
 MonoBehaviour:
   m_ObjectHideFlags: 1
