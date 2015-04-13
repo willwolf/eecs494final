@@ -295,7 +295,7 @@ public class PlayerController : MonoBehaviour {
 				TakeAction();
 			}
 			if (device != null) {
-				if (device.Action3.WasPressed && inBase) {
+				if (inBase && (device.Action3.WasPressed || (shopOpen && device.Action2.WasPressed))) {
 					ToggleStore();
 				}
 			} else if (Input.GetButtonDown("Store_Open_" + (player_num % 2).ToString()) && inBase) {
@@ -762,7 +762,7 @@ public class PlayerController : MonoBehaviour {
 				updateSliders();
 				updateStoneText();
 				dropping_resources.Play();
-			} if(rbox != null && rbox.stone > 0){
+			} if(rbox != null && hasBox && rbox.stone > 0){
 				drop.DepositResources(rbox.stone);
 				rbox.stone = 0;
 				if(rbox.stone + rbox.wood == 0){
@@ -779,7 +779,7 @@ public class PlayerController : MonoBehaviour {
 				updateWoodText();
 				updateSliders();
 				dropping_resources.Play();
-			} if(rbox != null && rbox.wood > 0){
+			} if(rbox != null && hasBox && rbox.wood > 0){
 				drop.DepositResources(rbox.wood);
 				rbox.wood = 0;
 				if(rbox.stone + rbox.wood == 0){
