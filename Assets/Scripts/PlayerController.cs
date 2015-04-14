@@ -175,8 +175,7 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		if (device != null) {
-//			device.RightStickX.LowerDeadZone = controller_sensitivity;
-			device.RightStickX.LowerDeadZone = 0.75f;
+            device.RightStickX.LowerDeadZone = controller_sensitivity;
 			device.RightStickY.LowerDeadZone = controller_sensitivity;
 			device.LeftStickX.LowerDeadZone = controller_sensitivity;
 			device.LeftStickY.LowerDeadZone = controller_sensitivity;
@@ -369,9 +368,9 @@ public class PlayerController : MonoBehaviour {
 
 			Vector2 rightStick = new Vector2(rotate_input, cameraYAxis);
 			rightStick.Normalize();
-			if (Mathf.Abs(rightStick.x) > Mathf.Abs(rightStick.y)) {
-				cameraYAxis = 0;
-			}
+            //if (Mathf.Abs(rightStick.x) > Mathf.Abs(rightStick.y)) {
+            //    cameraYAxis = 0;
+            //}
 
 
 			if (device.Action4.WasPressed) {
@@ -401,7 +400,8 @@ public class PlayerController : MonoBehaviour {
 		newVel.y += jump_input * jump_height;
 		transform.rigidbody.velocity = newVel;
 	}
-	void AdjustVelocity(float forwardInput, float sidestepInput) {
+	
+    void AdjustVelocity(float forwardInput, float sidestepInput) {
 		if (!Mathf.Approximately(forwardInput, 0) || !Mathf.Approximately(sidestepInput, 0)) {
 			if (rigidbody.velocity.magnitude < minMoveSpeed) {
 				rigidbody.velocity = rigidbody.velocity.normalized * minMoveSpeed;
@@ -419,11 +419,12 @@ public class PlayerController : MonoBehaviour {
 			}
 		}
 	}
-	void RotateCameraYAxis(float yaxisInput) {
+	
+    void RotateCameraYAxis(float yaxisInput) {
 		Vector3 q = playerCam.transform.rotation.eulerAngles;
-		if (yaxisInput > 0) {
+		if (yaxisInput > 0.6f) {
 			q.x = Mathf.Lerp(q.x, camEulerStart.x + MAX_CAM_ANGLE_DELTA, Time.deltaTime * cameraYAxisSpeed);
-        } else if (yaxisInput < 0) {
+        } else if (yaxisInput < -0.6f) {
 			q.x = Mathf.Lerp (q.x, camEulerStart.x - MAX_CAM_ANGLE_DELTA, Time.deltaTime * cameraYAxisSpeed);
 		} else {
 			q.x = Mathf.Lerp(q.x, camEulerStart.x, Time.deltaTime * cameraYAxisSpeed);
@@ -460,7 +461,8 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
-	void CheckShopInputs() {
+	
+    void CheckShopInputs() {
 		if (device != null) {
 			if (device.LeftStickY < 0) {
 				shopMenu.ScrollDown();
