@@ -2027,6 +2027,10 @@ MonoBehaviour:
   - {fileID: 110918}
   - {fileID: 145334, guid: 6ee2ee0a489434952bcdedba92a5170c, type: 2}
   currentWeapon: {fileID: 0}
+  playerCam: {fileID: 0}
+  camEulerStart: {x: 0, y: 0, z: 0}
+  MAX_CAM_ANGLE_DELTA: 10
+  cameraYAxisSpeed: 5
   gm: {fileID: 0}
   canvas: {fileID: 0}
   cataArm: {fileID: 0}

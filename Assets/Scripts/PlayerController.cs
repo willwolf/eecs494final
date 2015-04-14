@@ -87,6 +87,10 @@ public class PlayerController : MonoBehaviour {
 	public List<GameObject> weapons = new List<GameObject>();
 	public WeaponItem currentWeapon = null;
 
+	public Camera playerCam;
+	public Vector3 camEulerStart;
+	public float MAX_CAM_ANGLE_DELTA = 10f;
+	public float cameraYAxisSpeed = 5f;
 	public GameManager gm;
 	public Canvas canvas;
 	public Image cataArm;
@@ -130,6 +134,8 @@ public class PlayerController : MonoBehaviour {
 		stone_slider.value = curr_stone_resource;
 		armor_slider = canvas.transform.FindChild ("ArmorSlide").GetComponent<Slider> ();
 		armor_slider.value = 0;
+		playerCam = transform.FindChild("Cam").GetComponent<Camera>();
+		camEulerStart = playerCam.transform.rotation.eulerAngles;
 
 		arrow_slider = canvas.transform.FindChild ("Arrow Slider").GetComponent<Slider> ();
 		arrow_text   = arrow_slider.transform.FindChild ("ArrowText").GetComponent<Text> ();
@@ -169,7 +175,8 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		if (device != null) {
-			device.RightStickX.LowerDeadZone = controller_sensitivity;
+//			device.RightStickX.LowerDeadZone = controller_sensitivity;
+			device.RightStickX.LowerDeadZone = 0.75f;
 			device.RightStickY.LowerDeadZone = controller_sensitivity;
 			device.LeftStickX.LowerDeadZone = controller_sensitivity;
 			device.LeftStickY.LowerDeadZone = controller_sensitivity;
@@ -179,7 +186,7 @@ public class PlayerController : MonoBehaviour {
 		normColor = this.renderer.material.color; 
 		hitColor = Color.white;
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		if (hasWon (GameManager.winningTeam)) {
@@ -350,12 +357,22 @@ public class PlayerController : MonoBehaviour {
 		float rotate_input = 0,
 			  forward_input = 0,
 			  sidestep_input = 0,
-			  jump_input = 0;
+			  jump_input = 0,
+			  cameraYAxis = 0;
 		if (device != null) {
 			// Default to using controller inputs, if they are present otherwise use keyboard commands
 			rotate_input = device.RightStickX;
+			cameraYAxis = device.RightStickY;
 			sidestep_input = device.LeftStickX;
 			forward_input = device.LeftStickY;
+
+			Vector2 rightStick = new Vector2(rotate_input, cameraYAxis);
+			rightStick.Normalize();
+			if (Mathf.Abs(rightStick.x) > Mathf.Abs(rightStick.y)) {
+				cameraYAxis = 0;
+			}
+
+
 			if (device.Action4.WasPressed) {
 				// Check for being on the ground when the button is pressed
 				if (Physics.Raycast(transform.position, Vector3.down, transform.collider.bounds.extents.y + 0.1f)) {
@@ -368,6 +385,7 @@ public class PlayerController : MonoBehaviour {
 		}
 		
 		transform.Rotate(Vector3.up, rotate_speed * Time.deltaTime * rotate_input);
+		RotateCameraYAxis(cameraYAxis);
 		if (!GameManager.PLAYER_VELOCITY) {
 			transform.localPosition += (CalculateMoveSpeed(transform.forward, forward_input, forward_input < 0) +
 		                            	CalculateMoveSpeed(transform.right, sidestep_input, false));
@@ -376,7 +394,6 @@ public class PlayerController : MonoBehaviour {
 					sideStepChange = CalculateMoveSpeed(transform.right, sidestep_input, false);
 			transform.rigidbody.velocity += (forwardChange + sideStepChange);
 			AdjustVelocity(forward_input, sidestep_input);
-//			print (rigidbody.velocity.magnitude);
 		}
 		
 		Vector3 newVel = transform.rigidbody.velocity;
@@ -400,6 +417,17 @@ public class PlayerController : MonoBehaviour {
 				rigidbody.velocity = Vector3.zero;
 			}
 		}
+	}
+	void RotateCameraYAxis(float yaxisInput) {
+		Vector3 q = playerCam.transform.rotation.eulerAngles;
+		if (yaxisInput > 0) {
+			q.x = Mathf.Lerp(q.x, camEulerStart.x + MAX_CAM_ANGLE_DELTA, Time.deltaTime * cameraYAxisSpeed);
+        } else if (yaxisInput < 0) {
+			q.x = Mathf.Lerp (q.x, camEulerStart.x - MAX_CAM_ANGLE_DELTA, Time.deltaTime * cameraYAxisSpeed);
+		} else {
+			q.x = Mathf.Lerp(q.x, camEulerStart.x, Time.deltaTime * cameraYAxisSpeed);
+		}
+		playerCam.transform.rotation = Quaternion.Euler(q);
 	}
 
 	private float CalculateWinningEncumbered(){
