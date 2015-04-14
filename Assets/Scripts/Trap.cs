@@ -64,6 +64,7 @@ public class Trap : ShopItem {
 
 		if (player.homeBase_GO.GetInstanceID() != owner_base.GetInstanceID()) {
 			player.freeze(FREEZE_DURATION, true);
+            player.rigidbody.constraints |= RigidbodyConstraints.FreezePosition;
 			activated = true;
 			frozen_until = Time.time + FREEZE_DURATION;
 		}

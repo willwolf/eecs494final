@@ -205,6 +205,7 @@ public class PlayerController : MonoBehaviour {
 
 		if (frozen && Time.time > frozenUntil) {
 			frozen = false;
+            rigidbody.constraints &= ~RigidbodyConstraints.FreezePosition;
 			if (freeze_countdown) {
 				updateMidScreenText(freeze_expiration_msg);
 			}
