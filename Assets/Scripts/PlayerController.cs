@@ -610,6 +610,7 @@ public class PlayerController : MonoBehaviour {
 			trap.init();
 		} else if(rbox != null){
 			rbox.transform.SetParent(null);
+            // Reattach rigidbody for collision detection with DropPoint
             rbox.gameObject.AddComponent<Rigidbody>();
             rbox.rigidbody.useGravity = false;
 			rbox.transform.position = drop_at_position;
@@ -706,6 +707,7 @@ public class PlayerController : MonoBehaviour {
 		} else if(IsInRange(out hitinfo, "ResourceBox") && !shopOpen && !rbox && !trap){
 			//pick up resource box
 			hitinfo.transform.position = this.transform.position + this.transform.up * 0.5f + this.transform.forward;
+            // Remove rigidbody to allow box to move when jumping
             Destroy(hitinfo.transform.rigidbody);
 			hitinfo.transform.SetParent(this.transform);
 		}
