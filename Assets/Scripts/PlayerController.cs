@@ -104,7 +104,6 @@ public class PlayerController : MonoBehaviour {
 	public GameObject shop;
 	public ShopMenu shopMenu;
 	public bool shopOpen;
-	public bool hasBox;
 	public GameObject arrow;
 	public GameObject aim;
 	private GameObject aimLine;
@@ -263,7 +262,7 @@ public class PlayerController : MonoBehaviour {
 				CheckShopInputs();
 			}
 
-			if(inBase && (curr_wood_resource > 0 || curr_stone_resource > 0 || hasBox)) {
+			if(inBase && (curr_wood_resource > 0 || curr_stone_resource > 0 || GetComponentInChildren<ResourceBox>())) {
 				foreach(DropPoint drop in homeBase_GO.GetComponentsInChildren<DropPoint>()){
 					DepositResources(drop);
 				}
@@ -284,9 +283,11 @@ public class PlayerController : MonoBehaviour {
 			if (device != null) {
 				if (device.Action1.IsPressed) {
 					TakeAction();
-				} if((device.RightTrigger.IsPressed || device.RightBumper.IsPressed) && !shopOpen && !hasBox){
+				} if((device.RightTrigger.IsPressed || device.RightBumper.IsPressed) && !shopOpen && 
+                    (!GetComponentInChildren<Trap>() || !GetComponentInChildren<ResourceBox>())){
 					Attack();
-				} if((device.LeftTrigger.IsPressed || device.LeftBumper.IsPressed) && !shopOpen && !hasBox){
+				} if((device.LeftTrigger.IsPressed || device.LeftBumper.IsPressed) && !shopOpen &&
+                    !GetComponentInChildren<Trap>() && !GetComponentInChildren<ResourceBox>()){
 					Aim();
 				} else if(aimLine){
 					Destroy(aimLine);
@@ -294,9 +295,9 @@ public class PlayerController : MonoBehaviour {
 					DropResourceBox();
 				}
 			} else if (Input.GetButton("Action_" + (player_num % 2).ToString())) {
-				if(!shopOpen && !hasBox){
+                if (!shopOpen && (!GetComponentInChildren<Trap>() || !GetComponentInChildren<ResourceBox>())) {
 					Attack();
-				} else if(hasBox) {
+				} else if(GetComponentInChildren<ResourceBox>()) {
 					DropResourceBox();
 				}
 				TakeAction();
@@ -563,16 +564,13 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	public void killPlayer() {
-		if(hasBox){
-			DropResourceBox();
-		}
-
-		if (!GameManager.USE_SCATTER){
-			DropResourceBox();
-		} else {
-			ScatterResources();
-		}
-
+        Trap t = GetComponentInChildren<Trap>();
+        if (t) {
+            Destroy(t.gameObject);
+        }
+        // Remove trap so that resource box is dropped
+		DropResourceBox();
+		ScatterResources();
 
 		foreach (MeshRenderer renderer in GetComponentsInChildren<MeshRenderer>()) {
 			renderer.enabled = false;
@@ -587,11 +585,9 @@ public class PlayerController : MonoBehaviour {
 
 		this.transform.position = homeBase_GO.transform.position + homeBase_GO.transform.up * 1;
 
-//		stealthActive = false;
 		hasWeapon = false;
 		currentWeapon = null;
 		weapons[currentWeaponIndex].SetActive(false);
-//		hasStealth = false;
 		if(aimLine) Destroy(aimLine);
 
 		dead = true;
@@ -607,22 +603,20 @@ public class PlayerController : MonoBehaviour {
 		drop_at_position.y = 0.5f; //so it doesn't drop in the air, not the best solution
 
 		Trap trap = this.GetComponentInChildren<Trap>();
+        ResourceBox rbox = this.GetComponentInChildren<ResourceBox>();
 		if (trap != null) {
 			trap.transform.SetParent(null);
 			trap.transform.position = drop_at_position;
-			hasBox = false;
 			trap.init();
-		} else if(hasBox){
-			ResourceBox rbox = this.GetComponentInChildren<ResourceBox>();
-			if (rbox != null) {
-				rbox.transform.SetParent(null);
-				rbox.transform.position = drop_at_position;
-				hasBox = false;
-			}
+		} else if(rbox != null){
+			rbox.transform.SetParent(null);
+            rbox.gameObject.AddComponent<Rigidbody>();
+            rbox.rigidbody.useGravity = false;
+			rbox.transform.position = drop_at_position;
 		} else if(curr_stone_resource + curr_wood_resource > 0){
 			//drop resource box
 			GameObject box_GO = Instantiate(resourceBox, drop_at_position, this.transform.rotation) as GameObject;
-			ResourceBox rbox = box_GO.GetComponent<ResourceBox>();
+			rbox = box_GO.GetComponent<ResourceBox>();
 			
 			rbox.wood = curr_wood_resource;
 			rbox.stone = curr_stone_resource;
@@ -689,7 +683,9 @@ public class PlayerController : MonoBehaviour {
 
 	void TakeAction() {
 		RaycastHit hitinfo;
-		if (IsInRange(out hitinfo, "Resource") && !shopOpen && !hasBox) {
+        ResourceBox rbox = GetComponentInChildren<ResourceBox>();
+        Trap trap = GetComponentInChildren<Trap>();
+		if (IsInRange(out hitinfo, "Resource") && !shopOpen && (!trap || !rbox)) {
 			Resource r = hitinfo.transform.GetComponent<Resource>();
 			if (r == null) {
 				throw new UnassignedReferenceException("Resource layer object does not have Resource script attached");
@@ -707,11 +703,11 @@ public class PlayerController : MonoBehaviour {
 			if (drop.playerBaseGO.GetInstanceID() != homeBase_GO.GetInstanceID()) {
 				StealResource(drop);
 			}
-		} else if(IsInRange(out hitinfo, "ResourceBox") && !shopOpen && !hasBox){
+		} else if(IsInRange(out hitinfo, "ResourceBox") && !shopOpen && !rbox && !trap){
 			//pick up resource box
 			hitinfo.transform.position = this.transform.position + this.transform.up * 0.5f + this.transform.forward;
+            Destroy(hitinfo.transform.rigidbody);
 			hitinfo.transform.SetParent(this.transform);
-			hasBox = true;
 		}
 	}
 
@@ -793,12 +789,11 @@ public class PlayerController : MonoBehaviour {
 				updateSliders();
 				updateStoneText();
 				dropping_resources.Play();
-			} if(rbox != null && hasBox && rbox.stone > 0){
+			} if(rbox != null && rbox.stone > 0){
 				drop.DepositResources(rbox.stone);
 				rbox.stone = 0;
 				if(rbox.stone + rbox.wood == 0){
 					Destroy(rbox.gameObject);
-					hasBox = false;
 				}
 				dropping_resources.Play();
 			}
@@ -810,12 +805,11 @@ public class PlayerController : MonoBehaviour {
 				updateWoodText();
 				updateSliders();
 				dropping_resources.Play();
-			} if(rbox != null && hasBox && rbox.wood > 0){
+			} if(rbox != null && rbox.wood > 0){
 				drop.DepositResources(rbox.wood);
 				rbox.wood = 0;
 				if(rbox.stone + rbox.wood == 0){
 					Destroy(rbox.gameObject);
-					hasBox = false;
 				}
 				dropping_resources.Play();
 			}

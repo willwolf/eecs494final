@@ -29,7 +29,7 @@ public class Trap : ShopItem {
 	}
 
 	public override bool CanPurchase(PlayerController p, int teamId, GameManager gm) {
-		return !p.hasBox && p.GetComponentInChildren<Trap>() == null;
+		return p.GetComponentInChildren<Trap>() == null;
 	}
 
 	public override void MakePurchase(PlayerController p, int teamId, GameManager gm) {
@@ -39,7 +39,6 @@ public class Trap : ShopItem {
 		
 		Trap trap = t.GetComponent<Trap>();
 		trap.owner_base = p.homeBase_GO;
-		p.hasBox = true;
 	}
 
 	bool activated = false;
