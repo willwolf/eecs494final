@@ -189,9 +189,6 @@ public class PlayerController : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		if (player_num == 1) {
-			print(rigidbody.velocity);
-		}
 		if (hasWon (GameManager.winningTeam)) {
 			updateMidScreenText("You won!\nPress 'R' to Replay");
 			//			Time.timeScale = 0;
@@ -647,7 +644,34 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void DropResourceBox() {
-		Vector3 drop_at_position = this.transform.position + this.transform.forward * 1.5f;
+
+		Vector3 direction = this.transform.forward;
+		//pick layers to ignore
+		LayerMask layerMask = ~( (1 << LayerMask.NameToLayer("Base"))
+		                        + (1 << LayerMask.NameToLayer("Player")) 
+		                       	+ (1 << LayerMask.NameToLayer("ScatteredObject"))
+		                        + (1 << LayerMask.NameToLayer("ResourceBox")));
+		Debug.Log(layerMask.value);
+		RaycastHit outInfo;
+		while(Physics.Raycast(this.transform.position + this.transform.up, direction, out outInfo, 2.5f, layerMask)){
+			Debug.Log (LayerMask.LayerToName(outInfo.transform.gameObject.layer));
+			if(direction == this.transform.forward) {
+				direction = this.transform.right;
+				Debug.Log("Object in front");
+			} else if (direction == this.transform.right){
+				direction = -this.transform.forward;
+				Debug.Log("Object on right");
+			} else if (direction == -this.transform.forward) {
+				direction = -this.transform.right;
+				Debug.Log("Object behind");
+			} else {
+				direction = this.transform.forward;
+				Debug.Log("Object on left");
+				break;
+			}
+		}
+
+		Vector3 drop_at_position = this.transform.position + direction * 1.5f;
 		drop_at_position.y = 0.5f; //so it doesn't drop in the air, not the best solution
 
 		Trap trap = this.GetComponentInChildren<Trap>();
