@@ -187,6 +187,9 @@ public class PlayerController : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+		if (player_num == 1) {
+			print(rigidbody.velocity);
+		}
 		if (hasWon (GameManager.winningTeam)) {
 			updateMidScreenText("You won!\nPress 'R' to Replay");
 			//			Time.timeScale = 0;
@@ -390,6 +393,7 @@ public class PlayerController : MonoBehaviour {
 		if (!GameManager.PLAYER_VELOCITY) {
 			transform.localPosition += (CalculateMoveSpeed(transform.forward, forward_input, forward_input < 0) +
 		                            	CalculateMoveSpeed(transform.right, sidestep_input, false));
+			rigidbody.velocity = new Vector3(0,rigidbody.velocity.y, 0);
 		} else {
 			Vector3 forwardChange = CalculateMoveSpeed(transform.forward, forward_input, forward_input < 0),
 					sideStepChange = CalculateMoveSpeed(transform.right, sidestep_input, false);
@@ -610,9 +614,6 @@ public class PlayerController : MonoBehaviour {
 			trap.init();
 		} else if(rbox != null){
 			rbox.transform.SetParent(null);
-            // Reattach rigidbody for collision detection with DropPoint
-            rbox.gameObject.AddComponent<Rigidbody>();
-            rbox.rigidbody.useGravity = false;
 			rbox.transform.position = drop_at_position;
 		} else if(curr_stone_resource + curr_wood_resource > 0){
 			//drop resource box
@@ -707,8 +708,6 @@ public class PlayerController : MonoBehaviour {
 		} else if(IsInRange(out hitinfo, "ResourceBox") && !shopOpen && !rbox && !trap){
 			//pick up resource box
 			hitinfo.transform.position = this.transform.position + this.transform.up * 0.5f + this.transform.forward;
-            // Remove rigidbody to allow box to move when jumping
-            Destroy(hitinfo.transform.rigidbody);
 			hitinfo.transform.SetParent(this.transform);
 		}
 	}

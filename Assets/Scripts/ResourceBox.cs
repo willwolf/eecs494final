@@ -14,7 +14,6 @@ public class ResourceBox : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		foreach(TextMesh t in this.GetComponentsInChildren<TextMesh>()){
-			Debug.Log(t.name);
 			if(t.name == "WoodText"){
 				t.text = wood.ToString();
 			} if(t.name == "StoneText"){

@@ -28,21 +28,6 @@ public class DropPoint : MonoBehaviour {
 		}
 	}
 
-    void OnTriggerEnter(Collider col) {
-        if (col.gameObject.layer == LayerMask.NameToLayer("ResourceBox")) {
-            ResourceBox rb = col.GetComponent<ResourceBox>();
-            gm.AddResources(playerBaseGO.GetInstanceID(), ResourceType.wood, rb.wood);
-            gm.AddResources(playerBaseGO.GetInstanceID(), ResourceType.stone, rb.stone);
-            rb.wood = rb.stone = 0;
-            
-            Destroy(col.gameObject);
-        }
-    }
-
-    void OnTriggerStay(Collider col) {
-        OnTriggerEnter(col);
-    }
-
 	public void DepositResources(int amount) {
 		gm.AddResources(playerBaseGO.GetInstanceID(), resourceType, amount);
 	}
