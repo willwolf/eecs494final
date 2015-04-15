@@ -2789,6 +2789,15 @@ MonoBehaviour:
   trapGO: {fileID: 194302, guid: 995a3727bc29e43b896b529fc131e875, type: 2}
   stone_scatterObj: {fileID: 182868, guid: fa2dd373544cd4632b7e3982da493bb4, type: 2}
   wood_scatterObj: {fileID: 125448, guid: f6d2150e021c24c06b940440b5efabcc, type: 2}
+  changeShaderObjects:
+  - {fileID: 124980}
+  - {fileID: 124978}
+  - {fileID: 124972}
+  - {fileID: 124976}
+  - {fileID: 124974}
+  - {fileID: 175782}
+  - {fileID: 175780}
+  - {fileID: 175778}
   normMat: {fileID: 0}
   hitColor: {r: 0, g: 0, b: 0, a: 0}
   normColor: {r: 0, g: 0, b: 0, a: 0}

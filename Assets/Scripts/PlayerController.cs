@@ -113,6 +113,8 @@ public class PlayerController : MonoBehaviour {
 	public GameObject stone_scatterObj;
 	public GameObject wood_scatterObj;
 
+	public List<GameObject> changeShaderObjects = new List<GameObject>();
+
 	public Material normMat;
 	public Color hitColor;
 	public Color normColor;
@@ -319,7 +321,13 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void LateUpdate(){
-
+		foreach(GameObject go in changeShaderObjects) {			
+			if (currentWeapon is StealthScript) {
+				go.renderer.material.shader = Shader.Find("Transparent/Diffuse");
+			} else {
+				go.renderer.material.shader = Shader.Find("Diffuse");
+			}
+		}
 	}
 		
 	void OnTriggerEnter(Collider col) {
