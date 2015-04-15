@@ -925,30 +925,16 @@ public class PlayerController : MonoBehaviour {
 
 	
 	bool IsInRange(out RaycastHit hitinfo, string Layer) {
-		Vector3 halfWidth = transform.right / 2f;
-		float halfHeight = transform.lossyScale.y / 2f;
-		Vector3 center, leftCenter, rightCenter, footPos, footLeft, footRight;
-		
-		// Initialize center positions
-		center = leftCenter = rightCenter = transform.position;
-		leftCenter -= halfWidth;
-		rightCenter += halfWidth;
-		
-		// Initialze bottom positions
-		footPos = transform.position;
-		footPos.y -= halfHeight;
-		footLeft = footRight = footPos;
-		footLeft -= halfWidth;
-		footRight += halfWidth;
-		
-		return (CastActionRay(center, Layer, out hitinfo) || CastActionRay(footPos, Layer, out hitinfo) ||
-		        CastActionRay(leftCenter, Layer, out hitinfo) || CastActionRay(footLeft, Layer, out hitinfo) ||
-		        CastActionRay(rightCenter, Layer, out hitinfo) || CastActionRay(footRight, Layer, out hitinfo));
-	}
-
-	bool CastActionRay(Vector3 origin, string Layer, out RaycastHit info) {
-		int layerMask = LayerMask.GetMask(Layer); // only collide with Layer specified
-		return Physics.Raycast(origin, transform.forward, out info, 1.5f, layerMask);
+		int layerMask = LayerMask.GetMask(Layer);
+		//RaycastHit[] hits = P;
+		foreach (RaycastHit hit in Physics.SphereCastAll(transform.position, 1.5f, Vector3.left, Mathf.Infinity, layerMask)) {
+			if(Vector3.Angle(transform.forward, hit.transform.position-transform.position)<30) {
+				hitinfo = hit;
+				return true;
+			}
+		}
+		hitinfo = new RaycastHit();
+		return false;
 	}
 
 	public void updateMidScreenText(string newText){
