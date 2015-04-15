@@ -58,7 +58,7 @@ public class PlayerController : MonoBehaviour {
 
 	private bool frozen = false;
 	private float frozenUntil;
-	private float stunTime = 4f;
+	private float stunTime = 1.5f;
 	
 	private Text stone_text;
 	private Text wood_text;
