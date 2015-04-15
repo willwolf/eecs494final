@@ -113,8 +113,6 @@ public class PlayerController : MonoBehaviour {
 	public GameObject stone_scatterObj;
 	public GameObject wood_scatterObj;
 
-	public List<GameObject> changeShaderObjects = new List<GameObject>();
-
 	public Material normMat;
 	public Color hitColor;
 	public Color normColor;
@@ -318,13 +316,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void LateUpdate(){
-		foreach(GameObject go in changeShaderObjects) {			
-			if (currentWeapon is StealthScript) {
-				go.renderer.material.shader = Shader.Find("Transparent/Diffuse");
-			} else {
-				go.renderer.material.shader = Shader.Find("Diffuse");
-			}
-		}
+
 	}
 		
 	void OnTriggerEnter(Collider col) {
@@ -614,8 +606,8 @@ public class PlayerController : MonoBehaviour {
             Destroy(t.gameObject);
         }
         // Remove trap so that resource box is dropped
-		ScatterResources();
 		DropResourceBox();
+		ScatterResources();
 
 		foreach (MeshRenderer renderer in GetComponentsInChildren<MeshRenderer>()) {
 			renderer.enabled = false;
@@ -650,8 +642,7 @@ public class PlayerController : MonoBehaviour {
 		LayerMask layerMask = ~( (1 << LayerMask.NameToLayer("Base"))
 		                        + (1 << LayerMask.NameToLayer("Player")) 
 		                       	+ (1 << LayerMask.NameToLayer("ScatteredObject"))
-		                        + (1 << LayerMask.NameToLayer("ResourceBox"))
-		                        + (1 << LayerMask.NameToLayer("Trap")));
+		                        + (1 << LayerMask.NameToLayer("ResourceBox")));
 		Debug.Log(layerMask.value);
 		RaycastHit outInfo;
 		while(Physics.Raycast(this.transform.position + this.transform.up, direction, out outInfo, 2.5f, layerMask)){
@@ -756,10 +747,7 @@ public class PlayerController : MonoBehaviour {
 		RaycastHit hitinfo;
         ResourceBox rbox = GetComponentInChildren<ResourceBox>();
         Trap trap = GetComponentInChildren<Trap>();
-		if (trap || rbox) {
-			return;
-		}
-		if (IsInRange(out hitinfo, "Resource") && !shopOpen) {
+		if (IsInRange(out hitinfo, "Resource") && !shopOpen && (!trap || !rbox)) {
 			Resource r = hitinfo.transform.GetComponent<Resource>();
 			if (r == null) {
 				throw new UnassignedReferenceException("Resource layer object does not have Resource script attached");
@@ -777,12 +765,10 @@ public class PlayerController : MonoBehaviour {
 			if (drop.playerBaseGO.GetInstanceID() != homeBase_GO.GetInstanceID()) {
 				StealResource(drop);
 			}
-		} else if(IsInRange(out hitinfo, "ResourceBox") && !shopOpen){
+		} else if(IsInRange(out hitinfo, "ResourceBox") && !shopOpen && !rbox && !trap){
 			//pick up resource box
-			if (hitinfo.transform.gameObject.layer != LayerMask.NameToLayer("Player")) {
-				hitinfo.transform.position = this.transform.position + this.transform.up * 0.5f + this.transform.forward;
-				hitinfo.transform.SetParent(this.transform);
-			}
+			hitinfo.transform.position = this.transform.position + this.transform.up * 0.5f + this.transform.forward;
+			hitinfo.transform.SetParent(this.transform);
 		}
 	}
 
