@@ -113,6 +113,8 @@ public class PlayerController : MonoBehaviour {
 	public GameObject stone_scatterObj;
 	public GameObject wood_scatterObj;
 
+	public List<GameObject> changeShaderObjects = new List<GameObject>();
+
 	public Material normMat;
 	public Color hitColor;
 	public Color normColor;
@@ -316,7 +318,13 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void LateUpdate(){
-
+		foreach(GameObject go in changeShaderObjects) {			
+			if (currentWeapon is StealthScript) {
+				go.renderer.material.shader = Shader.Find("Transparent/Diffuse");
+			} else {
+				go.renderer.material.shader = Shader.Find("Diffuse");
+			}
+		}
 	}
 		
 	void OnTriggerEnter(Collider col) {
@@ -606,8 +614,8 @@ public class PlayerController : MonoBehaviour {
             Destroy(t.gameObject);
         }
         // Remove trap so that resource box is dropped
-		DropResourceBox();
 		ScatterResources();
+		DropResourceBox();
 
 		foreach (MeshRenderer renderer in GetComponentsInChildren<MeshRenderer>()) {
 			renderer.enabled = false;
@@ -747,7 +755,10 @@ public class PlayerController : MonoBehaviour {
 		RaycastHit hitinfo;
         ResourceBox rbox = GetComponentInChildren<ResourceBox>();
         Trap trap = GetComponentInChildren<Trap>();
-		if (IsInRange(out hitinfo, "Resource") && !shopOpen && (!trap || !rbox)) {
+		if (trap || rbox) {
+			return;
+		}
+		if (IsInRange(out hitinfo, "Resource") && !shopOpen) {
 			Resource r = hitinfo.transform.GetComponent<Resource>();
 			if (r == null) {
 				throw new UnassignedReferenceException("Resource layer object does not have Resource script attached");
@@ -765,10 +776,12 @@ public class PlayerController : MonoBehaviour {
 			if (drop.playerBaseGO.GetInstanceID() != homeBase_GO.GetInstanceID()) {
 				StealResource(drop);
 			}
-		} else if(IsInRange(out hitinfo, "ResourceBox") && !shopOpen && !rbox && !trap){
+		} else if(IsInRange(out hitinfo, "ResourceBox") && !shopOpen){
 			//pick up resource box
-			hitinfo.transform.position = this.transform.position + this.transform.up * 0.5f + this.transform.forward;
-			hitinfo.transform.SetParent(this.transform);
+			if (hitinfo.transform.gameObject.layer != LayerMask.NameToLayer("Player")) {
+				hitinfo.transform.position = this.transform.position + this.transform.up * 0.5f + this.transform.forward;
+				hitinfo.transform.SetParent(this.transform);
+			}
 		}
 	}
 
