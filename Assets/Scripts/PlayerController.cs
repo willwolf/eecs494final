@@ -650,7 +650,8 @@ public class PlayerController : MonoBehaviour {
 		LayerMask layerMask = ~( (1 << LayerMask.NameToLayer("Base"))
 		                        + (1 << LayerMask.NameToLayer("Player")) 
 		                       	+ (1 << LayerMask.NameToLayer("ScatteredObject"))
-		                        + (1 << LayerMask.NameToLayer("ResourceBox")));
+		                        + (1 << LayerMask.NameToLayer("ResourceBox"))
+		                        + (1 << LayerMask.NameToLayer("Trap")));
 		Debug.Log(layerMask.value);
 		RaycastHit outInfo;
 		while(Physics.Raycast(this.transform.position + this.transform.up, direction, out outInfo, 2.5f, layerMask)){
