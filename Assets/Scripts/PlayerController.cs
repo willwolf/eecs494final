@@ -58,7 +58,7 @@ public class PlayerController : MonoBehaviour {
 
 	private bool frozen = false;
 	private float frozenUntil;
-	private float stunTime = 0.4f;
+	private float stunTime = 1.5f;
 	
 	private Text stone_text;
 	private Text wood_text;
@@ -211,6 +211,9 @@ public class PlayerController : MonoBehaviour {
 		if (frozen && freeze_countdown) {
 			updateMidScreenText(Mathf.Ceil(frozenUntil - Time.time).ToString("0"));
 		}
+		if (stunned && Time.time > stunned_until) {
+			stunned = false;
+		}
 
 		if (player_num == 0) {
 			throw new UnassignedReferenceException("PlayerController::playerNum must be non-zero");
@@ -353,6 +356,35 @@ public class PlayerController : MonoBehaviour {
 		freeze_expiration_msg = expiration_msg;
 	}
 
+	public  IEnumerator stunFlash(){
+		int index = 0;
+		while(Time.time < stunned_until){
+			this.renderer.material = null;
+			if(index % 2 == 0){
+				this.renderer.material.color = normColor;
+				this.renderer.material = normMat;
+			}
+			else{
+				this.renderer.material.color = hitColor;
+			}
+			++index;
+			yield return new WaitForSeconds(.1f);  
+		}
+		this.renderer.material.color = normColor;
+		this.renderer.material = normMat;
+	}
+
+	bool stunned = false;
+	float stunned_until;
+	public void stun(float duration, bool flash) {
+		stunned = true;
+		stunned_until = Time.time + duration;
+		if (flash) {
+			StartCoroutine(stunFlash());
+		}
+		
+	}
+
 
 	void Move() {
 		float rotate_input = 0,
@@ -442,13 +474,17 @@ public class PlayerController : MonoBehaviour {
 		return percent;
 	}
 
+	public float STUN_SLOWDOWN = .5f;
+
 	Vector3 CalculateMoveSpeed(Vector3 direction, float input_data, bool isBackpedal) {
 		Vector3 moveSpeed = direction * walk_speed * input_data * Time.deltaTime;
 		if (isBackpedal) {
 			moveSpeed *= backPedalMult;
 		}
 
-		if (!inEnemyBase) {
+		if (stunned) {
+			return moveSpeed * STUN_SLOWDOWN;
+		} else if (!inEnemyBase) {
 			float encumbered = 1f;
 			float ecP = encumberPercent;
 			if(GameManager.ENCUMBER_WINNERS){
@@ -688,7 +724,7 @@ public class PlayerController : MonoBehaviour {
 				PlayerController other = hitinfo.transform.GetComponent<PlayerController>();
 				if (other.homeBase_GO.GetInstanceID() != this.homeBase_GO.GetInstanceID()) {
 					other.takeDamage(damage_amount);
-					other.freeze(stunTime, true);
+					other.stun(stunTime, true);
 				}
 			} else if (IsInRange(out hitinfo, "Enemy")){
 				hitinfo.transform.GetComponent<EnemyScript>().takeDamage(damage_amount);

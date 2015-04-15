@@ -77,7 +77,7 @@ public class GameManager : MonoBehaviour {
 		return q;
 	} 
 
-	void addPlayer(GameObject base1, Rect viewport, int playerNum) {
+	void addPlayer(GameObject base1, Rect viewport, int playerNum, bool isLumberJack) {
 		Vector3 pos = base1.transform.position;
 		pos.x += playerNum % 3;
 
@@ -86,7 +86,14 @@ public class GameManager : MonoBehaviour {
 		// Force the player to look at the center
 		player.transform.LookAt(centerPoint.transform.position);
 		player.transform.rotation = LookAtCenter(player.transform);
-    respawnPoints.Add(playerNum, pos);
+		if (isLumberJack) {
+			player.transform.FindChild("MinerHatObj").FindChild("MinerHat").gameObject.SetActive(false);
+			player.transform.FindChild("MinerHatObj").FindChild("Beanie").gameObject.SetActive(true);
+		} else {
+			player.transform.FindChild("MinerHatObj").FindChild("MinerHat").gameObject.SetActive(true);
+			player.transform.FindChild("MinerHatObj").FindChild("Beanie").gameObject.SetActive(false);
+		}
+    	respawnPoints.Add(playerNum, pos);
 
 		var devices = InputManager.Devices;
 		if (playerNum - 1 < devices.Count) {
@@ -193,7 +200,7 @@ public class GameManager : MonoBehaviour {
 		while(playerNum < numPlayers) {
 			foreach (KeyValuePair<string, string> pair in teamNames) {
 				GameObject baseObj = GameObject.Find(pair.Key);
-				addPlayer(baseObj, getViewport(numPlayers, playerNum), playerNum);
+				addPlayer(baseObj, getViewport(numPlayers, playerNum), playerNum, pair.Value == "Team 1");
 				playerNum++;
 			}
 		}
