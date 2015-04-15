@@ -83,10 +83,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: b6289423bfaf68a4fb37b57c44bf0026, type: 3}
   item_name: Freeze Trap
-  stone_cost: 3
-  wood_cost: 3
+  stone_cost: 5
+  wood_cost: 5
   owner_base: {fileID: 0}
-  FREEZE_DURATION: 6
+  FREEZE_DURATION: 8
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
