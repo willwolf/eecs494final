@@ -2717,9 +2717,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RESPAWN_TIME: 15
-  startingHealth: 6
+  startingHealth: 10
   health: 0
-  damage_amount: 2
+  damage_amount: 4
   INVULNERABLE_TIME: 1
   HEALTH_REGEN_TIME: 5
   FIRE_RATE_TIME: .5

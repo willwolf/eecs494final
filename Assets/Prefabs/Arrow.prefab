@@ -86,8 +86,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LIFE_TIME: 1.5
-  damage_amount: 2
+  damage_amount: 3
   speed_multiplier: 40
+  homebase_GO: {fileID: 0}
 --- !u!136 &13693964
 CapsuleCollider:
   m_ObjectHideFlags: 1
