@@ -83,8 +83,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 807ee7d81746b1148ab6759e75e723c5, type: 3}
   item_name: Catapult Arm
-  stone_cost: 5
-  wood_cost: 20
+  stone_cost: 0
+  wood_cost: 15
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

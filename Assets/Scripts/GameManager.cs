@@ -18,12 +18,14 @@ public class MultiValueDictionary<Key, Value> : Dictionary<Key, List<Value>> {
 public enum CatapultPart {
 	arm,
 	legs,
-	stone
+	stone,
+	weight
 }
 
 public class CatapultTracker {
 	public bool has_arm = false;
 	public bool has_projectile = false;
+	public bool has_weight = false;
 	public bool has_legs = false;
 }
 
@@ -429,6 +431,10 @@ public class GameManager : MonoBehaviour {
 			case CatapultPart.stone:
 				teamCatapultStatus[team_id].has_projectile = true;
 				teamBases[team_id].TurnOnCatapultStone();
+				break;
+			case CatapultPart.weight:
+				teamCatapultStatus[team_id].has_weight = true;
+				teamBases[team_id].TurnOnCatapultWeight();
 				break;
 			}
 		} finally {

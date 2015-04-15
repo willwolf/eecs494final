@@ -263,6 +263,25 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &124154
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 424154}
+  - 33: {fileID: 3324154}
+  - 65: {fileID: 6524154}
+  - 23: {fileID: 2324154}
+  - 114: {fileID: 11424154}
+  m_Layer: 0
+  m_Name: CatapultCounterWeight
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &175856
 GameObject:
   m_ObjectHideFlags: 1
@@ -623,6 +642,7 @@ Transform:
   m_Children:
   - {fileID: 400866}
   - {fileID: 400884}
+  - {fileID: 424154}
   - {fileID: 400890}
   m_Father: {fileID: 490338}
   m_RootOrder: 3
@@ -682,7 +702,7 @@ Transform:
   m_GameObject: {fileID: 100884}
   m_LocalRotation: {x: .197607294, y: -.00165067939, z: .00818831846, w: .980245709}
   m_LocalPosition: {x: 0, y: 2.75, z: 2.49000001}
-  m_LocalScale: {x: .882016361, y: 1, z: 8.40419483}
+  m_LocalScale: {x: .882016361, y: 1, z: 9.17683506}
   m_Children: []
   m_Father: {fileID: 400874}
   m_RootOrder: 1
@@ -720,14 +740,14 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100890}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.25999999, z: 6.26000023}
+  m_LocalPosition: {x: 0, y: 2.0999999, z: 6.5999999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 491842}
   - {fileID: 491840}
   - {fileID: 488358}
   m_Father: {fileID: 400874}
-  m_RootOrder: 2
+  m_RootOrder: 3
 --- !u!4 &400892
 Transform:
   m_ObjectHideFlags: 1
@@ -740,6 +760,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 490362}
   m_RootOrder: 8
+--- !u!4 &424154
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 124154}
+  m_LocalRotation: {x: 0, y: .707106829, z: 0, w: .707106709}
+  m_LocalPosition: {x: -.0199999996, y: 3.16000009, z: -1.62}
+  m_LocalScale: {x: .857142568, y: 1.71428597, z: .857142627}
+  m_Children: []
+  m_Father: {fileID: 400874}
+  m_RootOrder: 2
 --- !u!4 &475856
 Transform:
   m_ObjectHideFlags: 1
@@ -1168,6 +1200,26 @@ Renderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
   m_SortingOrder: 0
+--- !u!23 &2324154
+Renderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 124154}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 2100000, guid: 5397664f2d2574065b51c4a7c7171e10, type: 2}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
 --- !u!23 &2375856
 Renderer:
   m_ObjectHideFlags: 1
@@ -1485,6 +1537,13 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100892}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!33 &3324154
+MeshFilter:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 124154}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!33 &3375856
 MeshFilter:
   m_ObjectHideFlags: 1
@@ -1698,6 +1757,18 @@ BoxCollider:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100892}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &6524154
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 124154}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
@@ -2050,6 +2121,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   legs: {fileID: 100866}
   arm: {fileID: 100884}
+  weight: {fileID: 124154}
   stone: {fileID: 100890}
 --- !u!114 &11400890
 MonoBehaviour:
@@ -2090,6 +2162,21 @@ MonoBehaviour:
   catapult_sound: {fileID: 8291840}
   explosion_sound: {fileID: 8288356}
   flame_sound: {fileID: 8288358}
+--- !u!114 &11424154
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 124154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ba9d0c21dba24817830c7335d156547, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  icon: {fileID: 0}
+  item_name: 
+  stone_cost: 0
+  wood_cost: 0
 --- !u!114 &11488098
 MonoBehaviour:
   m_ObjectHideFlags: 1

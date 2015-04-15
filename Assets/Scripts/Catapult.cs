@@ -5,6 +5,7 @@ public class Catapult : MonoBehaviour {
 
 	public GameObject legs;
 	public GameObject arm;
+	public GameObject weight;
 	public GameObject stone;
 
 	// Use this for initialization
@@ -31,6 +32,9 @@ public class Catapult : MonoBehaviour {
 	}
 	public void EnableLegs() {
 		EnableObject(legs);
+	}
+	public void EnableWeight() {
+		EnableObject(weight);
 	}
 	public void EnableStone() {
 		EnableObject(stone);

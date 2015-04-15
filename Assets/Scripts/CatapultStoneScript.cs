@@ -26,7 +26,7 @@ public class CatapultStoneScript : BaseUpgradeItem {
 		direction = direction.normalized;
 		float velocity = Mathf.Sqrt(distance * Physics.gravity.magnitude);
 //		vel = new Vector3(velocity * direction.x, 0.46f * velocity, velocity * direction.z);
-		vel = new Vector3(0.69f * velocity * direction.x, 0.7f * velocity, 0.69f * velocity * direction.z);
+		vel = new Vector3(0.71f * velocity * direction.x, 0.7f * velocity, 0.71f * velocity * direction.z);
 		this.rigidbody.useGravity = false;
 	}
 	
@@ -53,14 +53,14 @@ public class CatapultStoneScript : BaseUpgradeItem {
 		if (!GameManager.FORCE_CATAPULT_ORDER)
 			return !gm.teamCatapultStatus[teamId].has_projectile;
 		else
-			return gm.teamCatapultStatus[teamId].has_arm && !gm.teamCatapultStatus[teamId].has_projectile;
+			return gm.teamCatapultStatus[teamId].has_arm && gm.teamCatapultStatus[teamId].has_weight && !gm.teamCatapultStatus[teamId].has_projectile;
 	}
 
 	override public void MakePurchase(PlayerController p, int teamId, GameManager gm) {
 		gm.AddCatapultPart(teamId, CatapultPart.stone);
 	}
 
-	void OnCollisionEnter(Collision other){
+	void OnTriggerEnter(Collider other){
 		if(!fired) return;
 		rigidbody.freezeRotation = true;
 		rigidbody.velocity = Vector3.zero;

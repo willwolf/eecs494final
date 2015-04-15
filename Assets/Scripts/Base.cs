@@ -15,6 +15,9 @@ public class Base : MonoBehaviour {
 	public bool hasCatapultStone {
 		get; private set;
 	}
+	public bool hasCatapultWeight {
+		get; private set;
+	}
 	public GameObject catapult_GO;
 	public Catapult catapult;
 
@@ -26,7 +29,7 @@ public class Base : MonoBehaviour {
 				child.collider.enabled = false;
 			}
 		}
-		hasCatapultArm = hasCatapultLegs = hasCatapultStone = false;
+		hasCatapultArm = hasCatapultLegs = hasCatapultStone = hasCatapultWeight = false;
 		catapult = catapult_GO.GetComponent<Catapult>();
 		DisableCatapult();
 	}
@@ -72,6 +75,10 @@ public class Base : MonoBehaviour {
 	public void TurnOnCatapultStone() {
 		catapult.EnableStone();
 		hasCatapultStone = true;
+	}
+	public void TurnOnCatapultWeight() {
+		catapult.EnableWeight();
+		hasCatapultWeight = true;
 	}
 	
 	void OnTriggerEnter(Collider other) {
