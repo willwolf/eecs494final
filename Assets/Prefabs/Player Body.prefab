@@ -750,7 +750,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 120228}
-  m_LocalRotation: {x: .173647955, y: 0, z: 0, w: .984807789}
+  m_LocalRotation: {x: .0871557519, y: 0, z: 0, w: .99619472}
   m_LocalPosition: {x: -.5, y: 2.5, z: -16}
   m_LocalScale: {x: 2, y: 1.5582118, z: 4.20895672}
   m_Children: []
@@ -1011,7 +1011,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 175774}
-  m_LocalRotation: {x: -.0765522346, y: .306889743, z: -.139961019, w: .938279986}
+  m_LocalRotation: {x: -.076552242, y: .306889772, z: -.139961034, w: .938280046}
   m_LocalPosition: {x: -.00527598802, y: .0498772711, z: .00339902448}
   m_LocalScale: {x: .130889639, y: .113804892, z: .163974971}
   m_Children: []
@@ -2385,7 +2385,7 @@ MonoBehaviour:
   currentWeapon: {fileID: 0}
   playerCam: {fileID: 0}
   camEulerStart: {x: 0, y: 0, z: 0}
-  MAX_CAM_ANGLE_DELTA: 10
+  MAX_CAM_ANGLE_DELTA: 0
   cameraYAxisSpeed: 5
   gm: {fileID: 0}
   canvas: {fileID: 0}
