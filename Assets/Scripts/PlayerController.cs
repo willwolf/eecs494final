@@ -542,6 +542,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	public void awakePlayer() {
+		rigidbody.constraints &= ~RigidbodyConstraints.FreezePosition;
 		dead = false;
 		health = startingHealth;
 		health_slider.value = health;
