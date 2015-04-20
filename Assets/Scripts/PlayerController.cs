@@ -726,8 +726,8 @@ public class PlayerController : MonoBehaviour {
 
 	public void Attack(){
 		if(currentWeapon is SwordScript){
-			weapons[currentWeaponIndex].GetComponent<SwordScript>().Swing();
-			swinging_sword.Play();
+			weapons[currentWeaponIndex].GetComponent<SwordScript>().Swing(swinging_sword);
+//			swinging_sword.Play();
 			RaycastHit hitinfo;
 			if (IsInRange(out hitinfo, "Player")){
 				PlayerController other = hitinfo.transform.GetComponent<PlayerController>();
