@@ -657,6 +657,9 @@ public class PlayerController : MonoBehaviour {
 		RaycastHit outInfo;
 		while(Physics.Raycast(this.transform.position + this.transform.up, direction, out outInfo, 2.5f, layerMask)){
 			Debug.Log (LayerMask.LayerToName(outInfo.transform.gameObject.layer));
+			if (outInfo.transform.gameObject.GetComponent<PlayerController>() == this) {
+				break;
+			}
 			if(direction == this.transform.forward) {
 				direction = this.transform.right;
 				Debug.Log("Object in front");
