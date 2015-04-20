@@ -85,6 +85,7 @@ MonoBehaviour:
   item_name: Catapult Arm
   stone_cost: 0
   wood_cost: 15
+  description: The catapult arm itself
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

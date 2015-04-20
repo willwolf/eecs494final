@@ -85,6 +85,7 @@ MonoBehaviour:
   item_name: Freeze Trap
   stone_cost: 3
   wood_cost: 3
+  description: Stop an enemy for 8 seconds
   owner_base: {fileID: 0}
   FREEZE_DURATION: 8
 --- !u!1001 &100100000

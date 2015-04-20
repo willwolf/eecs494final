@@ -43,6 +43,7 @@ MonoBehaviour:
   item_name: Stealth
   stone_cost: 4
   wood_cost: 4
+  description: Become harder to see
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
