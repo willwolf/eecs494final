@@ -289,7 +289,7 @@ public class PlayerController : MonoBehaviour {
 				if (device.Action1.IsPressed) {
 					TakeAction();
 				} if((device.RightTrigger.IsPressed || device.RightBumper.IsPressed) && !shopOpen && 
-                    (!GetComponentInChildren<Trap>() || !GetComponentInChildren<ResourceBox>())){
+                    !GetComponentInChildren<Trap>() && !GetComponentInChildren<ResourceBox>()){
 					Attack();
 				} if((device.LeftTrigger.IsPressed || device.LeftBumper.IsPressed) && !shopOpen &&
                     !GetComponentInChildren<Trap>() && !GetComponentInChildren<ResourceBox>()){
@@ -300,7 +300,7 @@ public class PlayerController : MonoBehaviour {
 					DropResourceBox();
 				}
 			} else if (Input.GetButton("Action_" + (player_num % 2).ToString())) {
-                if (!shopOpen && (!GetComponentInChildren<Trap>() || !GetComponentInChildren<ResourceBox>())) {
+                if (!shopOpen && (!GetComponentInChildren<Trap>() && !GetComponentInChildren<ResourceBox>())) {
 					Attack();
 				} else if(GetComponentInChildren<ResourceBox>()) {
 					DropResourceBox();
