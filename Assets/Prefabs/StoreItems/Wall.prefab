@@ -463,6 +463,7 @@ MonoBehaviour:
   item_name: Wall
   stone_cost: 5
   wood_cost: 5
+  description: Protect your base
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

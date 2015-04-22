@@ -9,7 +9,7 @@ public class MenuButton : MonoBehaviour {
 	public Image icon;
 	public Text woodLabel;
 	public Text stoneLabel;
-
+	public Text description;
 
 
 }

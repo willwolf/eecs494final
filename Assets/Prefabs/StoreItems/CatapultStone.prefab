@@ -73,6 +73,7 @@ MonoBehaviour:
   item_name: Catapult Stone
   stone_cost: 10
   wood_cost: 10
+  description: The catapult's projectile
   target: {fileID: 0}
   fired: 0
   fire: {fileID: 0}

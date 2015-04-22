@@ -519,6 +519,7 @@ MonoBehaviour:
   item_name: Catapult Legs
   stone_cost: 15
   wood_cost: 15
+  description: The base of the catapult
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

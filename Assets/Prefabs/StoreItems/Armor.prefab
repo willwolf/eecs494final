@@ -229,6 +229,7 @@ MonoBehaviour:
   item_name: Armor
   stone_cost: 2
   wood_cost: 2
+  description: Protect yourself from damage
   STARTING_HEALTH: 8
   armorHealth: 8
 --- !u!136 &13634498

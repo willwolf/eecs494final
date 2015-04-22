@@ -124,6 +124,7 @@ public class ShopMenu : MonoBehaviour {
 			button.icon.sprite = i.icon;
 			button.woodLabel.text = "Wood: " + i.wood_cost.ToString();
 			button.stoneLabel.text = "Stone: " + i.stone_cost.ToString();
+			button.description.text = i.description;
 			newButton.transform.SetParent (contentPanel);
 			menuButtons.Add (newButton);
 			buttonList.Add(newButton.GetComponent<Button>());

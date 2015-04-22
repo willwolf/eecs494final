@@ -210,6 +210,7 @@ MonoBehaviour:
   item_name: Catapult Stone
   stone_cost: 35
   wood_cost: 0
+  description: 
   target: {fileID: 1619672632}
   fired: 0
   fire: {fileID: 109038, guid: 35bf1fbf05bd0470b8e9ac7b53637a52, type: 2}
@@ -2161,6 +2162,7 @@ MonoBehaviour:
   item_name: Catapult Legs
   stone_cost: 0
   wood_cost: 25
+  description: 
 --- !u!1001 &230921462
 Prefab:
   m_ObjectHideFlags: 0
@@ -4000,6 +4002,7 @@ MonoBehaviour:
   item_name: Catapult Arm
   stone_cost: 0
   wood_cost: 20
+  description: 
 --- !u!23 &453264573
 Renderer:
   m_ObjectHideFlags: 0
@@ -6597,6 +6600,7 @@ MonoBehaviour:
   item_name: Catapult Arm
   stone_cost: 0
   wood_cost: 20
+  description: 
 --- !u!23 &762178183
 Renderer:
   m_ObjectHideFlags: 0
@@ -10428,6 +10432,7 @@ MonoBehaviour:
   item_name: 
   stone_cost: 0
   wood_cost: 0
+  description: 
 --- !u!1 &1149594637
 GameObject:
   m_ObjectHideFlags: 0
@@ -11177,6 +11182,7 @@ MonoBehaviour:
   item_name: Wall
   stone_cost: 0
   wood_cost: 0
+  description: 
 --- !u!1 &1231979373
 GameObject:
   m_ObjectHideFlags: 0
@@ -13481,6 +13487,7 @@ MonoBehaviour:
   item_name: 
   stone_cost: 0
   wood_cost: 0
+  description: 
 --- !u!23 &1439469738
 Renderer:
   m_ObjectHideFlags: 0
@@ -15724,6 +15731,7 @@ MonoBehaviour:
   item_name: Catapult Stone
   stone_cost: 35
   wood_cost: 0
+  description: 
   target: {fileID: 174982709}
   fired: 0
   fire: {fileID: 109038, guid: 35bf1fbf05bd0470b8e9ac7b53637a52, type: 2}
@@ -16898,6 +16906,7 @@ MonoBehaviour:
   item_name: Wall
   stone_cost: 0
   wood_cost: 0
+  description: 
 --- !u!1 &1805057897
 GameObject:
   m_ObjectHideFlags: 0
@@ -18726,6 +18735,7 @@ MonoBehaviour:
   item_name: Catapult Legs
   stone_cost: 0
   wood_cost: 25
+  description: 
 --- !u!1 &2004844544
 GameObject:
   m_ObjectHideFlags: 0
