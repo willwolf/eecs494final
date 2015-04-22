@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
+using InControl;
 
 public class IntroScene : MonoBehaviour {
 
@@ -32,7 +33,7 @@ public class IntroScene : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-      
+     
 
       if (clickCount == 0 )
       {
@@ -54,27 +55,50 @@ public class IntroScene : MonoBehaviour {
       }
 
       //change this to action button or something
-      if (Input.GetKeyDown(KeyCode.P)) {
-          switch (clickCount) { 
-              case 0:
-                  can.GetComponent<Image>().sprite = poroi;
-                  break;
-              case 1:
-                  can.GetComponent<Image>().sprite = dudes;
-                  break;
-              case 2:
-                  can.GetComponent<Image>().sprite = conflict;
-                  break;
-              case 3:
-                  can.GetComponent<Image>().sprite = cata;
-                  break;
-              case 4:
-                  Application.LoadLevel("_scene_tutorial_2");
-                  break;
-          }
-          ++clickCount;
-          
-      }
+		if (Input.GetKeyDown(KeyCode.P)) {
+			switch (clickCount) { 
+			case 0:
+				can.GetComponent<Image>().sprite = poroi;
+				break;
+			case 1:
+				can.GetComponent<Image>().sprite = dudes;
+				break;
+			case 2:
+				can.GetComponent<Image>().sprite = conflict;
+				break;
+			case 3:
+				can.GetComponent<Image>().sprite = cata;
+				break;
+			case 4:
+				Application.LoadLevel("_scene_tutorial_2");
+				break;
+			}
+			++clickCount;
+			
+		}
+		foreach(var d in InputManager.Devices) {
+			if (d.Action1.WasPressed) {
+				switch (clickCount) { 
+			      case 0:
+			          can.GetComponent<Image>().sprite = poroi;
+			          break;
+			      case 1:
+			          can.GetComponent<Image>().sprite = dudes;
+			          break;
+			      case 2:
+			          can.GetComponent<Image>().sprite = conflict;
+			          break;
+			      case 3:
+			          can.GetComponent<Image>().sprite = cata;
+			          break;
+			      case 4:
+			          Application.LoadLevel("_scene_tutorial_2");
+			          break;
+			  }
+			  ++clickCount;
+			  
+			}
+		}
       if (Input.GetKeyDown(KeyCode.B)) {
           
       }
