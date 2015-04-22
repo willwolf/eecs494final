@@ -55,9 +55,30 @@ public class IntroScene : MonoBehaviour {
       }
 
       //change this to action button or something
+		if (Input.GetKeyDown(KeyCode.P)) {
+			switch (clickCount) { 
+			case 0:
+				can.GetComponent<Image>().sprite = poroi;
+				break;
+			case 1:
+				can.GetComponent<Image>().sprite = dudes;
+				break;
+			case 2:
+				can.GetComponent<Image>().sprite = conflict;
+				break;
+			case 3:
+				can.GetComponent<Image>().sprite = cata;
+				break;
+			case 4:
+				Application.LoadLevel("_scene_tutorial_2");
+				break;
+			}
+			++clickCount;
+			
+		}
 		foreach(var d in InputManager.Devices) {
-			if (Input.GetKeyDown(KeyCode.P) || d.Action1.WasPressed) {
-			  switch (clickCount) { 
+			if (d.Action1.WasPressed) {
+				switch (clickCount) { 
 			      case 0:
 			          can.GetComponent<Image>().sprite = poroi;
 			          break;
