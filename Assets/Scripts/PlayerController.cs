@@ -289,7 +289,7 @@ public class PlayerController : MonoBehaviour {
 				if (device.Action1.IsPressed) {
 					TakeAction();
 				} if((device.RightTrigger.IsPressed || device.RightBumper.IsPressed) && !shopOpen && 
-                    (!GetComponentInChildren<Trap>() || !GetComponentInChildren<ResourceBox>())){
+                    !GetComponentInChildren<Trap>() && !GetComponentInChildren<ResourceBox>()){
 					Attack();
 				} if((device.LeftTrigger.IsPressed || device.LeftBumper.IsPressed) && !shopOpen &&
                     !GetComponentInChildren<Trap>() && !GetComponentInChildren<ResourceBox>()){
@@ -300,7 +300,7 @@ public class PlayerController : MonoBehaviour {
 					DropResourceBox();
 				}
 			} else if (Input.GetButton("Action_" + (player_num % 2).ToString())) {
-                if (!shopOpen && (!GetComponentInChildren<Trap>() || !GetComponentInChildren<ResourceBox>())) {
+                if (!shopOpen && (!GetComponentInChildren<Trap>() && !GetComponentInChildren<ResourceBox>())) {
 					Attack();
 				} else if(GetComponentInChildren<ResourceBox>()) {
 					DropResourceBox();
@@ -542,6 +542,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	public void awakePlayer() {
+		rigidbody.constraints &= ~RigidbodyConstraints.FreezePosition;
 		dead = false;
 		health = startingHealth;
 		health_slider.value = health;
@@ -656,6 +657,9 @@ public class PlayerController : MonoBehaviour {
 		RaycastHit outInfo;
 		while(Physics.Raycast(this.transform.position + this.transform.up, direction, out outInfo, 2.5f, layerMask)){
 			Debug.Log (LayerMask.LayerToName(outInfo.transform.gameObject.layer));
+			if (outInfo.transform.gameObject.GetComponent<PlayerController>() == this) {
+				break;
+			}
 			if(direction == this.transform.forward) {
 				direction = this.transform.right;
 				Debug.Log("Object in front");
@@ -726,8 +730,8 @@ public class PlayerController : MonoBehaviour {
 
 	public void Attack(){
 		if(currentWeapon is SwordScript){
-			weapons[currentWeaponIndex].GetComponent<SwordScript>().Swing();
-			swinging_sword.Play();
+			weapons[currentWeaponIndex].GetComponent<SwordScript>().Swing(swinging_sword);
+//			swinging_sword.Play();
 			RaycastHit hitinfo;
 			if (IsInRange(out hitinfo, "Player")){
 				PlayerController other = hitinfo.transform.GetComponent<PlayerController>();

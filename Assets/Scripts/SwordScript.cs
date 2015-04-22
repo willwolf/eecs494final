@@ -75,10 +75,11 @@ public class SwordScript : WeaponItem {
 //		print ("It's a trigger!");
 	}
 
-	public void Swing(){
+	public void Swing(AudioSource s){
 		if (upswing || downswing) {
 			return;
 		}
+		s.Play();
 		if(!upswing){
 			upswing = true;
 		}

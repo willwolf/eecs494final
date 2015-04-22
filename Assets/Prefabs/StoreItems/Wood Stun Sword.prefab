@@ -253,6 +253,7 @@ MonoBehaviour:
   item_name: Wood Stun Sword
   stone_cost: 0
   wood_cost: 2
+  description: Slows the enemy when hit
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

@@ -507,6 +507,7 @@ MonoBehaviour:
   item_name: Bow
   stone_cost: 3
   wood_cost: 3
+  description: Shoot enemies at a distance
 --- !u!136 &13620150
 CapsuleCollider:
   m_ObjectHideFlags: 1
