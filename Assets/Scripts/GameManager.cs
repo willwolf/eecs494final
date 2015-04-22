@@ -30,6 +30,7 @@ public class CatapultTracker {
 }
 
 public class GameManager : MonoBehaviour {
+	public float CATAPULT_ALERT_TIME = 2f;
 	public const bool USE_SCATTER = true;
 	public const bool FORCE_CATAPULT_ORDER = true;
 	public const bool ENCUMBER_WINNERS = true;
@@ -251,6 +252,7 @@ public class GameManager : MonoBehaviour {
 				if(teamCatapultStatus[teamId].has_projectile){
 					p.cataStone.enabled = true;
 				}
+				p.updateMidScreenText("Enemy purchased catapult part!", CATAPULT_ALERT_TIME);
 			}
 		}
 	}
@@ -275,6 +277,7 @@ public class GameManager : MonoBehaviour {
 				if(teamCatapultStatus[oppId].has_projectile){
 					p.oppCataStone.enabled = true;
 				}
+				p.updateMidScreenText("Catapult part purchased!", CATAPULT_ALERT_TIME);
 			}
 		}
 	}

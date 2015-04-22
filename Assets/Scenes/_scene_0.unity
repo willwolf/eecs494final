@@ -19417,6 +19417,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 447c27080d2354984b68f17304436118, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CATAPULT_ALERT_TIME: 2
   TUTORIAL: 0
   allPlayers: []
   INITIAL_FREEZE_DUR: 3

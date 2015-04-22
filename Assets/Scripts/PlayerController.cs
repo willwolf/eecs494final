@@ -46,7 +46,7 @@ public class PlayerController : MonoBehaviour {
 	public float steal_at_time;
 
 
-	public int MIDTEXT_COOLDOWN_TIME = 5;
+	const int MIDTEXT_COOLDOWN_TIME = 1;
 	private bool showing = false;
 	private float zero_at_time;
 
@@ -959,12 +959,11 @@ public class PlayerController : MonoBehaviour {
 		return false;
 	}
 
-	public void updateMidScreenText(string newText){
+	public void updateMidScreenText(string newText, float timeoutAt=MIDTEXT_COOLDOWN_TIME){
 		showing = true;
-		zero_at_time = Time.time + MIDTEXT_COOLDOWN_TIME;
+		zero_at_time = Time.time + timeoutAt;
 	
 		mid_screen_text.text = newText;
-
 	}
 
 	public bool hasWon(int baseID){
