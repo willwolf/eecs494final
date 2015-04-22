@@ -6,8 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/_scene_intro.unity
+  - enabled: 1
     path: Assets/Scenes/_scene_0.unity
   - enabled: 1
     path: Assets/Scenes/_scene_game_over.unity
   - enabled: 1
     path: Assets/Scenes/_scene_tutorial.unity
+  - enabled: 1
+    path: Assets/Scenes/_scene_tutorial_2.unity
