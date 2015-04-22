@@ -22,6 +22,7 @@ public class Tutorial2 : MonoBehaviour {
 		gm = GameObject.Find("GameManager").GetComponent<GameManager>();
 		for(int i = 0; i < 4; i++){
 			tutorialSteps.Add(0);
+			waitTimes.Add(Time.time);
 		}
 		for(int i = 0; i <= num_steps; i++) {
 			tutorialTexts[i] = i + ") " + getText(i);
@@ -39,7 +40,9 @@ public class Tutorial2 : MonoBehaviour {
 					pc.updateMidScreenText("Task Complete!");
 					pc.freeze(1, false);
 				}
-				tutorialSteps[pc.player_num - 1]++;
+				if(tutorialSteps[pc.player_num - 1] < num_steps) {
+					tutorialSteps[pc.player_num - 1]++;
+				}
 				string nextText = tutorialTexts[tutorialSteps[pc.player_num - 1]];
 				Text tut_text = pc.canvas.transform.Find("Tutorial_Text").gameObject.GetComponent<Text>();
 				tut_text.text = nextText;
@@ -54,7 +57,6 @@ public class Tutorial2 : MonoBehaviour {
 			}
 			allDone = allDone && (tutorialSteps[pc.player_num - 1] >= num_steps);
 			wallDrop = wallDrop && (tutorialSteps[pc.player_num - 1] >= wall_drop);
-			Debug.Log(pc.GetComponentsInChildren<StealthScript>().Length);
 		} if(allDone) {
 			if(Time.time > startGameTime){
 				foreach(PlayerController pc in gm.allPlayers){
@@ -91,6 +93,8 @@ public class Tutorial2 : MonoBehaviour {
 		case 5:
 			return task15_1(pc);
 		case 6:
+			pc.freeze(1, false);
+			pc.updateMidScreenText("Waiting for other players...");
 			return true;
 		default:
 			return false;
@@ -142,8 +146,7 @@ public class Tutorial2 : MonoBehaviour {
 
 	bool task8_1(PlayerController pc){
 		//fire arrows
-		if(pc.hasWeapon && (Input.GetKeyDown(KeyCode.RightShift) || Input.GetKeyDown(KeyCode.LeftShift) 
-		                    || pc.device.RightTrigger.IsPressed || pc.device.RightBumper.IsPressed)){
+		if(pc.hasWeapon && (pc.device.RightTrigger.IsPressed || pc.device.RightBumper.IsPressed)){
 			pc.Attack();
 			return true;
 		}
@@ -153,7 +156,7 @@ public class Tutorial2 : MonoBehaviour {
 	
 	bool task15_1(PlayerController pc){
 		pc.freeze(1, false);
-		pc.updateMidScreenText("Waiting for other players...");
+//		pc.updateMidScreenText("Waiting for other players...");
 		return Time.time > waitTimes[pc.player_num - 1];
 	}
 
