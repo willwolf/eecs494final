@@ -42,6 +42,9 @@ public class Tutorial2 : MonoBehaviour {
 				}
 				if(tutorialSteps[pc.player_num - 1] < num_steps) {
 					tutorialSteps[pc.player_num - 1]++;
+				} else {
+					pc.updateMidScreenText("Waiting for other players...");
+					pc.freeze(1, false);
 				}
 				string nextText = tutorialTexts[tutorialSteps[pc.player_num - 1]];
 				Text tut_text = pc.canvas.transform.Find("Tutorial_Text").gameObject.GetComponent<Text>();
@@ -93,8 +96,6 @@ public class Tutorial2 : MonoBehaviour {
 		case 5:
 			return task15_1(pc);
 		case 6:
-			pc.freeze(1, false);
-			pc.updateMidScreenText("Waiting for other players...");
 			return true;
 		default:
 			return false;
@@ -150,7 +151,7 @@ public class Tutorial2 : MonoBehaviour {
 			pc.Attack();
 			return true;
 		}
-		waitTimes[pc.player_num - 1] = Time.time + 5f;
+		waitTimes[pc.player_num - 1] = Time.time + 3;
 		return false;
 	}
 	
