@@ -9,6 +9,7 @@ public class IntroScene : MonoBehaviour {
 
     public Sprite title1;
     public Sprite title2;
+    public AudioSource themeSong;
 
     public Sprite poroi;
     public Sprite dudes;
@@ -22,8 +23,9 @@ public class IntroScene : MonoBehaviour {
 
 	// Use this for initialization
 	void Awake () {
+      themeSong.Play();
       can = GameObject.Find("Canvas").GetComponent<Canvas>();
-      flashTimer = Time.time + 1;
+      flashTimer = Time.time + .5f;
 
 	}
 	

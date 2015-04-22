@@ -361,6 +361,10 @@ Prefab:
       propertyPath: m_LocalScale.x
       value: 40
       objectReference: {fileID: 0}
+    - target: {fileID: 11400892, guid: 5f93fdd4e70a94e768133bb21d9dd9b0, type: 2}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 1863967338}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5f93fdd4e70a94e768133bb21d9dd9b0, type: 2}
   m_RootGameObject: {fileID: 1168538637}
@@ -4735,6 +4739,10 @@ Prefab:
       propertyPath: m_LocalScale.x
       value: 40
       objectReference: {fileID: 0}
+    - target: {fileID: 11400892, guid: 5f93fdd4e70a94e768133bb21d9dd9b0, type: 2}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 1168538637}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5f93fdd4e70a94e768133bb21d9dd9b0, type: 2}
   m_RootGameObject: {fileID: 1863967338}
@@ -12919,7 +12927,7 @@ MonoBehaviour:
   stone_cost: 35
   wood_cost: 0
   description: 
-  target: {fileID: 0}
+  target: {fileID: 1168538637}
   fired: 0
   fire: {fileID: 109038, guid: 35bf1fbf05bd0470b8e9ac7b53637a52, type: 2}
   num_fires: 30
@@ -14003,7 +14011,7 @@ MonoBehaviour:
   stone_cost: 35
   wood_cost: 0
   description: 
-  target: {fileID: 0}
+  target: {fileID: 1863967338}
   fired: 0
   fire: {fileID: 109038, guid: 35bf1fbf05bd0470b8e9ac7b53637a52, type: 2}
   num_fires: 30
