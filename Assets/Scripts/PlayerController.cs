@@ -606,6 +606,7 @@ public class PlayerController : MonoBehaviour {
 				frozen = false;
 			} 
 			StartCoroutine(colorFlash());
+			rigidbody.constraints &= ~RigidbodyConstraints.FreezePosition;
 		}
 
 		if(health <= 0){
