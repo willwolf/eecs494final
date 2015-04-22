@@ -109,6 +109,7 @@ public class PlayerController : MonoBehaviour {
 	private GameObject aimLine;
 	public GameObject resourceBox;
 	public GameObject trapGO;
+  public GameObject upperBody;
 
 	public GameObject stone_scatterObj;
 	public GameObject wood_scatterObj;
@@ -139,6 +140,7 @@ public class PlayerController : MonoBehaviour {
 		armor_slider.value = 0;
 		playerCam = transform.FindChild("Cam").GetComponent<Camera>();
 		camEulerStart = playerCam.transform.rotation.eulerAngles;
+    upperBody = transform.FindChild("Chest").gameObject;
 
 		arrow_slider = canvas.transform.FindChild ("Arrow Slider").GetComponent<Slider> ();
 		arrow_text   = arrow_slider.transform.FindChild ("ArrowText").GetComponent<Text> ();
@@ -571,15 +573,20 @@ public class PlayerController : MonoBehaviour {
 		while(Time.time < vulnerable_at_time){
 			this.renderer.material = null;
 			if(index % 2 == 0){
+          upperBody.renderer.material.color = normColor;
+          upperBody.renderer.material = normMat;
 				this.renderer.material.color = normColor;
 				this.renderer.material = normMat;
 			}
 			else{
+          upperBody.renderer.material.color = hitColor;
 				this.renderer.material.color = hitColor;
 			}
 			++index;
 			yield return new WaitForSeconds(.1f);  
 		}
+    upperBody.renderer.material.color = normColor;
+    upperBody.renderer.material = normMat;
 		this.renderer.material.color = normColor;
 		this.renderer.material = normMat;
 	}
