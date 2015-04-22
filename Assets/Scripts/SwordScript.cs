@@ -62,23 +62,16 @@ public class SwordScript : WeaponItem {
 		}
 	}
 
-	void OnCollisionEnter(Collision collision) {
-      print("ouch");
-		if (collision.gameObject.name == this.transform.parent.gameObject.name) {
+	void OnTriggerEnter(Collider collision) {
+		print("ouch");
+		if (collision.gameObject.GetInstanceID() == this.transform.parent.transform.parent.gameObject.GetInstanceID()) {
 			return;
-      PlayerController player = collision.transform.GetComponent<PlayerController>();
-      if (this.transform.parent.GetComponent<PlayerController>().homeBase_GO.GetInstanceID() != player.homeBase_GO.GetInstanceID())
-          player.takeDamage(damage_amount);
-		
 		}
+		PlayerController player = collision.transform.GetComponent<PlayerController>();
+		if (this.transform.parent.transform.parent.GetComponent<PlayerController>().homeBase_GO.GetInstanceID() != player.homeBase_GO.GetInstanceID()) {
+			player.takeDamage(damage_amount);
 
-		foreach (ContactPoint contact in collision.contacts) {
-			Debug.DrawRay(contact.point, contact.normal, Color.white);
 		}
-	}
-
-	void OnTriggerEnter(Collider coll) {
-//		print ("It's a trigger!");
 	}
 
 	public void Swing(AudioSource s){

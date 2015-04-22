@@ -2766,6 +2766,7 @@ MonoBehaviour:
   item_name: Bow
   stone_cost: 0
   wood_cost: 6
+  description: 
 --- !u!114 &11421850
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2781,6 +2782,7 @@ MonoBehaviour:
   item_name: Sword
   stone_cost: 6
   wood_cost: 0
+  description: 
   damage_amount: 2
   upswing: 0
   downswing: 0
@@ -2799,6 +2801,7 @@ MonoBehaviour:
   item_name: Wood Stun Sword
   stone_cost: 0
   wood_cost: 3
+  description: 
   damage_amount: 2
   upswing: 0
   downswing: 0
@@ -2918,6 +2921,7 @@ MonoBehaviour:
   item_name: 
   stone_cost: 0
   wood_cost: 0
+  description: 
 --- !u!124 &12420228
 Behaviour:
   m_ObjectHideFlags: 1
