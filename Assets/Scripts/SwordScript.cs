@@ -62,17 +62,17 @@ public class SwordScript : WeaponItem {
 		}
 	}
 
-	void OnTriggerEnter(Collider collision) {
-		print("ouch");
-		if (collision.gameObject.GetInstanceID() == this.transform.parent.transform.parent.gameObject.GetInstanceID()) {
-			return;
-		}
-		PlayerController player = collision.transform.GetComponent<PlayerController>();
-		if (this.transform.parent.transform.parent.GetComponent<PlayerController>().homeBase_GO.GetInstanceID() != player.homeBase_GO.GetInstanceID()) {
-			player.takeDamage(damage_amount);
-
-		}
-	}
+//	void OnTriggerEnter(Collider collision) {
+//		print("ouch");
+//		if (collision.gameObject.GetInstanceID() == this.transform.parent.transform.parent.gameObject.GetInstanceID()) {
+//			return;
+//		}
+//		PlayerController player = collision.transform.GetComponent<PlayerController>();
+//		if (this.transform.parent.transform.parent.GetComponent<PlayerController>().homeBase_GO.GetInstanceID() != player.homeBase_GO.GetInstanceID()) {
+//			player.takeDamage(damage_amount);
+//
+//		}
+//	}
 
 	public void Swing(AudioSource s){
 		if (upswing || downswing) {

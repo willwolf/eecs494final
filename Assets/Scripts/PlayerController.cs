@@ -743,15 +743,13 @@ public class PlayerController : MonoBehaviour {
 
 //			swinging_sword.Play();
 			RaycastHit hitinfo;
-		/*	if (IsInRange(out hitinfo, "Player")){
+		if (IsInRange(out hitinfo, "Player")){
 				PlayerController other = hitinfo.transform.GetComponent<PlayerController>();
 				if (other.homeBase_GO.GetInstanceID() != this.homeBase_GO.GetInstanceID()) {
 					other.takeDamage(damage_amount);
 					other.stun(stunTime, true);
 				}
-			} else if (IsInRange(out hitinfo, "Enemy")){
-				hitinfo.transform.GetComponent<EnemyScript>().takeDamage(damage_amount);
-			}*/ 
+			}
 		}  else if (currentWeapon is BowScript){
 			if(Time.time > next_fire_at_time && arrows > 0){
 				arrow_sound.Play();
