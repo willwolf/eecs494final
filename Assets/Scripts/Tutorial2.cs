@@ -7,7 +7,7 @@ public class Tutorial2 : MonoBehaviour {
 
 	private GameManager gm;
 	public GameObject barriers;
-	private int num_steps = 16;
+	private int num_steps = 6;
 	private int wall_drop = 13;
 	private List<int> tutorialSteps = new List<int>();
 	private Dictionary<int, string> tutorialTexts = new Dictionary<int, string>();
@@ -58,19 +58,21 @@ public class Tutorial2 : MonoBehaviour {
 		if(wallDrop){
 			Destroy(barriers);
 		} if(allDone) {
-			foreach(PlayerController pc in gm.allPlayers){
-				string nextText = "Tutorial Complete! Press any button to start a game";
-				pc.canvas.transform.Find("Tutorial_Text").gameObject.GetComponent<Text>().text = nextText;
-				if(pc.device.AnyButton && Time.time > startGameTime){
-					Application.LoadLevel(0);
+			if(Time.time > startGameTime){
+				foreach(PlayerController pc in gm.allPlayers){
+					string nextText = "Tutorial Complete! Press any button to start a game";
+					pc.canvas.transform.Find("Tutorial_Text").gameObject.GetComponent<Text>().text = nextText;
+					if(Input.anyKey || (pc.device != null && pc.device.AnyButton)){
+						Application.LoadLevel(0);
+					}
 				}
 			}
 		} else {
-			startGameTime = Time.time + 5;
+			startGameTime = Time.time + 3;
 		}
 		
 		//quit tutorial, play game
-		if(Input.GetKeyDown(KeyCode.Alpha0)){
+		if(Input.GetKeyDown(KeyCode.P)){
 			Application.LoadLevel(0);
 		}
 	}
@@ -91,7 +93,7 @@ public class Tutorial2 : MonoBehaviour {
 		case 5:
 			return task15_1(pc);
 		case 6:
-			return task6(pc);
+			return true;
 		default:
 			return false;
 		}
@@ -100,7 +102,7 @@ public class Tutorial2 : MonoBehaviour {
 	string getText(int num){
 		switch(num){
 		case 0:
-			return "Welcome to Base Race! This tutorial will teach you how to play";
+			return "Welcome to the Base Race Tutorial! Press P at any time to start the game";
 		case 1:
 			return "Collect 3 wood or 3 stone by pressing and holding A when close to the trees or rocks";
 		case 2:
@@ -142,15 +144,19 @@ public class Tutorial2 : MonoBehaviour {
 
 	bool task8_1(PlayerController pc){
 		//fire arrows
-		if(pc.hasWeapon && (pc.device.RightTrigger.IsPressed || pc.device.RightBumper.IsPressed)){
+		if(pc.hasWeapon && (Input.GetKeyDown(KeyCode.RightShift) || Input.GetKeyDown(KeyCode.LeftShift) 
+		                    || pc.device.RightTrigger.IsPressed || pc.device.RightBumper.IsPressed)){
 			pc.Attack();
 			return true;
 		}
+		startTime = Time.time + 5;
 		return false;
 	}
 	
 	bool task15_1(PlayerController pc){
-		
+		pc.freeze(1, false);
+		pc.updateMidScreenText("Waiting for other players...");
+		return allDone;
 	}
 
 }

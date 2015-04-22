@@ -3063,6 +3063,7 @@ MonoBehaviour:
   item_name: Catapult Arm
   stone_cost: 0
   wood_cost: 20
+  description: 
 --- !u!23 &271504378
 Renderer:
   m_ObjectHideFlags: 0
@@ -4620,6 +4621,7 @@ MonoBehaviour:
   item_name: Wall
   stone_cost: 0
   wood_cost: 0
+  description: 
 --- !u!1001 &417548242
 Prefab:
   m_ObjectHideFlags: 0
@@ -6356,6 +6358,7 @@ MonoBehaviour:
   item_name: Catapult Legs
   stone_cost: 0
   wood_cost: 25
+  description: 
 --- !u!1 &617515309
 GameObject:
   m_ObjectHideFlags: 0
@@ -7894,6 +7897,7 @@ MonoBehaviour:
   item_name: 
   stone_cost: 0
   wood_cost: 0
+  description: 
 --- !u!23 &750288275
 Renderer:
   m_ObjectHideFlags: 0
@@ -8732,6 +8736,7 @@ MonoBehaviour:
   item_name: Wall
   stone_cost: 0
   wood_cost: 0
+  description: 
 --- !u!1 &822372770
 GameObject:
   m_ObjectHideFlags: 0
@@ -8877,6 +8882,7 @@ MonoBehaviour:
   item_name: Catapult Legs
   stone_cost: 0
   wood_cost: 25
+  description: 
 --- !u!1001 &833223468
 Prefab:
   m_ObjectHideFlags: 0
@@ -12185,6 +12191,7 @@ MonoBehaviour:
   item_name: Catapult Stone
   stone_cost: 35
   wood_cost: 0
+  description: 
   target: {fileID: 0}
   fired: 0
   fire: {fileID: 109038, guid: 35bf1fbf05bd0470b8e9ac7b53637a52, type: 2}
@@ -13147,6 +13154,7 @@ MonoBehaviour:
   item_name: Catapult Stone
   stone_cost: 35
   wood_cost: 0
+  description: 
   target: {fileID: 0}
   fired: 0
   fire: {fileID: 109038, guid: 35bf1fbf05bd0470b8e9ac7b53637a52, type: 2}
@@ -14928,6 +14936,7 @@ MonoBehaviour:
   item_name: 
   stone_cost: 0
   wood_cost: 0
+  description: 
 --- !u!23 &1419801843
 Renderer:
   m_ObjectHideFlags: 0
@@ -20527,6 +20536,7 @@ MonoBehaviour:
   item_name: Catapult Arm
   stone_cost: 0
   wood_cost: 20
+  description: 
 --- !u!23 &2026554438
 Renderer:
   m_ObjectHideFlags: 0
@@ -20686,7 +20696,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2039927965}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e85965c40c8b47e0975e28b61fcb399, type: 3}
+  m_Script: {fileID: 11500000, guid: 4bf9048edcb1a436f9b9c19db8899c0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   barriers: {fileID: 1587802980}
