@@ -10,6 +10,7 @@ public class Tutorial2 : MonoBehaviour {
 	private int num_steps = 6;
 	private int wall_drop = 13;
 	private List<int> tutorialSteps = new List<int>();
+	private List<float> waitTimes = new List<float>();
 	private Dictionary<int, string> tutorialTexts = new Dictionary<int, string>();
 	private float startTime;
 	private float startGameTime;
@@ -54,9 +55,6 @@ public class Tutorial2 : MonoBehaviour {
 			allDone = allDone && (tutorialSteps[pc.player_num - 1] >= num_steps);
 			wallDrop = wallDrop && (tutorialSteps[pc.player_num - 1] >= wall_drop);
 			Debug.Log(pc.GetComponentsInChildren<StealthScript>().Length);
-		}
-		if(wallDrop){
-			Destroy(barriers);
 		} if(allDone) {
 			if(Time.time > startGameTime){
 				foreach(PlayerController pc in gm.allPlayers){
@@ -149,14 +147,14 @@ public class Tutorial2 : MonoBehaviour {
 			pc.Attack();
 			return true;
 		}
-		startTime = Time.time + 5;
+		waitTimes[pc.player_num - 1] = Time.time + 5f;
 		return false;
 	}
 	
 	bool task15_1(PlayerController pc){
 		pc.freeze(1, false);
 		pc.updateMidScreenText("Waiting for other players...");
-		return allDone;
+		return Time.time > waitTimes[pc.player_num - 1];
 	}
 
 }
