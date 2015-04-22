@@ -947,7 +947,7 @@ public class PlayerController : MonoBehaviour {
 	bool IsInRange(out RaycastHit hitinfo, string Layer) {
 		int layerMask = LayerMask.GetMask(Layer);
 //		foreach (RaycastHit hit in Physics.SphereCastAll(transform.position, 1.5f, this.transform.forward, 3f, layerMask)) {
-		foreach (RaycastHit hit in Physics.SphereCastAll(transform.position-transform.forward*1.5f, 1.5f, this.transform.forward, 4f, layerMask)) {
+		foreach (RaycastHit hit in Physics.SphereCastAll(transform.position-transform.forward*1.5f, 1.5f, this.transform.forward, 3.25f, layerMask)) {
 //			if(Vector3.Angle(transform.forward, hit.transform.position-transform.position)<30) {
 			//if (hit.transform.position < this.transform.position) {
 			if(true) {
