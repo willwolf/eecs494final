@@ -4,12 +4,13 @@ using System.Collections;
 public class SwordScript : WeaponItem {
 	Vector3 swingStart;
 	Vector3 swingEnd;
-	bool upswing;
-	bool downswing;
+  public int damage_amount = 2;
+	public bool upswing;
+	public bool downswing;
 
 	// Use this for initialization
 	void Start () {
-		swingStart = new Vector3 (1, 0, 1);
+		swingStart = new Vector3 (.5f, 0, .5f);
 		swingEnd = new Vector3 (-1, 0, 1);
 		transform.localPosition = swingStart;
 		upswing = false;
@@ -19,21 +20,21 @@ public class SwordScript : WeaponItem {
 	// Update is called once per frame
 	void Update () {
 		if (upswing){
-			transform.localPosition = Vector3.Slerp(transform.localPosition, swingEnd, 25 * Time.deltaTime);
+		//	transform.localPosition = Vector3.Slerp(transform.localPosition, swingEnd, 25 * Time.deltaTime);
 			//print ("swingup");
-			if (transform.localPosition == swingEnd) {
+		//	if (transform.localPosition == swingEnd) {
 			//	print ("start downswing");
 				upswing = false;
 				downswing = true;
-			}
+			//}
 		}	
 		if (downswing){
 			//print ("swingdown");
-			transform.localPosition = Vector3.Slerp(transform.localPosition, swingStart, 25 * Time.deltaTime);
-			if (transform.localPosition == swingStart) {	
+		//	transform.localPosition = Vector3.Slerp(transform.localPosition, swingStart, 25 * Time.deltaTime);
+		//	if (transform.localPosition == swingStart) {	
 		//		print ("back to start");
 				downswing = false;
-			}
+			//}
 		}
 	}
 
@@ -62,8 +63,13 @@ public class SwordScript : WeaponItem {
 	}
 
 	void OnCollisionEnter(Collision collision) {
+      print("ouch");
 		if (collision.gameObject.name == this.transform.parent.gameObject.name) {
-			return;		
+			return;
+      PlayerController player = collision.transform.GetComponent<PlayerController>();
+      if (this.transform.parent.GetComponent<PlayerController>().homeBase_GO.GetInstanceID() != player.homeBase_GO.GetInstanceID())
+          player.takeDamage(damage_amount);
+		
 		}
 
 		foreach (ContactPoint contact in collision.contacts) {

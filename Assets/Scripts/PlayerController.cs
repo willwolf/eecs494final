@@ -118,6 +118,8 @@ public class PlayerController : MonoBehaviour {
 	public Material normMat;
 	public Color hitColor;
 	public Color normColor;
+  public Animator anim;
+  public int swordAnimHash;
 
 	// Use this for initialization
 	void Start () {
@@ -185,6 +187,8 @@ public class PlayerController : MonoBehaviour {
 		normMat = this.renderer.material;
 		normColor = this.renderer.material.color; 
 		hitColor = Color.white;
+    anim = this.GetComponent<Animator>();
+    swordAnimHash = Animator.StringToHash("SwordSwing");
 	}
 
 	// Update is called once per frame
@@ -728,12 +732,22 @@ public class PlayerController : MonoBehaviour {
 		arrow_text.text = "Arrows: " + arrows.ToString();
 	}
 
+  public void setSwinging() { 
+    
+  }
+
 	public void Attack(){
 		if(currentWeapon is SwordScript){
 			weapons[currentWeaponIndex].GetComponent<SwordScript>().Swing(swinging_sword);
+            anim.SetTrigger(swordAnimHash);
+            //anim.SetBool(Animator.StringToHash("swingBool"), true);
+      
+        
+
+
 //			swinging_sword.Play();
 			RaycastHit hitinfo;
-			if (IsInRange(out hitinfo, "Player")){
+		/*	if (IsInRange(out hitinfo, "Player")){
 				PlayerController other = hitinfo.transform.GetComponent<PlayerController>();
 				if (other.homeBase_GO.GetInstanceID() != this.homeBase_GO.GetInstanceID()) {
 					other.takeDamage(damage_amount);
@@ -741,7 +755,7 @@ public class PlayerController : MonoBehaviour {
 				}
 			} else if (IsInRange(out hitinfo, "Enemy")){
 				hitinfo.transform.GetComponent<EnemyScript>().takeDamage(damage_amount);
-			} 
+			}*/ 
 		}  else if (currentWeapon is BowScript){
 			if(Time.time > next_fire_at_time && arrows > 0){
 				arrow_sound.Play();
