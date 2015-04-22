@@ -657,25 +657,20 @@ public class PlayerController : MonoBehaviour {
 		                       	+ (1 << LayerMask.NameToLayer("ScatteredObject"))
 		                        + (1 << LayerMask.NameToLayer("ResourceBox"))
 		                        + (1 << LayerMask.NameToLayer("Trap")));
-		Debug.Log(layerMask.value);
+
 		RaycastHit outInfo;
 		while(Physics.Raycast(this.transform.position + this.transform.up, direction, out outInfo, 2.5f, layerMask)){
-			Debug.Log (LayerMask.LayerToName(outInfo.transform.gameObject.layer));
 			if (outInfo.transform.gameObject.GetComponent<PlayerController>() == this) {
 				break;
 			}
 			if(direction == this.transform.forward) {
 				direction = this.transform.right;
-				Debug.Log("Object in front");
 			} else if (direction == this.transform.right){
 				direction = -this.transform.forward;
-				Debug.Log("Object on right");
 			} else if (direction == -this.transform.forward) {
 				direction = -this.transform.right;
-				Debug.Log("Object behind");
 			} else {
 				direction = this.transform.forward;
-				Debug.Log("Object on left");
 				break;
 			}
 		}
