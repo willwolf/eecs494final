@@ -252,7 +252,6 @@ public class GameManager : MonoBehaviour {
 				if(teamCatapultStatus[teamId].has_projectile){
 					p.cataStone.enabled = true;
 				}
-				p.updateMidScreenText("Enemy purchased catapult part!", CATAPULT_ALERT_TIME);
 			}
 		}
 	}
@@ -277,7 +276,6 @@ public class GameManager : MonoBehaviour {
 				if(teamCatapultStatus[oppId].has_projectile){
 					p.oppCataStone.enabled = true;
 				}
-				p.updateMidScreenText("Catapult part purchased!", CATAPULT_ALERT_TIME);
 			}
 		}
 	}
@@ -292,6 +290,16 @@ public class GameManager : MonoBehaviour {
 					text.text += "Wood: " + counts.wood + 
 						" Stone: " + counts.stone;// + catapultText(pair.Key) + "\n";
 				}		
+			}
+		}
+	}
+
+	public void CatapultPurchaseAlert(int teamId) {
+		foreach (PlayerController p in allPlayers) {
+			if (p.homeBase_GO.GetInstanceID() == teamId) {
+				p.updateMidScreenText("Purchased catapult part!", CATAPULT_ALERT_TIME);
+			} else {
+				p.updateMidScreenText("Enemy purchased catapult part!", CATAPULT_ALERT_TIME);
 			}
 		}
 	}
@@ -443,8 +451,8 @@ public class GameManager : MonoBehaviour {
 			}
 		} finally {
 			updateTeamText(team_id);
+			CatapultPurchaseAlert(team_id);
 			updateAllOppTexts();
-//			updateAllOppCataIcons();
 			UpdateAllCatapultIcons();
 		}
 	} 
