@@ -146,7 +146,7 @@ public class GameManager : MonoBehaviour {
 		player.renderer.material = teamMats[base1.GetInstanceID()];
     player.transform.FindChild("Chest").gameObject.renderer.material = teamMats[base1.GetInstanceID()];
 
-
+    
 		controller.freeze(INITIAL_FREEZE_DUR, false, true, "GO!");
 	}
 

@@ -50,6 +50,9 @@ public class PlayerController : MonoBehaviour {
 	private bool showing = false;
 	private float zero_at_time;
 
+  const int BETWEEN_SCENE_DURATION = 3;
+  float switch_scene_at_time;
+
 	public GameObject homeBase_GO;
 	public Base homeBase { get; private set; }
 	public bool inBase = false;
@@ -198,10 +201,20 @@ public class PlayerController : MonoBehaviour {
 		hitColor = Color.white;
     anim = this.GetComponent<Animator>();
     swordAnimHash = Animator.StringToHash("SwordSwing");
+
+    switch_scene_at_time = Time.time + BETWEEN_SCENE_DURATION;
 	}
 
 	// Update is called once per frame
 	void Update () {
+      if (Application.loadedLevelName =="_scene_1") {
+          updateMidScreenText("First team to buy the 4 catapult parts wins!");
+          if (Time.time > switch_scene_at_time) {
+              Application.LoadLevel("_scene_0");
+          }
+          return;
+      }
+
 		if (hasWon (GameManager.winningTeam)) {
 			updateMidScreenText("You won!\nPress 'R' to Replay");
 			//			Time.timeScale = 0;

@@ -66,7 +66,7 @@ public class Tutorial2 : MonoBehaviour {
 					string nextText = "Tutorial Complete! Press any button to start a game";
 					pc.canvas.transform.Find("Tutorial_Text").gameObject.GetComponent<Text>().text = nextText;
 					if(Input.anyKey || (pc.device != null && pc.device.AnyButton)){
-						Application.LoadLevel("_scene_0");
+						Application.LoadLevel("_scene_1");
 					}
 				}
 			}
@@ -76,7 +76,7 @@ public class Tutorial2 : MonoBehaviour {
 		
 		//quit tutorial, play game
 		if(Input.GetKeyDown(KeyCode.P)){
-			Application.LoadLevel("_scene_0");
+			Application.LoadLevel("_scene_1");
 		}
 	}
 	
