@@ -21,13 +21,16 @@ public class IntroScene : MonoBehaviour {
     float flashTimer;
     public int flashCount = 0;
     public int clickCount = 0;
+	public float nextTransition = 0;
+	public float transitionInterval = 2f;
+	public bool USE_TIMER = true;
 
 	// Use this for initialization
 	void Awake () {
-      themeSong.Play();
-      can = GameObject.Find("Canvas").GetComponent<Canvas>();
-      flashTimer = Time.time + .5f;
-
+		themeSong.Play();
+		can = GameObject.Find("Canvas").GetComponent<Canvas>();
+		flashTimer = Time.time + .5f;
+		nextTransition = Time.time + transitionInterval;
 	}
 	
 	// Update is called once per frame
@@ -52,56 +55,45 @@ public class IntroScene : MonoBehaviour {
               ++flashCount;
           } 
         
-      }
+		}
+		if (USE_TIMER && clickCount != 0 && Time.time > nextTransition) {
+			MakeTransition(clickCount);
+			clickCount++;
+			nextTransition = Time.time + transitionInterval;
+		}
 
       //change this to action button or something
 		if (Input.GetKeyDown(KeyCode.P)) {
-			switch (clickCount) { 
-			case 0:
-				can.GetComponent<Image>().sprite = poroi;
-				break;
-			case 1:
-				can.GetComponent<Image>().sprite = dudes;
-				break;
-			case 2:
-				can.GetComponent<Image>().sprite = conflict;
-				break;
-			case 3:
-				can.GetComponent<Image>().sprite = cata;
-				break;
-			case 4:
-				Application.LoadLevel("_scene_tutorial_2");
-				break;
-			}
+			MakeTransition(clickCount);
 			++clickCount;
-			
+			nextTransition = Time.time + transitionInterval;
 		}
 		foreach(var d in InputManager.Devices) {
 			if (d.Action1.WasPressed) {
-				switch (clickCount) { 
-			      case 0:
-			          can.GetComponent<Image>().sprite = poroi;
-			          break;
-			      case 1:
-			          can.GetComponent<Image>().sprite = dudes;
-			          break;
-			      case 2:
-			          can.GetComponent<Image>().sprite = conflict;
-			          break;
-			      case 3:
-			          can.GetComponent<Image>().sprite = cata;
-			          break;
-			      case 4:
-			          Application.LoadLevel("_scene_tutorial_2");
-			          break;
-			  }
-			  ++clickCount;
-			  
+				MakeTransition(clickCount);
+				++clickCount;
+				nextTransition = Time.time + transitionInterval;  
 			}
 		}
-      if (Input.GetKeyDown(KeyCode.B)) {
-          
-      }
+	}
 
+	public void MakeTransition(int clickCount) {
+		switch (clickCount) { 
+		case 0:
+			can.GetComponent<Image>().sprite = poroi;
+			break;
+		case 1:
+			can.GetComponent<Image>().sprite = dudes;
+			break;
+		case 2:
+			can.GetComponent<Image>().sprite = conflict;
+			break;
+		case 3:
+			can.GetComponent<Image>().sprite = cata;
+			break;
+		case 4:
+			Application.LoadLevel("_scene_tutorial_2");
+			break;
+		}
 	}
 }
