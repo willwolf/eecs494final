@@ -96,10 +96,12 @@ public class PlayerController : MonoBehaviour {
 	public Image cataArm;
 	public Image cataStone;
 	public Image cataBase;
+	public Image cataWeight;
 
 	public Image oppCataArm;
 	public Image oppCataStone;
 	public Image oppCataBase;
+	public Image oppCataWeight;
 
 	public GameObject shop;
 	public ShopMenu shopMenu;
@@ -153,17 +155,22 @@ public class PlayerController : MonoBehaviour {
 		cataBase = canvas.transform.FindChild ("Team_Catapult_Base_Icon").GetComponent<Image> ();
 		cataArm = canvas.transform.FindChild ("Team_Catapult_Arm_Icon").GetComponent<Image> ();
 		cataStone = canvas.transform.FindChild ("Team_Catapult_Stone_Icon").GetComponent<Image> ();
+		cataWeight = canvas.transform.FindChild("Team_Catapult_Weight_Icon").GetComponent<Image>();
+
 		cataBase.enabled = false;
 		cataArm.enabled = false;
 		cataStone.enabled = false;
+		cataWeight.enabled = false;
 
 		//Currently hardcoded assuming just 2 teams
 		oppCataBase = canvas.transform.FindChild ("Opp_Catapult_Base_Icon").GetComponent<Image> ();
 		oppCataArm = canvas.transform.FindChild ("Opp_Catapult_Arm_Icon").GetComponent<Image> ();
 		oppCataStone = canvas.transform.FindChild ("Opp_Catapult_Stone_Icon").GetComponent<Image> ();
+		oppCataWeight = canvas.transform.FindChild ("Opp_Catapult_Weight_Icon").GetComponent<Image> ();
 		oppCataBase.enabled = false;
 		oppCataArm.enabled = false;
 		oppCataStone.enabled = false;
+		oppCataWeight.enabled = false;
 
 		homeBase = homeBase_GO.GetComponent<Base>();
 		shop = canvas.transform.FindChild ("Shop_Menu").gameObject;

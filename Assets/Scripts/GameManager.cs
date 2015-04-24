@@ -147,7 +147,7 @@ public class GameManager : MonoBehaviour {
     player.transform.FindChild("Chest").gameObject.renderer.material = teamMats[base1.GetInstanceID()];
 
 
-		controller.freeze(INITIAL_FREEZE_DUR, false, true, "FIGHT!");
+		controller.freeze(INITIAL_FREEZE_DUR, false, true, "GO!");
 	}
 
 	Rect getViewport(int numPlayers, int playerNum) {
@@ -252,6 +252,9 @@ public class GameManager : MonoBehaviour {
 				if(teamCatapultStatus[teamId].has_projectile){
 					p.cataStone.enabled = true;
 				}
+				if (teamCatapultStatus[teamId].has_weight) {
+					p.cataWeight.enabled = true;
+				}
 			}
 		}
 	}
@@ -275,6 +278,9 @@ public class GameManager : MonoBehaviour {
 				}
 				if(teamCatapultStatus[oppId].has_projectile){
 					p.oppCataStone.enabled = true;
+				}
+				if (teamCatapultStatus[oppId].has_weight) {
+					p.oppCataWeight.enabled = true;
 				}
 			}
 		}
