@@ -353,6 +353,8 @@ public class GameManager : MonoBehaviour {
 		if (winningTeam != -1) {
 			if(Input.GetKeyDown(KeyCode.R)){
 				Application.LoadLevel(Application.loadedLevel);
+			} else if (Input.GetKeyDown(KeyCode.Q)){
+				Application.LoadLevel(0);
 			}		
 		}
 
